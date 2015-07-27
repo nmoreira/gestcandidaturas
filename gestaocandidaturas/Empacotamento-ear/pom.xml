@@ -80,6 +80,14 @@
 					<skip>false</skip>
 					<filename>PlataformaGestaoCandidaturas.ear</filename>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
