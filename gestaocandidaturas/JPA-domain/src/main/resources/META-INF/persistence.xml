@@ -1,39 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_1.xsd">
-	
-	<persistence-unit name="bdtest" transaction-type="JTA">
-	
-		<!-- Datasource defined in the Java EE application server -->
-		<jta-data-source>java:jboss/datasources/bdtest</jta-data-source>
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="Utilizadores" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/teste</jta-data-source>
+		
+		
+		
 
 		<properties>
-		
-			<!-- 
-				The settings below are specific to JPA implementation using
-				Hibernate. These settings were tested in JBoss (and Wildfly)
-				application servers. If this application will be deployed in
-				another application server, it should use Hibernate as JPA
-				implementation, or is needed to change these settings to the
-				properly different implementation.
-			 -->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			
-			<!-- Connection pool using c3p0 -->
-			<property name="hibernate.c3p0.min_size" value="5"/>
-			<property name="hibernate.c3p0.max_size" value="20"/>
-			<property name="hibernate.c3p0.timeout" value="300"/>
-			<property name="hibernate.c3p0.max_statements" value="50"/>			
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.password" value="admin" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql:testes" />
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 
-			<!-- 
-				Avoid that Hibernate throws exceptions when trying to load 
-				metadata information from database. Its usage is not encouraged 
-				in Oracle databases.  
-			-->
-			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" /> 
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
+
 	</persistence-unit>
 </persistence>
