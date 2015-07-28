@@ -5,9 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
+//@MappedSuperclass
 @Entity
+// @DiscriminatorColumn(name = "Tipo")
+// @Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Utilizador {
 
 	@Id
@@ -30,7 +36,6 @@ public abstract class Utilizador {
 	@Column(unique = true)
 	private String email;
 
-	@Column
 	@ManyToOne
 	private Perfil perfil;
 
