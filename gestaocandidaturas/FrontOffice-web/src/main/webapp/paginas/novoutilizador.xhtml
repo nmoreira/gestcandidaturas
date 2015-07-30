@@ -1,0 +1,48 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+
+ xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+ 
+ <ui:define name="titulo">Introdução de novo utilizador</ui:define>   
+ 
+ <ui:define name="corpo">
+ 	<h1>Novo Utilizador</h1>
+ 	
+ 	<p:toolbar style="margin-top:20px">
+ 	<p:toolbarGroup>
+ 		<!-- quando carrego no botão a página é recarregada e os dados do formulario são limpos (é o que faz o outcome)-->
+ 		<p:button value="Novo" outcome="/paginas/novoutilizador"></p:button> 
+ 		<p:button value="Guardar" id="botaoguardar"></p:button> 
+ 	
+ 	</p:toolbarGroup>
+ 	
+ 	</p:toolbar>
+ 	
+ 	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top:20px"
+ 	columnClasses="rotulo,campo">
+  	
+ 	<p:outputLabel value="Login" for="login"></p:outputLabel>
+ 	<p:inputText id="login" size="20" maxlength="20"></p:inputText>
+ 	
+ 	<p:outputLabel value="Password" for="password"></p:outputLabel>
+ 	<p:inputText id="password" size="20" maxlength="20"></p:inputText>
+ 	
+ 	<p:outputLabel value="Primeiro Nome" for="pnome"></p:outputLabel>
+ 	<p:inputText id="pnome" size="20" maxlength="20"></p:inputText>
+ 	
+ 	<p:outputLabel value="Sobrenome" for="snome"></p:outputLabel>
+ 	<p:inputText id="snome" size="20" maxlength="20"></p:inputText>
+ 	
+ 	<p:outputLabel value="Email" for="email"></p:outputLabel>
+ 	<p:inputText id="email" size="20" maxlength="20"></p:inputText>
+ 	
+ 	</p:panelGrid>
+ 
+ 
+ 
+ </ui:define>
+
+</ui:composition>
