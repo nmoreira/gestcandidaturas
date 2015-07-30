@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="Utilizadores" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:jboss/datasources/teste</jta-data-source>
+		<jta-data-source>java:jboss/datasources/playlist</jta-data-source>
 		
 		
 		
@@ -12,7 +12,7 @@
 		<properties>
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="admin" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql:testes" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql:playlist" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
