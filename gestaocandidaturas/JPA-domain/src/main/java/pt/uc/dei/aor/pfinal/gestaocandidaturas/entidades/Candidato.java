@@ -46,7 +46,7 @@ public class Candidato extends Utilizador implements Serializable {
 	@Column
 	private String idLinkedin;
 
-	@OneToMany
+	@OneToMany(mappedBy = "candidato")
 	private List<Entrevista> entrevistas;
 
 	public Candidato() {

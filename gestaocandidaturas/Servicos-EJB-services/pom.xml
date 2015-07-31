@@ -26,7 +26,6 @@
 			<groupId>pt.uc.dei.aor.pfinal</groupId>
 			<artifactId>JPA-domain</artifactId>
 			<version>${project.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -47,6 +46,11 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.rome</artifactId>
+			<version>1.0_3</version>
 		</dependency>
 	</dependencies>
 </project>

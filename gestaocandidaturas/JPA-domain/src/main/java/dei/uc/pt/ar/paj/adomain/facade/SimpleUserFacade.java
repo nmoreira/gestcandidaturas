@@ -18,7 +18,7 @@ public class SimpleUserFacade implements Serializable, ISimpleUserFacade {
 	 */
 	private static final long serialVersionUID = 2247848378581085739L;
 
-	@PersistenceContext(unitName = "Utilizadores")
+	@PersistenceContext(unitName = "gestcandidaturas")
 	private EntityManager entityManager;
 
 	@Override

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entity implementation class for Entity: Candidatura
@@ -27,6 +29,7 @@ public class Candidatura implements Serializable {
 	private long id;
 
 	@Column
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCandidatura;
 
 	@Column

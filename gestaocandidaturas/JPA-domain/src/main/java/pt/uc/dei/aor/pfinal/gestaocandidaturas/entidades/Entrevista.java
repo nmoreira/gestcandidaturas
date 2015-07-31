@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entity implementation class for Entity: Entrevista
@@ -25,6 +28,7 @@ public class Entrevista implements Serializable {
 	private long id;
 
 	@Column
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataEntrevista;
 
 	@ManyToOne
@@ -35,6 +39,9 @@ public class Entrevista implements Serializable {
 
 	@ManyToOne
 	private Candidatura candidatura;
+
+	@OneToOne
+	private Feedback feedback;
 
 	private static final long serialVersionUID = 1L;
 
@@ -80,6 +87,14 @@ public class Entrevista implements Serializable {
 
 	public void setCandidatura(Candidatura candidatura) {
 		this.candidatura = candidatura;
+	}
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
 	}
 
 }
