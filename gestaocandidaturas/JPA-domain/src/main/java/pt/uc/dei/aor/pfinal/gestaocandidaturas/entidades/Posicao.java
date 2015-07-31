@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entity implementation class for Entity: Posicao
@@ -27,6 +29,7 @@ public class Posicao implements Serializable {
 	private long id;
 
 	@Column
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAbertura;
 
 	@Column
@@ -45,6 +48,7 @@ public class Posicao implements Serializable {
 	private int quantidadeVagas;
 
 	@Column
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataFecho;
 
 	@Column

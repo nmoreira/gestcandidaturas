@@ -6,6 +6,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.TesteEJB;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Administrador;
 import dei.uc.pt.ar.paj.service.core.UserServices;
 
 @Named
@@ -20,7 +22,17 @@ public class WebControl implements Serializable {
 	@Inject
 	private UserServices serv;
 
+	@Inject
+	private TesteEJB ejb;
+
 	public String getHello() {
+
+		Administrador adm = new Administrador();
+		adm.setNome("nome do admin");
+		adm.setEmail("email do admin");
+
+		ejb.saveUser(adm);
+
 		return serv.sayHello();
 	}
 

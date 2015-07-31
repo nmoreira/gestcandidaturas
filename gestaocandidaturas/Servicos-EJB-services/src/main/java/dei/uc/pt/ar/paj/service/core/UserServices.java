@@ -28,6 +28,11 @@ public class UserServices implements Serializable {
 		SimpleUser a_usr = new SimpleUser();
 		a_usr.setUsername("teste");
 
+		SimpleUser created_user = usermng.create(a_usr);
+
+		System.out.println("Utilizador criado! Nome: "
+				+ created_user.getUsername() + " id: " + created_user.getId());
+
 		// Here: a_usr has a ref
 		// SimpleUser a_usr_with_id = usermng.create(a_usr);
 		// Here: ref as changed (CAREFULL) !! (the returned a_usr has the ID)

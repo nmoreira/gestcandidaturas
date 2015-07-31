@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Facelets Hello World</title>
@@ -12,6 +13,8 @@
 	<h1>Hello World </h1>
 	<h:form>
 	<h:outputText value="#{webControl.getHello()}"></h:outputText>
+	<p:calendar/>
+	
 	</h:form>
 </h:body>
 </html>
