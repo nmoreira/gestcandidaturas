@@ -1,0 +1,43 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+
+ xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="titulo">Login</ui:define>
+    
+    <ui:define name="corpo">
+    	<div id="login-dialog">
+    		<h1>Login</h1>
+    		
+    		<h:form id="frm">
+		<p:ajaxStatus onstart="$('input').css('background-color', 'yellow')"
+			oncomplete="$('input').css('background-color', '')" />
+	
+		<p:messages autoUpdate="true" />
+    		
+    			
+    			<h:panelGrid columns="2" styleClass="grid-login">
+    	
+    				<p:outputLabel value="Login" for="login"/>
+    				<p:inputText size="30" id="login" required="true" label="Login" feedback="true"/>
+    				
+    				<p:outputLabel value="Password" for="password"/>
+    				<p:password size="30" id="password" required="true"  feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
+    				promptLabel="Indique uma password" inline="true"/>
+    				
+    				<h:panelGroup/>
+    				
+    				<p:commandButton value="Login" />
+    				<p:commandButton value="Registo" />
+    			</h:panelGrid>
+    		</h:form>
+    	</div>
+    	</ui:define>
+   
+   
+
+ </ui:composition>

@@ -1,0 +1,27 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<p:carousel id="slideShow" autoPlayInterval="4000" numVisible="1"
+			effect="easeInStrong" circular="true" pageLinks="6"
+			itemStyleClass="slidshow" >
+			
+			<p:graphicImage value="/resources/imagens/imagem4.jpg" styleClass="fotos"/>
+			<p:graphicImage value="/resources/imagens/imagem2.jpg" styleClass="fotos"/>
+			<p:graphicImage value="/resources/imagens/imagem3.jpg" styleClass="fotos"/>
+			
+			<p:graphicImage value="/resources/imagens/imagem5.png" styleClass="fotos"/>
+			<p:graphicImage value="/resources/imagens/imagem6.JPG" styleClass="fotos"/>
+			<p:graphicImage value="/resources/imagens/imagem8.jpg" styleClass="fotos"/>
+			
+
+		</p:carousel>
+
+	</ui:define>
+
+</ui:composition>
+

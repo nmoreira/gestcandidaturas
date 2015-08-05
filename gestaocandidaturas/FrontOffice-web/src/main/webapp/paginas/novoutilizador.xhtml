@@ -9,35 +9,48 @@
  <ui:define name="titulo">Introdução de novo utilizador</ui:define>   
  
  <ui:define name="corpo">
+ 	
+ 	<p:panelGrid columns="1" id="painel" style="width: 50%; margin-top:20px; margin-left:350px"
+ 	columnClasses="rotulo,campo">
+ 	
  	<h1>Novo Utilizador</h1>
  	
- 	<p:toolbar style="margin-top:20px">
+ 	
  	<p:toolbarGroup>
  		<!-- quando carrego no botão a página é recarregada e os dados do formulario são limpos (é o que faz o outcome)-->
- 		<p:button value="Novo" outcome="/paginas/novoutilizador"></p:button> 
- 		<p:button value="Guardar" id="botaoguardar"></p:button> 
+ 		<p:button value="Novo" outcome="/paginas/novoutilizador"/>
+ 		<p:commandButton value="Guardar" id="botaoguardar" action="#{loginutilizador.logar}"/> 
  	
  	</p:toolbarGroup>
  	
- 	</p:toolbar>
  	
- 	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top:20px"
- 	columnClasses="rotulo,campo">
+ 	</p:panelGrid>
   	
+  	<p:panelGrid columns="2" id="painel" style="width: 50%; margin-top:20px; margin-left:350px"
+ 	columnClasses="rotulo,campo">
  	<p:outputLabel value="Login" for="login"></p:outputLabel>
- 	<p:inputText id="login" size="20" maxlength="20"></p:inputText>
+ 	<p:inputText id="login" value="#{loginutilizador.login}" required="true">
+				<p:ajax listener="#{loginutilizador.verificarDisponibilidadeLogin}" 
+					event="change" process="@this" />
+			</p:inputText>
  	
  	<p:outputLabel value="Password" for="password"></p:outputLabel>
- 	<p:inputText id="password" size="20" maxlength="20"></p:inputText>
+ 	<p:inputText id="password" size="40" maxlength="40"></p:inputText>
+ 	
+ 	<p:outputLabel value="Confirmar Password" for="confpassword"/>
+    <p:password size="30" id="confpassword" required="true"/>
  	
  	<p:outputLabel value="Primeiro Nome" for="pnome"></p:outputLabel>
- 	<p:inputText id="pnome" size="20" maxlength="20"></p:inputText>
+ 	<p:inputText id="pnome" size="40" maxlength="40"></p:inputText>
  	
  	<p:outputLabel value="Sobrenome" for="snome"></p:outputLabel>
- 	<p:inputText id="snome" size="20" maxlength="20"></p:inputText>
+ 	<p:inputText id="snome" size="40" maxlength="40"></p:inputText>
  	
  	<p:outputLabel value="Email" for="email"></p:outputLabel>
- 	<p:inputText id="email" size="20" maxlength="20"></p:inputText>
+ 	<p:inputText id="email" value="#{loginutilizador.login}" required="true">
+				<p:ajax listener="#{loginutilizador.verificarDisponibilidadeEmail}" 
+					event="change" process="@this" />
+			</p:inputText>
  	
  	</p:panelGrid>
  
