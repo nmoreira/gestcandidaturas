@@ -22,4 +22,13 @@ public abstract class ResponsavelPosicao extends Utilizador {
 		this.listaPosicoes = listaPosicoes;
 	}
 
+	public ResponsavelPosicao() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public ResponsavelPosicao(String login, String password, String nome,
+			String apelido, String email) {
+		super(login, password, nome, apelido, email);
+	}
+
 }

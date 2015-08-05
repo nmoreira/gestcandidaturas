@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,6 +19,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "perfil")
+@NamedQueries({
+		@NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p"),
+		@NamedQuery(name = "Perfil.findByName", query = "SELECT p FROM Perfil p WHERE p.cargo = :cargo"),
+		@NamedQuery(name = "Perfil.findById", query = "SELECT p FROM Perfil p WHERE p.id = :id") })
 public class Perfil implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,10 +36,14 @@ public class Perfil implements Serializable {
 	private String cargo;
 
 	@OneToMany(mappedBy = "perfil")
-	private List<Utilizador> utilizador;
+	private List<Utilizador> utilizadores;
 
 	public Perfil() {
 		super();
+	}
+
+	public Perfil(String cargo) {
+		this.cargo = cargo;
 	}
 
 	public long getId() {
@@ -52,12 +62,12 @@ public class Perfil implements Serializable {
 		this.cargo = cargo;
 	}
 
-	public List<Utilizador> getUtilizador() {
-		return utilizador;
+	public List<Utilizador> getUtilizadores() {
+		return utilizadores;
 	}
 
-	public void setUtilizador(List<Utilizador> utilizador) {
-		this.utilizador = utilizador;
+	public void setUtilizadores(List<Utilizador> utilizador) {
+		this.utilizadores = utilizador;
 	}
 
 }

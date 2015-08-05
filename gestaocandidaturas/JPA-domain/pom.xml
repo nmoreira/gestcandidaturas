@@ -34,6 +34,11 @@
 				<version>${hibernate.version}</version>
 				<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.rome</artifactId>
+			<version>1.0_3</version>
+		</dependency>
 	</dependencies>
 	
 </project>

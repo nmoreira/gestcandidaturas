@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,6 +17,11 @@ import javax.persistence.Table;
 @Entity
 // @DiscriminatorValue(value = "Candidato")
 @Table(name = "candidato")
+@NamedQueries({
+		@NamedQuery(name = "Candidato.findAll", query = "SELECT a FROM Candidato a"),
+		@NamedQuery(name = "Candidato.findByLogin", query = "SELECT a FROM Candidato a WHERE a.login = :login"),
+		@NamedQuery(name = "Candidato.findByEmail", query = "SELECT a FROM Candidato a WHERE a.email = :email"),
+		@NamedQuery(name = "Candidato.findById", query = "SELECT a FROM Candidato a WHERE a.id = :id") })
 public class Candidato extends Utilizador implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -51,6 +58,40 @@ public class Candidato extends Utilizador implements Serializable {
 
 	public Candidato() {
 		super();
+		this.setCargo("CANDIDATO");
+	}
+
+	// public Candidato(String login, String password, String nome,
+	// String apelido, String email) {
+	// super(login, password, nome, apelido, email);
+	// this.setCargo("CANDIDATO");
+	// }
+
+	public Candidato(Utilizador user) {
+		super();
+		this.setCargo("CANDIDATO");
+		this.setNome(user.getNome());
+		this.setApelido(user.getApelido());
+		this.setEmail(user.getEmail());
+		this.setPassword(user.getPassword());
+		this.setLogin(user.getLogin());
+	}
+
+	public Candidato(String login, String password, String nome,
+			String apelido, String email, String morada, String cidade,
+			long telefone, long telemovel, String pais, String curso,
+			String escola, String cv, String idLinkedin) {
+		super(login, password, nome, apelido, email);
+		this.setCargo("CANDIDATO");
+		this.morada = morada;
+		this.cidade = cidade;
+		this.telefone = telefone;
+		this.telemovel = telemovel;
+		this.pais = pais;
+		this.curso = curso;
+		this.escola = escola;
+		this.cv = cv;
+		this.idLinkedin = idLinkedin;
 	}
 
 	public String getMorada() {

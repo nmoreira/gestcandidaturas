@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<h1>Novo Utilizador</h1>
+	<p:messages closable="true" />
+	<h:form>
+		<p:panelGrid columns="2">
+			
+			<p:outputLabel value="Login" for="login" />
+			<p:inputText id="login" size="20" maxlength="20"
+				value="#{novoUtilizador.login}" required="true"/>
+
+			<p:outputLabel value="Password" for="password" />
+			<p:password id="password" value="#{novoUtilizador.password}" feedback="true" 
+			strongLabel="Password Forte" weakLabel="Password Fraca" goodLabel="Password boa" 
+			promptLabel="Por favor introduza uma password" required="true" inline="true" match="confirmaPassword"/>
+			
+			<p:outputLabel value="Confirmar password" for="confirmaPassword"/>
+			<p:password id="confirmaPassword" required="true"/>
+
+			<p:outputLabel value="Primeiro Nome" for="pnome" />
+			<p:inputText id="pnome" size="20" maxlength="20"
+				value="#{novoUtilizador.nome}" required="true"/>
+
+			<p:outputLabel value="Sobrenome" for="snome" />
+			<p:inputText id="snome" size="20" maxlength="20"
+				value="#{novoUtilizador.apelido}" required="true"/>
+
+			<p:outputLabel value="Email" for="email" />
+			<p:inputText id="email" size="20" maxlength="20"
+				value="#{novoUtilizador.email}" required="true"/>
+		</p:panelGrid>
+		<p:commandButton value="submeter" action="#{novoUtilizador.criaUtilizador()}" />
+	</h:form>
+</h:body>
+</html>
