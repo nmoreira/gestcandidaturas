@@ -8,13 +8,15 @@
 <h:head></h:head>
 <h:body>
 	<h1>Registar novo Candidato</h1>
-	<p:messages closable="true" />
 	<h:form>
+	<p:messages closable="true" id="status" autoUpdate="true"/>
 		<p:panelGrid columns="2">
 			
 			<p:outputLabel value="Login" for="login" />
 			<p:inputText id="login" size="20" maxlength="20"
-				value="#{novoCandidato.login}" required="true"/>
+				value="#{novoCandidato.login}" required="true">
+				<p:ajax listener="#{novoCandidato.validaLogin()}" event="change" process="@this" update="status" partialSubmit="true"/>
+			</p:inputText>
 
 			<p:outputLabel value="Password" for="password" />
 			<p:password id="password" value="#{novoCandidato.password}" feedback="true" 
@@ -34,7 +36,9 @@
 
 			<p:outputLabel value="Email" for="email" />
 			<p:inputText id="email" size="20" maxlength="20"
-				value="#{novoCandidato.email}" required="true"/>
+				value="#{novoCandidato.email}" required="true">
+				<p:ajax listener="#{novoCandidato.validaEmail()}" update="status" partialSubmit="true"/>
+			</p:inputText>
 				
 			<p:outputLabel value="Morada" for="morada" />
 			<p:inputText id="morada" value="#{novoCandidato.morada}" />
@@ -46,7 +50,7 @@
 			<p:inputText id="telefone" size="20" maxlength="20"
 				value="#{novoCandidato.telefone}" />
 				
-			<p:outputLabel value="Telemovel" for="telemovel" />
+			<p:outputLabel value="Telemóvel" for="telemovel" />
 			<p:inputText id="telemovel" size="20" maxlength="20"
 				value="#{novoCandidato.telemovel}" />
 			
@@ -64,9 +68,12 @@
 			
 			<p:outputLabel value="Endereço de LinkedIn" for="linkedin" />
 			<p:inputText id="linkedin" value="#{novoCandidato.idLinkedin}" />
-			
+
+			<f:facet name="footer">
+				<p:commandButton value="submeter" action="#{novoCandidato.criaCandidato()}" update="status"
+					icon="ui-icon-disk" />
+			</f:facet>
 		</p:panelGrid>
-		<p:commandButton value="submeter" action="#{novoCandidato.criaCandidato()}" />
 	</h:form>
 </h:body>
 </html>

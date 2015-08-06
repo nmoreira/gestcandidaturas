@@ -29,4 +29,18 @@ public class UtilizadorService {
 		userFacade.create(newUser);
 	}
 
+	public boolean existeLogin(String login) {
+		if (userFacade.findByLogin(login) == null)
+			return false;
+		else
+			return true;
+	}
+
+	public boolean existeEmail(String email) {
+		if (userFacade.findByEmail(email) == null)
+			return false;
+		else
+			return true;
+	}
+
 }

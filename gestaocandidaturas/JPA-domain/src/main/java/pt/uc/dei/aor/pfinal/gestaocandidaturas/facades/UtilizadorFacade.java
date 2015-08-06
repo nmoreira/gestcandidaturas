@@ -79,7 +79,7 @@ public class UtilizadorFacade implements IUtilizadorFacade {
 	@Override
 	public Utilizador findByEmail(String email) {
 		TypedQuery<Utilizador> q = em.createNamedQuery(
-				"Utilizador.findByLogin", Utilizador.class).setParameter(
+				"Utilizador.findByEmail", Utilizador.class).setParameter(
 				"email", email);
 		if (!q.getResultList().isEmpty())
 			return q.getResultList().get(0);

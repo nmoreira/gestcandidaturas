@@ -28,10 +28,44 @@ public class NovoUtilizador implements Serializable {
 	private UtilizadorService userService;
 
 	public void criaUtilizador() {
-		Utilizador newUser = new Utilizador(login, password, nome, apelido,
-				email);
-		userService.createNewUtilizador(newUser);
-		DisplayMessages.addInfoMessage("Novo Utilizador criado!");
+		if (userService.existeEmail(email) == true) {
+			DisplayMessages.addErrorMessage("O email " + email
+					+ " já está registado!");
+		} else if (userService.existeLogin(login) == true) {
+			DisplayMessages.addErrorMessage("O login " + login
+					+ " já está em uso! Por favor escolha outro");
+		} else {
+			Utilizador newUser = new Utilizador(login, password, nome, apelido,
+					email);
+			userService.createNewUtilizador(newUser);
+			DisplayMessages.addInfoMessage("Novo Utilizador criado!");
+		}
+	}
+
+	public void validaLogin() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (userService.existeLogin(login) == true)
+			DisplayMessages.addErrorMessage("O login " + login
+					+ " já está em uso! Por favor escolha outro");
+		else
+			DisplayMessages.addInfoMessage("Login " + login + " disponível");
+	}
+
+	public void validaEmail() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (userService.existeEmail(email) == true)
+			DisplayMessages.addErrorMessage("O email " + email
+					+ " já está registado!");
 	}
 
 	public String getLogin() {

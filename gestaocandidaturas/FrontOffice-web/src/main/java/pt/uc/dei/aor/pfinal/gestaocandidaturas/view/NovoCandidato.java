@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidatoService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 
@@ -37,13 +38,38 @@ public class NovoCandidato implements Serializable {
 	@Inject
 	private CandidatoService candidatoServ;
 
+	@Inject
+	private UtilizadorService userServ;
+
 	public void criaCandidato() {
-		Candidato newUser = new Candidato(login, password, nome, apelido,
-				email, morada, cidade, telefone, telemovel, pais, curso,
-				escola, cv, idLinkedin);
-		candidatoServ.createNewCandidato(newUser);
-		DisplayMessages.addInfoMessage("Candidato " + nome
-				+ " registado com sucesso");
+		if (userServ.existeEmail(email) == true) {
+			DisplayMessages.addErrorMessage("O email " + email
+					+ " já está registado!");
+		} else if (userServ.existeLogin(login) == true) {
+			DisplayMessages.addErrorMessage("O login " + login
+					+ " já está em uso! Por favor escolha outro");
+		} else {
+			Candidato newUser = new Candidato(login, password, nome, apelido,
+					email, morada, cidade, telefone, telemovel, pais, curso,
+					escola, cv, idLinkedin);
+			candidatoServ.createNewCandidato(newUser);
+			DisplayMessages.addInfoMessage("Candidato " + nome
+					+ " registado com sucesso");
+		}
+	}
+
+	public void validaLogin() {
+		if (userServ.existeLogin(login) == true)
+			DisplayMessages.addErrorMessage("O login " + login
+					+ " já está em uso! Por favor escolha outro");
+		else
+			DisplayMessages.addInfoMessage("Login " + login + " disponível");
+	}
+
+	public void validaEmail() {
+		if (userServ.existeEmail(email) == true)
+			DisplayMessages.addErrorMessage("O email " + email
+					+ " já está registado!");
 	}
 
 	public String getLogin() {
