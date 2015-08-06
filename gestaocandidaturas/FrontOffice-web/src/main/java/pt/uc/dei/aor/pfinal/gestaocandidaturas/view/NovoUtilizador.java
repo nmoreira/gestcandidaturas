@@ -33,7 +33,7 @@ public class NovoUtilizador implements Serializable {
 					+ " já está registado!");
 		} else if (userService.existeLogin(login) == true) {
 			DisplayMessages.addErrorMessage("O login " + login
-					+ " já está em uso! Por favor escolha outro");
+					+ " já está em uso! Por favor escolha outro!");
 		} else {
 			Utilizador newUser = new Utilizador(login, password, nome, apelido,
 					email);
