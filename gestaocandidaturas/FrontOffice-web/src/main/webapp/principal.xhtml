@@ -6,9 +6,13 @@
 
 	<ui:define name="corpo">
 
+<p:panelGrid columns="1" id="painel"
+			styleClass="panelNoBorder">
+			
+			
 		<p:carousel id="slideShow" autoPlayInterval="4000" numVisible="1"
 			effect="easeInStrong" circular="true" pageLinks="6"
-			itemStyleClass="slidshow" >
+			itemStyleClass="slidshow">
 			
 			<p:graphicImage value="/resources/imagens/imagem4.jpg" styleClass="fotos"/>
 			<p:graphicImage value="/resources/imagens/imagem2.jpg" styleClass="fotos"/>
@@ -20,7 +24,7 @@
 			
 
 		</p:carousel>
-
+</p:panelGrid>
 	</ui:define>
 
 </ui:composition>

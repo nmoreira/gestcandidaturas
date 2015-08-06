@@ -1,0 +1,104 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+ xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<ui:define name="corpo">
+	
+	<h:form>
+	<p:ajaxStatus styleClass="ajax-status">
+		<f:facet name="start">
+			<h:graphicImage library="imagens" name="carregando.gif"/>
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+	
+	<p:messages closable="true" id="status" autoUpdate="true"/>
+	
+	
+		<p:panelGrid columns="1" id="painel1"
+			style="width: 50%; margin-top:20px; margin-left:350px"
+			columnClasses="rotulo,campo">
+	<h1>Novo Candidato</h1>
+	</p:panelGrid>
+	
+		<p:panelGrid columns="2" id="painel"
+			style="width: 50%; margin-top:20px; margin-left:350px"
+			columnClasses="rotulo,campo">
+			
+			
+			<p:outputLabel value="Login" for="login" />
+			<p:inputText id="login" size="20" maxlength="20"
+				value="#{novoCandidato.login}" required="true">
+				<p:ajax listener="#{novoCandidato.validaLogin()}" event="change" process="@this" update="status" partialSubmit="true"/>
+			</p:inputText>
+
+			<p:outputLabel value="Password" for="password" />
+			<p:password id="password" value="#{novoCandidato.password}" feedback="true" 
+			strongLabel="Password Forte" weakLabel="Password Fraca" goodLabel="Password boa" 
+			promptLabel="Por favor introduza uma password" required="true" inline="true" match="confirmaPassword"/>
+			
+			<p:outputLabel value="Confirmar password" for="confirmaPassword"/>
+			<p:password id="confirmaPassword" required="true"/>
+
+			<p:outputLabel value="Primeiro Nome" for="pnome" />
+			<p:inputText id="pnome" size="20" maxlength="20"
+				value="#{novoCandidato.nome}" required="true"/>
+
+			<p:outputLabel value="Apelido" for="apelido" />
+			<p:inputText id="apelido" size="20" maxlength="20"
+				value="#{novoCandidato.apelido}" required="true"/>
+
+			<p:outputLabel value="Email" for="email" />
+			<p:inputText id="email" size="20" maxlength="20"
+				value="#{novoCandidato.email}" required="true">
+				<p:ajax listener="#{novoCandidato.validaEmail()}" update="status" partialSubmit="true"/>
+			</p:inputText>
+				
+			<p:outputLabel value="Morada" for="morada" />
+			<p:inputText id="morada" value="#{novoCandidato.morada}" />
+			
+			<p:outputLabel value="Cidade" for="cidade" />
+			<p:inputText id="cidade" value="#{novoCandidato.cidade}" />
+			
+			<p:outputLabel value="Telefone" for="telefone" />
+			<p:inputText id="telefone" size="20" maxlength="20"
+				value="#{novoCandidato.telefone}" />
+				
+			<p:outputLabel value="Telemóvel" for="telemovel" />
+			<p:inputText id="telemovel" size="20" maxlength="20"
+				value="#{novoCandidato.telemovel}" />
+			
+			<p:outputLabel value="País" for="pais" />
+			<p:inputText id="pais" value="#{novoCandidato.pais}"/>
+			
+			<p:outputLabel value="Curso" for="curso" />
+			<p:inputText id="curso" value="#{novoCandidato.curso}" />
+			
+			<p:outputLabel value="Escola" for="escola" />
+			<p:inputText id="escola" value="#{novoCandidato.escola}" />
+			
+			<p:outputLabel value="Curriculum vitæ" for="cv" />
+			<p:inputText id="cv" value="#{novoCandidato.cv}" />
+			
+			<p:outputLabel value="Endereço de LinkedIn" for="linkedin" />
+			<p:inputText id="linkedin" value="#{novoCandidato.idLinkedin}" />
+
+			
+				<p:commandButton value="submeter" action="#{novoCandidato.criaCandidato()}" update="status"
+					icon="ui-icon-disk" />
+				<p:button value="Limpar" outcome="/paginas/novocandidato" />
+			
+		</p:panelGrid>
+		
+	</h:form>
+	</ui:define>
+
+</ui:composition>
+
