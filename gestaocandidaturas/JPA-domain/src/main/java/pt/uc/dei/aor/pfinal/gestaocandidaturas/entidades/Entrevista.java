@@ -34,8 +34,8 @@ public class Entrevista implements Serializable {
 	@ManyToOne
 	private Entrevistador entrevistador;
 
-	@ManyToOne
-	private Candidato candidato;
+	// @ManyToOne
+	// private Candidato candidato;
 
 	@ManyToOne
 	private Candidatura candidatura;
@@ -73,13 +73,13 @@ public class Entrevista implements Serializable {
 		this.entrevistador = entrevistador;
 	}
 
-	public Candidato getCandidato() {
-		return candidato;
-	}
-
-	public void setCandidato(Candidato candidato) {
-		this.candidato = candidato;
-	}
+	// public Candidato getCandidato() {
+	// return candidato;
+	// }
+	//
+	// public void setCandidato(Candidato candidato) {
+	// this.candidato = candidato;
+	// }
 
 	public Candidatura getCandidatura() {
 		return candidatura;

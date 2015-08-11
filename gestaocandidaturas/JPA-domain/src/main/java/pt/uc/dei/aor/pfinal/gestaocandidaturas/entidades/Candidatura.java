@@ -41,6 +41,9 @@ public class Candidatura implements Serializable {
 	@ManyToOne
 	private Posicao posicao;
 
+	@ManyToOne
+	private Candidato candidato;
+
 	@OneToMany(mappedBy = "candidatura")
 	private List<Entrevista> entrevistas;
 
@@ -80,6 +83,30 @@ public class Candidatura implements Serializable {
 
 	public void setFonte(String fonte) {
 		this.fonte = fonte;
+	}
+
+	public Posicao getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(Posicao posicao) {
+		this.posicao = posicao;
+	}
+
+	public Candidato getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(Candidato candidato) {
+		this.candidato = candidato;
+	}
+
+	public List<Entrevista> getEntrevistas() {
+		return entrevistas;
+	}
+
+	public void setEntrevistas(List<Entrevista> entrevistas) {
+		this.entrevistas = entrevistas;
 	}
 
 }

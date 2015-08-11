@@ -54,7 +54,7 @@ public class Candidato extends Utilizador implements Serializable {
 	private String idLinkedin;
 
 	@OneToMany(mappedBy = "candidato")
-	private List<Entrevista> entrevistas;
+	private List<Candidatura> candidaturas;
 
 	public Candidato() {
 		super();
@@ -166,12 +166,20 @@ public class Candidato extends Utilizador implements Serializable {
 		this.idLinkedin = idLinkedin;
 	}
 
-	public List<Entrevista> getEntrevistas() {
-		return entrevistas;
+	public List<Candidatura> getCandidaturas() {
+		return candidaturas;
 	}
 
-	public void setEntrevistas(List<Entrevista> entrevistas) {
-		this.entrevistas = entrevistas;
+	public void setCandidaturas(List<Candidatura> candidaturas) {
+		this.candidaturas = candidaturas;
 	}
+
+	// public List<Entrevista> getEntrevistas() {
+	// return entrevistas;
+	// }
+	//
+	// public void setEntrevistas(List<Entrevista> entrevistas) {
+	// this.entrevistas = entrevistas;
+	// }
 
 }
