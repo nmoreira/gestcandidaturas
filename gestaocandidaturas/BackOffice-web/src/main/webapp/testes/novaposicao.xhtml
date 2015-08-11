@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+
+	<h1>Introduzir uma nova posição</h1>
+	<h:form>
+		<p:messages closable="true" id="status" autoUpdate="true" />
+		<p:panelGrid columns="2">
+
+			<p:outputLabel for="codigo" value="Código da posição" />
+			<p:inputText id="codigo" required="true"
+				value="#{novaPosicao.codPosicao}">
+				<p:ajax listener="#{novaPosicao.validaCodPosicao()}" event="change"
+					process="@this" partialSubmit="true" update="status" />
+			</p:inputText>
+
+			<p:outputLabel for="titulo" value="Título" />
+			<p:inputText id="titulo" value="#{novaPosicao.titulo}"
+				required="true" />
+
+			<p:outputLabel for="descricao" value="Descrição da posição" />
+			<p:inputTextarea id="descricao" value="#{novaPosicao.descricao}"
+				cols="60" rows="8" />
+
+			<p:outputLabel for="local" value="Localização" />
+			<p:inputText id="local" value="#{novaPosicao.localizacao}" />
+
+			<p:outputLabel for="quantidade" value="Quantidade de vagas" />
+			<p:inputText id="quantidade" value="#{novaPosicao.quantidadeVagas}" />
+
+			<p:outputLabel for="dataAbertura" value="Data de abertura da posição" />
+			<p:calendar id="dataAbertura" value="#{novaPosicao.dataAbertura}"
+				required="true" navigator="true" readonlyInput="true" mode="popup" />
+				
+			<p:outputLabel for="dataFecho" value="Data de fecho da posição"/>
+			<p:calendar id="dataFecho" value="#{novaPosicao.dataFecho}"
+				navigator="true" readonlyInput="true" mode="popup" />
+			
+			<p:outputLabel for="responsavel" value="Responsável"/>
+			<p:selectOneMenu id="responsavel" value="#{novaPosicao.responsavel}" 
+			converter="responsavelPosicao" filter="true" filterMatchMode="contains">
+				
+				<f:selectItems value="#{novaPosicao.getResponsaveis()}" 
+				var="responsavel" itemLabel="#{responsavel.nome} #{responsavel.apelido}" itemValue="#{responsavel}"/>
+			</p:selectOneMenu>
+				
+			<p:outputLabel for="sla" value="Service Level Agreement"/>
+			<p:inputText id="sla" value="#{novaPosicao.sla}"/>
+			
+			<p:outputLabel for="empresa" value="Empresa"/>
+			<p:inputText id="empresa" value="#{novaPosicao.empresa}"/>
+			
+			<p:outputLabel for="area" value="Área Técnica"/>
+			<p:inputText id="area" value="#{novaPosicao.areaTecnica}"/>
+			
+			<p:outputLabel for="canais" value="Canais de Publicação"/>
+			<p:inputText id="canais" value="#{novaPosicao.canaisPublicacao}"/>
+			
+			<f:facet name="footer">
+				<p:commandButton value="Criar posição" action="#{novaPosicao.criaPosicao()}" update="@form"
+					icon="ui-icon-disk" />
+			</f:facet>
+
+		</p:panelGrid>
+	</h:form>
+
+</h:body>
+</html>

@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -29,6 +31,10 @@ public class UtilizadorService {
 		userFacade.create(newUser);
 	}
 
+	public boolean deleteUtilizador(Utilizador user) {
+		return userFacade.delete(user);
+	}
+
 	public boolean existeLogin(String login) {
 		if (userFacade.findByLogin(login) == null)
 			return false;
@@ -41,6 +47,18 @@ public class UtilizadorService {
 			return false;
 		else
 			return true;
+	}
+
+	public List<Utilizador> getUtilizadoresSemPerfil() {
+		return userFacade.getUtilizadoresSemPerfil();
+	}
+
+	public Utilizador getUtilizadorByLogin(String login) {
+		return userFacade.findByLogin(login);
+	}
+
+	public List<Utilizador> listaUtilizadores() {
+		return (List<Utilizador>) userFacade.findAll();
 	}
 
 }

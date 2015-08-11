@@ -1,78 +1,57 @@
 <ui:composition template="/paginas/Padrao.xhtml"
+ xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
- xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
- 
- <ui:define name="titulo">Introdução de novo utilizador</ui:define>   
- 
- <ui:define name="corpo">
- 	
- 	<p:panelGrid columns="1" id="painel" style="width: 50%; margin-top:20px; margin-left:350px"
- 	columnClasses="rotulo,campo">
- 	
- 	<h1>Introdução de Candidatura</h1>
- 	
- 	
- 	<p:toolbarGroup>
- 		<!-- quando carrego no botão a página é recarregada e os dados do formulario são limpos (é o que faz o outcome)-->
- 		<p:button value="Novo" outcome="/paginas/novoutilizador"/>
- 		<p:commandButton value="Guardar" id="botaoguardar" action="#{loginutilizador.logar}"/> <!--corrigir-->
- 	
- 	</p:toolbarGroup>
- 	
- 	
- 	</p:panelGrid>
-  	
-  	<p:panelGrid columns="2" id="painel" style="width: 50%; margin-top:20px; margin-left:350px"
- 	columnClasses="rotulo,campo">
- 
- 	<p:outputLabel value="Primeiro Nome" for="pnome"></p:outputLabel>
- 	<p:inputText id="pnome" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="Sobrenome" for="snome"></p:outputLabel>
- 	<p:inputText id="snome" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="Email" for="email"></p:outputLabel>
- 	<p:inputText id="email" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="Morada" for="morada"></p:outputLabel>
- 	<p:inputText id="morada" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="Cidade" for="cidade"></p:outputLabel>
- 	<p:inputText id="cidade" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="Telefone" for="telefone"></p:outputLabel>
- 	<p:inputText id="telefone" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="Telemóvel" for="telemovel"></p:outputLabel>
- 	<p:inputText id="telemovel" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="País" for="pais"></p:outputLabel>
- 	<p:inputText id="pais" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="Curso" for="curso"></p:outputLabel>
- 	<p:inputText id="curso" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="Escola" for="escola"></p:outputLabel>
- 	<p:inputText id="escola" size="40" maxlength="40"></p:inputText>
- 	
- 	<p:outputLabel value="CV (upload)" for="cv"></p:outputLabel>
- 	<p:inputText id="cv" size="40" maxlength="40"></p:inputText>           <!-- quando a função estiver feita substitui-se por <p:fileUpload value="#{fileUploadManagedBean.file}"  mode="simple"></p:fileUpload> -->
- 	
- 	<p:outputLabel value="Carta de Motivação" for="cmotivacao"></p:outputLabel>
- 	<p:inputText id="cmotivacao" size="40" maxlength="40"></p:inputText>   <!-- quando a função estiver feita substitui-se por <p:fileUpload value="#{fileUploadManagedBean.file}"  mode="simple"></p:fileUpload> -->
- 	
- 	<p:outputLabel value="Fonte" for="fonte"></p:outputLabel>
- 	<p:inputText id="fonte" size="40" maxlength="40"></p:inputText>
- 	
- 	</p:panelGrid>
- 
- 
- 
- </ui:define>
+
+
+<ui:define name="corpo">
+	
+	<h:form>
+	<p:ajaxStatus styleClass="ajax-status">
+		<f:facet name="start">
+			<h:graphicImage library="imagens" name="carregando.gif"/>
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+	
+	<p:messages closable="true" id="status" autoUpdate="true"/>
+	
+	
+		<p:panelGrid columns="1" id="painel1"
+			style="width: 50%; margin-top:20px; margin-left:350px"
+			columnClasses="rotulo,campo">
+	<h1>Nova Candidatura</h1>
+	</p:panelGrid>
+	
+		<p:panelGrid columns="2" id="painel"
+			style="width: 50%; margin-top:20px; margin-left:350px"
+			columnClasses="rotulo,campo">
+			
+			<p:outputLabel value="Carta Motivação" for="cmotivacao" />
+			<p:inputText id="cmotivacao" value="#{novoCandidato.cidade}" />
+			
+		
+			<p:outputLabel value="Fonte" for="fonte" />
+			<p:autoComplete id="fonte" value="#{novaCandidatura.fonte}" required="true" completeMethod="#{novaCandidatura.sugerirfonte}"
+			forceSelection="true" minQueryLenght="1" dropdown="true"></p:autoComplete>
+			
+				<p:commandButton value="submeter" action="#{novoCandidato.criaCandidato()}" update="status"
+					icon="ui-icon-disk" />
+				<p:button value="Limpar" outcome="/paginas/candidaturas" />
+			
+		</p:panelGrid>
+		
+	</h:form>
+	</ui:define>
 
 </ui:composition>
+
+
+
+
 

@@ -52,9 +52,19 @@ public class PerfilFacade implements IPerfilFacade {
 	}
 
 	@Override
-	public void delete(Perfil entity) {
-		Perfil entityToBeRemoved = em.merge(entity);
-		em.remove(entityToBeRemoved);
+	public boolean delete(Perfil entity) {
+		if (em.find(Perfil.class, entity.getId()) == null) {
+			return false;
+		} else {
+
+			try {
+				Perfil entityToBeRemoved = em.merge(entity);
+				em.remove(entityToBeRemoved);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
 	}
 
 	@Override

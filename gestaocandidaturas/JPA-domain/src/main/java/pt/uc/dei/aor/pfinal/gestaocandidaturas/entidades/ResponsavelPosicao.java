@@ -3,12 +3,14 @@ package pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@NamedQueries({
+		@NamedQuery(name = "ResponsavelPosicao.findAll", query = "SELECT r FROM ResponsavelPosicao r"),
+		@NamedQuery(name = "ResponsavelPosicao.findById", query = "SELECT r FROM ResponsavelPosicao r WHERE r.id = :id") })
 public abstract class ResponsavelPosicao extends Utilizador {
 
 	@OneToMany(mappedBy = "responsavel")

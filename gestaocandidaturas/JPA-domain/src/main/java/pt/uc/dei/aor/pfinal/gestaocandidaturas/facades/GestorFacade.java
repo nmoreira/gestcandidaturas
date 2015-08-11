@@ -9,16 +9,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Gestor;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Perfil;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.Encript;
 
 /**
- * Session Bean implementation class CandidatoFacade
+ * Session Bean implementation class AdministradorFacade
  */
-@Stateless
+@Stateless()
 @LocalBean
-public class CandidatoFacade implements ICandidatoFacade {
+public class GestorFacade implements IGestorFacade {
 
 	@PersistenceContext(unitName = "gestcandidaturas")
 	private EntityManager em;
@@ -29,30 +29,30 @@ public class CandidatoFacade implements ICandidatoFacade {
 	/**
 	 * Default constructor.
 	 */
-	public CandidatoFacade() {
+	public GestorFacade() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Candidato create(Candidato entity) {
+	public Gestor create(Gestor entity) {
 		entity.setPassword(Encript.encript(entity.getPassword()));
 		em.persist(entity);
 		return entity;
 	}
 
 	@Override
-	public Candidato update(Candidato entity) {
+	public Gestor update(Gestor entity) {
 		return em.merge(entity);
 	}
 
 	@Override
-	public boolean delete(Candidato entity) {
-		if (em.find(Candidato.class, entity.getId()) == null) {
+	public boolean delete(Gestor entity) {
+		if (em.find(Gestor.class, entity.getId()) == null) {
 			return false;
 		} else {
 
 			try {
-				Candidato entityToBeRemoved = em.merge(entity);
+				Gestor entityToBeRemoved = em.merge(entity);
 				em.remove(entityToBeRemoved);
 				return true;
 			} catch (Exception e) {
@@ -62,9 +62,9 @@ public class CandidatoFacade implements ICandidatoFacade {
 	}
 
 	@Override
-	public Candidato find(long pk) {
-		TypedQuery<Candidato> q = em.createNamedQuery("Candidato.findById",
-				Candidato.class).setParameter("id", pk);
+	public Gestor find(long pk) {
+		TypedQuery<Gestor> q = em.createNamedQuery("Gestor.findById",
+				Gestor.class).setParameter("id", pk);
 		if (!q.getResultList().isEmpty())
 			return q.getResultList().get(0);
 		else
@@ -72,16 +72,16 @@ public class CandidatoFacade implements ICandidatoFacade {
 	}
 
 	@Override
-	public Collection<Candidato> findAll() {
-		TypedQuery<Candidato> q = em.createNamedQuery("Candidato.findAll",
-				Candidato.class);
+	public Collection<Gestor> findAll() {
+		TypedQuery<Gestor> q = em.createNamedQuery("Gestor.findAll",
+				Gestor.class);
 		return q.getResultList();
 	}
 
 	@Override
-	public Candidato findByLogin(String login) {
-		TypedQuery<Candidato> q = em.createNamedQuery("Candidato.findByLogin",
-				Candidato.class).setParameter("login", login);
+	public Gestor findByLogin(String login) {
+		TypedQuery<Gestor> q = em.createNamedQuery("Gestor.findByLogin",
+				Gestor.class).setParameter("login", login);
 		if (!q.getResultList().isEmpty())
 			return q.getResultList().get(0);
 		else
@@ -89,9 +89,9 @@ public class CandidatoFacade implements ICandidatoFacade {
 	}
 
 	@Override
-	public Candidato findByEmail(String email) {
-		TypedQuery<Candidato> q = em.createNamedQuery("Candidato.findByLogin",
-				Candidato.class).setParameter("email", email);
+	public Gestor findByEmail(String email) {
+		TypedQuery<Gestor> q = em.createNamedQuery("Gestor.findByLogin",
+				Gestor.class).setParameter("email", email);
 		if (!q.getResultList().isEmpty())
 			return q.getResultList().get(0);
 		else
@@ -99,20 +99,20 @@ public class CandidatoFacade implements ICandidatoFacade {
 	}
 
 	@Override
-	public Perfil getPerfilCandidato() {
-		Perfil candidato = pf.findByName("CANDIDATO");
-		if (candidato == null) {
-			pf.create(new Perfil("CANDIDATO"));
-			candidato = pf.findByName("CANDIDATO");
-			return candidato;
+	public Perfil getPerfilGestor() {
+		Perfil gest = pf.findByName("GESTOR");
+		if (gest == null) {
+			pf.create(new Perfil("GESTOR"));
+			gest = pf.findByName("GESTOR");
+			return gest;
 		} else {
-			return candidato;
+			return gest;
 		}
 	}
 
 	@Override
 	public void changePassword(long userId, String newPassword) {
-		Candidato user = find(userId);
+		Gestor user = find(userId);
 		user.setPassword(Encript.encript(newPassword));
 		update(user);
 	}

@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -36,13 +38,18 @@ public class AdministradorService {
 		Administrador newAdmin = new Administrador(user);
 		newAdmin.setPerfil(adminFacade.getPerfilAdmin());
 		userFacade.delete(user);
+		user = null;
 		adminFacade.create(newAdmin);
-		return adminFacade.findByLogin(user.getLogin());
+		return adminFacade.findByLogin(newAdmin.getLogin());
 	}
 
 	public void createNewAdministrador(Administrador newAdmin) {
 		newAdmin.setPerfil(adminFacade.getPerfilAdmin());
 		adminFacade.create(newAdmin);
+	}
+
+	public List<Administrador> listaAdministradores() {
+		return (List<Administrador>) adminFacade.findAll();
 	}
 
 }

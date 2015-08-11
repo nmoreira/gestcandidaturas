@@ -22,22 +22,9 @@ public class Administrador extends ResponsavelPosicao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	// @Transient
-	// @Inject
-	// private PerfilFacade perfilFac;
-
 	public Administrador() {
 		super();
 		this.setCargo("ADMIN");
-		// Perfil perfilAdmin = perfilFac.findByName("ADMIN");
-		// if (perfilAdmin != null) {
-		// System.out.println("Perfil admin inexistente");
-		// this.setPerfil(perfilAdmin);
-		// } else {
-		// perfilAdmin = new Perfil("ADMIN");
-		// perfilFac.create(perfilAdmin);
-		// this.setPerfil(perfilAdmin);
-		// }
 	}
 
 	public Administrador(Utilizador user) {

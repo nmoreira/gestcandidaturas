@@ -14,4 +14,5 @@ public interface IUtilizadorFacade extends IEntityFacade<Utilizador> {
 
 	public abstract void changePassword(long userId, String newPassword);
 
+	public abstract List<Utilizador> getUtilizadoresSemPerfil();
 }

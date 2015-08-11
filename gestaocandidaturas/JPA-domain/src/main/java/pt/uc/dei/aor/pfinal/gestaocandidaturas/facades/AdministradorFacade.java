@@ -46,9 +46,19 @@ public class AdministradorFacade implements IAdministradorFacade {
 	}
 
 	@Override
-	public void delete(Administrador entity) {
-		Administrador entityToBeRemoved = em.merge(entity);
-		em.remove(entityToBeRemoved);
+	public boolean delete(Administrador entity) {
+		if (em.find(Administrador.class, entity.getId()) == null) {
+			return false;
+		} else {
+
+			try {
+				Administrador entityToBeRemoved = em.merge(entity);
+				em.remove(entityToBeRemoved);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
 	}
 
 	@Override

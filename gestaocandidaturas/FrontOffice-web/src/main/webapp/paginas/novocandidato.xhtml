@@ -76,7 +76,9 @@
 				value="#{novoCandidato.telemovel}" />
 			
 			<p:outputLabel value="País" for="pais" />
-			<p:inputText id="pais" value="#{novoCandidato.pais}"/>
+			<p:autoComplete id="pais" value="#{novoCandidato.pais}" required="true" completeMethod="#{novoCandidato.sugerirpais}"
+			forceSelection="true" minQueryLenght="1" dropdown="true"></p:autoComplete>
+		
 			
 			<p:outputLabel value="Curso" for="curso" />
 			<p:inputText id="curso" value="#{novoCandidato.curso}" />

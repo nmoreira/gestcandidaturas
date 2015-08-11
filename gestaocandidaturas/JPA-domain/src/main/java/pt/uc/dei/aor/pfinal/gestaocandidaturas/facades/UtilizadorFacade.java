@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.facades;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
@@ -21,6 +23,8 @@ public class UtilizadorFacade implements IUtilizadorFacade {
 
 	@PersistenceContext(unitName = "gestcandidaturas")
 	private EntityManager em;
+
+	private Query q;
 
 	/**
 	 * Default constructor.
@@ -42,10 +46,20 @@ public class UtilizadorFacade implements IUtilizadorFacade {
 	}
 
 	@Override
-	public void delete(Utilizador entity) {
-		Utilizador entityToBeRemoved = em.merge(entity);
-		em.remove(entityToBeRemoved);
+	public boolean delete(Utilizador entity) {
+		if (em.find(Utilizador.class, entity.getId()) == null) {
+			return false;
+		} else {
 
+			try {
+				Utilizador entityToBeRemoved = em.merge(entity);
+				em.remove(entityToBeRemoved);
+				em.flush();
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
 	}
 
 	@Override
@@ -99,6 +113,14 @@ public class UtilizadorFacade implements IUtilizadorFacade {
 		Utilizador user = find(userId);
 		user.setPassword(Encript.encript(newPassword));
 		update(user);
+	}
+
+	@Override
+	public List<Utilizador> getUtilizadoresSemPerfil() {
+		List<Utilizador> listaFinal = new ArrayList<>();
+		q = em.createQuery("from Utilizador u where u.perfil = null");
+		listaFinal = q.getResultList();
+		return listaFinal;
 	}
 
 }

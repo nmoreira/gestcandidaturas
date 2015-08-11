@@ -1,6 +1,8 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.view;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -34,6 +36,22 @@ public class NovoCandidato implements Serializable {
 	private String escola;
 	private String cv;
 	private String idLinkedin;
+
+	private List<String> paises = new ArrayList<>();
+
+	public NovoCandidato() {
+		paises.add("Portugal");
+		paises.add("Alemanha");
+		paises.add("Espanha");
+		paises.add("França");
+		paises.add("Suiça");
+		paises.add("Argélia");
+		paises.add("Brasil");
+		paises.add("Argentina");
+		paises.add("Bolívia");
+		paises.add("Estados Unidos");
+		paises.add("Bulgária");
+	}
 
 	@Inject
 	private CandidatoService candidatoServ;
@@ -70,6 +88,15 @@ public class NovoCandidato implements Serializable {
 		if (userServ.existeEmail(email) == true)
 			DisplayMessages.addErrorMessage("O email " + email
 					+ " já está registado!");
+	}
+
+	public List<String> sugerirpais(String consulta) {
+		List<String> paisesugeridos = new ArrayList<>();
+		for (String pais : paises) {
+			if (pais.toLowerCase().startsWith(consulta.toLowerCase()))
+				paisesugeridos.add(pais);
+		}
+		return paisesugeridos;
 	}
 
 	public String getLogin() {

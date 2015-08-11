@@ -9,16 +9,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevistador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Perfil;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.Encript;
 
 /**
- * Session Bean implementation class CandidatoFacade
+ * Session Bean implementation class AdministradorFacade
  */
-@Stateless
+@Stateless()
 @LocalBean
-public class CandidatoFacade implements ICandidatoFacade {
+public class EntrevistadorFacade implements IEntrevistadorFacade {
 
 	@PersistenceContext(unitName = "gestcandidaturas")
 	private EntityManager em;
@@ -29,30 +29,30 @@ public class CandidatoFacade implements ICandidatoFacade {
 	/**
 	 * Default constructor.
 	 */
-	public CandidatoFacade() {
+	public EntrevistadorFacade() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Candidato create(Candidato entity) {
+	public Entrevistador create(Entrevistador entity) {
 		entity.setPassword(Encript.encript(entity.getPassword()));
 		em.persist(entity);
 		return entity;
 	}
 
 	@Override
-	public Candidato update(Candidato entity) {
+	public Entrevistador update(Entrevistador entity) {
 		return em.merge(entity);
 	}
 
 	@Override
-	public boolean delete(Candidato entity) {
-		if (em.find(Candidato.class, entity.getId()) == null) {
+	public boolean delete(Entrevistador entity) {
+		if (em.find(Entrevistador.class, entity.getId()) == null) {
 			return false;
 		} else {
 
 			try {
-				Candidato entityToBeRemoved = em.merge(entity);
+				Entrevistador entityToBeRemoved = em.merge(entity);
 				em.remove(entityToBeRemoved);
 				return true;
 			} catch (Exception e) {
@@ -62,9 +62,10 @@ public class CandidatoFacade implements ICandidatoFacade {
 	}
 
 	@Override
-	public Candidato find(long pk) {
-		TypedQuery<Candidato> q = em.createNamedQuery("Candidato.findById",
-				Candidato.class).setParameter("id", pk);
+	public Entrevistador find(long pk) {
+		TypedQuery<Entrevistador> q = em.createNamedQuery(
+				"Entrevistador.findById", Entrevistador.class).setParameter(
+				"id", pk);
 		if (!q.getResultList().isEmpty())
 			return q.getResultList().get(0);
 		else
@@ -72,16 +73,17 @@ public class CandidatoFacade implements ICandidatoFacade {
 	}
 
 	@Override
-	public Collection<Candidato> findAll() {
-		TypedQuery<Candidato> q = em.createNamedQuery("Candidato.findAll",
-				Candidato.class);
+	public Collection<Entrevistador> findAll() {
+		TypedQuery<Entrevistador> q = em.createNamedQuery(
+				"Entrevistador.findAll", Entrevistador.class);
 		return q.getResultList();
 	}
 
 	@Override
-	public Candidato findByLogin(String login) {
-		TypedQuery<Candidato> q = em.createNamedQuery("Candidato.findByLogin",
-				Candidato.class).setParameter("login", login);
+	public Entrevistador findByLogin(String login) {
+		TypedQuery<Entrevistador> q = em.createNamedQuery(
+				"Entrevistador.findByLogin", Entrevistador.class).setParameter(
+				"login", login);
 		if (!q.getResultList().isEmpty())
 			return q.getResultList().get(0);
 		else
@@ -89,9 +91,10 @@ public class CandidatoFacade implements ICandidatoFacade {
 	}
 
 	@Override
-	public Candidato findByEmail(String email) {
-		TypedQuery<Candidato> q = em.createNamedQuery("Candidato.findByLogin",
-				Candidato.class).setParameter("email", email);
+	public Entrevistador findByEmail(String email) {
+		TypedQuery<Entrevistador> q = em.createNamedQuery(
+				"Entrevistador.findByLogin", Entrevistador.class).setParameter(
+				"email", email);
 		if (!q.getResultList().isEmpty())
 			return q.getResultList().get(0);
 		else
@@ -99,20 +102,20 @@ public class CandidatoFacade implements ICandidatoFacade {
 	}
 
 	@Override
-	public Perfil getPerfilCandidato() {
-		Perfil candidato = pf.findByName("CANDIDATO");
-		if (candidato == null) {
-			pf.create(new Perfil("CANDIDATO"));
-			candidato = pf.findByName("CANDIDATO");
-			return candidato;
+	public Perfil getPerfilEntrevistador() {
+		Perfil ent = pf.findByName("ENTREVISTADOR");
+		if (ent == null) {
+			pf.create(new Perfil("ENTREVISTADOR"));
+			ent = pf.findByName("ENTREVISTADOR");
+			return ent;
 		} else {
-			return candidato;
+			return ent;
 		}
 	}
 
 	@Override
 	public void changePassword(long userId, String newPassword) {
-		Candidato user = find(userId);
+		Entrevistador user = find(userId);
 		user.setPassword(Encript.encript(newPassword));
 		update(user);
 	}

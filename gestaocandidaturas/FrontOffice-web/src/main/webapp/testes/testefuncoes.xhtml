@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+
+	<h1>Teste de funções</h1>
+	<div align="center">
+		<h:form>
+			<h:panelGrid columns="4">
+				<h:commandButton action="#{testeUtilizadores.inicializaUtilizadores()}"	value="Criar 20 utilizadores" />
+				<h:commandButton action="#{testeUtilizadores.apagaUtilizador2()}" value="Apagar utilizador 2" />
+				<h:commandButton action="#{testeUtilizadores.converterUserEmAdmin()}" value="Converter users em admins" />
+				<h:commandButton action="#{testeUtilizadores.converterUserEmEntrevistador()}" value="Converter user em Entrevistador" />
+				<h:commandButton action="#{testeUtilizadores.listaAdmins()}" value="Listar administradores" />
+				<h:commandButton action="#{testeUtilizadores.listaUtilizadores()}" value="Listar utilizadores" />
+				<h:commandButton action="#{testeUtilizadores.listaUtilizadoresSemPerfil()}" value="ListaUtilizadores sem perfil" />
+				<h:commandButton action="#{testeUtilizadores.converterUserEmGestor()}" value="Converter user em gestor" />
+				<h:commandButton action="#{testeUtilizadores.listaGestores()}" value="Lista Gestores" />
+			</h:panelGrid>
+		</h:form>
+	</div>
+
+</h:body>
+</html>

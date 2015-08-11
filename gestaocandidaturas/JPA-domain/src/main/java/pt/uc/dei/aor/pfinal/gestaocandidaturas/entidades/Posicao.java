@@ -10,10 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  * Entity implementation class for Entity: Posicao
@@ -21,6 +24,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "posicao")
+@NamedQueries({
+		@NamedQuery(name = "Posicao.findAll", query = "SELECT p FROM Posicao p"),
+		@NamedQuery(name = "Posicao.findByTitulo", query = "SELECT p FROM Posicao p WHERE p.titulo LIKE :titulo"),
+		@NamedQuery(name = "Posicao.findByEmpresa", query = "SELECT p FROM Posicao p WHERE p.empresa LIKE :empresa"),
+		@NamedQuery(name = "Posicao.findById", query = "SELECT p FROM Posicao p WHERE p.id = :id"),
+		@NamedQuery(name = "Posicao.findByCodPosicao", query = "SELECT p FROM Posicao p WHERE p.codPosicao = :codPosicao") })
 public class Posicao implements Serializable {
 
 	@Id
@@ -32,7 +41,8 @@ public class Posicao implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAbertura;
 
-	@Column
+	@Column(unique = true)
+	@NotNull
 	private String codPosicao;
 
 	@Column
@@ -79,6 +89,28 @@ public class Posicao implements Serializable {
 
 	public Posicao() {
 		super();
+	}
+
+	public Posicao(Date dataAbertura, String codPosicao, String titulo,
+			String localizacao, String estado, int quantidadeVagas,
+			Date dataFecho, String sla, ResponsavelPosicao responsavel,
+			String empresa, String areaTecnica, String descricao,
+			String canaisPublicacao, Guiao guiao) {
+		super();
+		this.dataAbertura = dataAbertura;
+		this.codPosicao = codPosicao;
+		this.titulo = titulo;
+		this.localizacao = localizacao;
+		this.estado = estado;
+		this.quantidadeVagas = quantidadeVagas;
+		this.dataFecho = dataFecho;
+		this.sla = sla;
+		this.responsavel = responsavel;
+		this.empresa = empresa;
+		this.areaTecnica = areaTecnica;
+		this.descricao = descricao;
+		this.canaisPublicacao = canaisPublicacao;
+		this.guiao = guiao;
 	}
 
 	public long getId() {
