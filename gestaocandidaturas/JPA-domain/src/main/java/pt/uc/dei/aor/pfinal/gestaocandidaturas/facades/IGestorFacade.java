@@ -9,6 +9,8 @@ public interface IGestorFacade extends IEntityFacade<Gestor> {
 
 	public abstract Gestor findByEmail(String email);
 
+	public abstract Gestor createBypassingPassword(Gestor gestor);
+
 	public abstract Perfil getPerfilGestor();
 
 	public abstract void changePassword(long userId, String newPassword);

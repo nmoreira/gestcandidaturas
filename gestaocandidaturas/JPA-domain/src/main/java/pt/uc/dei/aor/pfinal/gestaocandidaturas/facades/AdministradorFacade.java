@@ -120,4 +120,10 @@ public class AdministradorFacade implements IAdministradorFacade {
 		update(user);
 	}
 
+	@Override
+	public Administrador createBypassingPassword(Administrador newAdmin) {
+		em.persist(newAdmin);
+		return newAdmin;
+	}
+
 }

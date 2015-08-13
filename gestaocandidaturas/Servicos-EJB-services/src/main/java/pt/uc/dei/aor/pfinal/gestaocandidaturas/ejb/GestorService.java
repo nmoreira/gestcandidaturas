@@ -39,7 +39,7 @@ public class GestorService {
 		newGest.setPerfil(gestorFacade.getPerfilGestor());
 		userFacade.delete(user);
 		user = null;
-		gestorFacade.create(newGest);
+		gestorFacade.createBypassingPassword(newGest);
 		return gestorFacade.findByLogin(newGest.getLogin());
 	}
 

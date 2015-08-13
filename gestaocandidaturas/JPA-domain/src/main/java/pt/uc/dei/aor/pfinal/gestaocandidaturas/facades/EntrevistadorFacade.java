@@ -120,4 +120,10 @@ public class EntrevistadorFacade implements IEntrevistadorFacade {
 		update(user);
 	}
 
+	@Override
+	public Entrevistador createBypassingPassword(Entrevistador entrevistador) {
+		em.persist(entrevistador);
+		return entrevistador;
+	}
+
 }

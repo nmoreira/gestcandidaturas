@@ -9,6 +9,8 @@ public interface ICandidatoFacade extends IEntityFacade<Candidato> {
 
 	public abstract Candidato findByEmail(String email);
 
+	public abstract Candidato createBypassingPassword(Candidato candidato);
+
 	public abstract Perfil getPerfilCandidato();
 
 	public abstract void changePassword(long userId, String newPassword);

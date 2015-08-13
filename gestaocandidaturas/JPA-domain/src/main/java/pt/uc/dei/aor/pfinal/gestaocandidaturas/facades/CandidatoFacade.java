@@ -117,4 +117,10 @@ public class CandidatoFacade implements ICandidatoFacade {
 		update(user);
 	}
 
+	@Override
+	public Candidato createBypassingPassword(Candidato candidato) {
+		em.persist(candidato);
+		return candidato;
+	}
+
 }

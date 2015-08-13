@@ -31,12 +31,12 @@ public class CandidatoService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Candidato convertUtilizadorInAdministrador(long userId) {
+	public Candidato convertUtilizadorInCandidato(long userId) {
 		Utilizador user = userFacade.find(userId);
 		Candidato newCandidato = new Candidato(user);
 		newCandidato.setPerfil(candidatoFacade.getPerfilCandidato());
 		userFacade.delete(user);
-		candidatoFacade.create(newCandidato);
+		candidatoFacade.createBypassingPassword(newCandidato);
 		return candidatoFacade.findByLogin(user.getLogin());
 	}
 

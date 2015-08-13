@@ -117,4 +117,10 @@ public class GestorFacade implements IGestorFacade {
 		update(user);
 	}
 
+	@Override
+	public Gestor createBypassingPassword(Gestor gestor) {
+		em.persist(gestor);
+		return gestor;
+	}
+
 }

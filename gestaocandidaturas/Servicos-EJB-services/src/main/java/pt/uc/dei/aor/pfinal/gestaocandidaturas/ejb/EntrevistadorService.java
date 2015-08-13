@@ -36,7 +36,7 @@ public class EntrevistadorService {
 		Entrevistador newEnt = new Entrevistador(user);
 		newEnt.setPerfil(entFacade.getPerfilEntrevistador());
 		userFacade.delete(user);
-		entFacade.create(newEnt);
+		entFacade.createBypassingPassword(newEnt);
 		return entFacade.findByLogin(user.getLogin());
 	}
 

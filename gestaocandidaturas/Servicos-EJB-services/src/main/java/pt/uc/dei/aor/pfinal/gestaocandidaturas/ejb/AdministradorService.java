@@ -39,7 +39,7 @@ public class AdministradorService {
 		newAdmin.setPerfil(adminFacade.getPerfilAdmin());
 		userFacade.delete(user);
 		user = null;
-		adminFacade.create(newAdmin);
+		adminFacade.createBypassingPassword(newAdmin);
 		return adminFacade.findByLogin(newAdmin.getLogin());
 	}
 

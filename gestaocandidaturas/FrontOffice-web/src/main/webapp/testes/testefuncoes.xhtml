@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head></h:head>
 <h:body>
@@ -11,18 +12,212 @@
 	<div align="center">
 		<h:form>
 			<h:panelGrid columns="4">
-				<h:commandButton action="#{testeUtilizadores.inicializaUtilizadores()}"	value="Criar 20 utilizadores" />
-				<h:commandButton action="#{testeUtilizadores.apagaUtilizador2()}" value="Apagar utilizador 2" />
-				<h:commandButton action="#{testeUtilizadores.converterUserEmAdmin()}" value="Converter users em admins" />
-				<h:commandButton action="#{testeUtilizadores.converterUserEmEntrevistador()}" value="Converter user em Entrevistador" />
-				<h:commandButton action="#{testeUtilizadores.listaAdmins()}" value="Listar administradores" />
-				<h:commandButton action="#{testeUtilizadores.listaUtilizadores()}" value="Listar utilizadores" />
-				<h:commandButton action="#{testeUtilizadores.listaUtilizadoresSemPerfil()}" value="ListaUtilizadores sem perfil" />
-				<h:commandButton action="#{testeUtilizadores.converterUserEmGestor()}" value="Converter user em gestor" />
-				<h:commandButton action="#{testeUtilizadores.listaGestores()}" value="Lista Gestores" />
+				<h:commandButton
+					action="#{testeUtilizadores.inicializaUtilizadores()}"
+					value="Criar 20 utilizadores" />
+				<h:commandButton action="#{testeUtilizadores.apagaUtilizador2()}"
+					value="Apagar utilizador 2" />
+				<h:commandButton
+					action="#{testeUtilizadores.converterUserEmAdmin()}"
+					value="Converter users em admins" />
+				<h:commandButton
+					action="#{testeUtilizadores.converterUserEmEntrevistador()}"
+					value="Converter user em Entrevistador" />
+				<h:commandButton action="#{testeUtilizadores.consultaListaAdmins()}"
+					value="Listar administradores" />
+				<h:commandButton
+					action="#{testeUtilizadores.consultaListaUtilizadores()}"
+					value="Listar utilizadores" />
+				<h:commandButton
+					action="#{testeUtilizadores.consultaListaUtilizadoresSemPerfil()}"
+					value="ListaUtilizadores sem perfil" />
+				<h:commandButton
+					action="#{testeUtilizadores.converterUserEmGestor()}"
+					value="Converter user em gestor" />
+				<h:commandButton
+					action="#{testeUtilizadores.consultaListaGestores()}"
+					value="Lista Gestores" />
 			</h:panelGrid>
 		</h:form>
+
 	</div>
+	<p:tabView dynamic="true" cache="false">
+		<p:tab title="Lista de todos os utilizaodres">
+			<h3>Lista de todos os utilizaodres</h3>
+			<p:dataTable value="#{testeUtilizadores.listaUtilizadores}"
+				var="utilizador" emptyMessage="Tabela sem registos!" rows="10"
+				paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" draggableColumns="true"
+				resizableColumns="true" sortBy="#{utilizador.id}"
+				sortOrder="ascending">
+				<p:column headerText="ID" sortBy="#{utilizador.id}">
+					<h:outputText value="#{utilizador.id}" />
+				</p:column>
+				<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+					<h:outputText value="#{utilizador.nome}" />
+				</p:column>
+				<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+					<h:outputText value="#{utilizador.apelido}" />
+				</p:column>
+				<p:column headerText="Login" sortBy="#{utilizador.login}">
+					<h:outputText value="#{utilizador.login}" />
+				</p:column>
+				<p:column headerText="Email" sortBy="#{utilizador.email}">
+					<h:outputText value="#{utilizador.email}" />
+				</p:column>
+				<p:column headerText="Cargo" sortBy="#{utilizador.cargo}">
+					<h:outputText value="#{utilizador.cargo}" />
+				</p:column>
+				<p:column headerText="Perfil" sortBy="#{utilizador.perfil.cargo}">
+					<h:outputText value="#{utilizador.perfil.cargo}" />
+				</p:column>
+				<f:facet name="footer">
+        		#{testeUtilizadores.listaUtilizadores.size()} registos. 
+    		</f:facet>
+			</p:dataTable>
+		</p:tab>
+
+		<p:tab title="Lista de todos os administradores">
+			<h3>Lista de todos os administradores</h3>
+			<p:dataTable value="#{testeUtilizadores.listaAdministradores}"
+				var="utilizador" emptyMessage="Tabela sem registos!" rows="10"
+				paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" draggableColumns="true"
+				resizableColumns="true" sortBy="#{utilizador.id}"
+				sortOrder="ascending">
+				<p:column headerText="ID" sortBy="#{utilizador.id}">
+					<h:outputText value="#{utilizador.id}" />
+				</p:column>
+				<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+					<h:outputText value="#{utilizador.nome}" />
+				</p:column>
+				<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+					<h:outputText value="#{utilizador.apelido}" />
+				</p:column>
+				<p:column headerText="Login" sortBy="#{utilizador.login}">
+					<h:outputText value="#{utilizador.login}" />
+				</p:column>
+				<p:column headerText="Email" sortBy="#{utilizador.email}">
+					<h:outputText value="#{utilizador.email}" />
+				</p:column>
+				<p:column headerText="Cargo" sortBy="#{utilizador.cargo}">
+					<h:outputText value="#{utilizador.cargo}" />
+				</p:column>
+				<p:column headerText="Perfil" sortBy="#{utilizador.perfil.cargo}">
+					<h:outputText value="#{utilizador.perfil.cargo}" />
+				</p:column>
+				<f:facet name="footer">
+        		#{testeUtilizadores.listaAdministradores.size()} registos. 
+    		</f:facet>
+			</p:dataTable>
+		</p:tab>
+
+		<p:tab title="Lista de todos os gestores">
+			<h3>Lista de todos os gestores</h3>
+			<p:dataTable value="#{testeUtilizadores.listaGestores}"
+				var="utilizador" emptyMessage="Tabela sem registos!" rows="10"
+				paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" draggableColumns="true"
+				resizableColumns="true" sortBy="#{utilizador.id}"
+				sortOrder="ascending">
+				<p:column headerText="ID" sortBy="#{utilizador.id}">
+					<h:outputText value="#{utilizador.id}" />
+				</p:column>
+				<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+					<h:outputText value="#{utilizador.nome}" />
+				</p:column>
+				<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+					<h:outputText value="#{utilizador.apelido}" />
+				</p:column>
+				<p:column headerText="Login" sortBy="#{utilizador.login}">
+					<h:outputText value="#{utilizador.login}" />
+				</p:column>
+				<p:column headerText="Email" sortBy="#{utilizador.email}">
+					<h:outputText value="#{utilizador.email}" />
+				</p:column>
+				<p:column headerText="Cargo" sortBy="#{utilizador.cargo}">
+					<h:outputText value="#{utilizador.cargo}" />
+				</p:column>
+				<p:column headerText="Perfil" sortBy="#{utilizador.perfil.cargo}">
+					<h:outputText value="#{utilizador.perfil.cargo}" />
+				</p:column>
+				<f:facet name="footer">
+        		#{testeUtilizadores.listaGestores.size()} registos. 
+    		</f:facet>
+			</p:dataTable>
+		</p:tab>
+
+		<p:tab title="Lista de todos os Candidatos">
+			<h3>Lista de todos os candidatos</h3>
+			<p:dataTable value="#{testeUtilizadores.listaCandidatos}"
+				var="utilizador" emptyMessage="Tabela sem registos!" rows="10"
+				paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" draggableColumns="true"
+				resizableColumns="true" sortBy="#{utilizador.id}"
+				sortOrder="ascending">
+				<p:column headerText="ID" sortBy="#{utilizador.id}">
+					<h:outputText value="#{utilizador.id}" />
+				</p:column>
+				<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+					<h:outputText value="#{utilizador.nome}" />
+				</p:column>
+				<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+					<h:outputText value="#{utilizador.apelido}" />
+				</p:column>
+				<p:column headerText="Login" sortBy="#{utilizador.login}">
+					<h:outputText value="#{utilizador.login}" />
+				</p:column>
+				<p:column headerText="Email" sortBy="#{utilizador.email}">
+					<h:outputText value="#{utilizador.email}" />
+				</p:column>
+				<p:column headerText="Cargo" sortBy="#{utilizador.cargo}">
+					<h:outputText value="#{utilizador.cargo}" />
+				</p:column>
+				<p:column headerText="Perfil" sortBy="#{utilizador.perfil.cargo}">
+					<h:outputText value="#{utilizador.perfil.cargo}" />
+				</p:column>
+				<f:facet name="footer">
+        		#{testeUtilizadores.listaCandidatos.size()} registos. 
+    		</f:facet>
+			</p:dataTable>
+		</p:tab>
+
+		<p:tab title="Lista de todos os Utilizadores sem perfil">
+			<h3>Lista de todos os Utilizadores sem perfil</h3>
+			<p:dataTable value="#{testeUtilizadores.listaUtilizadoresSemPerfil}"
+				var="utilizador" emptyMessage="Tabela sem registos!" rows="10"
+				paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" draggableColumns="true"
+				resizableColumns="true" sortBy="#{utilizador.id}"
+				sortOrder="ascending">
+				<p:column headerText="ID" sortBy="#{utilizador.id}">
+					<h:outputText value="#{utilizador.id}" />
+				</p:column>
+				<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+					<h:outputText value="#{utilizador.nome}" />
+				</p:column>
+				<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+					<h:outputText value="#{utilizador.apelido}" />
+				</p:column>
+				<p:column headerText="Login" sortBy="#{utilizador.login}">
+					<h:outputText value="#{utilizador.login}" />
+				</p:column>
+				<p:column headerText="Email" sortBy="#{utilizador.email}">
+					<h:outputText value="#{utilizador.email}" />
+				</p:column>
+				<p:column headerText="Cargo" sortBy="#{utilizador.cargo}">
+					<h:outputText value="#{utilizador.cargo}" />
+				</p:column>
+				<p:column headerText="Perfil" sortBy="#{utilizador.perfil.cargo}">
+					<h:outputText value="#{utilizador.perfil.cargo}" />
+				</p:column>
+				<f:facet name="footer">
+        			#{testeUtilizadores.listaUtilizadoresSemPerfil.size()} registos. 
+    			</f:facet>
+			</p:dataTable>
+		</p:tab>
+
+	</p:tabView>
 
 </h:body>
 </html>

@@ -9,6 +9,9 @@ public interface IEntrevistadorFacade extends IEntityFacade<Entrevistador> {
 
 	public abstract Entrevistador findByEmail(String email);
 
+	public abstract Entrevistador createBypassingPassword(
+			Entrevistador entrevistador);
+
 	public abstract Perfil getPerfilEntrevistador();
 
 	public abstract void changePassword(long userId, String newPassword);

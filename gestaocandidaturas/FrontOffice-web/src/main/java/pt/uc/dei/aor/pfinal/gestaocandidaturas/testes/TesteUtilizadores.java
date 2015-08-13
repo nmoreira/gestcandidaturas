@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.testes;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -12,6 +13,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.EntrevistadorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.GestorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Administrador;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevistador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Gestor;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
@@ -37,18 +39,46 @@ public class TesteUtilizadores implements Serializable {
 	@Inject
 	private GestorService gestService;
 
+	private List<Utilizador> listaUtilizadores = new ArrayList<>();
+	private List<Utilizador> listaUtilizadoresSemPerfil = new ArrayList<>();
+	private List<Administrador> listaAdministradores = new ArrayList<>();
+	private List<Gestor> listaGestores = new ArrayList<>();
+
+	private List<Candidato> listaCandidatos = new ArrayList<>();
+
 	private void criaUtilizadores(int quant) {
 		for (int i = 1; i <= quant; i++) {
 			System.out.println("utilizador " + i);
-			Utilizador newUser = new Utilizador("user" + i,
-					"password utilizador " + i, "Utilizador " + i,
-					"Apelido utilizador " + i, "email utilizador" + i);
+			Utilizador newUser = new Utilizador("user" + i, "123",
+					"Utilizador " + i, "Apelido utilizador " + i,
+					"email utilizador" + i);
 			userService.createNewUtilizador(newUser);
 		}
 	}
 
+	public void carregaUsers() {
+		Utilizador user1 = new Utilizador("user", "123", "Utilizador teste",
+				"Apelido utilizador teste", "mail1");
+		userService.createNewUtilizador(user1);
+
+		Administrador admin = new Administrador("admin", "123",
+				"Administrador teste", "Apelido administrador teste",
+				"mailadmin");
+		adminService.createNewAdministrador(admin);
+
+		Gestor gestor = new Gestor("gestor", "123", "Gestor teste",
+				"Apelido gestor teste", "mailgest");
+		gestService.createNewGestor(gestor);
+
+		Entrevistador entr = new Entrevistador("ent", "123",
+				"Entrevistador teste", "Apelido entrevistador teste", "mailent");
+		entService.createNewEntrevistador(entr);
+	}
+
 	public void inicializaUtilizadores() {
+		carregaUsers();
 		criaUtilizadores(20);
+		consultaListaUtilizadores();
 	}
 
 	public void apagaUtilizador2() {
@@ -57,6 +87,7 @@ public class TesteUtilizadores implements Serializable {
 			System.out.println("Utilizador 2 apagado!");
 		else
 			System.out.println("Falha ao apagar o utilizador");
+		consultaListaUtilizadores();
 	}
 
 	public void converterUserEmAdmin() {
@@ -72,6 +103,8 @@ public class TesteUtilizadores implements Serializable {
 				.convertUtilizadorInAdministrador(user5.getId());
 		System.out.println("user 5 convertido em administrador com o id:"
 				+ admin5.getId());
+		consultaListaUtilizadores();
+		consultaListaAdmins();
 	}
 
 	public void converterUserEmEntrevistador() {
@@ -80,6 +113,7 @@ public class TesteUtilizadores implements Serializable {
 				.convertUtilizadorInEntrevistador(user10.getId());
 		System.out.println("user 10 convertido em entrevistador com o id:"
 				+ ent10.getId());
+		consultaListaUtilizadores();
 	}
 
 	public void converterUserEmGestor() {
@@ -87,38 +121,90 @@ public class TesteUtilizadores implements Serializable {
 		Gestor gest15 = gestService.convertUtilizadorInGestor(user15.getId());
 		System.out.println("user 15 convertido em gestor com o id:"
 				+ gest15.getId());
+		consultaListaUtilizadores();
+		consultaListaGestores();
 	}
 
-	public void listaAdmins() {
+	public void consultaListaAdmins() {
 		List<Administrador> admins = adminService.listaAdministradores();
 		System.out.println("Encontrados " + admins.size() + " administradores");
+		listaAdministradores.clear();
 		for (Administrador administrador : admins) {
-			System.out.println(administrador);
+			listaAdministradores.add(administrador);
+
 		}
 	}
 
-	public void listaUtilizadores() {
+	public void consultaListaUtilizadores() {
 		List<Utilizador> users = userService.listaUtilizadores();
 		System.out.println("Encontrados " + users.size() + " utilizadores");
+		listaUtilizadores.clear();
 		for (Utilizador user : users) {
-			System.out.println(user);
+			listaUtilizadores.add(user);
+
 		}
+		consultaListaUtilizadoresSemPerfil();
 	}
 
-	public void listaGestores() {
+	public void consultaListaGestores() {
 		List<Gestor> gests = gestService.listaGestores();
 		System.out.println("Encontrados " + gests.size() + " gestores");
+		listaGestores.clear();
 		for (Gestor administrador : gests) {
-			System.out.println(administrador);
+			listaGestores.add(administrador);
+
 		}
 	}
 
-	public void listaUtilizadoresSemPerfil() {
+	public void consultaListaUtilizadoresSemPerfil() {
 		List<Utilizador> users = userService.getUtilizadoresSemPerfil();
+		listaUtilizadoresSemPerfil.clear();
 		System.out.println("Encontrados " + users.size()
 				+ " utilizadores sem perfil atribuido");
 		for (Utilizador user : users) {
-			System.out.println(user);
+			listaUtilizadoresSemPerfil.add(user);
+
 		}
+	}
+
+	public List<Utilizador> getListaUtilizadores() {
+		return listaUtilizadores;
+	}
+
+	public void setListaUtilizadores(List<Utilizador> listaUtilizadores) {
+		this.listaUtilizadores = listaUtilizadores;
+	}
+
+	public List<Administrador> getListaAdministradores() {
+		return listaAdministradores;
+	}
+
+	public void setListaAdministradores(List<Administrador> listaAdministradores) {
+		this.listaAdministradores = listaAdministradores;
+	}
+
+	public List<Gestor> getListaGestores() {
+		return listaGestores;
+	}
+
+	public void setListaGestores(List<Gestor> listaGestores) {
+		this.listaGestores = listaGestores;
+	}
+
+	public List<Candidato> getListaCandidatos() {
+		return listaCandidatos;
+	}
+
+	public void setListaCandidatos(List<Candidato> listaCandidatos) {
+		this.listaCandidatos = listaCandidatos;
+	}
+
+	public List<Utilizador> getListaUtilizadoresSemPerfil() {
+		return listaUtilizadoresSemPerfil;
+	}
+
+	public void setListaUtilizadoresSemPerfil(
+			List<Utilizador> listaUtilizadoresSemPerfil) {
+		this.listaUtilizadoresSemPerfil = listaUtilizadoresSemPerfil;
 	}
 }
