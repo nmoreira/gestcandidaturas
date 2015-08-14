@@ -30,6 +30,7 @@ public class NovaPosicao implements Serializable {
 	private String codPosicao;
 	private String titulo;
 	private String localizacao;
+	private List<String> local;
 	private String estado;
 	private int quantidadeVagas;
 	private Date dataFecho;
@@ -76,7 +77,10 @@ public class NovaPosicao implements Serializable {
 	}
 
 	private void loadLocais() {
-		// TODO;
+		LOCAIS.add("Coimbra");
+		LOCAIS.add("Oporto");
+		LOCAIS.add("Lisbon");
+		LOCAIS.add("Client");
 	}
 
 	private void loadAreasTecnicas() {
@@ -96,6 +100,14 @@ public class NovaPosicao implements Serializable {
 		CANAIS_COMUNICACAO.add("Linkedin");
 		CANAIS_COMUNICACAO.add("Glassdoor");
 		CANAIS_COMUNICACAO.add("Facebook");
+	}
+
+	public List<String> getLOCAIS() {
+		return LOCAIS;
+	}
+
+	public List<String> getCANAIS_COMUNICACAO() {
+		return CANAIS_COMUNICACAO;
 	}
 
 	public List<String> sugerirCanaisComunicacao(String query) {
@@ -121,10 +133,9 @@ public class NovaPosicao implements Serializable {
 			DisplayMessages
 					.addErrorMessage("O Cód. de posição introduzido já existe! Por favor escolha outro.");
 		} else {
-			Posicao pos = new Posicao(dataAbertura, codPosicao, titulo,
-					localizacao, estado, quantidadeVagas, dataFecho, sla,
-					responsavel, empresa, areaTecnica, descricao,
-					canaisPublicacao, guiao);
+			Posicao pos = new Posicao(dataAbertura, codPosicao, titulo, local,
+					estado, quantidadeVagas, dataFecho, sla, responsavel,
+					empresa, areaTecnica, descricao, canaisPublicacao, guiao);
 			posicaoServ.createNewPosicao(pos);
 			DisplayMessages.addInfoMessage("Posição criada com sucesso!");
 		}
@@ -249,6 +260,14 @@ public class NovaPosicao implements Serializable {
 
 	public List<String> getAREAS_TECNICAS() {
 		return AREAS_TECNICAS;
+	}
+
+	public List<String> getLocal() {
+		return local;
+	}
+
+	public void setLocal(List<String> local) {
+		this.local = local;
 	}
 
 }

@@ -29,7 +29,10 @@
 				cols="60" rows="8" />
 
 			<p:outputLabel for="local" value="Localização" />
-			<p:inputText id="local" value="#{novaPosicao.localizacao}" />
+			<p:selectManyCheckbox id="local" value="#{novaPosicao.local}">
+				<f:selectItems value="#{novaPosicao.LOCAIS}"/>
+			</p:selectManyCheckbox>
+			
 
 			<p:outputLabel for="quantidade" value="Quantidade de vagas" />
 			<p:inputText id="quantidade" value="#{novaPosicao.quantidadeVagas}" />

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -48,8 +49,8 @@ public class Posicao implements Serializable {
 	@Column
 	private String titulo;
 
-	@Column
-	private String localizacao;
+	@ElementCollection
+	private List<String> localizacao;
 
 	@Column
 	private String estado;
@@ -92,7 +93,7 @@ public class Posicao implements Serializable {
 	}
 
 	public Posicao(Date dataAbertura, String codPosicao, String titulo,
-			String localizacao, String estado, int quantidadeVagas,
+			List<String> localizacao, String estado, int quantidadeVagas,
 			Date dataFecho, String sla, ResponsavelPosicao responsavel,
 			String empresa, String areaTecnica, String descricao,
 			String canaisPublicacao, Guiao guiao) {
@@ -145,11 +146,11 @@ public class Posicao implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public String getLocalizacao() {
+	public List<String> getLocalizacao() {
 		return localizacao;
 	}
 
-	public void setLocalizacao(String localizacao) {
+	public void setLocalizacao(List<String> localizacao) {
 		this.localizacao = localizacao;
 	}
 
