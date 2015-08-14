@@ -25,7 +25,9 @@ import javax.persistence.TemporalType;
 @Table(name = "candidatura")
 @NamedQueries({
 		@NamedQuery(name = "Candidatura.findAll", query = "SELECT c FROM Candidatura c"),
-		@NamedQuery(name = "Candidatura.findById", query = "SELECT c FROM Candidatura c WHERE c.id = :id") })
+		@NamedQuery(name = "Candidatura.findById", query = "SELECT c FROM Candidatura c WHERE c.id = :id"),
+		@NamedQuery(name = "Candidatura.findByCandidato", query = "SELECT c FROM Candidatura c WHERE c.candidato = :candidato"),
+		@NamedQuery(name = "Candidatura.findByPosicao", query = "SELECT c FROM Candidatura c WHERE c.posicao = :posicao") })
 public class Candidatura implements Serializable {
 
 	@Id

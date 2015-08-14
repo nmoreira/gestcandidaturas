@@ -41,7 +41,10 @@ public class NovaPosicao implements Serializable {
 	private String canaisPublicacao;
 	private Guiao guiao;
 
-	private static final List<ResponsavelPosicao> RESPONSAVEIS = new ArrayList<>();
+	public static final List<ResponsavelPosicao> RESPONSAVEIS = new ArrayList<>();
+	private final List<String> LOCAIS = new ArrayList<>();
+	private final List<String> AREAS_TECNICAS = new ArrayList<>();
+	private final List<String> CANAIS_COMUNICACAO = new ArrayList<>();
 
 	@Inject
 	private PosicaoService posicaoServ;
@@ -57,11 +60,53 @@ public class NovaPosicao implements Serializable {
 	}
 
 	@PostConstruct
+	private void load() {
+		loadResponsaveis();
+		loadLocais();
+		loadAreasTecnicas();
+		loadCanaisComunicacao();
+	}
+
 	private void loadResponsaveis() {
 		List<ResponsavelPosicao> list = respServ.getAllResponsaveisPosicao();
+		RESPONSAVEIS.clear();
 		for (ResponsavelPosicao responsavelPosicao : list) {
 			RESPONSAVEIS.add(responsavelPosicao);
 		}
+	}
+
+	private void loadLocais() {
+		// TODO;
+	}
+
+	private void loadAreasTecnicas() {
+		AREAS_TECNICAS.add("SSPA – Software and Security Product Assurance");
+		AREAS_TECNICAS
+				.add(".Net Development – desenvolvimento em tecnologias Microsoft");
+		AREAS_TECNICAS.add("Java Development – desenvolvimento em Java");
+		AREAS_TECNICAS
+				.add("Safety Critical – desenvolvimento mais baixo nível (C, Assembly, VHDL,...)");
+		AREAS_TECNICAS.add("Project Management – gestão de projectos");
+		AREAS_TECNICAS
+				.add("Integration – competências em bases de dados, integração (ESBs, protocolos de comunicação, middleware,...)");
+	}
+
+	private void loadCanaisComunicacao() {
+		CANAIS_COMUNICACAO.add("Critical Software website");
+		CANAIS_COMUNICACAO.add("Linkedin");
+		CANAIS_COMUNICACAO.add("Glassdoor");
+		CANAIS_COMUNICACAO.add("Facebook");
+	}
+
+	public List<String> sugerirCanaisComunicacao(String query) {
+		List<String> sugestao = new ArrayList<>();
+
+		for (String canal : this.CANAIS_COMUNICACAO) {
+			if (canal.toLowerCase().startsWith(query.toLowerCase())) {
+				sugestao.add(canal);
+			}
+		}
+		return sugestao;
 	}
 
 	public void validaCodPosicao() {
@@ -198,8 +243,12 @@ public class NovaPosicao implements Serializable {
 		this.guiao = guiao;
 	}
 
-	public static List<ResponsavelPosicao> getResponsaveis() {
+	public List<ResponsavelPosicao> getResponsaveis() {
 		return RESPONSAVEIS;
+	}
+
+	public List<String> getAREAS_TECNICAS() {
+		return AREAS_TECNICAS;
 	}
 
 }

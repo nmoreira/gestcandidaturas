@@ -57,10 +57,14 @@
 			<p:inputText id="empresa" value="#{novaPosicao.empresa}"/>
 			
 			<p:outputLabel for="area" value="Área Técnica"/>
-			<p:inputText id="area" value="#{novaPosicao.areaTecnica}"/>
+			<p:selectOneMenu id="area" value="#{novaPosicao.areaTecnica}">
+				<f:selectItems value="#{novaPosicao.AREAS_TECNICAS}" var="area"/>
+			</p:selectOneMenu>
 			
 			<p:outputLabel for="canais" value="Canais de Publicação"/>
-			<p:inputText id="canais" value="#{novaPosicao.canaisPublicacao}"/>
+			<p:autoComplete id="canais" value="#{novaPosicao.canaisPublicacao}" dropdown="true"
+				completeMethod="#{novaPosicao.sugerirCanaisComunicacao}" />
+ 
 			
 			<f:facet name="footer">
 				<p:commandButton value="Criar posição" action="#{novaPosicao.criaPosicao()}" update="@form"

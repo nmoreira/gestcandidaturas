@@ -43,7 +43,7 @@ public class Login {
 		try {
 			request.logout();
 			CurrentSession.setCurrentUser(null);
-			return "testes/loginfront";
+			return "/testes/loginfront?faces-redirect=true";
 		} catch (ServletException e) {
 			DisplayMessages.addErrorMessage("Falha no Logout");
 			return "";

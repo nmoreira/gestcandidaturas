@@ -48,7 +48,7 @@
 				var="utilizador" emptyMessage="Tabela sem registos!" rows="10"
 				paginator="true" paginatorPosition="bottom"
 				paginatorAlwaysVisible="false" draggableColumns="true"
-				resizableColumns="true" sortBy="#{utilizador.id}"
+				resizableColumns="false" sortBy="#{utilizador.id}"
 				sortOrder="ascending">
 				<p:column headerText="ID" sortBy="#{utilizador.id}">
 					<h:outputText value="#{utilizador.id}" />

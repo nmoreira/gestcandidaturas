@@ -15,19 +15,13 @@ public class ResponsavelPosicaoConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
 		if (value != null) {
-			for (ResponsavelPosicao responsavel : NovaPosicao.getResponsaveis()) {
+			for (ResponsavelPosicao responsavel : NovaPosicao.RESPONSAVEIS) {
 				if (value.equals(String.valueOf(responsavel.getId()))) {
 					return responsavel;
 				}
 			}
 		}
 		return null;
-		// ResponsavelPosicao r =
-		// context.getApplication().getELResolver().getValue(context.getELContext(),
-		// null, "responsavel")). .find(id)
-		// ResponsavelPosicao resp = respSrv.getResponsavelPosicaoById(value);
-		// System.out.println("foi lido o responsavel " + resp.getNome());
-		// return resp;
 	}
 
 	@Override
