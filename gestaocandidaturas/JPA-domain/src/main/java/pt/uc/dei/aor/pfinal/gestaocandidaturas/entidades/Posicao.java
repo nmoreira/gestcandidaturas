@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -49,8 +49,15 @@ public class Posicao implements Serializable {
 	@Column
 	private String titulo;
 
-	@ElementCollection
-	private List<String> localizacao;
+	@Column
+	private String localizacao;
+
+	// @ElementCollection
+	// @CollectionTable(name = "localizacao_posicao",
+	// joinColumns = @JoinColumn(name = "posicao_id"))
+	// @Column(name = "local")
+	@Transient
+	private List<String> local;
 
 	@Column
 	private String estado;
@@ -93,7 +100,7 @@ public class Posicao implements Serializable {
 	}
 
 	public Posicao(Date dataAbertura, String codPosicao, String titulo,
-			List<String> localizacao, String estado, int quantidadeVagas,
+			String localizacao, String estado, int quantidadeVagas,
 			Date dataFecho, String sla, ResponsavelPosicao responsavel,
 			String empresa, String areaTecnica, String descricao,
 			String canaisPublicacao, Guiao guiao) {
@@ -146,11 +153,11 @@ public class Posicao implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public List<String> getLocalizacao() {
+	public String getLocalizacao() {
 		return localizacao;
 	}
 
-	public void setLocalizacao(List<String> localizacao) {
+	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
 	}
 
@@ -224,6 +231,14 @@ public class Posicao implements Serializable {
 
 	public void setCanaisPublicacao(String canaisPublicacao) {
 		this.canaisPublicacao = canaisPublicacao;
+	}
+
+	public List<String> getLocal() {
+		return local;
+	}
+
+	public void setLocal(List<String> local) {
+		this.local = local;
 	}
 
 }

@@ -44,7 +44,7 @@
 		<primefaces-version>5.2</primefaces-version>
 
 		<!-- Hibernate -->
-		<hibernate.version>4.3.7.Final</hibernate.version>
+		<hibernate.version>4.3.11.Final</hibernate.version>
 
 		<!-- Logs et al. -->
 		<slf4j.version>1.7.12</slf4j.version>

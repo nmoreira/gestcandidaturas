@@ -29,9 +29,12 @@
 				cols="60" rows="8" />
 
 			<p:outputLabel for="local" value="Localização" />
-			<p:selectManyCheckbox id="local" value="#{novaPosicao.local}">
+			<h:panelGroup>
+			<p:selectManyCheckbox id="local2" value="#{novaPosicao.local}">
 				<f:selectItems value="#{novaPosicao.LOCAIS}"/>
 			</p:selectManyCheckbox>
+			<p:inputText id="local" value="#{novaPosicao.localizacao}"/>			
+			</h:panelGroup>
 			
 
 			<p:outputLabel for="quantidade" value="Quantidade de vagas" />

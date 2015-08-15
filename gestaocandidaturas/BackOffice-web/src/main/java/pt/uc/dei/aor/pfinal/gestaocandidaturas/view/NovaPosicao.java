@@ -29,8 +29,8 @@ public class NovaPosicao implements Serializable {
 	private Date dataAbertura;
 	private String codPosicao;
 	private String titulo;
-	private String localizacao;
 	private List<String> local;
+	private String localizacao;
 	private String estado;
 	private int quantidadeVagas;
 	private Date dataFecho;
@@ -133,9 +133,11 @@ public class NovaPosicao implements Serializable {
 			DisplayMessages
 					.addErrorMessage("O Cód. de posição introduzido já existe! Por favor escolha outro.");
 		} else {
-			Posicao pos = new Posicao(dataAbertura, codPosicao, titulo, local,
-					estado, quantidadeVagas, dataFecho, sla, responsavel,
-					empresa, areaTecnica, descricao, canaisPublicacao, guiao);
+			Posicao pos = new Posicao(dataAbertura, codPosicao, titulo,
+					localizacao, estado, quantidadeVagas, dataFecho, sla,
+					responsavel, empresa, areaTecnica, descricao,
+					canaisPublicacao, guiao);
+			pos.setLocal(local);
 			posicaoServ.createNewPosicao(pos);
 			DisplayMessages.addInfoMessage("Posição criada com sucesso!");
 		}
@@ -164,14 +166,6 @@ public class NovaPosicao implements Serializable {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
-	}
-
-	public String getLocalizacao() {
-		return localizacao;
-	}
-
-	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
 	}
 
 	public String getEstado() {
@@ -268,6 +262,14 @@ public class NovaPosicao implements Serializable {
 
 	public void setLocal(List<String> local) {
 		this.local = local;
+	}
+
+	public String getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
 	}
 
 }

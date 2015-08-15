@@ -11,10 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-//@MappedSuperclass
 @Entity
-// @DiscriminatorColumn(name = "Tipo")
-// @Inheritance(strategy = InheritanceType.JOINED)
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
 		@NamedQuery(name = "Utilizador.findAll", query = "SELECT u FROM Utilizador u"),
