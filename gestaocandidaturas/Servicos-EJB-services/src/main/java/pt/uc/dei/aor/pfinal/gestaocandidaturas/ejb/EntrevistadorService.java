@@ -4,6 +4,9 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevistador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.EntrevistadorFacade;
@@ -24,6 +27,8 @@ public class EntrevistadorService {
 	@EJB(beanInterface = UtilizadorFacade.class)
 	private IUtilizadorFacade userFacade;
 
+	static Logger logger = LoggerFactory.getLogger(EntrevistadorService.class);
+
 	/**
 	 * Default constructor.
 	 */
@@ -37,7 +42,10 @@ public class EntrevistadorService {
 		newEnt.setPerfil(entFacade.getPerfilEntrevistador());
 		userFacade.delete(user);
 		entFacade.createBypassingPassword(newEnt);
-		return entFacade.findByLogin(user.getLogin());
+		newEnt = entFacade.findByLogin(user.getLogin());
+		logger.info("Utilizador com login " + newEnt.getLogin()
+				+ " convertido com sucesso em Entrevistador");
+		return newEnt;
 	}
 
 	public void createNewEntrevistador(Entrevistador newEnt) {

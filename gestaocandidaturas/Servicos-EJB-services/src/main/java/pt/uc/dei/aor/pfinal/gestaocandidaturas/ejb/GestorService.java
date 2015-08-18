@@ -6,6 +6,9 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Gestor;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.GestorFacade;
@@ -26,6 +29,8 @@ public class GestorService {
 	@EJB(beanInterface = UtilizadorFacade.class)
 	private IUtilizadorFacade userFacade;
 
+	static Logger logger = LoggerFactory.getLogger(GestorService.class);
+
 	/**
 	 * Default constructor.
 	 */
@@ -38,9 +43,11 @@ public class GestorService {
 		Gestor newGest = new Gestor(user);
 		newGest.setPerfil(gestorFacade.getPerfilGestor());
 		userFacade.delete(user);
-		user = null;
 		gestorFacade.createBypassingPassword(newGest);
-		return gestorFacade.findByLogin(newGest.getLogin());
+		newGest = gestorFacade.findByLogin(newGest.getLogin());
+		logger.info("Utilizador com login " + newGest.getLogin()
+				+ " convertido com sucesso em Gestor");
+		return newGest;
 	}
 
 	public void createNewGestor(Gestor newGest) {

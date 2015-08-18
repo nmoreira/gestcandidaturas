@@ -4,6 +4,9 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.CandidatoFacade;
@@ -24,6 +27,8 @@ public class CandidatoService {
 	@EJB(beanInterface = UtilizadorFacade.class)
 	private IUtilizadorFacade userFacade;
 
+	static Logger logger = LoggerFactory.getLogger(CandidatoService.class);
+
 	/**
 	 * Default constructor.
 	 */
@@ -37,7 +42,10 @@ public class CandidatoService {
 		newCandidato.setPerfil(candidatoFacade.getPerfilCandidato());
 		userFacade.delete(user);
 		candidatoFacade.createBypassingPassword(newCandidato);
-		return candidatoFacade.findByLogin(user.getLogin());
+		newCandidato = candidatoFacade.findByLogin(user.getLogin());
+		logger.info("Utilizador com login " + newCandidato.getLogin()
+				+ " convertido com sucesso em Candidato");
+		return newCandidato;
 	}
 
 	public void createNewCandidato(Candidato newCandidato) {

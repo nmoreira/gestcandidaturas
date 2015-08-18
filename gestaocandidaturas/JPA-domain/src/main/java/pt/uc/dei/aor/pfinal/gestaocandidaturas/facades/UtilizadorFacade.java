@@ -11,6 +11,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.Encript;
 
@@ -24,6 +27,8 @@ public class UtilizadorFacade implements IUtilizadorFacade {
 	@PersistenceContext(unitName = "gestcandidaturas")
 	private EntityManager em;
 
+	static Logger logger = LoggerFactory.getLogger(UtilizadorFacade.class);
+
 	private Query q;
 
 	/**
@@ -36,27 +41,50 @@ public class UtilizadorFacade implements IUtilizadorFacade {
 	@Override
 	public Utilizador create(Utilizador entity) {
 		entity.setPassword(Encript.encript(entity.getPassword()));
-		em.persist(entity);
-		return entity;
+		String login = entity.getLogin();
+		try {
+			em.persist(entity);
+			Utilizador newUser = findByLogin(login);
+			logger.info("Utilizador " + login
+					+ " criado com sucesso na base de dados");
+			return newUser;
+		} catch (Exception e) {
+			logger.error("Erro ao criar o utilizador " + login
+					+ " na base de dados");
+			return null;
+		}
 	}
 
 	@Override
 	public Utilizador update(Utilizador entity) {
-		return em.merge(entity);
+		try {
+			Utilizador updatedUser = em.merge(entity);
+			logger.info("Utilizador " + entity.getLogin()
+					+ " atualizado com sucesso");
+			return updatedUser;
+		} catch (Exception e) {
+			logger.error("Erro ao atualizar o utilizador " + entity.getLogin()
+					+ " na base de dados");
+			return null;
+		}
 	}
 
 	@Override
 	public boolean delete(Utilizador entity) {
 		if (em.find(Utilizador.class, entity.getId()) == null) {
+			logger.error("Erro ao apagar o utilizador " + entity.getLogin()
+					+ ". Utilizador não encontrado");
 			return false;
 		} else {
-
 			try {
 				Utilizador entityToBeRemoved = em.merge(entity);
 				em.remove(entityToBeRemoved);
 				em.flush();
+				logger.info("Utilizador " + entity.getLogin()
+						+ " apagado com sucesso da base de dados");
 				return true;
 			} catch (Exception e) {
+				logger.error("Erro ao apagar o utilizador " + entity.getLogin());
 				return false;
 			}
 		}
@@ -113,6 +141,8 @@ public class UtilizadorFacade implements IUtilizadorFacade {
 		Utilizador user = find(userId);
 		user.setPassword(Encript.encript(newPassword));
 		update(user);
+		logger.info("Password do utilizador " + user.getLogin()
+				+ " atualizada com sucesso");
 	}
 
 	@Override

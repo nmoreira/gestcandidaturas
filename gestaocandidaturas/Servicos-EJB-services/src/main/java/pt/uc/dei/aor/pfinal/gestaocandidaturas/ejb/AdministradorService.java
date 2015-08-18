@@ -6,6 +6,9 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Administrador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.AdministradorFacade;
@@ -26,6 +29,8 @@ public class AdministradorService {
 	@EJB(beanInterface = UtilizadorFacade.class)
 	private IUtilizadorFacade userFacade;
 
+	static Logger logger = LoggerFactory.getLogger(AdministradorService.class);
+
 	/**
 	 * Default constructor.
 	 */
@@ -40,7 +45,10 @@ public class AdministradorService {
 		userFacade.delete(user);
 		user = null;
 		adminFacade.createBypassingPassword(newAdmin);
-		return adminFacade.findByLogin(newAdmin.getLogin());
+		newAdmin = adminFacade.findByLogin(newAdmin.getLogin());
+		logger.info("Utilizador com login " + newAdmin.getLogin()
+				+ " convertido com sucesso em Administrador");
+		return newAdmin;
 	}
 
 	public void createNewAdministrador(Administrador newAdmin) {

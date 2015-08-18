@@ -9,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevistador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Perfil;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.Encript;
@@ -23,6 +26,8 @@ public class EntrevistadorFacade implements IEntrevistadorFacade {
 	@PersistenceContext(unitName = "gestcandidaturas")
 	private EntityManager em;
 
+	static Logger logger = LoggerFactory.getLogger(EntrevistadorFacade.class);
+
 	@Inject
 	private PerfilFacade pf;
 
@@ -36,26 +41,51 @@ public class EntrevistadorFacade implements IEntrevistadorFacade {
 	@Override
 	public Entrevistador create(Entrevistador entity) {
 		entity.setPassword(Encript.encript(entity.getPassword()));
-		em.persist(entity);
-		return entity;
+		String login = entity.getLogin();
+		try {
+			em.persist(entity);
+			Entrevistador newUser = findByLogin(login);
+			logger.info("Entrevistador " + login
+					+ " criado com sucesso na base de dados");
+			return newUser;
+		} catch (Exception e) {
+			logger.error("Erro ao criar o entrevistador " + login
+					+ " na base de dados");
+			return null;
+		}
 	}
 
 	@Override
 	public Entrevistador update(Entrevistador entity) {
-		return em.merge(entity);
+		try {
+			Entrevistador updatedUser = em.merge(entity);
+			logger.info("Entrevistador " + entity.getLogin()
+					+ " atualizado com sucesso");
+			return updatedUser;
+		} catch (Exception e) {
+			logger.error("Erro ao atualizar o entrevistador "
+					+ entity.getLogin() + " na base de dados");
+			return null;
+		}
 	}
 
 	@Override
 	public boolean delete(Entrevistador entity) {
 		if (em.find(Entrevistador.class, entity.getId()) == null) {
+			logger.error("Erro ao apagar o entrevistador " + entity.getLogin()
+					+ ". Entrevistador não encontrado");
 			return false;
 		} else {
-
 			try {
 				Entrevistador entityToBeRemoved = em.merge(entity);
 				em.remove(entityToBeRemoved);
+				em.flush();
+				logger.info("Entrevistador " + entity.getLogin()
+						+ " apagado com sucesso da base de dados");
 				return true;
 			} catch (Exception e) {
+				logger.error("Erro ao apagar o entrevistador "
+						+ entity.getLogin());
 				return false;
 			}
 		}
@@ -118,12 +148,24 @@ public class EntrevistadorFacade implements IEntrevistadorFacade {
 		Entrevistador user = find(userId);
 		user.setPassword(Encript.encript(newPassword));
 		update(user);
+		logger.info("Password do entrevistador " + user.getLogin()
+				+ " atualizada com sucesso");
 	}
 
 	@Override
 	public Entrevistador createBypassingPassword(Entrevistador entrevistador) {
-		em.persist(entrevistador);
-		return entrevistador;
+		String login = entrevistador.getLogin();
+		try {
+			em.persist(entrevistador);
+			Entrevistador newUser = findByLogin(login);
+			logger.info("Entrevistador " + login
+					+ " criado com sucesso na base de dados");
+			return newUser;
+		} catch (Exception e) {
+			logger.error("Erro ao criar o entrevistador " + login
+					+ " na base de dados");
+			return null;
+		}
 	}
 
 }

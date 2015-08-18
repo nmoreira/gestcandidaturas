@@ -10,4 +10,7 @@ public interface ICandidaturaFacade extends IEntityFacade<Candidatura> {
 
 	public abstract List<Candidatura> findByPosicao(long posicaoId);
 
+	public abstract Candidatura findByCandidatoAndPosicao(long candidatoId,
+			long posicaoId);
+
 }

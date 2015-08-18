@@ -9,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 
 /**
@@ -21,6 +24,8 @@ public class PosicaoFacade implements IPosicaoFacade {
 	@PersistenceContext(unitName = "gestcandidaturas")
 	private EntityManager em;
 
+	static Logger logger = LoggerFactory.getLogger(PosicaoFacade.class);
+
 	/**
 	 * Default constructor.
 	 */
@@ -30,26 +35,52 @@ public class PosicaoFacade implements IPosicaoFacade {
 
 	@Override
 	public Posicao create(Posicao entity) {
-		em.persist(entity);
-		return entity;
+		String codPosicao = entity.getCodPosicao();
+		try {
+			em.persist(entity);
+			Posicao pos = findByCodPosicao(codPosicao);
+			logger.info("Posicao " + codPosicao
+					+ " criada com sucesso na base de dados");
+			return pos;
+		} catch (Exception e) {
+			logger.error("Erro ao criar a posição " + codPosicao
+					+ " na base de dados");
+			return null;
+		}
 	}
 
 	@Override
 	public Posicao update(Posicao entity) {
-		return em.merge(entity);
+		try {
+			Posicao updatedPos = em.merge(entity);
+			logger.info("Posicao " + entity.getCodPosicao()
+					+ " atualizada com sucesso");
+			return updatedPos;
+		} catch (Exception e) {
+			logger.error("Erro ao atualizar a Posicao "
+					+ entity.getCodPosicao() + " na base de dados");
+			return null;
+		}
 	}
 
 	@Override
 	public boolean delete(Posicao entity) {
 		if (em.find(Posicao.class, entity.getId()) == null) {
+			logger.error("Erro ao apagar a Posição " + entity.getCodPosicao()
+					+ ". Posição não encontrada");
 			return false;
 		} else {
 
 			try {
 				Posicao entityToBeRemoved = em.merge(entity);
 				em.remove(entityToBeRemoved);
+				em.flush();
+				logger.info("Posição " + entity.getCodPosicao()
+						+ " apagada com sucesso da base de dados");
 				return true;
 			} catch (Exception e) {
+				logger.error("Erro ao apagar a Posição "
+						+ entity.getCodPosicao());
 				return false;
 			}
 		}

@@ -42,4 +42,10 @@ public class CandidaturaService {
 	public List<Candidatura> getCandidaturasByCandidatoId(long candidatoId) {
 		return candidaturaFacade.findByCandidato(candidatoId);
 	}
+
+	public Candidatura getCandidaturaByCandidatoIdAndPosicaoId(
+			long candidatoId, long posicaoId) {
+		return candidaturaFacade.findByCandidatoAndPosicao(candidatoId,
+				posicaoId);
+	}
 }
