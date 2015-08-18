@@ -4,27 +4,34 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
+	<ui:define name="titulo">Página inicial</ui:define>
+
 	<ui:define name="corpo">
 
-<p:panelGrid columns="1" id="painel"
-			styleClass="panelNoBorder">
-			
-			
-		<p:carousel id="slideShow" autoPlayInterval="4000" numVisible="1"
-			effect="easeInStrong" circular="true" pageLinks="6"
-			itemStyleClass="slidshow">
-			
-			<p:graphicImage value="/resources/imagens/imagem4.jpg" styleClass="fotos"/>
-			<p:graphicImage value="/resources/imagens/imagem2.jpg" styleClass="fotos"/>
-			<p:graphicImage value="/resources/imagens/imagem3.jpg" styleClass="fotos"/>
-			
-			<p:graphicImage value="/resources/imagens/imagem5.png" styleClass="fotos"/>
-			<p:graphicImage value="/resources/imagens/imagem6.JPG" styleClass="fotos"/>
-			<p:graphicImage value="/resources/imagens/imagem8.jpg" styleClass="fotos"/>
-			
+		<p:panelGrid columns="1" id="painel" styleClass="panelNoBorder">
 
-		</p:carousel>
-</p:panelGrid>
+
+			<p:carousel id="slideShow" autoPlayInterval="4000" numVisible="1"
+				effect="easeInStrong" circular="true" pageLinks="6"
+				itemStyleClass="slidshow">
+
+				<p:graphicImage value="/resources/imagens/imagem4.jpg"
+					styleClass="fotos" />
+				<p:graphicImage value="/resources/imagens/imagem2.jpg"
+					styleClass="fotos" />
+				<p:graphicImage value="/resources/imagens/imagem3.jpg"
+					styleClass="fotos" />
+
+				<p:graphicImage value="/resources/imagens/imagem5.png"
+					styleClass="fotos" />
+				<p:graphicImage value="/resources/imagens/imagem6.JPG"
+					styleClass="fotos" />
+				<p:graphicImage value="/resources/imagens/imagem8.jpg"
+					styleClass="fotos" />
+
+
+			</p:carousel>
+		</p:panelGrid>
 	</ui:define>
 
 </ui:composition>

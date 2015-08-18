@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-
+<ui:define name="titulo">Criação de uma nova posição</ui:define>
 
 <ui:define name="corpo">
 	
@@ -30,12 +30,12 @@
 				cols="60" rows="8" />
 
 			<p:outputLabel value="Localização" for="local" />
-			<p:selectManyCheckbox id="local" value="#{novaPosicao.local}">
-			
-			<f:selectItems value="#{novaPosicao.LOCAIS}"/>
-			
-		</p:selectManyCheckbox >
-			
+			<h:panelGroup>
+			<p:selectManyCheckbox id="local2" value="#{novaPosicao.local}" rendered="false">
+				<f:selectItems value="#{novaPosicao.LOCAIS}"/>
+			</p:selectManyCheckbox>
+			<p:inputText id="local" value="#{novaPosicao.localizacao}"/>			
+			</h:panelGroup>
 
 			<p:outputLabel for="quantidade" value="Quantidade de vagas" />
 			<p:inputText id="quantidade" value="#{novaPosicao.quantidadeVagas}" />

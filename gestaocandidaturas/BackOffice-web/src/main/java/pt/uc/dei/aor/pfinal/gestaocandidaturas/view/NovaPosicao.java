@@ -78,7 +78,7 @@ public class NovaPosicao implements Serializable {
 
 	private void loadLocais() {
 		LOCAIS.add("Coimbra");
-		LOCAIS.add("porto");
+		LOCAIS.add("Porto");
 		LOCAIS.add("Lisboa");
 		LOCAIS.add("Cliente");
 	}
