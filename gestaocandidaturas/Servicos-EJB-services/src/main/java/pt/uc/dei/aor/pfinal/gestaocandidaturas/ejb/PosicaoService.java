@@ -41,4 +41,8 @@ public class PosicaoService {
 		else
 			return true;
 	}
+
+	public List<Posicao> getPosicoesEmAberto() {
+		return posicaoFacade.getPosicoesEmAberto();
+	}
 }

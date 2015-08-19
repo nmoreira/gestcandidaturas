@@ -16,6 +16,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Guiao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.ResponsavelPosicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
 
 @Named
 @ViewScoped
@@ -31,7 +32,7 @@ public class NovaPosicao implements Serializable {
 	private String titulo;
 	private List<String> local;
 	private String localizacao;
-	private String estado;
+	private EstadoPosicao estado;
 	private int quantidadeVagas;
 	private Date dataFecho;
 	private String sla;
@@ -102,6 +103,10 @@ public class NovaPosicao implements Serializable {
 		CANAIS_COMUNICACAO.add("Facebook");
 	}
 
+	public EstadoPosicao[] getEstadoPosicao() {
+		return EstadoPosicao.values();
+	}
+
 	public List<String> getLOCAIS() {
 		return LOCAIS;
 	}
@@ -114,7 +119,7 @@ public class NovaPosicao implements Serializable {
 		List<String> sugestao = new ArrayList<>();
 
 		for (String canal : this.CANAIS_COMUNICACAO) {
-			if (canal.toLowerCase().startsWith(query.toLowerCase())) {
+			if (canal.toLowerCase().contains(query.toLowerCase())) {
 				sugestao.add(canal);
 			}
 		}
@@ -168,11 +173,11 @@ public class NovaPosicao implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public String getEstado() {
+	public EstadoPosicao getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(EstadoPosicao estado) {
 		this.estado = estado;
 	}
 

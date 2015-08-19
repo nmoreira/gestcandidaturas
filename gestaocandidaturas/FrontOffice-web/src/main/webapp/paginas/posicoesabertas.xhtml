@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
+		var="posicao" emptyMessage="Não existem vagas para candidatura"
+		layout="grid" style="width: 70%" rows="12" paginator="true"
+		paginatorAlwaysVisible="true" paginatorPosition="bottom"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		currentPageReportTemplate="{currentPage} de {totalPages}">
+		<p:panel header="#{posicao.titulo}" style="text-align:center">
+			<h:panelGrid columns="2" style="width:100%; text-align: left;">
+				<p:spacer />
+				<h:outputText value="#{posicao.descricao}" />
+				<p:outputLabel value="Área técnica:" for="area" />
+				<h:outputText value="#{posicao.areaTecnica}" id="area" />
+				<p:outputLabel value="Localização:" for="localizacao" />
+				<h:outputText value="#{posicao.localizacao}" id="localizacao" />
+				<p:outputLabel value="Vagas" for="vagas" />
+				<h:outputText value="#{posicao.quantidadeVagas}" id="vagas" />
+				<f:facet name="footer">
+					<p:button value="Candidatar" style="float:right"/>
+				</f:facet>
+			</h:panelGrid>
+		</p:panel>
+	</p:dataGrid>
+</ui:composition>

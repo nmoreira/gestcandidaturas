@@ -12,4 +12,6 @@ public interface IPosicaoFacade extends IEntityFacade<Posicao> {
 
 	public abstract Posicao findByCodPosicao(String codPosicao);
 
+	public abstract List<Posicao> getPosicoesEmAberto();
+
 }

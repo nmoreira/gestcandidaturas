@@ -30,12 +30,12 @@
 
 			<p:outputLabel for="local" value="Localização" />
 			<h:panelGroup>
-			<p:selectManyCheckbox id="local2" value="#{novaPosicao.local}">
-				<f:selectItems value="#{novaPosicao.LOCAIS}"/>
-			</p:selectManyCheckbox>
-			<p:inputText id="local" value="#{novaPosicao.localizacao}"/>			
+				<p:selectManyCheckbox id="local2" value="#{novaPosicao.local}">
+					<f:selectItems value="#{novaPosicao.LOCAIS}" />
+				</p:selectManyCheckbox>
+				<p:inputText id="local" value="#{novaPosicao.localizacao}" />
 			</h:panelGroup>
-			
+
 
 			<p:outputLabel for="quantidade" value="Quantidade de vagas" />
 			<p:inputText id="quantidade" value="#{novaPosicao.quantidadeVagas}" />
@@ -43,37 +43,47 @@
 			<p:outputLabel for="dataAbertura" value="Data de abertura da posição" />
 			<p:calendar id="dataAbertura" value="#{novaPosicao.dataAbertura}"
 				required="true" navigator="true" readonlyInput="true" mode="popup" />
-				
-			<p:outputLabel for="dataFecho" value="Data de fecho da posição"/>
+
+			<p:outputLabel for="dataFecho" value="Data de fecho da posição" />
 			<p:calendar id="dataFecho" value="#{novaPosicao.dataFecho}"
 				navigator="true" readonlyInput="true" mode="popup" />
-			
-			<p:outputLabel for="responsavel" value="Responsável"/>
-			<p:selectOneMenu id="responsavel" value="#{novaPosicao.responsavel}" 
-			converter="responsavelPosicao" filter="true" filterMatchMode="contains">
-				
-				<f:selectItems value="#{novaPosicao.getResponsaveis()}" 
-				var="responsavel" itemLabel="#{responsavel.nome} #{responsavel.apelido}" itemValue="#{responsavel}"/>
+
+			<p:outputLabel for="responsavel" value="Responsável" />
+			<p:selectOneMenu id="responsavel" value="#{novaPosicao.responsavel}"
+				converter="responsavelPosicao" filter="true"
+				filterMatchMode="contains">
+
+				<f:selectItems value="#{novaPosicao.getResponsaveis()}"
+					var="responsavel"
+					itemLabel="#{responsavel.nome} #{responsavel.apelido}"
+					itemValue="#{responsavel}" />
 			</p:selectOneMenu>
-				
-			<p:outputLabel for="sla" value="Service Level Agreement"/>
-			<p:inputText id="sla" value="#{novaPosicao.sla}"/>
-			
-			<p:outputLabel for="empresa" value="Empresa"/>
-			<p:inputText id="empresa" value="#{novaPosicao.empresa}"/>
-			
-			<p:outputLabel for="area" value="Área Técnica"/>
+
+			<p:outputLabel for="sla" value="Service Level Agreement" />
+			<p:inputText id="sla" value="#{novaPosicao.sla}" />
+
+			<p:outputLabel for="empresa" value="Empresa" />
+			<p:inputText id="empresa" value="#{novaPosicao.empresa}" />
+
+			<p:outputLabel for="area" value="Área Técnica" />
 			<p:selectOneMenu id="area" value="#{novaPosicao.areaTecnica}">
-				<f:selectItems value="#{novaPosicao.AREAS_TECNICAS}" var="area"/>
+				<f:selectItems value="#{novaPosicao.AREAS_TECNICAS}" var="area" />
 			</p:selectOneMenu>
-			
-			<p:outputLabel for="canais" value="Canais de Publicação"/>
-			<p:autoComplete id="canais" value="#{novaPosicao.canaisPublicacao}" dropdown="true"
+
+			<p:outputLabel for="canais" value="Canais de Publicação" />
+			<p:autoComplete id="canais" value="#{novaPosicao.canaisPublicacao}"
+				dropdown="true"
 				completeMethod="#{novaPosicao.sugerirCanaisComunicacao}" />
- 
-			
+
+			<p:outputLabel for="estado" value="Estado da posição" />
+			<p:selectOneMenu id="estado" value="#{novaPosicao.estado}">
+				<f:selectItems value="#{novaPosicao.estadoPosicao}" var="estado"
+					itemLabel="#{estado.valor}" itemValue="#{estado}" />
+			</p:selectOneMenu>
+
 			<f:facet name="footer">
-				<p:commandButton value="Criar posição" action="#{novaPosicao.criaPosicao()}" update="@form"
+				<p:commandButton value="Criar posição"
+					action="#{novaPosicao.criaPosicao()}" update="@form"
 					icon="ui-icon-disk" />
 			</f:facet>
 

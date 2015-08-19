@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.facades;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -7,12 +8,14 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
 
 /**
  * Session Bean implementation class AdministradorFacade
@@ -25,6 +28,8 @@ public class PosicaoFacade implements IPosicaoFacade {
 	private EntityManager em;
 
 	static Logger logger = LoggerFactory.getLogger(PosicaoFacade.class);
+
+	private Query q;
 
 	/**
 	 * Default constructor.
@@ -125,6 +130,15 @@ public class PosicaoFacade implements IPosicaoFacade {
 			return q.getResultList().get(0);
 		else
 			return null;
+	}
+
+	@Override
+	public List<Posicao> getPosicoesEmAberto() {
+		List<Posicao> result = new ArrayList<>();
+		q = em.createQuery("from Posicao p where p.estado = :estado");
+		q.setParameter("estado", EstadoPosicao.ABERTA);
+		result = q.getResultList();
+		return result;
 	}
 
 }

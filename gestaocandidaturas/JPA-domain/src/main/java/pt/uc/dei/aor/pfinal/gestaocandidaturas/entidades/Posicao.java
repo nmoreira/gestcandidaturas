@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
 
 /**
  * Entity implementation class for Entity: Posicao
@@ -60,7 +64,8 @@ public class Posicao implements Serializable {
 	private List<String> local;
 
 	@Column
-	private String estado;
+	@Enumerated(EnumType.STRING)
+	private EstadoPosicao estado;
 
 	@Column
 	private int quantidadeVagas;
@@ -100,7 +105,7 @@ public class Posicao implements Serializable {
 	}
 
 	public Posicao(Date dataAbertura, String codPosicao, String titulo,
-			String localizacao, String estado, int quantidadeVagas,
+			String localizacao, EstadoPosicao estado, int quantidadeVagas,
 			Date dataFecho, String sla, ResponsavelPosicao responsavel,
 			String empresa, String areaTecnica, String descricao,
 			String canaisPublicacao, Guiao guiao) {
@@ -161,11 +166,11 @@ public class Posicao implements Serializable {
 		this.localizacao = localizacao;
 	}
 
-	public String getEstado() {
+	public EstadoPosicao getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(EstadoPosicao estado) {
 		this.estado = estado;
 	}
 
