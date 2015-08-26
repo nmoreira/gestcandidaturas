@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.AdministradorService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidatoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.EntrevistadorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.GestorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
@@ -38,6 +39,9 @@ public class TesteUtilizadores implements Serializable {
 
 	@Inject
 	private GestorService gestService;
+
+	@Inject
+	private CandidatoService candidatoServ;
 
 	private List<Utilizador> listaUtilizadores = new ArrayList<>();
 	private List<Utilizador> listaUtilizadoresSemPerfil = new ArrayList<>();
@@ -73,6 +77,13 @@ public class TesteUtilizadores implements Serializable {
 		Entrevistador entr = new Entrevistador("ent", "123",
 				"Entrevistador teste", "Apelido entrevistador teste", "mailent");
 		entService.createNewEntrevistador(entr);
+
+		Candidato cand = new Candidato();
+		cand.setLogin("cand");
+		cand.setEmail("mail cand");
+		cand.setNome("candidato teste");
+		cand.setPassword("123");
+		candidatoServ.createNewCandidato(cand);
 	}
 
 	public void inicializaUtilizadores() {

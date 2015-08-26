@@ -52,5 +52,4 @@ public class CandidatoService {
 		newCandidato.setPerfil(candidatoFacade.getPerfilCandidato());
 		candidatoFacade.create(newCandidato);
 	}
-
 }

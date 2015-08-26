@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.PosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 
 @Named
 @ViewScoped
@@ -25,9 +26,22 @@ public class PosicoesAtuais implements Serializable {
 	@Inject
 	private PosicaoService posicaoService;
 
+	@Inject
+	private CurrentSession current;
+
 	@PostConstruct
 	private void init() {
 		loadPosicoesAbertas();
+	}
+
+	public String candidatar() {
+		if (current.getCurrentUser() == null) {
+			DisplayMessages
+					.addWarnMessage("Inicie sessão antes de se candidatar a uma posição");
+			return "";
+		} else {
+			return "/paginas/candidaturas";
+		}
 	}
 
 	private void loadPosicoesAbertas() {

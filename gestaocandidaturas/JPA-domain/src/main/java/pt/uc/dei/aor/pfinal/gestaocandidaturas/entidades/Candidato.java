@@ -9,13 +9,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Entity implementation class for Entity: Candidato
  *
  */
 @Entity
-// @DiscriminatorValue(value = "Candidato")
 @Table(name = "candidato")
 @NamedQueries({
 		@NamedQuery(name = "Candidato.findAll", query = "SELECT a FROM Candidato a"),
@@ -55,6 +55,10 @@ public class Candidato extends Utilizador implements Serializable {
 
 	@OneToMany(mappedBy = "candidato")
 	private List<Candidatura> candidaturas;
+
+	// @ElementCollection
+	@Transient
+	private List<String> cartas;
 
 	public Candidato() {
 		super();
@@ -172,6 +176,14 @@ public class Candidato extends Utilizador implements Serializable {
 
 	public void setCandidaturas(List<Candidatura> candidaturas) {
 		this.candidaturas = candidaturas;
+	}
+
+	public List<String> getCartas() {
+		return cartas;
+	}
+
+	public void setCartas(List<String> cartasMotivacao) {
+		this.cartas = cartasMotivacao;
 	}
 
 	// public List<Entrevista> getEntrevistas() {

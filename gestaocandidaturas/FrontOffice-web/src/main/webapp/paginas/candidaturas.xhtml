@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-
+<ui:define name="titulo">Nova Candidatura</ui:define>
 
 <ui:define name="corpo">
 	
@@ -20,19 +20,27 @@
 	<h1>Nova Candidatura</h1>
 	</p:panelGrid>
 	
+	<h:panelGrid columns="2" style="width: 50%; margin-top:20px; margin-left:350px"
+			columnClasses="rotulo,campo">
+		<p:outputLabel value="Candidato"/>
+		<h:outputText value="#{novaCandidatura.candidato.nome}" />
+		<p:outputLabel value="Posição"/>
+		<h:outputText value="#{novaCandidatura.posicao.titulo}" />
+	</h:panelGrid>
+	
 		<p:panelGrid columns="2" id="painel"
 			style="width: 50%; margin-top:20px; margin-left:350px"
 			columnClasses="rotulo,campo">
 			
 			<p:outputLabel value="Carta Motivação" for="cmotivacao" />
-			<p:inputText id="cmotivacao" value="#{novoCandidato.cidade}" />
+			<p:inputText id="cmotivacao" value="#{novaCandidatura.cartamotivacao}" />
 			
 		
 			<p:outputLabel value="Fonte" for="fonte" />
 			<p:autoComplete id="fonte" value="#{novaCandidatura.fonte}" required="true" completeMethod="#{novaCandidatura.sugerirfonte}"
 			forceSelection="true" minQueryLenght="1" dropdown="true"></p:autoComplete>
 			
-				<p:commandButton value="submeter" action="#{novoCandidato.criaCandidato()}" update="status"
+				<p:commandButton value="submeter" action="#{novaCandidatura.Candidatar()}" update="status"
 					icon="ui-icon-disk" />
 				<p:button value="Limpar" outcome="/paginas/candidaturas" />
 			

@@ -61,6 +61,16 @@ public class Candidatura implements Serializable {
 		super();
 	}
 
+	public Candidatura(String cartaMotivacao, String fonte, Posicao posicao,
+			Candidato candidato) {
+		super();
+		this.cartaMotivacao = cartaMotivacao;
+		this.fonte = fonte;
+		this.posicao = posicao;
+		this.candidato = candidato;
+		this.dataCandidatura = new Date();
+	}
+
 	public long getId() {
 		return id;
 	}

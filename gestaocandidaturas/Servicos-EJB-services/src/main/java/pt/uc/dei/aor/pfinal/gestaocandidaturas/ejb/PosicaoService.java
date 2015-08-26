@@ -45,4 +45,8 @@ public class PosicaoService {
 	public List<Posicao> getPosicoesEmAberto() {
 		return posicaoFacade.getPosicoesEmAberto();
 	}
+
+	public Posicao getPosicaoById(long id) {
+		return posicaoFacade.find(id);
+	}
 }

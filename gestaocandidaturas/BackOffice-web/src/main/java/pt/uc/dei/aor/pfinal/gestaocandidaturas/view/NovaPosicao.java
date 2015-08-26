@@ -117,7 +117,6 @@ public class NovaPosicao implements Serializable {
 
 	public List<String> sugerirCanaisComunicacao(String query) {
 		List<String> sugestao = new ArrayList<>();
-
 		for (String canal : this.CANAIS_COMUNICACAO) {
 			if (canal.toLowerCase().contains(query.toLowerCase())) {
 				sugestao.add(canal);

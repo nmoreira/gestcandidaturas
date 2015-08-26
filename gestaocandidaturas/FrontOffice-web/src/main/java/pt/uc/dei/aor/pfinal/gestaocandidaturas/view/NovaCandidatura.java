@@ -3,15 +3,20 @@ package pt.uc.dei.aor.pfinal.gestaocandidaturas.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidatoService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidaturaService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.PosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 
 @Named
@@ -34,18 +39,29 @@ public class NovaCandidatura implements Serializable {
 	private UtilizadorService userServ;
 
 	@Inject
+	private PosicaoService posicaoServ;
+
+	@Inject
 	private CurrentSession current;
+
+	@Inject
+	private CandidaturaService candidaturaServ;
 
 	public NovaCandidatura() {
 	}
 
 	@PostConstruct
 	private void init() {
-		carregaCandidaturas();
+		carregaFontes();
 		this.candidato = (Candidato) current.getCurrentUser();
+
+		Map<String, String> params = FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap();
+		long posid = Long.parseLong(params.get("posid"));
+		this.posicao = posicaoServ.getPosicaoById(posid);
 	}
 
-	private void carregaCandidaturas() {
+	private void carregaFontes() {
 		fontes.add("Expresso");
 		fontes.add("Linkdin");
 		fontes.add("Diário de Notícias");
@@ -62,6 +78,12 @@ public class NovaCandidatura implements Serializable {
 				fontesugeridas.add(fonte);
 		}
 		return fontesugeridas;
+	}
+
+	public void Candidatar() {
+		Candidatura candidatura = new Candidatura(cartamotivacao, fonte,
+				posicao, candidato);
+		candidaturaServ.createNewCandidatura(candidatura);
 	}
 
 	public String getCartamotivacao() {

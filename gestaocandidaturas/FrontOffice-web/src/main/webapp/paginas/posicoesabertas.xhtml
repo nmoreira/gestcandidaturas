@@ -20,9 +20,15 @@
 				<h:outputText value="#{posicao.localizacao}" id="localizacao" />
 				<p:outputLabel value="Vagas" for="vagas" />
 				<h:outputText value="#{posicao.quantidadeVagas}" id="vagas" />
+				
 				<f:facet name="footer">
-					<p:button value="Candidatar" style="float:right"/>
+				<h:form>
+					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.candidatar()}" ajax="false">
+						<f:param name="posid" value="#{posicao.id}"/> 
+					</p:commandButton>
+				</h:form>
 				</f:facet>
+				
 			</h:panelGrid>
 		</p:panel>
 	</p:dataGrid>
