@@ -4,24 +4,20 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
 
-import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.ResponsavelPosicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.view.NovaPosicao;
 
-@FacesConverter("localPosicao")
-public class ResponsavelPosicaoConverter implements Converter {
-
-	@Inject
-	private NovaPosicao bean;
+@FacesConverter("responsavelPosicao")
+public class LocalPosicaoConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
 		if (value != null) {
-			for (LocalPosicao local : bean.getLocais()) {
-				if (value.equals(local.toString())) {
-					return local;
+			for (ResponsavelPosicao responsavel : NovaPosicao.RESPONSAVEIS) {
+				if (value.equals(String.valueOf(responsavel.getId()))) {
+					return responsavel;
 				}
 			}
 		}
@@ -32,8 +28,9 @@ public class ResponsavelPosicaoConverter implements Converter {
 	public String getAsString(FacesContext context, UIComponent component,
 			Object value) {
 		if (value != null) {
-			LocalPosicao loc = (LocalPosicao) value;
-			return loc.toString();
+			ResponsavelPosicao resp = (ResponsavelPosicao) value;
+			return "" + resp.getId();
+			// return String.valueOf(((ResponsavelPosicao) value).getId());
 		}
 		return null;
 	}

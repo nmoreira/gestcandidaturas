@@ -1,15 +1,16 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  * Entity implementation class for Entity: Candidato
@@ -56,20 +57,14 @@ public class Candidato extends Utilizador implements Serializable {
 	@OneToMany(mappedBy = "candidato")
 	private List<Candidatura> candidaturas;
 
-	// @ElementCollection
-	@Transient
-	private List<String> cartas;
+	@ElementCollection
+	// @Transient
+	private List<String> cartas = new ArrayList<>();
 
 	public Candidato() {
 		super();
 		this.setCargo("CANDIDATO");
 	}
-
-	// public Candidato(String login, String password, String nome,
-	// String apelido, String email) {
-	// super(login, password, nome, apelido, email);
-	// this.setCargo("CANDIDATO");
-	// }
 
 	public Candidato(Utilizador user) {
 		super();
@@ -185,13 +180,4 @@ public class Candidato extends Utilizador implements Serializable {
 	public void setCartas(List<String> cartasMotivacao) {
 		this.cartas = cartasMotivacao;
 	}
-
-	// public List<Entrevista> getEntrevistas() {
-	// return entrevistas;
-	// }
-	//
-	// public void setEntrevistas(List<Entrevista> entrevistas) {
-	// this.entrevistas = entrevistas;
-	// }
-
 }

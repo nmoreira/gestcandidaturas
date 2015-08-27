@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.facades;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -165,5 +166,14 @@ public class CandidatoFacade implements ICandidatoFacade {
 					+ " na base de dados");
 			return null;
 		}
+	}
+
+	@Override
+	public List<String> getCartasFromCandidatoId(long id) {
+		q = em.createQuery("select c from Candidato c left join fetch c.cartas where c.id = :id");
+		q.setParameter("id", id);
+		Candidato c = (Candidato) q.getSingleResult();
+		System.out.println(c.getNome());
+		return c.getCartas();
 	}
 }

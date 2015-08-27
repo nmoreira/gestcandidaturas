@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -52,4 +54,21 @@ public class CandidatoService {
 		newCandidato.setPerfil(candidatoFacade.getPerfilCandidato());
 		candidatoFacade.create(newCandidato);
 	}
+
+	public Candidato getCandidatoById(long id) {
+		return candidatoFacade.find(id);
+	}
+
+	public Candidato getCandidatoByEmail(String email) {
+		return candidatoFacade.findByEmail(email);
+	}
+
+	public Candidato getCandidatoByLogin(String login) {
+		return candidatoFacade.findByLogin(login);
+	}
+
+	public List<String> getCartas(long id) {
+		return candidatoFacade.getCartasFromCandidatoId(id);
+	}
+
 }

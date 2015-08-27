@@ -15,8 +15,10 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.ResponsavelPosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Guiao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.ResponsavelPosicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.AreaTecnica;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 
 @Named
 @ViewScoped
@@ -30,7 +32,7 @@ public class NovaPosicao implements Serializable {
 	private Date dataAbertura;
 	private String codPosicao;
 	private String titulo;
-	private List<String> local;
+	private List<LocalPosicao> local;
 	private String localizacao;
 	private EstadoPosicao estado;
 	private int quantidadeVagas;
@@ -38,14 +40,12 @@ public class NovaPosicao implements Serializable {
 	private String sla;
 	private ResponsavelPosicao responsavel;
 	private String empresa;
-	private String areaTecnica;
+	private AreaTecnica areaTecnica;
 	private String descricao;
 	private String canaisPublicacao;
 	private Guiao guiao;
 
 	public static final List<ResponsavelPosicao> RESPONSAVEIS = new ArrayList<>();
-	private final List<String> LOCAIS = new ArrayList<>();
-	private final List<String> AREAS_TECNICAS = new ArrayList<>();
 	private final List<String> CANAIS_COMUNICACAO = new ArrayList<>();
 
 	@Inject
@@ -64,8 +64,6 @@ public class NovaPosicao implements Serializable {
 	@PostConstruct
 	private void load() {
 		loadResponsaveis();
-		loadLocais();
-		loadAreasTecnicas();
 		loadCanaisComunicacao();
 	}
 
@@ -75,25 +73,6 @@ public class NovaPosicao implements Serializable {
 		for (ResponsavelPosicao responsavelPosicao : list) {
 			RESPONSAVEIS.add(responsavelPosicao);
 		}
-	}
-
-	private void loadLocais() {
-		LOCAIS.add("Coimbra");
-		LOCAIS.add("Porto");
-		LOCAIS.add("Lisboa");
-		LOCAIS.add("Cliente");
-	}
-
-	private void loadAreasTecnicas() {
-		AREAS_TECNICAS.add("SSPA – Software and Security Product Assurance");
-		AREAS_TECNICAS
-				.add(".Net Development – desenvolvimento em tecnologias Microsoft");
-		AREAS_TECNICAS.add("Java Development – desenvolvimento em Java");
-		AREAS_TECNICAS
-				.add("Safety Critical – desenvolvimento mais baixo nível (C, Assembly, VHDL,...)");
-		AREAS_TECNICAS.add("Project Management – gestão de projectos");
-		AREAS_TECNICAS
-				.add("Integration – competências em bases de dados, integração (ESBs, protocolos de comunicação, middleware,...)");
 	}
 
 	private void loadCanaisComunicacao() {
@@ -107,8 +86,12 @@ public class NovaPosicao implements Serializable {
 		return EstadoPosicao.values();
 	}
 
-	public List<String> getLOCAIS() {
-		return LOCAIS;
+	public AreaTecnica[] getAreas() {
+		return AreaTecnica.values();
+	}
+
+	public LocalPosicao[] getLocais() {
+		return LocalPosicao.values();
 	}
 
 	public List<String> getCANAIS_COMUNICACAO() {
@@ -220,11 +203,11 @@ public class NovaPosicao implements Serializable {
 		this.empresa = empresa;
 	}
 
-	public String getAreaTecnica() {
+	public AreaTecnica getAreaTecnica() {
 		return areaTecnica;
 	}
 
-	public void setAreaTecnica(String areaTecnica) {
+	public void setAreaTecnica(AreaTecnica areaTecnica) {
 		this.areaTecnica = areaTecnica;
 	}
 
@@ -256,15 +239,11 @@ public class NovaPosicao implements Serializable {
 		return RESPONSAVEIS;
 	}
 
-	public List<String> getAREAS_TECNICAS() {
-		return AREAS_TECNICAS;
-	}
-
-	public List<String> getLocal() {
+	public List<LocalPosicao> getLocal() {
 		return local;
 	}
 
-	public void setLocal(List<String> local) {
+	public void setLocal(List<LocalPosicao> local) {
 		this.local = local;
 	}
 

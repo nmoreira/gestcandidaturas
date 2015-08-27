@@ -1,16 +1,20 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -18,10 +22,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.AreaTecnica;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 
 /**
  * Entity implementation class for Entity: Posicao
@@ -56,12 +61,14 @@ public class Posicao implements Serializable {
 	@Column
 	private String localizacao;
 
-	// @ElementCollection
+	@ElementCollection
+	@CollectionTable(name = "posicao_locais", joinColumns = @JoinColumn(name = "posicao_id"))
+	@Column(name = "local")
 	// @CollectionTable(name = "localizacao_posicao",
 	// joinColumns = @JoinColumn(name = "posicao_id"))
 	// @Column(name = "local")
-	@Transient
-	private List<String> local;
+	// @Transient
+	private List<String> local = new ArrayList<>();
 
 	@Column
 	@Enumerated(EnumType.STRING)
@@ -84,7 +91,8 @@ public class Posicao implements Serializable {
 	private String empresa;
 
 	@Column
-	private String areaTecnica;
+	@Enumerated(EnumType.STRING)
+	private AreaTecnica areaTecnica;
 
 	@Column(columnDefinition = "text")
 	private String descricao;
@@ -107,7 +115,7 @@ public class Posicao implements Serializable {
 	public Posicao(Date dataAbertura, String codPosicao, String titulo,
 			String localizacao, EstadoPosicao estado, int quantidadeVagas,
 			Date dataFecho, String sla, ResponsavelPosicao responsavel,
-			String empresa, String areaTecnica, String descricao,
+			String empresa, AreaTecnica areaTecnica, String descricao,
 			String canaisPublicacao, Guiao guiao) {
 		super();
 		this.dataAbertura = dataAbertura;
@@ -214,11 +222,11 @@ public class Posicao implements Serializable {
 		this.empresa = empresa;
 	}
 
-	public String getAreaTecnica() {
+	public AreaTecnica getAreaTecnica() {
 		return areaTecnica;
 	}
 
-	public void setAreaTecnica(String areaTecnica) {
+	public void setAreaTecnica(AreaTecnica areaTecnica) {
 		this.areaTecnica = areaTecnica;
 	}
 
@@ -238,12 +246,25 @@ public class Posicao implements Serializable {
 		this.canaisPublicacao = canaisPublicacao;
 	}
 
-	public List<String> getLocal() {
-		return local;
+	public List<LocalPosicao> getLocal() {
+		List<LocalPosicao> loc = new ArrayList<>();
+		for (String locaisBD : local) {
+			for (LocalPosicao localPosicao : LocalPosicao.values()) {
+				if (locaisBD.equals(localPosicao.toString())) {
+					loc.add(localPosicao);
+					break;
+				}
+			}
+		}
+		return loc;
 	}
 
-	public void setLocal(List<String> local) {
-		this.local = local;
+	public void setLocal(List<LocalPosicao> local) {
+		List<String> loc = new ArrayList<>();
+		for (int i = 0; i < local.size(); i++) {
+			LocalPosicao l = local.get(i);
+			loc.add(l.toString());
+		}
+		this.local = loc;
 	}
-
 }

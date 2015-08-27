@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.facades;
 
+import java.util.List;
+
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Perfil;
 
@@ -14,5 +16,7 @@ public interface ICandidatoFacade extends IEntityFacade<Candidato> {
 	public abstract Perfil getPerfilCandidato();
 
 	public abstract void changePassword(long userId, String newPassword);
+
+	public abstract List<String> getCartasFromCandidatoId(long id);
 
 }

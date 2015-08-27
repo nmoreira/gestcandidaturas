@@ -28,13 +28,14 @@
 			<p:outputLabel for="descricao" value="Descrição da posição" />
 			<p:inputTextarea id="descricao" value="#{novaPosicao.descricao}"
 				cols="60" rows="8" />
-
-			<p:outputLabel value="Localização" for="local" />
+			
+			<p:outputLabel for="local" value="Localização" />
 			<h:panelGroup>
-			<p:selectManyCheckbox id="local2" value="#{novaPosicao.local}" rendered="false">
-				<f:selectItems value="#{novaPosicao.LOCAIS}"/>
-			</p:selectManyCheckbox>
-			<p:inputText id="local" value="#{novaPosicao.localizacao}"/>			
+				<p:selectManyCheckbox id="local2" value="#{novaPosicao.local}" converter="localPosicao">
+					<f:selectItems value="#{novaPosicao.locais}" var="local" 
+					itemLabel="#{local.valor}" itemValue="#{local}"/>
+				</p:selectManyCheckbox>
+				<p:inputText id="local" value="#{novaPosicao.localizacao}" rendered="false"/>
 			</h:panelGroup>
 
 			<p:outputLabel for="quantidade" value="Quantidade de vagas" />
@@ -64,12 +65,19 @@
 			
 			<p:outputLabel for="area" value="Área Técnica"/>
 			<p:selectOneMenu id="area" value="#{novaPosicao.areaTecnica}">
-				<f:selectItems value="#{novaPosicao.AREAS_TECNICAS}" var="area"/>
+				<f:selectItems value="#{novaPosicao.areas}" var="area" 
+				itemLabel="#{area.valor}" itemValue="#{area}"/>
 			</p:selectOneMenu>
 			
 			<p:outputLabel for="canais" value="Canais de Publicação"/>
 			<p:autoComplete id="canais" value="#{novaPosicao.canaisPublicacao}" dropdown="true"
 				completeMethod="#{novaPosicao.sugerirCanaisComunicacao}" />
+			
+			<p:outputLabel for="estado" value="Estado da posição" />
+			<p:selectOneMenu id="estado" value="#{novaPosicao.estado}">
+				<f:selectItems value="#{novaPosicao.estadoPosicao}" var="estado"
+					itemLabel="#{estado.valor}" itemValue="#{estado}" />
+			</p:selectOneMenu>
 			
 				<p:commandButton value="Criar posição" action="#{novaPosicao.criaPosicao()}" update="@form"
 					icon="ui-icon-disk" />
