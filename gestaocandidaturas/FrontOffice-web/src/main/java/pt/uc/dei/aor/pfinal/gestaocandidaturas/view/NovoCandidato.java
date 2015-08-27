@@ -1,12 +1,23 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.event.FileUploadEvent;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidatoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
@@ -97,6 +108,47 @@ public class NovoCandidato implements Serializable {
 				paisesugeridos.add(pais);
 		}
 		return paisesugeridos;
+	}
+
+	public void fileUpload(FileUploadEvent event) {
+		if (this.nome == null || this.apelido == null) {
+			DisplayMessages
+					.addWarnMessage("Por favor indique primeiro o seu Nome e Apelido");
+		} else {
+			String path = FacesContext.getCurrentInstance()
+					.getExternalContext().getRealPath("/");
+
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss");
+			String name = fmt.format(new Date())
+					+ event.getFile()
+							.getFileName()
+							.substring(
+									event.getFile().getFileName()
+											.lastIndexOf('.'));
+			String local = "/data/cv/" + this.nome + "_" + this.apelido + name;
+			File file = new File(path + local);
+
+			try {
+				InputStream is = event.getFile().getInputstream();
+				OutputStream out = new FileOutputStream(file);
+				byte buf[] = new byte[1024];
+				int len;
+				while ((len = is.read(buf)) > 0)
+					out.write(buf, 0, len);
+				is.close();
+				out.close();
+				this.cv = local;
+				DisplayMessages
+						.addInfoMessage("Ficheiro carregado com sucesso");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	public String getLogin() {

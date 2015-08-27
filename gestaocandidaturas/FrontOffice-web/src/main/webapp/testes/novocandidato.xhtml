@@ -14,7 +14,7 @@
 			
 			<p:outputLabel value="Login" for="login" />
 			<p:inputText id="login" size="20" maxlength="20"
-				value="#{novoCandidato.login}" required="true">
+				value="#{novoCandidato.login}" required="true" >
 				<p:ajax listener="#{novoCandidato.validaLogin()}" event="change" process="@this" update="status" partialSubmit="true"/>
 			</p:inputText>
 
@@ -28,11 +28,15 @@
 
 			<p:outputLabel value="Primeiro Nome" for="pnome" />
 			<p:inputText id="pnome" size="20" maxlength="20"
-				value="#{novoCandidato.nome}" required="true"/>
+				value="#{novoCandidato.nome}" required="true">
+				<p:ajax event="change" process="@this" partialSubmit="true"/>
+			</p:inputText>
 
 			<p:outputLabel value="Apelido" for="apelido" />
 			<p:inputText id="apelido" size="20" maxlength="20"
-				value="#{novoCandidato.apelido}" required="true"/>
+				value="#{novoCandidato.apelido}" required="true">
+				<p:ajax event="change" process="@this" partialSubmit="true"/>
+			</p:inputText>
 
 			<p:outputLabel value="Email" for="email" />
 			<p:inputText id="email" size="20" maxlength="20"
@@ -64,8 +68,15 @@
 			<p:inputText id="escola" value="#{novoCandidato.escola}" />
 			
 			<p:outputLabel value="Curriculum vitæ" for="cv" />
-			<p:inputText id="cv" value="#{novoCandidato.cv}" />
 			
+   			<p:fileUpload id="cv" fileUploadListener="#{novoCandidato.fileUpload}" mode="advanced"
+                     auto="false" sizeLimit="5242880"  allowTypes="/(\.|\/)(pdf|doc|docx)$/" 
+                     label="Procurar ficheiro" fileLimit="1" fileLimitMessage="Só pode enviar um ficheiro"
+                     uploadLabel="Enviar" invalidSizeMessage="Tamanho máximo do ficheiro (5MB) excedido"
+                     invalidFileMessage="Só são aceites ficheiros em formato PDF,DOC,DOCX" accept="*.pdf;*.doc;*.docx" 
+                     process="pnome, apelido, login" >
+            </p:fileUpload>
+ 			
 			<p:outputLabel value="Endereço de LinkedIn" for="linkedin" />
 			<p:inputText id="linkedin" value="#{novoCandidato.idLinkedin}" />
 
