@@ -71,4 +71,8 @@ public class CandidatoService {
 		return candidatoFacade.getCartasFromCandidatoId(id);
 	}
 
+	public boolean adicionarCartaMotivacao(long id, String cartaUrl) {
+		return candidatoFacade.addCartaMotivacao(id, cartaUrl);
+	}
+
 }

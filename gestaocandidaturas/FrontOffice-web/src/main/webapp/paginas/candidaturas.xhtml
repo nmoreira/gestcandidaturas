@@ -10,10 +10,6 @@
 <ui:define name="corpo">
 	
 	<h:form>
-		
-	<p:messages closable="true" id="status" autoUpdate="true"/>
-	
-	
 		<p:panelGrid columns="1" id="painel1"
 			style="width: 50%; margin-top:20px; margin-left:350px"
 			columnClasses="rotulo,campo">
@@ -32,21 +28,44 @@
 			style="width: 50%; margin-top:20px; margin-left:350px"
 			columnClasses="rotulo,campo">
 			
-			<p:outputLabel value="Carta Motivação" for="cmotivacao" />
-			<p:inputText id="cmotivacao" value="#{novaCandidatura.cartamotivacao}" />
+			<p:outputLabel value="Selecione uma carta de motivação para esta posição" for="cmotivacao" />
+			<h:panelGroup>
+			<p:selectOneListbox id="cmotivacao" value="#{novaCandidatura.cartamotivacao}" var="c" >
+				<f:selectItems value="#{novaCandidatura.cartas}" var="carta"
+				itemValue="#{carta}"/>
+				<p:column>
+					<p:link value="#{c}" href="#{novaCandidatura.pathCartas}#{c}" />
+				</p:column>
+			</p:selectOneListbox>
+			<p:commandButton value="Carregar um ficheiro" type="button"
+			onclick="PF('novoFicheiro').show()" partialSubmit="true" process="@none"/>
 			
+			</h:panelGroup>
 		
 			<p:outputLabel value="Fonte" for="fonte" />
 			<p:autoComplete id="fonte" value="#{novaCandidatura.fonte}" required="true" completeMethod="#{novaCandidatura.sugerirfonte}"
 			forceSelection="true" minQueryLenght="1" dropdown="true"></p:autoComplete>
 			
-				<p:commandButton value="submeter" action="#{novaCandidatura.Candidatar()}" update="status"
+				<p:commandButton value="submeter" action="#{novaCandidatura.candidatar()}" update="status"
 					icon="ui-icon-disk" />
 				<p:button value="Limpar" outcome="/paginas/candidaturas" />
+				
 			
 		</p:panelGrid>
-		
+		<p:dialog header="Carregar uma carta de motivação" widgetVar="novoFicheiro" resizable="false">
+		<p:fileUpload id="file"
+					fileUploadListener="#{novaCandidatura.fileUpload}" mode="advanced"
+					auto="false" sizeLimit="5242880"
+					allowTypes="/(\.|\/)(pdf|doc|docx)$/" label="Procurar ficheiro"
+					fileLimit="1" fileLimitMessage="Só pode enviar um ficheiro"
+					uploadLabel="Enviar" cancelLabel="Cancelar"
+					invalidSizeMessage="Tamanho máximo do ficheiro (5MB) excedido"
+					invalidFileMessage="Só são aceites ficheiros em formato PDF, DOC, DOCX"
+					accept="*.pdf;*.doc;*.docx" update="cmotivacao" oncomplete="PF('novoFicheiro').hide()">
+		</p:fileUpload>
+		</p:dialog>
 	</h:form>
+		
 	</ui:define>
 
 </ui:composition>

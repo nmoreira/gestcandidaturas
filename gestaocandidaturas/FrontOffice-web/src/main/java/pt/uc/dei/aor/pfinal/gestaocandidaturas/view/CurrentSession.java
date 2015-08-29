@@ -18,12 +18,29 @@ public class CurrentSession implements Serializable {
 
 	private static Utilizador currentUser;
 
+	private static String userFirstName = "Visitante";
+	private static boolean logged = false;
+
 	public Utilizador getCurrentUser() {
 		return currentUser;
 	}
 
 	public static void setCurrentUser(Utilizador loggedUser) {
+		if (loggedUser == null) {
+			userFirstName = "Visitante";
+			logged = false;
+		} else {
+			userFirstName = loggedUser.getNome();
+			logged = true;
+		}
 		currentUser = loggedUser;
 	}
 
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+
+	public boolean isLogged() {
+		return logged;
+	}
 }

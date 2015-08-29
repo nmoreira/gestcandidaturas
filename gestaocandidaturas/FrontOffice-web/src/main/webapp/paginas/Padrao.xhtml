@@ -22,10 +22,21 @@
 			</f:facet>
 		</p:ajaxStatus>
 		<header>
-			<div>
+			<div style="float: left;">
 				<h:link outcome="/principal">
 					<h:graphicImage library="imagens" name="critical.png" />
 				</h:link>
+			</div>
+			<div style="float:right;">
+				<h:form>
+				<h4>
+					Olá #{currentSession.userFirstName}!
+					<p:commandLink value="Inicie Sessão" rendered="#{!currentSession.logged}"/>
+					<p:outputLabel value=" ou " rendered="#{!currentSession.logged}"/>
+					<p:commandLink value="Registe-se" rendered="#{!currentSession.logged}"/>
+					<p:commandLink value="Logout" rendered="#{currentSession.logged}"/>
+				</h4>
+				</h:form>
 			</div>
 		</header>
 		<p:messages closable="true" id="status" autoUpdate="true"/>

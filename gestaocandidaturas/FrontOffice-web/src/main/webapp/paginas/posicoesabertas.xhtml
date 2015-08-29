@@ -15,7 +15,7 @@
 				<p:spacer />
 				<h:outputText value="#{posicao.descricao}" />
 				<p:outputLabel value="Área técnica:" for="area" />
-				<h:outputText value="#{posicao.areaTecnica}" id="area" />
+				<h:outputText value="#{posicao.areaTecnica.valor}" id="area" />
 				<p:outputLabel value="Localização:" for="localizacao" />
 				<h:outputText value="#{posicao.localizacao}" id="localizacao" />
 				<p:outputLabel value="Vagas" for="vagas" />
@@ -24,6 +24,7 @@
 				<f:facet name="footer">
 				<h:form>
 					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.candidatar()}" ajax="false">
+						<f:param name="faces-redirect" value="true"/>
 						<f:param name="posid" value="#{posicao.id}"/> 
 					</p:commandButton>
 				</h:form>

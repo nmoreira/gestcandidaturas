@@ -27,8 +27,12 @@ public class CandidaturaService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createNewCandidatura(Candidatura candidatura) {
-		candidaturaFacade.create(candidatura);
+	public boolean createNewCandidatura(Candidatura candidatura) {
+		if (candidaturaFacade.create(candidatura) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public Candidatura getCandidatura(long candidaturaid) {

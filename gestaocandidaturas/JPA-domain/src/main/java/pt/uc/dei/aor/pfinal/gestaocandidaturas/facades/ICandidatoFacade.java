@@ -19,4 +19,6 @@ public interface ICandidatoFacade extends IEntityFacade<Candidato> {
 
 	public abstract List<String> getCartasFromCandidatoId(long id);
 
+	public abstract boolean addCartaMotivacao(long candidatoId, String cartaUrl);
+
 }

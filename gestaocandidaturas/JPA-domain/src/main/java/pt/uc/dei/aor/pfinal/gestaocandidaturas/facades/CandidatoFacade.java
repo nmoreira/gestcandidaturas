@@ -173,7 +173,20 @@ public class CandidatoFacade implements ICandidatoFacade {
 		q = em.createQuery("select c from Candidato c left join fetch c.cartas where c.id = :id");
 		q.setParameter("id", id);
 		Candidato c = (Candidato) q.getSingleResult();
-		System.out.println(c.getNome());
 		return c.getCartas();
+	}
+
+	@Override
+	public boolean addCartaMotivacao(long candidatoId, String cartaUrl) {
+		try {
+			q = em.createQuery("select c from Candidato c left join fetch c.cartas where c.id = :id");
+			q.setParameter("id", candidatoId);
+			Candidato c = (Candidato) q.getSingleResult();
+			c.getCartas().add(cartaUrl);
+			update(c);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }
