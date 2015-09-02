@@ -2,6 +2,7 @@ package pt.uc.dei.aor.pfinal.gestaocandidaturas.facades;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -15,7 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.AreaTecnica;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 
 /**
  * Session Bean implementation class AdministradorFacade
@@ -137,6 +140,76 @@ public class PosicaoFacade implements IPosicaoFacade {
 		List<Posicao> result = new ArrayList<>();
 		q = em.createQuery("from Posicao p where p.estado = :estado");
 		q.setParameter("estado", EstadoPosicao.ABERTA);
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Posicao> searchByDataAbertura(Date data) {
+		List<Posicao> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct p from Posicao p join fetch p.local where p.dataAbertura = :data");
+		q.setParameter("data", data);
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Posicao> searchByCodPosicao(String codPosicao) {
+		List<Posicao> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct p from Posicao p join fetch p.local where upper(p.codPosicao) like :codPosicao");
+		q.setParameter("codPosicao", "%" + codPosicao.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Posicao> searchByTitulo(String titulo) {
+		List<Posicao> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct p from Posicao p join fetch p.local where upper(p.titulo) like :titulo");
+		q.setParameter("titulo", "%" + titulo.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Posicao> searchByLocal(LocalPosicao local) {
+		List<Posicao> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct p from Posicao p join fetch p.local l where l = :local");
+		q.setParameter("local", local.toString());
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Posicao> searchByEstado(EstadoPosicao estado) {
+		List<Posicao> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct p from Posicao p join fetch p.local where p.estado = :estado");
+		q.setParameter("estado", estado);
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Posicao> searchByEmpresa(String empresa) {
+		List<Posicao> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct p from Posicao p join fetch p.local where upper(p.empresa) like :empresa");
+		q.setParameter("empresa", "%" + empresa.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Posicao> searchByAreaTecnica(AreaTecnica area) {
+		List<Posicao> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct p from Posicao p join fetch p.local where p.areaTecnica = :areaTecnica");
+		q.setParameter("areaTecnica", area);
 		result = q.getResultList();
 		return result;
 	}

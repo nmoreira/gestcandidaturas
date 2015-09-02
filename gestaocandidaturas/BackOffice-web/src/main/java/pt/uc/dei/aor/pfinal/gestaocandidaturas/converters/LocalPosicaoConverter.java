@@ -4,20 +4,24 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
-import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.ResponsavelPosicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.view.NovaPosicao;
 
-@FacesConverter("responsavelPosicao")
+@FacesConverter("localPosicao")
 public class LocalPosicaoConverter implements Converter {
+
+	@Inject
+	private NovaPosicao bean;
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
 		if (value != null) {
-			for (ResponsavelPosicao responsavel : NovaPosicao.RESPONSAVEIS) {
-				if (value.equals(String.valueOf(responsavel.getId()))) {
-					return responsavel;
+			for (LocalPosicao local : bean.getLocais()) {
+				if (value.equals(local.toString())) {
+					return local;
 				}
 			}
 		}
@@ -28,9 +32,8 @@ public class LocalPosicaoConverter implements Converter {
 	public String getAsString(FacesContext context, UIComponent component,
 			Object value) {
 		if (value != null) {
-			ResponsavelPosicao resp = (ResponsavelPosicao) value;
-			return "" + resp.getId();
-			// return String.valueOf(((ResponsavelPosicao) value).getId());
+			LocalPosicao loc = (LocalPosicao) value;
+			return loc.toString();
 		}
 		return null;
 	}

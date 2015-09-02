@@ -35,11 +35,12 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 @Entity
 @Table(name = "posicao")
 @NamedQueries({
-		@NamedQuery(name = "Posicao.findAll", query = "SELECT p FROM Posicao p"),
+		@NamedQuery(name = "Posicao.findAll", query = "SELECT p FROM Posicao p join fetch p.local"),
 		@NamedQuery(name = "Posicao.findByTitulo", query = "SELECT p FROM Posicao p WHERE p.titulo LIKE :titulo"),
 		@NamedQuery(name = "Posicao.findByEmpresa", query = "SELECT p FROM Posicao p WHERE p.empresa LIKE :empresa"),
 		@NamedQuery(name = "Posicao.findById", query = "SELECT p FROM Posicao p WHERE p.id = :id"),
-		@NamedQuery(name = "Posicao.findByCodPosicao", query = "SELECT p FROM Posicao p WHERE p.codPosicao = :codPosicao") })
+		@NamedQuery(name = "Posicao.findByCodPosicao", query = "SELECT p FROM Posicao p WHERE p.codPosicao = :codPosicao"),
+		@NamedQuery(name = "Posicao.findByDataAbertura", query = "SELECT p FROM Posicao p WHERE p.dataAbertura = :dataAbertura") })
 public class Posicao implements Serializable {
 
 	@Id
@@ -267,4 +268,34 @@ public class Posicao implements Serializable {
 		}
 		this.local = loc;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((codPosicao == null) ? 0 : codPosicao.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Posicao other = (Posicao) obj;
+		if (codPosicao == null) {
+			if (other.codPosicao != null)
+				return false;
+		} else if (!codPosicao.equals(other.codPosicao))
+			return false;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
 }

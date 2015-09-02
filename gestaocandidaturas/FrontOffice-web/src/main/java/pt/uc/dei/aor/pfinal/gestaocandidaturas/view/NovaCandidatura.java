@@ -99,12 +99,10 @@ public class NovaCandidatura implements Serializable {
 		if (cartas.size() > 0) {
 			pathCartas = cartas.get(0).substring(0,
 					cartas.get(0).lastIndexOf("/") + 1);
-			System.out.println("path: " + pathCartas);
 		}
 		List<String> paths = new ArrayList<>();
 		for (String path : cartas) {
 			String file = path.substring(path.lastIndexOf("/") + 1);
-			System.out.println(file);
 			paths.add(file);
 		}
 		this.cartas = paths;

@@ -30,14 +30,11 @@
 				cols="60" rows="8" />
 			
 			<p:outputLabel for="local" value="Localização" />
-			<h:panelGroup>
-				<p:selectManyCheckbox id="local2" value="#{novaPosicao.local}" converter="localPosicao">
-					<f:selectItems value="#{novaPosicao.locais}" var="local" 
-					itemLabel="#{local.valor}" itemValue="#{local}"/>
-				</p:selectManyCheckbox>
-				<p:inputText id="local" value="#{novaPosicao.localizacao}" rendered="false"/>
-			</h:panelGroup>
-
+			<p:selectManyCheckbox id="local" value="#{novaPosicao.local}" converter="localPosicao">
+				<f:selectItems value="#{novaPosicao.locais}" var="local" 
+				itemLabel="#{local.valor}" itemValue="#{local}"/>
+			</p:selectManyCheckbox>
+				
 			<p:outputLabel for="quantidade" value="Quantidade de vagas" />
 			<p:inputText id="quantidade" value="#{novaPosicao.quantidadeVagas}" />
 
@@ -50,9 +47,8 @@
 				navigator="true" readonlyInput="true" mode="popup" />
 			
 			<p:outputLabel for="responsavel" value="Responsável"/>
-			<p:selectOneMenu id="responsavel" value="#{novaPosicao.responsavel}" 
-			converter="responsavelPosicao" filter="true" filterMatchMode="contains">
-				
+			<p:selectOneMenu id="responsavel" value="#{novaPosicao.responsavel}" style="width:250px;"
+			converter="responsavelPosicao" filter="true" filterMatchMode="contains" >				
 				<f:selectItems value="#{novaPosicao.getResponsaveis()}" 
 				var="responsavel" itemLabel="#{responsavel.nome} #{responsavel.apelido}" itemValue="#{responsavel}"/>>
 			</p:selectOneMenu> 
@@ -64,7 +60,7 @@
 			<p:inputText id="empresa" value="#{novaPosicao.empresa}"/>
 			
 			<p:outputLabel for="area" value="Área Técnica"/>
-			<p:selectOneMenu id="area" value="#{novaPosicao.areaTecnica}">
+			<p:selectOneMenu id="area" value="#{novaPosicao.areaTecnica}" style="width:200px;">
 				<f:selectItems value="#{novaPosicao.areas}" var="area" 
 				itemLabel="#{area.valor}" itemValue="#{area}"/>
 			</p:selectOneMenu>
