@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.facades;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -152,5 +153,108 @@ public class CandidaturaFacade implements ICandidaturaFacade {
 					.setParameter("posicao", pos);
 			return q.getSingleResult();
 		}
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoNome(String nome) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF.searchCandidatoByNome(nome)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoApelido(String apelido) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF.searchCandidatoByApelido(apelido)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoEmail(String email) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF.searchCandidatoByEmail(email)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoMorada(String morada) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF.searchCandidatoByMorada(morada)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoCidade(String cidade) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF.searchCandidatoByCidade(cidade)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoTelefone(long telefone) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF
+				.searchCandidatoByTelefone(telefone)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoTelemovel(
+			long telemovel) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF
+				.searchCandidatoByTelemovel(telemovel)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoPais(String pais) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF.searchCandidatoByPais(pais)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoCurso(String curso) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF.searchCandidatoByCurso(curso)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Candidatura> searchCandidaturaByCandidatoEscola(String escola) {
+		List<Candidatura> result = new ArrayList<>();
+
+		for (Candidato candidato : candidatoF.searchCandidatoByEscola(escola)) {
+			result.addAll(candidato.getCandidaturas());
+		}
+		return result;
 	}
 }

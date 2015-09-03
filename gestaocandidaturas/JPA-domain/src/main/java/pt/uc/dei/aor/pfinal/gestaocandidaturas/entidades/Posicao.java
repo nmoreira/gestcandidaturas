@@ -35,7 +35,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 @Entity
 @Table(name = "posicao")
 @NamedQueries({
-		@NamedQuery(name = "Posicao.findAll", query = "SELECT p FROM Posicao p join fetch p.local"),
+		@NamedQuery(name = "Posicao.findAll", query = "SELECT p FROM Posicao p left join fetch p.local"),
 		@NamedQuery(name = "Posicao.findByTitulo", query = "SELECT p FROM Posicao p WHERE p.titulo LIKE :titulo"),
 		@NamedQuery(name = "Posicao.findByEmpresa", query = "SELECT p FROM Posicao p WHERE p.empresa LIKE :empresa"),
 		@NamedQuery(name = "Posicao.findById", query = "SELECT p FROM Posicao p WHERE p.id = :id"),

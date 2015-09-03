@@ -75,4 +75,44 @@ public class CandidatoService {
 		return candidatoFacade.addCartaMotivacao(id, cartaUrl);
 	}
 
+	public List<Candidato> pesquisaCandidatoByNome(String nome) {
+		return candidatoFacade.searchCandidatoByNome(nome);
+	}
+
+	public List<Candidato> pesquisaCandidatoByApelido(String apelido) {
+		return candidatoFacade.searchCandidatoByApelido(apelido);
+	}
+
+	public List<Candidato> pesquisaCandidatoByEmail(String email) {
+		return candidatoFacade.searchCandidatoByEmail(email);
+	}
+
+	public List<Candidato> pesquisaCandidatoByMorada(String morada) {
+		return candidatoFacade.searchCandidatoByMorada(morada);
+	}
+
+	public List<Candidato> pesquisaCandidatoByCidade(String cidade) {
+		return candidatoFacade.searchCandidatoByCidade(cidade);
+	}
+
+	public List<Candidato> pesquisaCandidatoByTelefone(long telefone) {
+		return candidatoFacade.searchCandidatoByTelefone(telefone);
+	}
+
+	public List<Candidato> pesquisaCandidatoByTelemovel(long telemovel) {
+		return candidatoFacade.searchCandidatoByTelemovel(telemovel);
+	}
+
+	public List<Candidato> pesquisaCandidatoByPais(String pais) {
+		return candidatoFacade.searchCandidatoByPais(pais);
+	}
+
+	public List<Candidato> pesquisaCandidatoByCurso(String curso) {
+		return candidatoFacade.searchCandidatoByCurso(curso);
+	}
+
+	public List<Candidato> pesquisaCandidatoByEscola(String escola) {
+		return candidatoFacade.searchCandidatoByEscola(escola);
+	}
+
 }

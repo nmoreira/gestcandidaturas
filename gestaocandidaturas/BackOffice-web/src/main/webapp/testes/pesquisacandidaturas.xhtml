@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<h:form>
+		<p:panelGrid columns="6">
+			<p:outputLabel for="nome" value="Nome" />
+			<p:inputText id="nome" value="#{pesquisaCandidaturas.nome}" />
+
+			<p:outputLabel for="apelido" value="Apelido" />
+			<p:inputText id="apelido" value="#{pesquisaCandidaturas.apelido}" />
+
+			<p:outputLabel for="email" value="Email" />
+			<p:inputText id="email" value="#{pesquisaCandidaturas.email}" />
+
+			<p:outputLabel for="morada" value="Morada" />
+			<p:inputText id="morada" value="#{pesquisaCandidaturas.morada}" />
+
+			<p:outputLabel for="cidade" value="Cidade" />
+			<p:inputText id="cidade" value="#{pesquisaCandidaturas.cidade}" />
+
+			<p:outputLabel for="telefone" value="Telefone" />
+			<p:inputText id="telefone" value="#{pesquisaCandidaturas.telefone}" />
+
+			<p:outputLabel for="telemovel" value="Telemovel" />
+			<p:inputText id="telemovel" value="#{pesquisaCandidaturas.telemovel}" />
+
+			<p:outputLabel for="pais" value="País" />
+			<p:inputText id="pais" value="#{pesquisaCandidaturas.pais}" />
+
+			<p:outputLabel for="curso" value="Curso" />
+			<p:inputText id="curso" value="#{pesquisaCandidaturas.curso}" />
+
+			<p:outputLabel for="escola" value="Escola" />
+			<p:inputText id="escola" value="#{pesquisaCandidaturas.escola}" />
+			<p:commandButton value="Pesquisar"
+				action="#{pesquisaCandidaturas.Pesquisar()}" update="resultados" />
+		</p:panelGrid>
+	</h:form>
+	<br />
+	<p:dataTable id="resultados"
+		value="#{pesquisaCandidaturas.resultadosPesquisa}" var="resultado"
+		emptyMessage="Sem resultados" rows="10" paginator="true"
+		paginatorPosition="bottom" paginatorAlwaysVisible="false"
+		sortBy="#{resultado.candidato.nome}" sortOrder="ascending">
+		<p:column headerText="Posição" sortBy="#{resultado.posicao.titulo}">
+			<h:outputText value="#{resultado.posicao.titulo}" />
+		</p:column>
+		<p:column headerText="Candidato"
+			sortBy="#{resultado.candidato.nome} #{resultado.candidato.apelido}">
+			<h:outputText
+				value="#{resultado.candidato.nome} #{resultado.candidato.apelido}" />
+		</p:column>
+		<p:column headerText="Data de Candidatura"
+			sortBy="#{resultado.dataCandidatura}">
+			<h:outputText value="#{resultado.dataCandidatura}" />
+		</p:column>
+	</p:dataTable>
+</h:body>
+</html>

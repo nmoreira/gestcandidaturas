@@ -35,6 +35,10 @@ public class CandidaturaService {
 		}
 	}
 
+	public List<Candidatura> listaCandidaturas() {
+		return (List<Candidatura>) candidaturaFacade.findAll();
+	}
+
 	public Candidatura getCandidatura(long candidaturaid) {
 		return candidaturaFacade.find(candidaturaid);
 	}
@@ -52,4 +56,49 @@ public class CandidaturaService {
 		return candidaturaFacade.findByCandidatoAndPosicao(candidatoId,
 				posicaoId);
 	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoNome(String nome) {
+		return candidaturaFacade.searchCandidaturaByCandidatoNome(nome);
+	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoApelido(
+			String apelido) {
+		return candidaturaFacade.searchCandidaturaByCandidatoApelido(apelido);
+	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoEmail(String email) {
+		return candidaturaFacade.searchCandidaturaByCandidatoEmail(email);
+	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoMorada(String morada) {
+		return candidaturaFacade.searchCandidaturaByCandidatoMorada(morada);
+	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoCidade(String cidade) {
+		return candidaturaFacade.searchCandidaturaByCandidatoCidade(cidade);
+	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoTelefone(
+			long telefone) {
+		return candidaturaFacade.searchCandidaturaByCandidatoTelefone(telefone);
+	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoTelemovel(
+			long telemovel) {
+		return candidaturaFacade
+				.searchCandidaturaByCandidatoTelemovel(telemovel);
+	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoPais(String pais) {
+		return candidaturaFacade.searchCandidaturaByCandidatoPais(pais);
+	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoCurso(String curso) {
+		return candidaturaFacade.searchCandidaturaByCandidatoCurso(curso);
+	}
+
+	public List<Candidatura> pesquisaCandidaturasByCandidatoEscola(String escola) {
+		return candidaturaFacade.searchCandidaturaByCandidatoEscola(escola);
+	}
+
 }

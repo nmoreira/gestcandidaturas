@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.facades;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -188,5 +189,105 @@ public class CandidatoFacade implements ICandidatoFacade {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByNome(String nome) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where upper(c.nome) like :nome");
+		q.setParameter("nome", "%" + nome.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByApelido(String apelido) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where upper(c.apelido) like :apelido");
+		q.setParameter("apelido", "%" + apelido.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByEmail(String email) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where upper(c.email) like :email");
+		q.setParameter("email", "%" + email.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByMorada(String morada) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where upper(c.morada) like :morada");
+		q.setParameter("morada", "%" + morada.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByCidade(String cidade) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where upper(c.cidade) like :cidade");
+		q.setParameter("cidade", "%" + cidade.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByTelefone(long telefone) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where c.telefone = :telefone");
+		q.setParameter("telefone", telefone);
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByTelemovel(long telemovel) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where c.telemovel = :telemovel");
+		q.setParameter("telemovel", telemovel);
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByPais(String pais) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where upper(c.pais) like :pais");
+		q.setParameter("pais", "%" + pais.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByCurso(String curso) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where upper(c.curso) like :curso");
+		q.setParameter("curso", "%" + curso.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Candidato> searchCandidatoByEscola(String escola) {
+		List<Candidato> result = new ArrayList<>();
+
+		q = em.createQuery("select distinct c from Candidato c left join fetch c.candidaturas where upper(c.escola) like :escola");
+		q.setParameter("escola", "%" + escola.toUpperCase() + "%");
+		result = q.getResultList();
+		return result;
 	}
 }

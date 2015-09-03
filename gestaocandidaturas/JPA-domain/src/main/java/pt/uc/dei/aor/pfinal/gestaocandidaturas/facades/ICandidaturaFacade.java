@@ -13,4 +13,34 @@ public interface ICandidaturaFacade extends IEntityFacade<Candidatura> {
 	public abstract Candidatura findByCandidatoAndPosicao(long candidatoId,
 			long posicaoId);
 
+	public abstract List<Candidatura> searchCandidaturaByCandidatoNome(
+			String nome);
+
+	public abstract List<Candidatura> searchCandidaturaByCandidatoApelido(
+			String apelido);
+
+	public abstract List<Candidatura> searchCandidaturaByCandidatoEmail(
+			String email);
+
+	public abstract List<Candidatura> searchCandidaturaByCandidatoMorada(
+			String morada);
+
+	public abstract List<Candidatura> searchCandidaturaByCandidatoCidade(
+			String cidade);
+
+	public abstract List<Candidatura> searchCandidaturaByCandidatoTelefone(
+			long telefone);
+
+	public abstract List<Candidatura> searchCandidaturaByCandidatoTelemovel(
+			long telemovel);
+
+	public abstract List<Candidatura> searchCandidaturaByCandidatoPais(
+			String pais);
+
+	public abstract List<Candidatura> searchCandidaturaByCandidatoCurso(
+			String curso);
+
+	public abstract List<Candidatura> searchCandidaturaByCandidatoEscola(
+			String escola);
+
 }

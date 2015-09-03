@@ -31,8 +31,8 @@ public class PosicaoService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createNewPosicao(Posicao posicao) {
-		posicaoFacade.create(posicao);
+	public Posicao createNewPosicao(Posicao posicao) {
+		return posicaoFacade.create(posicao);
 	}
 
 	public List<Posicao> listaPosicoes() {

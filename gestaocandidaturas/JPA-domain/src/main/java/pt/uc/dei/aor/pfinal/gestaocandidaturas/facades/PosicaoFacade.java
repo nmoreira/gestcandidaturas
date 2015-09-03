@@ -148,7 +148,7 @@ public class PosicaoFacade implements IPosicaoFacade {
 	public List<Posicao> searchByDataAbertura(Date data) {
 		List<Posicao> result = new ArrayList<>();
 
-		q = em.createQuery("select distinct p from Posicao p join fetch p.local where p.dataAbertura = :data");
+		q = em.createQuery("select distinct p from Posicao p left join fetch p.local where p.dataAbertura = :data");
 		q.setParameter("data", data);
 		result = q.getResultList();
 		return result;
@@ -158,7 +158,7 @@ public class PosicaoFacade implements IPosicaoFacade {
 	public List<Posicao> searchByCodPosicao(String codPosicao) {
 		List<Posicao> result = new ArrayList<>();
 
-		q = em.createQuery("select distinct p from Posicao p join fetch p.local where upper(p.codPosicao) like :codPosicao");
+		q = em.createQuery("select distinct p from Posicao p left join fetch p.local where upper(p.codPosicao) like :codPosicao");
 		q.setParameter("codPosicao", "%" + codPosicao.toUpperCase() + "%");
 		result = q.getResultList();
 		return result;
@@ -168,7 +168,7 @@ public class PosicaoFacade implements IPosicaoFacade {
 	public List<Posicao> searchByTitulo(String titulo) {
 		List<Posicao> result = new ArrayList<>();
 
-		q = em.createQuery("select distinct p from Posicao p join fetch p.local where upper(p.titulo) like :titulo");
+		q = em.createQuery("select distinct p from Posicao p left join fetch p.local where upper(p.titulo) like :titulo");
 		q.setParameter("titulo", "%" + titulo.toUpperCase() + "%");
 		result = q.getResultList();
 		return result;
@@ -178,7 +178,7 @@ public class PosicaoFacade implements IPosicaoFacade {
 	public List<Posicao> searchByLocal(LocalPosicao local) {
 		List<Posicao> result = new ArrayList<>();
 
-		q = em.createQuery("select distinct p from Posicao p join fetch p.local l where l = :local");
+		q = em.createQuery("select distinct p from Posicao p left join fetch p.local l where l = :local");
 		q.setParameter("local", local.toString());
 		result = q.getResultList();
 		return result;
@@ -188,7 +188,7 @@ public class PosicaoFacade implements IPosicaoFacade {
 	public List<Posicao> searchByEstado(EstadoPosicao estado) {
 		List<Posicao> result = new ArrayList<>();
 
-		q = em.createQuery("select distinct p from Posicao p join fetch p.local where p.estado = :estado");
+		q = em.createQuery("select distinct p from Posicao p left join fetch p.local where p.estado = :estado");
 		q.setParameter("estado", estado);
 		result = q.getResultList();
 		return result;
@@ -198,7 +198,7 @@ public class PosicaoFacade implements IPosicaoFacade {
 	public List<Posicao> searchByEmpresa(String empresa) {
 		List<Posicao> result = new ArrayList<>();
 
-		q = em.createQuery("select distinct p from Posicao p join fetch p.local where upper(p.empresa) like :empresa");
+		q = em.createQuery("select distinct p from Posicao p left join fetch p.local where upper(p.empresa) like :empresa");
 		q.setParameter("empresa", "%" + empresa.toUpperCase() + "%");
 		result = q.getResultList();
 		return result;
@@ -208,7 +208,7 @@ public class PosicaoFacade implements IPosicaoFacade {
 	public List<Posicao> searchByAreaTecnica(AreaTecnica area) {
 		List<Posicao> result = new ArrayList<>();
 
-		q = em.createQuery("select distinct p from Posicao p join fetch p.local where p.areaTecnica = :areaTecnica");
+		q = em.createQuery("select distinct p from Posicao p left join fetch p.local where p.areaTecnica = :areaTecnica");
 		q.setParameter("areaTecnica", area);
 		result = q.getResultList();
 		return result;
