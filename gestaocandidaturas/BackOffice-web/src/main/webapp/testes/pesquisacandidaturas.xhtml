@@ -58,7 +58,9 @@
 		</p:column>
 		<p:column headerText="Data de Candidatura"
 			sortBy="#{resultado.dataCandidatura}">
-			<h:outputText value="#{resultado.dataCandidatura}" />
+			<h:outputText value="#{resultado.dataCandidatura}">
+				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+			</h:outputText>
 		</p:column>
 	</p:dataTable>
 </h:body>

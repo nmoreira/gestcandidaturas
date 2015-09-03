@@ -57,7 +57,9 @@
 		paginatorPosition="bottom" paginatorAlwaysVisible="false"
 		sortBy="#{resultado.titulo}" sortOrder="ascending">
 		<p:column headerText="Data" sortBy="#{resultado.dataAbertura}">
-			<h:outputText value="#{resultado.dataAbertura}" />
+			<h:outputText value="#{resultado.dataAbertura}">
+				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+			</h:outputText>
 		</p:column>
 		<p:column headerText="Código" sortBy="#{resultado.codPosicao}">
 			<h:outputText value="#{resultado.codPosicao}" />
