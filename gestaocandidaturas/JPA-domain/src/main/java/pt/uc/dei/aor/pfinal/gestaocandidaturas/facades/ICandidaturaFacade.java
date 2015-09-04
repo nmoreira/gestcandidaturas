@@ -13,6 +13,8 @@ public interface ICandidaturaFacade extends IEntityFacade<Candidatura> {
 	public abstract Candidatura findByCandidatoAndPosicao(long candidatoId,
 			long posicaoId);
 
+	public abstract boolean criaCandidaturaEspontanea(Candidatura candidatura);
+
 	public abstract List<Candidatura> searchCandidaturaByCandidatoNome(
 			String nome);
 

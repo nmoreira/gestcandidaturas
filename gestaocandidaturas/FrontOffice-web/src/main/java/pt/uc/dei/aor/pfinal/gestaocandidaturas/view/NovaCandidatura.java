@@ -72,7 +72,12 @@ public class NovaCandidatura implements Serializable {
 		Map<String, String> params = FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestParameterMap();
 		long posid = Long.parseLong(params.get("posid"));
-		this.posicao = posicaoServ.getPosicaoById(posid);
+
+		if (posid == 0) {
+			this.posicao = null;
+		} else {
+			this.posicao = posicaoServ.getPosicaoById(posid);
+		}
 	}
 
 	private void carregaFontes() {
@@ -111,11 +116,24 @@ public class NovaCandidatura implements Serializable {
 	public void candidatar() {
 		Candidatura candidatura = new Candidatura(cartamotivacao, fonte,
 				posicao, candidato);
-		if (candidaturaServ.createNewCandidatura(candidatura)) {
-			DisplayMessages.addInfoMessage("Candidatura efetuada com sucesso!");
+		if (candidatura.getPosicao() == null) {
+			if (candidaturaServ.criaCandidaturaEspontanea(candidatura)) {
+				DisplayMessages
+						.addInfoMessage("Candidatura espontânea efetuada com sucesso!");
+			} else {
+				DisplayMessages
+						.addErrorMessage("Falha ao submeter a candidatura espontânea!");
+			}
 		} else {
-			DisplayMessages.addErrorMessage("Falha ao submeter a candidatura!");
+			if (candidaturaServ.createNewCandidatura(candidatura)) {
+				DisplayMessages
+						.addInfoMessage("Candidatura efetuada com sucesso!");
+			} else {
+				DisplayMessages
+						.addErrorMessage("Falha ao submeter a candidatura!");
+			}
 		}
+
 	}
 
 	public void fileUpload(FileUploadEvent event) {
@@ -191,7 +209,13 @@ public class NovaCandidatura implements Serializable {
 	}
 
 	public Posicao getPosicao() {
-		return posicao;
+		if (this.posicao == null) {
+			Posicao p = new Posicao();
+			p.setTitulo("Candidatura espontânea");
+			return p;
+		} else {
+			return posicao;
+		}
 	}
 
 	public void setPosicao(Posicao posicao) {

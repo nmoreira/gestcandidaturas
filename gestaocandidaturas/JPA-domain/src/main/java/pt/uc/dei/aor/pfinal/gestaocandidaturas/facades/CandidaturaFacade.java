@@ -257,4 +257,19 @@ public class CandidaturaFacade implements ICandidaturaFacade {
 		}
 		return result;
 	}
+
+	@Override
+	public boolean criaCandidaturaEspontanea(Candidatura candidatura) {
+		String cand = candidatura.getCandidato().getLogin();
+		try {
+			em.persist(candidatura);
+			logger.info("Candidatura espontânea do candidato " + cand
+					+ " criada com sucesso na base de dados");
+			return true;
+		} catch (Exception e) {
+			logger.error("Erro ao criar a candidatura espontânea do candidato "
+					+ cand + " na base de dados");
+			return false;
+		}
+	}
 }

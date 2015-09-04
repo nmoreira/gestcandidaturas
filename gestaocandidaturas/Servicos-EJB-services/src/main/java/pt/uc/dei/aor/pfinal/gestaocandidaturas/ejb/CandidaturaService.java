@@ -35,6 +35,10 @@ public class CandidaturaService {
 		}
 	}
 
+	public boolean criaCandidaturaEspontanea(Candidatura candidatura) {
+		return candidaturaFacade.criaCandidaturaEspontanea(candidatura);
+	}
+
 	public List<Candidatura> listaCandidaturas() {
 		return (List<Candidatura>) candidaturaFacade.findAll();
 	}
