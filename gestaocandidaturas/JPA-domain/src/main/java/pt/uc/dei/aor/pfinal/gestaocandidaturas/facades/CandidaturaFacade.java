@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
@@ -29,6 +30,8 @@ public class CandidaturaFacade implements ICandidaturaFacade {
 	private EntityManager em;
 
 	static Logger logger = LoggerFactory.getLogger(CandidaturaFacade.class);
+
+	private Query q;
 
 	@Inject
 	private CandidatoFacade candidatoF;
@@ -271,5 +274,11 @@ public class CandidaturaFacade implements ICandidaturaFacade {
 					+ cand + " na base de dados");
 			return false;
 		}
+	}
+
+	@Override
+	public List<Candidatura> getCandidaturasEspontaneas() {
+		q = em.createQuery("from Candidatura c where c.posicao = null");
+		return q.getResultList();
 	}
 }

@@ -10,6 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><ui:insert name="titulo">Sistema padrão</ui:insert></title>
 	<h:outputStylesheet library="css" name="estilos.css" />
+	<h:outputScript library="js" name="script.js"/>
 </h:head>
 
 <h:body>
@@ -33,7 +34,7 @@
 				Olá #{currentSession.userFirstName}!
 				<br />
 				<p:commandLink value="Inicie Sessão"
-					rendered="#{!currentSession.logged}" />
+					rendered="#{!currentSession.logged}" onclick="PF('loginWindow').show();" title="login"/>
 				<p:outputLabel value=" ou " rendered="#{!currentSession.logged}" />
 				<p:commandLink value="Registe-se"
 					rendered="#{!currentSession.logged}"
@@ -46,13 +47,29 @@
 	</header>
 	<p:messages closable="true" id="status" autoUpdate="true" />
 
-	<div id="conteudo" style="min-height: 600px;">
+	<div id="conteudo" style="min-height: 500px;">
 		<ui:insert name="corpo" />
 	</div>
 
 	<p:separator style="margin-top: 20px" />
 
 	<footer> Desenvolvido por Nuno Moreira e Rita Costa </footer>
+	<h:form>
+	<p:dialog header="Login" modal="true" resizable="false" widgetVar="loginWindow">
+		<h:panelGrid columns="2" styleClass="grid-login">
+    	
+    				<p:outputLabel value="Login" for="login"/>
+    				<p:inputText size="30" id="login" value ="#{login.login}" required="true" label="Login"/>
+    				
+    				<p:outputLabel value="Password" for="password"/>
+    				<p:password size="30" id="password" value ="#{login.password}" required="true" />
+    				
+    				<f:facet name="footer">
+    				<p:commandButton value="Login" action="#{login.login()}" oncomplete="handleLoginRequest(xhr, status, args)" />
+    				</f:facet>
+    			</h:panelGrid>
+	</p:dialog>
+	</h:form>
 
 </h:body>
 </html>

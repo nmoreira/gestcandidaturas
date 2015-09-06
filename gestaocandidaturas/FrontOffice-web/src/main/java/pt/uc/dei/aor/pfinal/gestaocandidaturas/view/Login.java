@@ -7,7 +7,10 @@ import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.primefaces.context.RequestContext;
+
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 
 @Named
@@ -27,12 +30,21 @@ public class Login {
 
 		try {
 			request.login(login, password);
-			CurrentSession.setCurrentUser(userServ.getUtilizadorByLogin(login));
+			Utilizador u = userServ.getUtilizadorByLogin(login);
+			CurrentSession.setCurrentUser(u);
 			System.out.println("login ok: " + login);
-			return "/areaprotegida/index2?faces-redirect=true";
+			DisplayMessages
+					.addInfoMessage("Sessão iniciada com sucesso! Bem-vindo "
+							+ u.getNome() + " " + u.getApelido() + "!");
+			RequestContext.getCurrentInstance().addCallbackParam("loggedIn",
+					true);
+			return "";
 		} catch (ServletException e) {
-			DisplayMessages.addErrorMessage("Falha no login");
-			return "/errologin?faces-redirect=true";
+			RequestContext.getCurrentInstance().addCallbackParam("loggedIn",
+					false);
+			DisplayMessages
+					.addErrorMessage("Falha no login! Por favor tente novamente!");
+			return "";
 		}
 	}
 
@@ -43,7 +55,7 @@ public class Login {
 		try {
 			request.logout();
 			CurrentSession.setCurrentUser(null);
-			return "/paginas/login?faces-redirect=true";
+			return "/paginas/home.xhtml?faces-redirect=true";
 		} catch (ServletException e) {
 			DisplayMessages.addErrorMessage("Falha no Logout");
 			return "";

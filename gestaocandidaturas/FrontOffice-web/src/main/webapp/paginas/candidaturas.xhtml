@@ -30,9 +30,10 @@
 			
 			<p:outputLabel value="Selecione uma carta de motivação para esta posição" for="cmotivacao" />
 			<h:panelGroup>
-			<p:selectOneListbox id="cmotivacao" value="#{novaCandidatura.cartamotivacao}" var="c" >
+			<p:selectOneListbox id="cmotivacao" value="#{novaCandidatura.cartamotivacao}" var="c" 
+			rendered="#{not empty novaCandidatura.cartas}">
 				<f:selectItems value="#{novaCandidatura.cartas}" var="carta"
-				itemValue="#{carta}"/>
+				itemValue="#{carta}" />
 				<p:column>
 					<p:link value="#{c}" href="#{novaCandidatura.pathCartas}#{c}" />
 				</p:column>
@@ -61,7 +62,7 @@
 					uploadLabel="Enviar" cancelLabel="Cancelar"
 					invalidSizeMessage="Tamanho máximo do ficheiro (5MB) excedido"
 					invalidFileMessage="Só são aceites ficheiros em formato PDF, DOC, DOCX"
-					accept="*.pdf;*.doc;*.docx" update="cmotivacao" oncomplete="PF('novoFicheiro').hide()">
+					accept="*.pdf;*.doc;*.docx" update="painel" oncomplete="PF('novoFicheiro').hide()">
 		</p:fileUpload>
 		</p:dialog>
 	</h:form>

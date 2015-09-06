@@ -31,6 +31,8 @@ public class PesquisaPosicoes implements Serializable {
 
 	private Set<Posicao> resultadosPesquisa = null;
 
+	private List<Posicao> resultadosList = new ArrayList<Posicao>();
+
 	private Date data;
 	private String codigo;
 	private String titulo;
@@ -38,6 +40,8 @@ public class PesquisaPosicoes implements Serializable {
 	private EstadoPosicao estado;
 	private String empresa;
 	private AreaTecnica area;
+
+	private Posicao posicaoSelecionada;
 
 	public PesquisaPosicoes() {
 	}
@@ -124,12 +128,28 @@ public class PesquisaPosicoes implements Serializable {
 	}
 
 	public List<Posicao> getResultadosPesquisa() {
+		// if (resultadosPesquisa == null) {
+		// return new ArrayList<>();
+		// } else {
+		// List<Posicao> r = new ArrayList<>();
+		// r.addAll(resultadosPesquisa);
+		// return r;
+		// }
+
+		// if (resultadosPesquisa == null || resultadosPesquisa.isEmpty()) {
+		// return resultadosList;
+		// } else {
+		// resultadosList.clear();
+		// resultadosList.addAll(resultadosPesquisa);
+		// resultadosPesquisa.clear();
+		// return resultadosList;
+		// }
 		if (resultadosPesquisa == null) {
-			return new ArrayList<>();
+			return resultadosList;
 		} else {
-			List<Posicao> r = new ArrayList<>();
-			r.addAll(resultadosPesquisa);
-			return r;
+			resultadosList.clear();
+			resultadosList.addAll(resultadosPesquisa);
+			return resultadosList;
 		}
 	}
 
@@ -191,6 +211,15 @@ public class PesquisaPosicoes implements Serializable {
 
 	public void setArea(AreaTecnica area) {
 		this.area = area;
+	}
+
+	public Posicao getPosicaoSelecionada() {
+		return posicaoSelecionada;
+	}
+
+	public void setPosicaoSelecionada(Posicao posicaoSelecionada) {
+		this.posicaoSelecionada = posicaoSelecionada;
+		System.out.println("Posição selecionada: " + posicaoSelecionada);
 	}
 
 }

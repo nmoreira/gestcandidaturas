@@ -1,0 +1,46 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+ xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="titulo">Atribuição de posição a candidatura espontânea</ui:define>
+
+<ui:define name="corpo">
+	
+	<p:messages closable="true" id="status" autoUpdate="true" />
+	
+	<h1>Atribuir Posição</h1>
+	Candidato:
+	<h:panelGrid columns="2">
+		<p:outputLabel value="Nome"/>
+		<h:outputText value="#{atribuirPosicao.candidatura.candidato.nome} #{atribuirPosicao.candidatura.candidato.apelido}" />
+		<p:outputLabel value="Email"/>
+		<h:outputText value="#{atribuirPosicao.candidatura.candidato.email}" />
+		<p:outputLabel value="Telemóvel"/>
+		<h:outputText value="#{atribuirPosicao.candidatura.candidato.telemovel}" />
+		<p:outputLabel value="Telefone"/>
+		<h:outputText value="#{atribuirPosicao.candidatura.candidato.telefone}" />
+			
+<ui:include src="/paginas/pesquisaposicaoform.xhtml" />
+<br />
+<ui:include src="/paginas/pesquisaposicaoselectresultado.xhtml" />
+<p:dialog modal="true" dynamic="true" widgetVar="confirm" header="Confirmar atribuição de posição">
+	<p:panelGrid columns="2">
+	<p:outputLabel value="Posição"/>
+	<h:outputText value="#{atribuirPosicao.posicao.titulo}" />
+	<p:outputLabel value="Candidato"/>
+	<h:outputText value="#{atribuirPosicao.candidatura.candidato.nome} #{atribuirPosicao.candidatura.candidato.apelido}" />
+	<h:form>
+	<p:commandButton value="Confirmar" action="#{atribuirPosicao.atribuirPosicao()}" oncomplete="PF('confirm').hide();"/>
+	<p:commandButton value="Cancelar" onclick="PF('confirm').hide();"/>
+	</h:form>
+	</p:panelGrid>
+</p:dialog>
+
+</ui:define>
+</ui:composition>
+
+
+

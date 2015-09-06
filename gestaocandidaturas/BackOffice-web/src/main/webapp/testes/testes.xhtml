@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<h:body> 
+
+<h:form>
+	<p:commandButton value="Pesquisar" action="#{testes.pesquisa()}" update="tabela"/>
+</h:form>
+<p:dataTable id="tabela" value="#{testes.resultado}" var="r">
+	<p:column>
+		<h:outputText value="#{r.nome}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.apelido}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.cidade}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.curso}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.email}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.escola}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.login}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.morada}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.telefone}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.telemovel}" />
+	</p:column>
+	<p:column>
+		<p:dataGrid value="#{r.candidaturas}" var="c">
+			#{c.posicao.titulo}
+		</p:dataGrid>
+	</p:column>
+</p:dataTable>
+
+</h:body> 
+</html>

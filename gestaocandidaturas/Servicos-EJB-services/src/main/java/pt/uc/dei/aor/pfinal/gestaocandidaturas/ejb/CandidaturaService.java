@@ -7,8 +7,11 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.CandidaturaFacade;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.ICandidaturaFacade;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.IPosicaoFacade;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.PosicaoFacade;
 
 /**
  * Session Bean implementation class AdministradorService
@@ -19,6 +22,9 @@ public class CandidaturaService {
 
 	@EJB(beanInterface = CandidaturaFacade.class)
 	private ICandidaturaFacade candidaturaFacade;
+
+	@EJB(beanInterface = PosicaoFacade.class)
+	private IPosicaoFacade posicaoFacade;
 
 	/**
 	 * Default constructor.
@@ -103,6 +109,21 @@ public class CandidaturaService {
 
 	public List<Candidatura> pesquisaCandidaturasByCandidatoEscola(String escola) {
 		return candidaturaFacade.searchCandidaturaByCandidatoEscola(escola);
+	}
+
+	public List<Candidatura> getCandidaturasEspontaneas() {
+		return candidaturaFacade.getCandidaturasEspontaneas();
+	}
+
+	public boolean atribuirPosicao(long idCandidatura, long idPosicao) {
+		Candidatura cand = candidaturaFacade.find(idCandidatura);
+		Posicao pos = posicaoFacade.find(idPosicao);
+		cand.setPosicao(pos);
+		if (candidaturaFacade.update(cand) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

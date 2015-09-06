@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<h:body> 
+
+<h:form>
+	<p:commandButton value="Pesquisar candidaturas espontâneas" action="#{testes.candidaturasEspontaneas()}" update=":r:tabela"/>
+</h:form>
+<br />
+<h:form id="r">
+<p:dataTable id="tabela" value="#{testes.candEspontaneas}" var="r">
+	<p:column>
+		<h:outputText value="#{r.candidato.nome}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.dataCandidatura}" />
+	</p:column>
+	<p:column>
+		<h:outputText value="#{r.fonte}" />
+	</p:column>
+	<p:column>
+		<p:commandButton value="Atribuir posição" action="/paginas/atribuirposicao">
+			<f:param name="candid" value="#{r.id}"/>
+		</p:commandButton>
+	</p:column>
+</p:dataTable>
+</h:form>
+</h:body> 
+</html>
