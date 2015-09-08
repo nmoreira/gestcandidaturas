@@ -26,6 +26,7 @@ public class PesquisaCandidaturas implements Serializable {
 	private CandidaturaService candidaturaServ;
 
 	private Set<Candidatura> resultadosPesquisa = null;
+	private List<Candidatura> resultadosList = new ArrayList<Candidatura>();
 
 	private String nome;
 	private String apelido;
@@ -219,12 +220,14 @@ public class PesquisaCandidaturas implements Serializable {
 	}
 
 	public List<Candidatura> getResultadosPesquisa() {
+
 		if (resultadosPesquisa == null) {
-			return new ArrayList<>();
+			return resultadosList;
 		} else {
-			List<Candidatura> r = new ArrayList<>();
-			r.addAll(resultadosPesquisa);
-			return r;
+			resultadosList.clear();
+			resultadosList.addAll(resultadosPesquisa);
+			return resultadosList;
 		}
+
 	}
 }

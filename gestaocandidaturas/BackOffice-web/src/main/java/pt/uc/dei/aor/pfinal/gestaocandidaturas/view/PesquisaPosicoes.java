@@ -128,22 +128,7 @@ public class PesquisaPosicoes implements Serializable {
 	}
 
 	public List<Posicao> getResultadosPesquisa() {
-		// if (resultadosPesquisa == null) {
-		// return new ArrayList<>();
-		// } else {
-		// List<Posicao> r = new ArrayList<>();
-		// r.addAll(resultadosPesquisa);
-		// return r;
-		// }
 
-		// if (resultadosPesquisa == null || resultadosPesquisa.isEmpty()) {
-		// return resultadosList;
-		// } else {
-		// resultadosList.clear();
-		// resultadosList.addAll(resultadosPesquisa);
-		// resultadosPesquisa.clear();
-		// return resultadosList;
-		// }
 		if (resultadosPesquisa == null) {
 			return resultadosList;
 		} else {

@@ -137,12 +137,18 @@ public class UtilizadorFacade implements IUtilizadorFacade {
 	}
 
 	@Override
-	public void changePassword(long userId, String newPassword) {
+	public boolean changePassword(long userId, String newPassword) {
 		Utilizador user = find(userId);
 		user.setPassword(Encript.encript(newPassword));
-		update(user);
-		logger.info("Password do utilizador " + user.getLogin()
-				+ " atualizada com sucesso");
+		if (update(user) != null) {
+			logger.info("Password do utilizador " + user.getLogin()
+					+ " atualizada com sucesso");
+			return true;
+		} else {
+			logger.error("Falha ao atualizar a password do utilizador "
+					+ user.getLogin());
+			return false;
+		}
 	}
 
 	@Override
@@ -151,6 +157,16 @@ public class UtilizadorFacade implements IUtilizadorFacade {
 		q = em.createQuery("from Utilizador u where u.perfil = null");
 		listaFinal = q.getResultList();
 		return listaFinal;
+	}
+
+	@Override
+	public boolean passwordMatch(long userId, String password) {
+		Utilizador user = find(userId);
+		String pass = Encript.encript(password);
+		if (user.getPassword().equals(pass))
+			return true;
+		else
+			return false;
 	}
 
 }

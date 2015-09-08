@@ -12,7 +12,9 @@ public interface IUtilizadorFacade extends IEntityFacade<Utilizador> {
 
 	public abstract List<Utilizador> findByCargo(String cargo);
 
-	public abstract void changePassword(long userId, String newPassword);
+	public abstract boolean changePassword(long userId, String newPassword);
 
 	public abstract List<Utilizador> getUtilizadoresSemPerfil();
+
+	public abstract boolean passwordMatch(long userId, String password);
 }

@@ -49,6 +49,14 @@ public class UtilizadorService {
 			return true;
 	}
 
+	public boolean passwordMatch(long userId, String password) {
+		return userFacade.passwordMatch(userId, password);
+	}
+
+	public boolean alteraPassword(long userId, String novaPassword) {
+		return userFacade.changePassword(userId, novaPassword);
+	}
+
 	public List<Utilizador> getUtilizadoresSemPerfil() {
 		return userFacade.getUtilizadoresSemPerfil();
 	}

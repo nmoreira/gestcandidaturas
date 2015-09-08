@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.view;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -42,8 +43,9 @@ public class Login {
 		} catch (ServletException e) {
 			RequestContext.getCurrentInstance().addCallbackParam("loggedIn",
 					false);
-			DisplayMessages
-					.addErrorMessage("Falha no login! Por favor tente novamente!");
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN,
+					"Falha no login! Por favor tente novamente!", "Aviso");
+			FacesContext.getCurrentInstance().addMessage("login", m);
 			return "";
 		}
 	}

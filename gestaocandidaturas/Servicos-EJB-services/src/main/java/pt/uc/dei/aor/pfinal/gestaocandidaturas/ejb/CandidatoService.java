@@ -55,6 +55,14 @@ public class CandidatoService {
 		candidatoFacade.create(newCandidato);
 	}
 
+	public boolean atualizarCandidato(Candidato cand) {
+		if (candidatoFacade.update(cand) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public Candidato getCandidatoById(long id) {
 		return candidatoFacade.find(id);
 	}

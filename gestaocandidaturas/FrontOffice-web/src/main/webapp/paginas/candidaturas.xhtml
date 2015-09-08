@@ -31,7 +31,7 @@
 			<p:outputLabel value="Selecione uma carta de motivação para esta posição" for="cmotivacao" />
 			<h:panelGroup>
 			<p:selectOneListbox id="cmotivacao" value="#{novaCandidatura.cartamotivacao}" var="c" 
-			rendered="#{not empty novaCandidatura.cartas}">
+			rendered="#{not empty novaCandidatura.cartas}" required="true">
 				<f:selectItems value="#{novaCandidatura.cartas}" var="carta"
 				itemValue="#{carta}" />
 				<p:column>
@@ -45,7 +45,7 @@
 		
 			<p:outputLabel value="Fonte" for="fonte" />
 			<p:autoComplete id="fonte" value="#{novaCandidatura.fonte}" required="true" completeMethod="#{novaCandidatura.sugerirfonte}"
-			forceSelection="true" minQueryLenght="1" dropdown="true"></p:autoComplete>
+			minQueryLenght="1" dropdown="true"></p:autoComplete>
 			
 				<p:commandButton value="submeter" action="#{novaCandidatura.candidatar()}" update="status"
 					icon="ui-icon-disk" />

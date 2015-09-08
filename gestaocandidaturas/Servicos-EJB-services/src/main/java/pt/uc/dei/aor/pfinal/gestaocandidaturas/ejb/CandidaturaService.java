@@ -53,6 +53,14 @@ public class CandidaturaService {
 		return candidaturaFacade.find(candidaturaid);
 	}
 
+	public boolean atualizarCandidatura(Candidatura cand) {
+		if (candidaturaFacade.update(cand) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public List<Candidatura> getCandidaturasByPosicaoId(long posicaoId) {
 		return candidaturaFacade.findByPosicao(posicaoId);
 	}

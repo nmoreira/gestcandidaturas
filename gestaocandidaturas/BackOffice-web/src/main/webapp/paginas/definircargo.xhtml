@@ -1,0 +1,105 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<ui:define name="titulo">Definir cargo de utilizador</ui:define>
+
+	<ui:define name="corpo">
+
+		<h1>Definir cargo de utilizador</h1>
+
+		<h:form id="u">
+			<p:dataTable id="utilizadores" value="#{definirCargo.users}"
+				var="utilizador"
+				emptyMessage="Não foi encontrado nenhum utilizador sem cargo"
+				rows="10" paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false" sortBy="#{utilizador.nome}"
+				sortOrder="ascending">
+
+				<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+					<h:outputText value="#{utilizador.nome}" />
+				</p:column>
+				<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+					<h:outputText value="#{utilizador.apelido}" />
+				</p:column>
+				<p:column headerText="Login" sortBy="#{utilizador.login}">
+					<h:outputText value="#{utilizador.login}" />
+				</p:column>
+				<p:column headerText="Email" sortBy="#{utilizador.email}">
+					<h:outputText value="#{utilizador.email}" />
+				</p:column>
+				<p:column>
+					<p:commandButton value="Gestor"
+						action="#{definirCargo.utilizadorSelecionado()}"
+						alt="Converter utilizador em Gestor"
+						oncomplete="PF('gestor').show();">
+						<f:param name="userlogin" value="#{utilizador.login}" />
+						<f:param name="cargo" value="Gestor" />
+					</p:commandButton>
+				</p:column>
+				<p:column>
+					<p:commandButton value="Entrevistador"
+						action="#{definirCargo.utilizadorSelecionado()}"
+						alt="Converter utilizador em Entrevistador"
+						oncomplete="PF('entrevistador').show();">
+						<f:param name="userlogin" value="#{utilizador.login}" />
+						<f:param name="cargo" value="Entrevistador" />
+					</p:commandButton>
+				</p:column>
+				<p:column>
+					<p:commandButton value="Administrador"
+						action="#{definirCargo.utilizadorSelecionado()}"
+						alt="Converter utilizador em Entrevistador"
+						oncomplete="PF('administrador').show();">
+						<f:param name="userlogin" value="#{utilizador.login}" />
+						<f:param name="cargo" value="Administrador" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+		<p:dialog widgetVar="gestor" dynamic="true" modal="true"
+			header="Converter em Gestor?">
+			<h:form>
+				<h:outputText value="#{definirCargo.confirmString}" style="font-weight: bold;"/>
+				<h:panelGrid columns="2" cellspacing="10px" >
+				<p:commandButton value="Sim"
+					action="#{definirCargo.converterUserEmGestor()}"
+					oncomplete="PF('gestor').hide()" icon="ui-icon-check" update=":u:utilizadores"/>
+				<p:commandButton value="Não" onclick="PF('gestor').hide();" icon="ui-icon-close"/>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog widgetVar="entrevistador" dynamic="true" modal="true"
+			header="Converter em Entrevistador?">
+			<h:form>
+				<h:outputText value="#{definirCargo.confirmString}" style="font-weight: bold;"/>
+			<h:panelGrid columns="2" cellspacing="10px">
+				<p:commandButton value="Sim"
+					action="#{definirCargo.converterUserEmEntrevistador()}"
+					oncomplete="PF('entrevistador').hide()" icon="ui-icon-check" update=":u:utilizadores"/>
+				<p:commandButton value="Não" onclick="PF('entrevistador').hide();" icon="ui-icon-close"/>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog widgetVar="administrador" dynamic="true" modal="true"
+			header="Converter em Administrador?">
+			<h:form>
+				<h:outputText value="#{definirCargo.confirmString}" style="font-weight: bold;"/>
+			<h:panelGrid columns="2" cellspacing="10px">
+				<p:commandButton value="Sim"
+					action="#{definirCargo.converterUserEmAdmin()}"
+					oncomplete="PF('administrador').hide()" icon="ui-icon-check" update=":u:utilizadores"/>
+				<p:commandButton value="Não" onclick="PF('administrador').hide();" icon="ui-icon-close"/>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

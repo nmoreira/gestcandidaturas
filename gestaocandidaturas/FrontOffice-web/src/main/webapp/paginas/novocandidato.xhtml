@@ -71,7 +71,7 @@
 
 				<p:outputLabel value="País" for="pais" />
 				<p:autoComplete id="pais" value="#{novoCandidato.pais}"
-					required="true" completeMethod="#{novoCandidato.sugerirpais}"
+					completeMethod="#{novoCandidato.sugerirpais}"
 					forceSelection="true" minQueryLenght="1" dropdown="true"></p:autoComplete>
 
 
@@ -82,7 +82,7 @@
 				<p:inputText id="escola" value="#{novoCandidato.escola}" />
 
 				<p:outputLabel value="Curriculum vitæ" for="cv" />
-				<p:fileUpload id="cv"
+				<p:fileUpload id="cv" required="true"
 					fileUploadListener="#{novoCandidato.fileUpload}" mode="advanced"
 					auto="false" sizeLimit="5242880"
 					allowTypes="/(\.|\/)(pdf|doc|docx)$/" label="Procurar ficheiro"

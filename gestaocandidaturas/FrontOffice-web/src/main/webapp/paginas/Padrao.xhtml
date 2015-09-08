@@ -10,7 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><ui:insert name="titulo">Sistema padrão</ui:insert></title>
 	<h:outputStylesheet library="css" name="estilos.css" />
-	<h:outputScript library="js" name="script.js"/>
+	<h:outputScript library="js" name="script.js" />
 </h:head>
 
 <h:body>
@@ -29,23 +29,39 @@
 		</h:link>
 	</div>
 	<div align="center" style="float: right;">
-		<h:form>
-			<h4>
-				Olá #{currentSession.userFirstName}!
-				<br />
-				<p:commandLink value="Inicie Sessão"
-					rendered="#{!currentSession.logged}" onclick="PF('loginWindow').show();" title="login"/>
-				<p:outputLabel value=" ou " rendered="#{!currentSession.logged}" />
-				<p:commandLink value="Registe-se"
-					rendered="#{!currentSession.logged}"
-					action="/paginas/novocandidato?faces-redirect=true" />
-				<p:commandLink value="Logout" rendered="#{currentSession.logged}"
-					action="#{login.logout()}" />
-			</h4>
+		<h:form id="user">
+			<table>
+				<tr>
+					<td><p:menubar autoDisplay="false"
+							rendered="#{currentSession.logged}" >
+							<p:submenu label="Candidato">
+								<p:menuitem value="Minhas Candidaturas" icon="ui-icon-search"
+									url="http://www.google.com.br" />
+								<p:separator/>
+								<p:menuitem value="Editar perfil" outcome="/testes/editarperfil" />
+								<p:menuitem value="Alterar password" outcome="/testes/mudarpassword" />
+							</p:submenu>
+							<p:menuitem value="Sair" action="#{login.logout()}" />
+						</p:menubar></td>
+					<td align="center">
+						<h4>
+							Olá #{currentSession.userFirstName}! <br />
+							<p:commandLink value="Inicie Sessão"
+								rendered="#{!currentSession.logged}"
+								onclick="PF('loginWindow').show();" title="login" />
+							<p:outputLabel value=" ou " rendered="#{!currentSession.logged}" />
+							<p:commandLink value="Registe-se"
+								rendered="#{!currentSession.logged}"
+								action="/paginas/novocandidato?faces-redirect=true" />
+						</h4>
+					</td>
+				</tr>
+			</table>
 		</h:form>
 	</div>
 	</header>
-	<p:messages closable="true" id="status" autoUpdate="true" />
+	<p:messages closable="true" id="status" autoUpdate="true"
+		globalOnly="true" />
 
 	<div id="conteudo" style="min-height: 500px;">
 		<ui:insert name="corpo" />
@@ -55,20 +71,25 @@
 
 	<footer> Desenvolvido por Nuno Moreira e Rita Costa </footer>
 	<h:form>
-	<p:dialog header="Login" modal="true" resizable="false" widgetVar="loginWindow">
-		<h:panelGrid columns="2" styleClass="grid-login">
-    	
-    				<p:outputLabel value="Login" for="login"/>
-    				<p:inputText size="30" id="login" value ="#{login.login}" required="true" label="Login"/>
-    				
-    				<p:outputLabel value="Password" for="password"/>
-    				<p:password size="30" id="password" value ="#{login.password}" required="true" />
-    				
-    				<f:facet name="footer">
-    				<p:commandButton value="Login" action="#{login.login()}" oncomplete="handleLoginRequest(xhr, status, args)" />
-    				</f:facet>
-    			</h:panelGrid>
-	</p:dialog>
+		<p:dialog header="Login" modal="true" resizable="false"
+			widgetVar="loginWindow">
+			<p:messages autoUpdate="true" for="login" />
+			<h:panelGrid columns="2" styleClass="grid-login">
+
+				<p:outputLabel value="Login" for="login" />
+				<p:inputText size="30" id="login" value="#{login.login}"
+					required="true" label="Login" />
+
+				<p:outputLabel value="Password" for="password" />
+				<p:password size="30" id="password" value="#{login.password}"
+					required="true" />
+
+				<f:facet name="footer">
+					<p:commandButton value="Login" action="#{login.login()}"
+						oncomplete="handleLoginRequest(xhr, status, args)" update="user" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
 	</h:form>
 
 </h:body>

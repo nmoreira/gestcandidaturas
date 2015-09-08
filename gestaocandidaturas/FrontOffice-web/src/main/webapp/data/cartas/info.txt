@@ -1,0 +1,2 @@
+Pasta que contém pastas com o login de cada candidato, onde são guardadas 
+as cartas de motivação que cada um submeteu
