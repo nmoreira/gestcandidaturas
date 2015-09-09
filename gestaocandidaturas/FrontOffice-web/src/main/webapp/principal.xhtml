@@ -1,5 +1,6 @@
 <ui:composition template="/paginas/Padrao.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
@@ -8,30 +9,100 @@
 
 	<ui:define name="corpo">
 
-		<p:panelGrid columns="1" id="painel" styleClass="panelNoBorder">
+ <p:growl id="msgs" showDetail="true" />
+    
+    <p:tabView dynamic="true" cache="true">
+        <p:tab title="Principal">
+        <p:panelGrid columns="1" id="painel"
+			styleClass="panelNoBorder">
+			
+			
+		<p:carousel id="slideShow" autoPlayInterval="4000" numVisible="1"
+			effect="easeInStrong" circular="true" pageLinks="6"
+			itemStyleClass="slidshow">
+			
+			<p:graphicImage value="/resources/imagens/imagem4.jpg" styleClass="fotos"/>
+			<p:graphicImage value="/resources/imagens/imagem2.jpg" styleClass="fotos"/>
+			<p:graphicImage value="/resources/imagens/imagem3.jpg" styleClass="fotos"/>
+			
+			<p:graphicImage value="/resources/imagens/imagem5.png" styleClass="fotos"/>
+			<p:graphicImage value="/resources/imagens/imagem6.JPG" styleClass="fotos"/>
+			<p:graphicImage value="/resources/imagens/imagem8.jpg" styleClass="fotos"/>
+			
+		</p:carousel>
+</p:panelGrid>
+        </p:tab>
+         <p:tab title="Carreiras">
+         <p:tabView orientation="left">
+        <p:tab title="Carreiras">
+            <p:panelGrid columns="2" cellpadding="10">
+              <p:graphicImage value="/resources/imagens/trabalhar.jpg" styleClass="fotos1"/>
+                <p:outputLabel
+                    value="terá que se acrescentar um texto introdutivo e depois aparecem as oportunidades em aberto" />
+            </p:panelGrid>
+            
+       
+            <p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
+		var="posicao" emptyMessage="Não existem vagas para candidatura"
+		layout="grid" style="width: 70%" rows="12" paginator="true"
+		paginatorAlwaysVisible="true" paginatorPosition="bottom"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		currentPageReportTemplate="{currentPage} de {totalPages}">
+		<p:panel style="text-align:center">
+		
+			<h:panelGrid columns="2" style="width:100%; text-align: left;">
+				<p:spacer />
+				
+				<h:form>
+				   <p:commandLink value="#{posicao.titulo}" onclick="PF('caixadialogo').show();" update="@form"/>
+				</h:form>
+				
+				  <p:dialog header="Descrição da posição" widgetVar="caixadialogo" showEffect="explode"
+			hideEffect="bounce" height="300">
+			
+		<h:form>  
+				<p:outputLabel value="Área técnica:" for="area" />
+				<h:outputText value="#{posicao.descricao}" />
+				<p:spacer />
+				<p:outputLabel value="Localização:" for="localizacao" />
+				<h:outputText value="#{posicao.localizacao}" id="localizacao" />
+				<p:spacer />
+				<p:outputLabel value="Vagas" for="vagas" />
+				<h:outputText value="#{posicao.quantidadeVagas}" id="vagas" />
+				</h:form>
+				</p:dialog>
+				  
+				<h:form>
+				
+					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.candidatar()}" ajax="false">
+						<f:param name="posid" value="#{posicao.id}"/> 
+					</p:commandButton>
+				
+				</h:form>
+				
+			</h:panelGrid>
+		</p:panel>
+	</p:dataGrid>
+        </p:tab>
+        
+        <p:tab title="Candidatura Espontanea">
+            <p:panelGrid columns="2" cellpadding="10">
+               <p:graphicImage value="/resources/imagens/espontanea.jpg" styleClass="fotos1"/>
+                <p:outputLabel
+                    value="aparece um texto introdutivo e os campos a preencher para fzer a candidad«tura espontanea" />
+            </p:panelGrid>
+        </p:tab>
+        
+    </p:tabView>
+        </p:tab>
+    
+        
+        
+    </p:tabView>
 
 
-			<p:carousel id="slideShow" autoPlayInterval="4000" numVisible="1"
-				effect="easeInStrong" circular="true" pageLinks="6"
-				itemStyleClass="slidshow">
+			
 
-				<p:graphicImage value="/resources/imagens/imagem4.jpg"
-					styleClass="fotos" />
-				<p:graphicImage value="/resources/imagens/imagem2.jpg"
-					styleClass="fotos" />
-				<p:graphicImage value="/resources/imagens/imagem3.jpg"
-					styleClass="fotos" />
-
-				<p:graphicImage value="/resources/imagens/imagem5.png"
-					styleClass="fotos" />
-				<p:graphicImage value="/resources/imagens/imagem6.JPG"
-					styleClass="fotos" />
-				<p:graphicImage value="/resources/imagens/imagem8.jpg"
-					styleClass="fotos" />
-
-
-			</p:carousel>
-		</p:panelGrid>
 	</ui:define>
 
 </ui:composition>
