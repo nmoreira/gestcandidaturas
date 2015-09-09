@@ -47,4 +47,6 @@ public interface ICandidaturaFacade extends IEntityFacade<Candidatura> {
 	public abstract List<Candidatura> searchCandidaturaByCandidatoEscola(
 			String escola);
 
+	public abstract List<Candidatura> getCandidaturasSemEntrevistas();
+
 }

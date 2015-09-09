@@ -21,7 +21,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 
 /**
- * Session Bean implementation class AdministradorFacade
+ * Session Bean implementation class PosicaoFacade
  */
 @Stateless()
 @LocalBean

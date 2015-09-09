@@ -10,9 +10,12 @@ import javax.inject.Named;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidatoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidaturaService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.EntrevistaService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.EntrevistadorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.PosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevista;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.AreaTecnica;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
@@ -34,6 +37,12 @@ public class Testes implements Serializable {
 
 	@Inject
 	private CandidaturaService candidaturaServ;
+
+	@Inject
+	private EntrevistadorService entrevistadorServ;
+
+	@Inject
+	private EntrevistaService entrevistaServ;
 
 	private List<Candidato> resultado;
 
@@ -82,6 +91,20 @@ public class Testes implements Serializable {
 		for (Candidatura candidatura : pesquisa) {
 			System.out.println(candidatura.getPosicao().getTitulo());
 		}
+	}
+
+	public void candidaturasSemEntrevistas() {
+		List<Candidatura> cand = candidaturaServ
+				.getCandidaturasSemEntrevistas();
+		System.out.println("Candidaturas sem entrevistas: " + cand.size());
+		if (cand.size() > 0) {
+			Candidatura c1 = cand.get(0);
+			Entrevista e1 = new Entrevista(null,
+					entrevistadorServ.getEntrevistadorByLogin("ent"), c1);
+			entrevistaServ.createNewEntrevista(e1);
+		}
+		cand = candidaturaServ.getCandidaturasSemEntrevistas();
+		System.out.println("Candidaturas sem entrevistas: " + cand.size());
 	}
 
 	public void candidaturasEspontaneas() {

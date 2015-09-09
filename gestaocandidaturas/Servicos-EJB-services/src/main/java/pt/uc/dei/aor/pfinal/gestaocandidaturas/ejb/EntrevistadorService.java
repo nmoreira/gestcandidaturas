@@ -53,4 +53,16 @@ public class EntrevistadorService {
 		entFacade.create(newEnt);
 	}
 
+	public Entrevistador getEntrevistadorById(long entrevistadorId) {
+		return entFacade.find(entrevistadorId);
+	}
+
+	public Entrevistador getEntrevistadorByEmail(String email) {
+		return entFacade.findByEmail(email);
+	}
+
+	public Entrevistador getEntrevistadorByLogin(String login) {
+		return entFacade.findByLogin(login);
+	}
+
 }

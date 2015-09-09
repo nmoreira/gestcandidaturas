@@ -1,0 +1,87 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Lista de Candidaturas a posição</ui:define>
+
+	<ui:define name="corpo">
+
+		<h1>Lista de Candidaturas a posição</h1>
+
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				<h:outputText value="Posição" />
+			</f:facet>
+			<p:outputLabel value="Título" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.titulo}" />
+			<p:outputLabel value="Data de Abertura" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.dataAbertura}">
+				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+			</h:outputText>
+			<p:outputLabel value="Data de Fecho" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.dataFecho}">
+				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+			</h:outputText>
+			<p:outputLabel value="SLA" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.sla}" />
+			<p:outputLabel value="Área técnica" />
+			<h:outputText
+				value="#{posicaoCandidaturas.posicao.areaTecnica.valor}" />
+			<p:outputLabel value="Empresa" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.empresa}" />
+			<p:outputLabel value="Localização" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.local}" />
+			<p:outputLabel value="Vagas" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.quantidadeVagas}" />
+			<p:outputLabel value="Gestor de posição" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.responsavel}" />
+			<p:outputLabel value="Estado" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.estado.valor}" />
+		</p:panelGrid>
+		<br />
+		<p:dataTable id="resultados"
+			value="#{posicaoCandidaturas.candidaturas}" var="resultado"
+			emptyMessage="Posição sem candidaturas" rows="10" paginator="true"
+			paginatorPosition="bottom" paginatorAlwaysVisible="false"
+			sortBy="#{resultado.candidato.nome}" sortOrder="ascending">
+			<p:column headerText="Nome do Candidato"
+				sortBy="#{resultado.candidato.nome} #{resultado.candidato.apelido}">
+				<h:outputText
+					value="#{resultado.candidato.nome} #{resultado.candidato.apelido}" />
+			</p:column>
+			<p:column headerText="Data de Candidatura"
+				sortBy="#{resultado.dataCandidatura}">
+				<h:outputText value="#{resultado.dataCandidatura}">
+					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Carta de Motivação">
+				<p:link value="Ver" href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/FrontOffice-web#{resultado.cartaMotivacao}" target="_blank"/>
+			</p:column>
+			<p:column headerText="Cidade" sortBy="#{resultado.candidato.cidade}">
+				<h:outputText value="#{resultado.candidato.cidade}" />
+			</p:column>
+			<p:column headerText="Telefone">
+				<h:outputText value="#{resultado.candidato.telefone}" />
+			</p:column>
+			<p:column headerText="Telemóvel">
+				<h:outputText value="#{resultado.candidato.telemovel}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{resultado.candidato.email}" />
+			</p:column>
+			<p:column headerText="Candidato">
+				<p:link value="Ver Candidato" >
+					<f:param name="candidatoid" value="#{resultado.candidato.id}" />
+				</p:link>
+			</p:column>
+		</p:dataTable>
+
+
+
+	</ui:define>
+
+</ui:composition>

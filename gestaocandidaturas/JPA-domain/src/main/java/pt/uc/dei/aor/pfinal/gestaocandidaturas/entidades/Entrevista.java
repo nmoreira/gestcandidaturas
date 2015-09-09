@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,6 +22,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "entrevista")
+@NamedQueries({
+		@NamedQuery(name = "Entrevista.findAll", query = "SELECT e FROM Entrevista e"),
+		@NamedQuery(name = "Entrevista.findById", query = "SELECT e FROM Entrevista e WHERE e.id = :id"),
+		@NamedQuery(name = "Entrevista.findByCandidatura", query = "SELECT e FROM Entrevista e WHERE e.candidatura = :candidatura"),
+		@NamedQuery(name = "Entrevista.findByEntrevistador", query = "SELECT e FROM Entrevista e WHERE e.entrevistador = :entrevistador"),
+		@NamedQuery(name = "Entrevista.findByData", query = "SELECT e FROM Entrevista e WHERE e.dataEntrevista = :data") })
 public class Entrevista implements Serializable {
 
 	@Id
@@ -34,9 +42,6 @@ public class Entrevista implements Serializable {
 	@ManyToOne
 	private Entrevistador entrevistador;
 
-	// @ManyToOne
-	// private Candidato candidato;
-
 	@ManyToOne
 	private Candidatura candidatura;
 
@@ -47,6 +52,14 @@ public class Entrevista implements Serializable {
 
 	public Entrevista() {
 		super();
+	}
+
+	public Entrevista(Date dataEntrevista, Entrevistador entrevistador,
+			Candidatura candidatura) {
+		super();
+		this.dataEntrevista = dataEntrevista;
+		this.entrevistador = entrevistador;
+		this.candidatura = candidatura;
 	}
 
 	public long getId() {
@@ -72,14 +85,6 @@ public class Entrevista implements Serializable {
 	public void setEntrevistador(Entrevistador entrevistador) {
 		this.entrevistador = entrevistador;
 	}
-
-	// public Candidato getCandidato() {
-	// return candidato;
-	// }
-	//
-	// public void setCandidato(Candidato candidato) {
-	// this.candidato = candidato;
-	// }
 
 	public Candidatura getCandidatura() {
 		return candidatura;

@@ -38,7 +38,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 		@NamedQuery(name = "Posicao.findAll", query = "SELECT p FROM Posicao p left join fetch p.local"),
 		@NamedQuery(name = "Posicao.findByTitulo", query = "SELECT p FROM Posicao p WHERE p.titulo LIKE :titulo"),
 		@NamedQuery(name = "Posicao.findByEmpresa", query = "SELECT p FROM Posicao p WHERE p.empresa LIKE :empresa"),
-		@NamedQuery(name = "Posicao.findById", query = "SELECT p FROM Posicao p WHERE p.id = :id"),
+		@NamedQuery(name = "Posicao.findById", query = "SELECT p FROM Posicao p left join fetch p.local WHERE p.id = :id"),
 		@NamedQuery(name = "Posicao.findByCodPosicao", query = "SELECT p FROM Posicao p WHERE p.codPosicao = :codPosicao"),
 		@NamedQuery(name = "Posicao.findByDataAbertura", query = "SELECT p FROM Posicao p WHERE p.dataAbertura = :dataAbertura") })
 public class Posicao implements Serializable {

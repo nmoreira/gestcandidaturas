@@ -114,26 +114,30 @@ public class NovaCandidatura implements Serializable {
 	}
 
 	public void candidatar() {
-		Candidatura candidatura = new Candidatura(cartamotivacao, fonte,
-				posicao, candidato);
-		if (candidatura.getPosicao() == null) {
-			if (candidaturaServ.criaCandidaturaEspontanea(candidatura)) {
-				DisplayMessages
-						.addInfoMessage("Candidatura espontânea efetuada com sucesso!");
-			} else {
-				DisplayMessages
-						.addErrorMessage("Falha ao submeter a candidatura espontânea!");
-			}
+		if (cartamotivacao == null) {
+			DisplayMessages
+					.addWarnMessage("Por favor selecione ou carregue uma carta de motivação para esta posição");
 		} else {
-			if (candidaturaServ.createNewCandidatura(candidatura)) {
-				DisplayMessages
-						.addInfoMessage("Candidatura efetuada com sucesso!");
+			Candidatura candidatura = new Candidatura(cartamotivacao, fonte,
+					posicao, candidato);
+			if (candidatura.getPosicao() == null) {
+				if (candidaturaServ.criaCandidaturaEspontanea(candidatura)) {
+					DisplayMessages
+							.addInfoMessage("Candidatura espontânea efetuada com sucesso!");
+				} else {
+					DisplayMessages
+							.addErrorMessage("Falha ao submeter a candidatura espontânea!");
+				}
 			} else {
-				DisplayMessages
-						.addErrorMessage("Falha ao submeter a candidatura!");
+				if (candidaturaServ.createNewCandidatura(candidatura)) {
+					DisplayMessages
+							.addInfoMessage("Candidatura efetuada com sucesso!");
+				} else {
+					DisplayMessages
+							.addErrorMessage("Falha ao submeter a candidatura!");
+				}
 			}
 		}
-
 	}
 
 	public void fileUpload(FileUploadEvent event) {

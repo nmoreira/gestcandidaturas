@@ -1,60 +1,72 @@
 <ui:composition template="/paginas/Padrao.xhtml"
- xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<ui:define name="titulo">Nova Candidatura</ui:define>
+	<ui:define name="titulo">Nova Candidatura</ui:define>
 
-<ui:define name="corpo">
-	
-	<h:form>
-		<p:panelGrid columns="1" id="painel1"
-			style="width: 50%; margin-top:20px; margin-left:350px"
-			columnClasses="rotulo,campo">
-	<h1>Nova Candidatura</h1>
-	</p:panelGrid>
-	
-	<h:panelGrid columns="2" style="width: 50%; margin-top:20px; margin-left:350px"
-			columnClasses="rotulo,campo">
-		<p:outputLabel value="Candidato"/>
-		<h:outputText value="#{novaCandidatura.candidato.nome}" />
-		<p:outputLabel value="Posição"/>
-		<h:outputText value="#{novaCandidatura.posicao.titulo}" />
-	</h:panelGrid>
-	
-		<p:panelGrid columns="2" id="painel"
-			style="width: 50%; margin-top:20px; margin-left:350px"
-			columnClasses="rotulo,campo">
+	<ui:define name="corpo">
+			<p:message id="m1" for=":p:fonte"/>
+			<p:message id="m2" for=":p:cmotivacao"/>
+
+			<p:panelGrid columns="1" 
+				style="width: 50%; margin-top:20px; margin-left:350px"
+				columnClasses="rotulo,campo">
+				<h1>Nova Candidatura</h1>
+			</p:panelGrid>
+
+			<h:panelGrid columns="2"
+				style="width: 50%; margin-top:20px; margin-left:350px"
+				columnClasses="rotulo,campo">
+				<p:outputLabel value="Candidato" />
+				<h:outputText value="#{novaCandidatura.candidato.nome}" />
+				<p:outputLabel value="Posição" />
+				<h:outputText value="#{novaCandidatura.posicao.titulo}" />
+			</h:panelGrid>
 			
-			<p:outputLabel value="Selecione uma carta de motivação para esta posição" for="cmotivacao" />
-			<h:panelGroup>
-			<p:selectOneListbox id="cmotivacao" value="#{novaCandidatura.cartamotivacao}" var="c" 
-			rendered="#{not empty novaCandidatura.cartas}" required="true">
-				<f:selectItems value="#{novaCandidatura.cartas}" var="carta"
-				itemValue="#{carta}" />
-				<p:column>
-					<p:link value="#{c}" href="#{novaCandidatura.pathCartas}#{c}" />
-				</p:column>
-			</p:selectOneListbox>
-			<p:commandButton value="Carregar um ficheiro" type="button"
-			onclick="PF('novoFicheiro').show()" partialSubmit="true" process="@none"/>
-			
-			</h:panelGroup>
-		
-			<p:outputLabel value="Fonte" for="fonte" />
-			<p:autoComplete id="fonte" value="#{novaCandidatura.fonte}" required="true" completeMethod="#{novaCandidatura.sugerirfonte}"
-			minQueryLenght="1" dropdown="true"></p:autoComplete>
-			
-				<p:commandButton value="submeter" action="#{novaCandidatura.candidatar()}" update="status"
-					icon="ui-icon-disk" />
-				<p:button value="Limpar" outcome="/paginas/candidaturas" />
+		<h:form id="p">
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 50%; margin-top:20px; margin-left:350px"
+				columnClasses="rotulo,campo">
+
+				<p:outputLabel
+					value="Selecione uma carta de motivação para esta posição"
+					for="cmotivacao" />
+				<h:panelGroup>
+					<p:selectOneListbox id="cmotivacao"
+						value="#{novaCandidatura.cartamotivacao}" var="c"
+						rendered="#{not empty novaCandidatura.cartas}" required="true"
+						requiredMessage="Por favor selecione ou carregue uma carta de motivação para esta posição">
+						<f:selectItems value="#{novaCandidatura.cartas}" var="carta"
+							itemValue="#{carta}" />
+						<p:column>
+							<p:link value="#{c}" href="#{novaCandidatura.pathCartas}#{c}" />
+						</p:column>
+					</p:selectOneListbox>
 				
-			
-		</p:panelGrid>
-		<p:dialog header="Carregar uma carta de motivação" widgetVar="novoFicheiro" resizable="false">
-		<p:fileUpload id="file"
+					<p:commandButton value="Carregar um ficheiro" type="button"
+						onclick="PF('novoFicheiro').show()" partialSubmit="true"
+						process="@none" />
+				</h:panelGroup>
+				
+				<p:outputLabel value="Fonte" for="fonte" />
+				<p:autoComplete id="fonte" value="#{novaCandidatura.fonte}"
+					required="true" completeMethod="#{novaCandidatura.sugerirfonte}"
+					minQueryLenght="1" dropdown="true"
+					requiredMessage="Por favor indique a fonte onde encontrou esta posição">
+				</p:autoComplete>
+				
+				<p:commandButton value="Submeter" action="#{novaCandidatura.candidatar()}" update="@form m1 m2"/>
+				<p:button value="Limpar" outcome="/paginas/candidaturas" />
+			</p:panelGrid>
+		
+			<p:dialog header="Carregar uma carta de motivação"
+				widgetVar="novoFicheiro" resizable="false">
+				
+				<p:fileUpload id="file"
 					fileUploadListener="#{novaCandidatura.fileUpload}" mode="advanced"
 					auto="false" sizeLimit="5242880"
 					allowTypes="/(\.|\/)(pdf|doc|docx)$/" label="Procurar ficheiro"
@@ -62,11 +74,12 @@
 					uploadLabel="Enviar" cancelLabel="Cancelar"
 					invalidSizeMessage="Tamanho máximo do ficheiro (5MB) excedido"
 					invalidFileMessage="Só são aceites ficheiros em formato PDF, DOC, DOCX"
-					accept="*.pdf;*.doc;*.docx" update="painel" oncomplete="PF('novoFicheiro').hide()">
-		</p:fileUpload>
-		</p:dialog>
-	</h:form>
-		
+					accept="*.pdf;*.doc;*.docx" update="painel"
+					oncomplete="PF('novoFicheiro').hide()">
+				</p:fileUpload>
+			</p:dialog>
+				</h:form>
+
 	</ui:define>
 
 </ui:composition>

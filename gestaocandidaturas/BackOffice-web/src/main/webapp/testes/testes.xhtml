@@ -10,6 +10,7 @@
 
 <h:form>
 	<p:commandButton value="Pesquisar" action="#{testes.pesquisa()}" update="tabela"/>
+	<p:commandButton value="Candidaturas Sem Entrevistas" action="#{testes.candidaturasSemEntrevistas()}"/>
 </h:form>
 <p:dataTable id="tabela" value="#{testes.resultado}" var="r">
 	<p:column>

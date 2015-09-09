@@ -12,8 +12,11 @@
 		<p:messages closable="true" id="status" autoUpdate="true" />
 
 		<h1>Atribuir Posição</h1>
-	Candidato:
+	
 	<h:panelGrid columns="2">
+		<f:facet name="header">
+			<h:outputText value="Candidato" />
+		</f:facet>
 			<p:outputLabel value="Nome" />
 			<h:outputText
 				value="#{atribuirPosicao.candidatura.candidato.nome} #{atribuirPosicao.candidatura.candidato.apelido}" />

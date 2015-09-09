@@ -134,4 +134,8 @@ public class CandidaturaService {
 		}
 	}
 
+	public List<Candidatura> getCandidaturasSemEntrevistas() {
+		return candidaturaFacade.getCandidaturasSemEntrevistas();
+	}
+
 }

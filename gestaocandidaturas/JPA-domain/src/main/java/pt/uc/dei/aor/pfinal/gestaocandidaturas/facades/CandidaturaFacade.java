@@ -281,4 +281,10 @@ public class CandidaturaFacade implements ICandidaturaFacade {
 		q = em.createQuery("from Candidatura c where c.posicao = null");
 		return q.getResultList();
 	}
+
+	@Override
+	public List<Candidatura> getCandidaturasSemEntrevistas() {
+		q = em.createQuery("from Candidatura c left join fetch c.entrevistas e where e is null");
+		return q.getResultList();
+	}
 }
