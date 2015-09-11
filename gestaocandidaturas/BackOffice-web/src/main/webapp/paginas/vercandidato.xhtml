@@ -1,0 +1,82 @@
+<ui:composition template="/paginas/Padrao.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"> 
+
+<ui:define name="titulo">Detalhes de candidato</ui:define>
+
+	<ui:define name="corpo">
+	
+	<h1>Informações do candidato #{verCandidato.candidato.nome} #{verCandidato.candidato.apelido}</h1>
+	
+	<p:panelGrid columns="2">
+			
+			<p:outputLabel value="Nome" />
+			<h:outputText value="#{verCandidato.candidato.nome}" />
+			
+			<p:outputLabel value="Apelido" />
+			<h:outputText value="#{verCandidato.candidato.apelido}" />
+			
+			<p:outputLabel value="Morada" />
+			<h:outputText
+				value="#{verCandidato.candidato.morada}" />
+			
+			<p:outputLabel value="Cidade" />
+			<h:outputText value="#{verCandidato.candidato.cidade}" />
+			
+			<p:outputLabel value="País" />
+			<h:outputText value="#{verCandidato.candidato.pais}" />
+			
+			<p:outputLabel value="Email" />
+			<h:outputText value="#{verCandidato.candidato.email}" />
+			
+			<p:outputLabel value="Telefone" />
+			<h:outputText value="#{verCandidato.candidato.telefone}" />
+			
+			<p:outputLabel value="Telemóvel" />
+			<h:outputText value="#{verCandidato.candidato.telemovel}" />
+			
+			<p:outputLabel value="Curso" />
+			<h:outputText value="#{verCandidato.candidato.curso}" />
+			
+			<p:outputLabel value="Escola" />
+			<h:outputText value="#{verCandidato.candidato.escola}" />
+			
+			<p:outputLabel value="Curriculum Vitae" />
+			<p:link value="Ver" href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/FrontOffice-web#{verCandidato.candidato.cv}" target="_blank"/>
+			
+			<p:outputLabel value="LinkedIn" />
+			<h:outputText value="#{verCandidato.candidato.idLinkedin}" />
+		</p:panelGrid>
+		
+		<h3>Posições a que se candidatou</h3>
+		
+		<p:dataTable 
+			value="#{verCandidato.candidaturas}" var="candidatura"
+			emptyMessage="Sem candidaturas" rows="10" paginator="true"
+			paginatorPosition="bottom" paginatorAlwaysVisible="false"
+			sortBy="#{resultado.candidato.nome}" sortOrder="ascending">
+			<p:column headerText="Cod. Posição"
+				sortBy="#{candidatura.posicao.codPosicao}">
+				<h:outputText value="#{candidatura.posicao.codPosicao}" />
+			</p:column>
+			<p:column headerText="Título"
+				sortBy="#{candidatura.posicao.titulo}">
+				<h:outputText value="#{candidatura.posicao.titulo}"/>					
+			</p:column>
+			<p:column headerText="Data de Candidatura"
+				sortBy="#{candidatura.dataCandidatura}">
+				<h:outputText value="#{candidatura.dataCandidatura}">
+					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Carta de Motivação">
+				<p:link value="Ver" href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/FrontOffice-web#{candidatura.cartaMotivacao}" target="_blank"/>
+			</p:column>
+		</p:dataTable>
+	
+	</ui:define>
+
+</ui:composition>
