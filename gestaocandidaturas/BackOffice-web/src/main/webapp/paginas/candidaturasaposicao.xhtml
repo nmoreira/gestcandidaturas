@@ -37,7 +37,7 @@
 			<p:outputLabel value="Vagas" />
 			<h:outputText value="#{posicaoCandidaturas.posicao.quantidadeVagas}" />
 			<p:outputLabel value="Gestor de posição" />
-			<h:outputText value="#{posicaoCandidaturas.posicao.responsavel}" />
+			<h:outputText value="#{posicaoCandidaturas.posicao.responsavel.nome} #{posicaoCandidaturas.posicao.responsavel.apelido}" />
 			<p:outputLabel value="Estado" />
 			<h:outputText value="#{posicaoCandidaturas.posicao.estado.valor}" />
 		</p:panelGrid>
@@ -74,7 +74,7 @@
 				<h:outputText value="#{resultado.candidato.email}" />
 			</p:column>
 			<p:column headerText="Candidato">
-				<p:link value="Ver Candidato" >
+				<p:link value="Ver Candidato" outcome="/paginas/vercandidato">
 					<f:param name="candidatoid" value="#{resultado.candidato.id}" />
 				</p:link>
 			</p:column>
