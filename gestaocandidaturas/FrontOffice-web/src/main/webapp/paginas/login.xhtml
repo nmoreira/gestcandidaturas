@@ -12,9 +12,7 @@
     <ui:define name="corpo">
     	<div id="login-dialog">
     		<h1>Login</h1>    		
-    		<h:form id="frm">
-		<p:messages autoUpdate="true" />
-    		
+    		<h:form id="frm">    		
     			
     			<h:panelGrid columns="2" styleClass="grid-login">
     	
@@ -25,11 +23,9 @@
     				<p:password size="30" id="password" value ="#{login.password}" required="true"  feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
     				promptLabel="Indique uma password" inline="true"/>
     				
-    				<h:panelGroup/>
-    				
-    				
+    				<p:spacer/>
     				<p:commandButton value="Login" action="#{login.login()}"/>
-    				<p:commandButton value="Registo" />
+    				
     			</h:panelGrid>
     		</h:form>
     	</div>

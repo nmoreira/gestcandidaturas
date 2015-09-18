@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.GuiaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.PosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.ResponsavelPosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Guiao;
@@ -47,12 +48,16 @@ public class NovaPosicao implements Serializable {
 
 	public static final List<ResponsavelPosicao> RESPONSAVEIS = new ArrayList<>();
 	private final List<String> CANAIS_COMUNICACAO = new ArrayList<>();
+	private final List<Guiao> GUIOES_DISPONIVEIS = new ArrayList<>();
 
 	@Inject
 	private PosicaoService posicaoServ;
 
 	@Inject
 	private ResponsavelPosicaoService respServ;
+
+	@Inject
+	private GuiaoService guiaoServ;
 
 	/**
 	 * Default constructor.
@@ -65,6 +70,7 @@ public class NovaPosicao implements Serializable {
 	private void load() {
 		loadResponsaveis();
 		loadCanaisComunicacao();
+		loadGuioesDisponiveis();
 	}
 
 	private void loadResponsaveis() {
@@ -73,6 +79,10 @@ public class NovaPosicao implements Serializable {
 		for (ResponsavelPosicao responsavelPosicao : list) {
 			RESPONSAVEIS.add(responsavelPosicao);
 		}
+	}
+
+	private void loadGuioesDisponiveis() {
+		GUIOES_DISPONIVEIS.addAll(guiaoServ.getGuioesDisponiveis());
 	}
 
 	private void loadCanaisComunicacao() {
@@ -253,6 +263,10 @@ public class NovaPosicao implements Serializable {
 
 	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
+	}
+
+	public List<Guiao> getGUIOES_DISPONIVEIS() {
+		return GUIOES_DISPONIVEIS;
 	}
 
 }

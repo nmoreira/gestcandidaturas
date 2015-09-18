@@ -35,7 +35,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 @Entity
 @Table(name = "posicao")
 @NamedQueries({
-		@NamedQuery(name = "Posicao.findAll", query = "SELECT p FROM Posicao p left join fetch p.local"),
+		@NamedQuery(name = "Posicao.findAll", query = "SELECT DISTINCT p FROM Posicao p left join fetch p.local"),
 		@NamedQuery(name = "Posicao.findByTitulo", query = "SELECT p FROM Posicao p WHERE p.titulo LIKE :titulo"),
 		@NamedQuery(name = "Posicao.findByEmpresa", query = "SELECT p FROM Posicao p WHERE p.empresa LIKE :empresa"),
 		@NamedQuery(name = "Posicao.findById", query = "SELECT p FROM Posicao p left join fetch p.local WHERE p.id = :id"),
@@ -296,6 +296,22 @@ public class Posicao implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public Guiao getGuiao() {
+		return guiao;
+	}
+
+	public void setGuiao(Guiao guiao) {
+		this.guiao = guiao;
+	}
+
+	public List<Candidatura> getCandidaturas() {
+		return candidaturas;
+	}
+
+	public void setCandidaturas(List<Candidatura> candidaturas) {
+		this.candidaturas = candidaturas;
 	}
 
 }

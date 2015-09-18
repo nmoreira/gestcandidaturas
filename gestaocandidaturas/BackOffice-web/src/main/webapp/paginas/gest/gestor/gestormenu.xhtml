@@ -13,21 +13,19 @@
 					<p:menuitem value="Página Inicial"
 						outcome="/paginas/home.xhtml?faces-redirect=true" />
 					<p:submenu label="Posições">
-						<p:menuitem value="Nova Posição" outcome="/paginas/posicoes" />
+						<p:menuitem value="Nova Posição" />
 						<p:menuitem value="Pesquisa de Posições"
-							outcome="/testes/pesquisaposicoes" />
+							outcome="/paginas/gest/pesquisaposicoes" />
 					</p:submenu>
 					<p:submenu label="Candidaturas">
-						<p:menuitem value="Minhas Candidaturas" icon="ui-icon-search"
-							url="http://www.google.com.br" />
-						<p:separator />
-						<p:menuitem value="Editar perfil" />
-						<p:menuitem value="Alterar password" />
+						<p:menuitem value="Candidaturas espontâneas" outcome="/paginas/gest/gestor/candidaturasespontaneas"/>
+						<p:menuitem value="Pesquisa de candidaturas" outcome="/paginas/gest/gestor/pesquisacandidaturas"/>
 					</p:submenu>
+					
 				</p:menubar>
 			</f:facet>
 			<f:facet name="right">
-				<ui:include src="/paginas/menusair.xhtml" />
+				<ui:include src="/paginas/gest/menusair.xhtml" />
 			</f:facet>
 		</p:toolbar>
 	</h:form>

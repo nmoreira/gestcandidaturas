@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form>
+		<p:toolbar
+			rendered="#{currentSession.currentUser.cargo.equals('ADMIN')}">
+			<f:facet name="left">
+				<p:menubar autoDisplay="false">
+					<p:menuitem value="Página Inicial"
+						outcome="/paginas/home.xhtml?faces-redirect=true" />
+					<p:submenu label="Posições">
+						<p:menuitem value="Nova Posição" outcome="/paginas/gest/admin/posicoes" />
+						<p:menuitem value="Pesquisa de Posições"
+							outcome="/paginas/gest/pesquisaposicoes" />
+					</p:submenu>
+					<p:submenu label="Guiões">
+						<p:menuitem value="Novo Guião" outcome="/paginas/gest/admin/novoguiao"/>
+						<p:menuitem value="Gerir Guiões" outcome="/paginas/gest/admin/gerirguioes"/>
+					</p:submenu>
+					<p:submenu label="Candidaturas">
+						<p:menuitem value="Candidatura espontâneas" outcome="/paginas/gest/gestor/candidaturasespontaneas"/>
+						<p:menuitem value="Pesquisa de candidaturas" outcome="/paginas/gest/gestor/pesquisacandidaturas"/>
+					</p:submenu>
+					<p:submenu label="Utilizadores">
+						<p:menuitem value="Definir cargo de novos utilizadores" outcome="/paginas/gest/admin/definircargo"/>
+					</p:submenu>
+				</p:menubar>
+			</f:facet>
+			<f:facet name="right">
+				<ui:include src="/paginas/gest/menusair.xhtml" />
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+
+</ui:composition>

@@ -137,6 +137,16 @@ public class PesquisaCandidaturas implements Serializable {
 				}
 			}
 		}
+		fetchCandidaturas();
+	}
+
+	private void fetchCandidaturas() {
+		for (Candidatura candidatura : resultadosPesquisa) {
+			List<Candidatura> candidaturas = candidaturaServ
+					.getCandidaturasByCandidatoId(candidatura.getCandidato()
+							.getId());
+			candidatura.getCandidato().setCandidaturas(candidaturas);
+		}
 	}
 
 	public String getNome() {

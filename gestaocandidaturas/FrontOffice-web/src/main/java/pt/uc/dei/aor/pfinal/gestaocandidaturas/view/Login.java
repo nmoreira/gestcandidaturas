@@ -34,18 +34,35 @@ public class Login {
 			Utilizador u = userServ.getUtilizadorByLogin(login);
 			CurrentSession.setCurrentUser(u);
 			System.out.println("login ok: " + login);
-			DisplayMessages
-					.addInfoMessage("Sessão iniciada com sucesso! Bem-vindo "
-							+ u.getNome() + " " + u.getApelido() + "!");
-			RequestContext.getCurrentInstance().addCallbackParam("loggedIn",
-					true);
-			return "";
+			if (u.getCargo().equals("CANDIDATO")) {
+				DisplayMessages
+						.addInfoMessage("Sessão iniciada com sucesso! Bem-vindo "
+								+ u.getNome() + " " + u.getApelido() + "!");
+				RequestContext.getCurrentInstance().addCallbackParam(
+						"loggedIn", true);
+				return "";
+			} else {
+				request.logout();
+				CurrentSession.setCurrentUser(null);
+				RequestContext.getCurrentInstance().addCallbackParam(
+						"loggedIn", false);
+				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN,
+						"Perfil inválido! Área destinada apenas a candidatos",
+						"Aviso");
+				FacesContext.getCurrentInstance().addMessage("login", m);
+				return "";
+			}
 		} catch (ServletException e) {
 			RequestContext.getCurrentInstance().addCallbackParam("loggedIn",
 					false);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN,
 					"Falha no login! Por favor tente novamente!", "Aviso");
 			FacesContext.getCurrentInstance().addMessage("login", m);
+			try {
+				request.logout();
+			} catch (ServletException e1) {
+				DisplayMessages.addErrorMessage("Falha no autologout");
+			}
 			return "";
 		}
 	}

@@ -1,0 +1,44 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Gestão de Guiões</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Gestão de Guiões</h1>
+	<h:form id="g">
+		<p:dataTable id="guioes" value="#{gerirGuioes.guioes}" var="guiao"
+			emptyMessage="Sem guiões disponíveis">
+			<p:column headerText="Nome do Guião">
+				<h:outputText value="#{guiao.nome}" />
+			</p:column>
+			<p:column headerText="Nº de perguntas" width="120" style="text-align: center;">
+				<h:outputText value="#{guiao.questoes.size()}" />
+			</p:column>
+			<p:column width="90" style="text-align: center;">
+				<p:button icon="ui-icon-pencil" title="Editar guião" outcome="/paginas/gest/admin/editarguiao">
+					<f:param name="guiaoid" value="#{guiao.id}"/>
+				</p:button>
+				<p:commandButton icon="ui-icon-closethick" title="Remover guião" 
+					action="#{gerirGuioes.selecionarGuiao(guiao)}" oncomplete="PF('apagaguiao').show();"/>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+		<p:dialog widgetVar="apagaguiao" dynamic="true" modal="true"
+			header="Apagar guião?">
+			<h:form>
+				<h:outputText value="Confirma que pretende eliminar o guião #{gerirGuioes.guiaoSelecionado.nome}?" style="font-weight: bold;"/>
+				<h:panelGrid columns="2" cellspacing="10px" >
+				<p:commandButton value="Sim"
+					action="#{gerirGuioes.removerGuiao()}"
+					oncomplete="PF('apagaguiao').hide()" icon="ui-icon-check" update=":g:guioes"/>
+				<p:commandButton value="Não" onclick="PF('apagaguiao').hide();" icon="ui-icon-close"/>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

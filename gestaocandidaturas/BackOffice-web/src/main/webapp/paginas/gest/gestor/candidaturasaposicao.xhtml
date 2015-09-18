@@ -5,12 +5,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="titulo">Lista de Candidaturas a posição</ui:define>
+	<ui:define name="titulo">Lista de Candidaturas à posição Selecionada</ui:define>
 
 	<ui:define name="corpo">
-
-		<h1>Lista de Candidaturas a posição</h1>
-
+		<br />
+		<h1>Lista de Candidaturas à posição Selecionada</h1>
+		<br />
+		<br />
 		<p:panelGrid columns="2">
 			<f:facet name="header">
 				<h:outputText value="Posição" />
@@ -52,13 +53,13 @@
 				<h:outputText
 					value="#{resultado.candidato.nome} #{resultado.candidato.apelido}" />
 			</p:column>
-			<p:column headerText="Data de Candidatura"
+			<p:column headerText="Data de Candidatura" width="160"
 				sortBy="#{resultado.dataCandidatura}">
 				<h:outputText value="#{resultado.dataCandidatura}">
 					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
 				</h:outputText>
 			</p:column>
-			<p:column headerText="Carta de Motivação">
+			<p:column headerText="Carta de Motivação" width="155">
 				<p:link value="Ver" href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/FrontOffice-web#{resultado.cartaMotivacao}" target="_blank"/>
 			</p:column>
 			<p:column headerText="Cidade" sortBy="#{resultado.candidato.cidade}">
@@ -73,8 +74,8 @@
 			<p:column headerText="Email">
 				<h:outputText value="#{resultado.candidato.email}" />
 			</p:column>
-			<p:column headerText="Candidato">
-				<p:link value="Ver Candidato" outcome="/paginas/vercandidato">
+			<p:column headerText="Candidato" width="120">
+				<p:link value="Ver Candidato" outcome="/paginas/gest/vercandidato">
 					<f:param name="candidatoid" value="#{resultado.candidato.id}" />
 				</p:link>
 			</p:column>

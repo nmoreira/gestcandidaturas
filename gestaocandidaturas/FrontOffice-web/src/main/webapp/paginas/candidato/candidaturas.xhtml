@@ -8,24 +8,24 @@
 	<ui:define name="titulo">Nova Candidatura</ui:define>
 
 	<ui:define name="corpo">
-			<p:message id="m1" for=":p:fonte"/>
-			<p:message id="m2" for=":p:cmotivacao"/>
+		<p:message id="m1" for=":p:fonte" />
+		<p:message id="m2" for=":p:cmotivacao" />
 
-			<p:panelGrid columns="1" 
-				style="width: 50%; margin-top:20px; margin-left:350px"
-				columnClasses="rotulo,campo">
-				<h1>Nova Candidatura</h1>
-			</p:panelGrid>
+		<p:panelGrid columns="1"
+			style="width: 50%; margin-top:20px; margin-left:350px"
+			columnClasses="rotulo,campo">
+			<h1>Nova Candidatura</h1>
+		</p:panelGrid>
 
-			<h:panelGrid columns="2"
-				style="width: 50%; margin-top:20px; margin-left:350px"
-				columnClasses="rotulo,campo">
-				<p:outputLabel value="Candidato" />
-				<h:outputText value="#{novaCandidatura.candidato.nome}" />
-				<p:outputLabel value="Posição" />
-				<h:outputText value="#{novaCandidatura.posicao.titulo}" />
-			</h:panelGrid>
-			
+		<h:panelGrid columns="2"
+			style="width: 50%; margin-top:20px; margin-left:350px"
+			columnClasses="rotulo,campo">
+			<p:outputLabel value="Candidato" />
+			<h:outputText value="#{novaCandidatura.candidato.nome}" />
+			<p:outputLabel value="Posição" />
+			<h:outputText value="#{novaCandidatura.posicao.titulo}" />
+		</h:panelGrid>
+
 		<h:form id="p">
 
 			<p:panelGrid columns="2" id="painel"
@@ -46,26 +46,27 @@
 							<p:link value="#{c}" href="#{novaCandidatura.pathCartas}#{c}" />
 						</p:column>
 					</p:selectOneListbox>
-				
+
 					<p:commandButton value="Carregar um ficheiro" type="button"
 						onclick="PF('novoFicheiro').show()" partialSubmit="true"
 						process="@none" />
 				</h:panelGroup>
-				
+
 				<p:outputLabel value="Fonte" for="fonte" />
 				<p:autoComplete id="fonte" value="#{novaCandidatura.fonte}"
 					required="true" completeMethod="#{novaCandidatura.sugerirfonte}"
 					minQueryLenght="1" dropdown="true"
 					requiredMessage="Por favor indique a fonte onde encontrou esta posição">
 				</p:autoComplete>
-				
-				<p:commandButton value="Submeter" action="#{novaCandidatura.candidatar()}" update="@form m1 m2"/>
-				<p:button value="Limpar" outcome="/paginas/candidaturas" />
+
+				<p:commandButton value="Submeter"
+					action="#{novaCandidatura.candidatar()}" update="@form m1 m2" />
+				<p:button value="Limpar" outcome="/paginas/candidato/candidaturas" />
 			</p:panelGrid>
-		
+
 			<p:dialog header="Carregar uma carta de motivação"
 				widgetVar="novoFicheiro" resizable="false">
-				
+
 				<p:fileUpload id="file"
 					fileUploadListener="#{novaCandidatura.fileUpload}" mode="advanced"
 					auto="false" sizeLimit="5242880"
@@ -78,13 +79,6 @@
 					oncomplete="PF('novoFicheiro').hide()">
 				</p:fileUpload>
 			</p:dialog>
-				</h:form>
-
+		</h:form>
 	</ui:define>
-
 </ui:composition>
-
-
-
-
-

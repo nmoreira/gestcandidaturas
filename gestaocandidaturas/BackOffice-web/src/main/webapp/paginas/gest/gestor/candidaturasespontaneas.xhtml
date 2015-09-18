@@ -1,0 +1,48 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Lista de candidaturas espontâneas, sem posição atribuida</ui:define>
+
+	<ui:define name="corpo">
+		<br />
+		<br />
+		<h1>Lista de candidaturas espontâneas, sem posição atribuida</h1>
+		<br />
+		<h:form>
+			<p:dataTable
+				value="#{candidaturasEspontaneas.candidaturasEspontaneas}"
+				var="candidatura" emptyMessage="Sem candidaturas espontâneas"
+				rows="10" paginator="true" paginatorPosition="bottom"
+				paginatorAlwaysVisible="false"
+				sortBy="#{candidatura.dataCandidatura}" sortOrder="descending">>
+				<p:column headerText="Nome do candidato"
+					sortBy="#{candidatura.candidato.nome} #{candidatura.candidato.apelido}">
+					<h:outputText
+						value="#{candidatura.candidato.nome} #{candidatura.candidato.apelido}" />
+				</p:column>
+				<p:column headerText="Data de Candidatura" width="155"
+					sortBy="#{candidatura.dataCandidatura}">
+					<h:outputText value="#{candidatura.dataCandidatura}">
+						<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Fonte da Candidatura" width="200"
+					sortBy="#{candidatura.fonte}">
+					<h:outputText value="#{candidatura.fonte}" />
+				</p:column>
+				<p:column headerText=" " width="140">
+					<p:commandButton value="Atribuir posição"
+						action="/paginas/gest/gestor/atribuirposicao">
+						<f:param name="candid" value="#{candidatura.id}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

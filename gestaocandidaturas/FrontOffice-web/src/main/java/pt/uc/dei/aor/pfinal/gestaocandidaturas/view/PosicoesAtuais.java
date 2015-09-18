@@ -40,7 +40,7 @@ public class PosicoesAtuais implements Serializable {
 					.addWarnMessage("Inicie sessão antes de se candidatar a uma posição");
 			return "";
 		} else {
-			return "/paginas/candidaturas";
+			return "/paginas/candidato/candidaturas";
 		}
 	}
 

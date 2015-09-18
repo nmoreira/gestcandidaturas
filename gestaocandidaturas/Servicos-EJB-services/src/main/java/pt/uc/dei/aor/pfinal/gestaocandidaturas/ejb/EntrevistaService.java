@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,8 +9,14 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevista;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Guiao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Questao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.EntrevistaFacade;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.GuiaoFacade;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.IEntrevistaFacade;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.IGuiaoFacade;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.IQuestaoFacade;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.QuestaoFacade;
 
 /**
  * Session Bean implementation class EntrevistaService
@@ -21,6 +28,12 @@ public class EntrevistaService {
 	@EJB(beanInterface = EntrevistaFacade.class)
 	private IEntrevistaFacade entrevistaFacade;
 
+	@EJB(beanInterface = GuiaoFacade.class)
+	private IGuiaoFacade guiaoFacade;
+
+	@EJB(beanInterface = QuestaoFacade.class)
+	private IQuestaoFacade questaoFacade;
+
 	/**
 	 * Default constructor.
 	 */
@@ -29,6 +42,19 @@ public class EntrevistaService {
 	}
 
 	public void createNewEntrevista(Entrevista newEntrevista) {
+		Guiao guiao = newEntrevista.getCandidatura().getPosicao().getGuiao();
+		System.out.println("guiao: " + guiao);
+
+		List<Questao> original = guiaoFacade
+				.getQuestoesByGuiaoId(guiao.getId());
+
+		List<Questao> copia = new ArrayList<Questao>();
+		for (Questao questao : original) {
+			Questao copiada = questao.copiaPergunta(questao);
+			questaoFacade.create(copiada);
+			copia.add(copiada);
+		}
+		newEntrevista.setQuestoesEntrevista(copia);
 		entrevistaFacade.create(newEntrevista);
 	}
 

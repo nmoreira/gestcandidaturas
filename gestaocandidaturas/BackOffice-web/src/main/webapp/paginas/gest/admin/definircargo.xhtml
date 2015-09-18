@@ -4,9 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-
-
-
+	
 	<ui:define name="titulo">Definir cargo de utilizador</ui:define>
 
 	<ui:define name="corpo">
@@ -33,8 +31,8 @@
 				<p:column headerText="Email" sortBy="#{utilizador.email}">
 					<h:outputText value="#{utilizador.email}" />
 				</p:column>
-				<p:column>
-					<p:commandButton value="Gestor"
+				<p:column width="76">
+					<p:commandButton value="Gestor" 
 						action="#{definirCargo.utilizadorSelecionado()}"
 						alt="Converter utilizador em Gestor"
 						oncomplete="PF('gestor').show();">
@@ -42,7 +40,7 @@
 						<f:param name="cargo" value="Gestor" />
 					</p:commandButton>
 				</p:column>
-				<p:column>
+				<p:column width="120">
 					<p:commandButton value="Entrevistador"
 						action="#{definirCargo.utilizadorSelecionado()}"
 						alt="Converter utilizador em Entrevistador"
@@ -51,7 +49,7 @@
 						<f:param name="cargo" value="Entrevistador" />
 					</p:commandButton>
 				</p:column>
-				<p:column>
+				<p:column width="125">
 					<p:commandButton value="Administrador"
 						action="#{definirCargo.utilizadorSelecionado()}"
 						alt="Converter utilizador em Entrevistador"

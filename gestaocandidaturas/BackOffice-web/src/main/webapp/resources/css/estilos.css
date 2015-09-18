@@ -12,7 +12,6 @@ header {
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: normal;
 	padding: 5px 0px;
-	margin-bottom: 20px;
 	height: 50px;
 	background-color: #545454;
 	color: #fff;
@@ -24,6 +23,7 @@ header>div {
 }
 
 #conteudo {
+	margin-top: 7px;
 	padding: 0px 8px
 }
 
@@ -56,13 +56,9 @@ h1 {
 	width: 150px
 }
 
-/* .ui-panelgrid td {
-	height: 34px
-} */
-
 .ajax-status {
 	position: fixed;
-	top: 55px;
+	top: 110px;
 	right: 10px;
 	width: 35px;
 	height: 35px

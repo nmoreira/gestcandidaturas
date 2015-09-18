@@ -5,9 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	
-	<ui:define name="titulo">Página inicial</ui:define>
-
-	<div id="login-dialog" style="min-height: 300px; vertical-align: middle;">
+	<div id="login-dialog" style="min-height: 400px; vertical-align: middle;">
 		<h1>Login</h1>
 		<h:form id="frm">
 			<h:panelGrid columns="2" styleClass="grid-login">
@@ -19,9 +17,12 @@
 				<p:outputLabel value="Password" for="password" />
 				<p:password size="30" id="password" value="#{login.password}"
 					required="true" />
-
+				<p:spacer/>
+				<h:panelGroup>
 				<p:commandButton value="Login" action="#{login.login()}" />
-				<p:commandButton value="Registo" />
+				<p:spacer width="20"/>
+				<p:button value="Registo" outcome="/paginas/novoutilizador.xhtml"/>
+				</h:panelGroup>
 			</h:panelGrid>
 		</h:form>
 	</div>

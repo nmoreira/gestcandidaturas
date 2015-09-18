@@ -58,7 +58,7 @@
 			emptyMessage="Sem candidaturas" rows="10" paginator="true"
 			paginatorPosition="bottom" paginatorAlwaysVisible="false"
 			sortBy="#{resultado.candidato.nome}" sortOrder="ascending">
-			<p:column headerText="Cod. Posição"
+			<p:column headerText="Cod. Posição" width="130px"
 				sortBy="#{candidatura.posicao.codPosicao}">
 				<h:outputText value="#{candidatura.posicao.codPosicao}" />
 			</p:column>
@@ -66,13 +66,13 @@
 				sortBy="#{candidatura.posicao.titulo}">
 				<h:outputText value="#{candidatura.posicao.titulo}"/>					
 			</p:column>
-			<p:column headerText="Data de Candidatura"
+			<p:column headerText="Data de Candidatura" width="160"
 				sortBy="#{candidatura.dataCandidatura}">
 				<h:outputText value="#{candidatura.dataCandidatura}">
 					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
 				</h:outputText>
 			</p:column>
-			<p:column headerText="Carta de Motivação">
+			<p:column headerText="Carta de Motivação" width="140">
 				<p:link value="Ver" href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/FrontOffice-web#{candidatura.cartaMotivacao}" target="_blank"/>
 			</p:column>
 		</p:dataTable>

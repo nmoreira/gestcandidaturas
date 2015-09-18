@@ -47,8 +47,8 @@
 								<p:menuitem value="Minhas Candidaturas" icon="ui-icon-search"
 									url="http://www.google.com.br" />
 								<p:separator/>
-								<p:menuitem value="Editar perfil" outcome="/testes/editarperfil" />
-								<p:menuitem value="Alterar password" outcome="/testes/mudarpassword" />
+								<p:menuitem value="Editar perfil" outcome="/paginas/candidato/editarperfil" />
+								<p:menuitem value="Alterar password" outcome="/paginas/candidato/alterarpass" />
 							</p:submenu>
 							<p:menuitem value="Sair" action="#{login.logout()}" />
 						</p:menubar></td>
@@ -94,6 +94,7 @@
 					required="true" />
 
 				<f:facet name="footer">
+				<p:spacer/>
 					<p:commandButton value="Login" action="#{login.login()}"
 						oncomplete="handleLoginRequest(xhr, status, args)" update="user" />
 				</f:facet>

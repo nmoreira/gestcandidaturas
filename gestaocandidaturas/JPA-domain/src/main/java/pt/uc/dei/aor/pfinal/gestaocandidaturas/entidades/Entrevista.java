@@ -2,12 +2,14 @@ package pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -44,6 +46,9 @@ public class Entrevista implements Serializable {
 
 	@ManyToOne
 	private Candidatura candidatura;
+
+	@ManyToMany
+	private List<Questao> questoesEntrevista;
 
 	@OneToOne
 	private Feedback feedback;
@@ -100,6 +105,14 @@ public class Entrevista implements Serializable {
 
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
+	}
+
+	public List<Questao> getQuestoesEntrevista() {
+		return questoesEntrevista;
+	}
+
+	public void setQuestoesEntrevista(List<Questao> questoesEntrevista) {
+		this.questoesEntrevista = questoesEntrevista;
 	}
 
 }

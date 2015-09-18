@@ -52,7 +52,7 @@ public class AtualizarPassword implements Serializable {
 						.addErrorMessage("Falha ao atualizar a password");
 			}
 		} else {
-			DisplayMessages.addErrorMessage("A password antiga não é válida!");
+			DisplayMessages.addErrorMessage("A password atual não é válida!");
 		}
 	}
 

@@ -1,0 +1,36 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Alterar Password</ui:define>
+
+	<ui:define name="corpo">
+
+		<h1>Alterar password</h1>
+		<h:form>
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Password atual" for="pw" />
+				<p:password id="pw" value="#{atualizarPassword.antigaPass}"
+					required="true" />
+
+				<p:outputLabel value="Nova password" for="novapw" />
+				<p:password id="novapw" value="#{atualizarPassword.novaPass}"
+					feedback="true" strongLabel="Password Forte"
+					weakLabel="Password Fraca" goodLabel="Password boa"
+					promptLabel="Por favor introduza uma password" required="true"
+					inline="true" match="confirmaPassword" />
+
+				<p:outputLabel value="Confirmar nova password"
+					for="confirmaPassword" />
+				<p:password id="confirmaPassword" required="true" />
+
+				<p:commandButton value="Alterar password"
+					action="#{atualizarPassword.alteraPass()}" update="status" />
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+

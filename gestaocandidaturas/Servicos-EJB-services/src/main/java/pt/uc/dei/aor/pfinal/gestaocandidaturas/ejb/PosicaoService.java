@@ -54,6 +54,14 @@ public class PosicaoService {
 		return posicaoFacade.find(id);
 	}
 
+	public boolean atualizaPosicao(Posicao posicao) {
+		if (posicaoFacade.update(posicao) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public List<Posicao> getPosicoesByData(Date data) {
 		return posicaoFacade.searchByDataAbertura(data);
 	}
