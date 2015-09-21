@@ -54,10 +54,6 @@ h1 {
 	width: 150px
 }
 
-.ui-panelgrid td {
-	height: 34px
-}
-
 .ajax-status {
 	position: fixed;
 	top: 55px;

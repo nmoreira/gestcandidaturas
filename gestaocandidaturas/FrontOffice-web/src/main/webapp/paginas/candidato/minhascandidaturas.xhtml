@@ -40,22 +40,27 @@
 			</p:column>
 
 			<p:rowExpansion>
-				<p:panelGrid columns="2" style="width: 400px;">
+			<p:dataGrid style="width: 400px;" value="#{candidatura}" var="candidat" columns="1">
+				<p:panelGrid columns="2" >
+					<f:facet name="header">
+						<h:outputText value="#{candidat.posicao.titulo}" />
+					</f:facet>
 					<h:outputText value="Descrição" />
-					<h:outputText value="#{candidatura.posicao.descricao}" />
+					<h:outputText value="#{candidat.posicao.descricao}" />
 					<h:outputText value="Área técnica" />
-					<h:outputText value="#{candidatura.posicao.areaTecnica.valor}" />
+					<h:outputText value="#{candidat.posicao.areaTecnica.valor}" />
 					<h:outputText value="Data de abertura da posição" />
-					<h:outputText value="#{candidatura.posicao.dataAbertura}">
+					<h:outputText value="#{candidat.posicao.dataAbertura}">
 						<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
 					</h:outputText>
 					<h:outputText value="Empresa" />
-					<h:outputText value="#{candidatura.posicao.empresa}" />
+					<h:outputText value="#{candidat.posicao.empresa}" />
 					<h:outputText value="Localização" />
-					<h:outputText value="#{candidatura.posicao.local}" />
+					<h:outputText value="#{candidat.posicao.local}" />
 					<h:outputText value="Vagas a alocar" />
-					<h:outputText value="#{candidatura.posicao.quantidadeVagas}" />
+					<h:outputText value="#{candidat.posicao.quantidadeVagas}" />
 				</p:panelGrid>
+				</p:dataGrid>
 			</p:rowExpansion>
 
 		</p:dataTable>

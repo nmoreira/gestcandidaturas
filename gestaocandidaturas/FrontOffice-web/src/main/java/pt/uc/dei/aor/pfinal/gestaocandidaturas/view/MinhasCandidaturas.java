@@ -13,6 +13,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidaturaService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.PosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 
 @Named
 @ViewScoped
@@ -44,8 +45,14 @@ public class MinhasCandidaturas implements Serializable {
 		List<Candidatura> candidaturas = candidaturaServ
 				.getCandidaturasByCandidatoId(candidato.getId());
 		for (Candidatura candidatura : candidaturas) {
-			long id = candidatura.getPosicao().getId();
-			candidatura.setPosicao(posicaoServ.getPosicaoById(id));
+			if (candidatura.getPosicao() == null) {
+				Posicao p = new Posicao();
+				p.setTitulo("Candidatura Espontânea, sem posição atribuida");
+				candidatura.setPosicao(p);
+			} else {
+				long id = candidatura.getPosicao().getId();
+				candidatura.setPosicao(posicaoServ.getPosicaoById(id));
+			}
 		}
 		this.candidato.setCandidaturas(candidaturas);
 	}
