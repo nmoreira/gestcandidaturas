@@ -33,4 +33,25 @@ public abstract class ResponsavelPosicao extends Utilizador {
 		super(login, password, nome, apelido, email);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (this.getId() ^ (this.getId() >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ResponsavelPosicao other = (ResponsavelPosicao) obj;
+		if (this.getId() != other.getId())
+			return false;
+		return true;
+	}
 }

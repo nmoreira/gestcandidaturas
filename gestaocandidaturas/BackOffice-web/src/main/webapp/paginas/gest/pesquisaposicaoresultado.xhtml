@@ -35,10 +35,13 @@
 		<p:column headerText="Área" sortBy="#{resultado.areaTecnica.valor}">
 			<h:outputText value="#{resultado.areaTecnica.valor}" />
 		</p:column>
-		<p:column>
-			<p:link value="Ver Candidaturas" outcome="/paginas/gest/gestor/candidaturasaposicao">
-				<f:param name="posid" value="#{resultado.id}"/>
-			</p:link>
+		<p:column style="text-align: center;">
+		<p:button icon="ui-icon-search" title="Ver candidaturas" outcome="/paginas/gest/gestor/candidaturasaposicao">
+			<f:param name="posid" value="#{resultado.id}"/>
+		</p:button>
+		<p:button icon="ui-icon-pencil" title="Editar Posição" outcome="/paginas/gest/admin/editarposicao">
+			<f:param name="posicaoid" value="#{resultado.id}"/>
+		</p:button>	
 		</p:column>
 	</p:dataTable>
 	</h:form>

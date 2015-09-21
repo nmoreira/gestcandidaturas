@@ -59,7 +59,7 @@ h1 {
 .ajax-status {
 	position: fixed;
 	top: 110px;
-	right: 10px;
+	left: 10px;
 	width: 35px;
 	height: 35px
 }

@@ -65,4 +65,11 @@ public class EntrevistadorService {
 		return entFacade.findByLogin(login);
 	}
 
+	public boolean atualizarEntrevistador(Entrevistador ent) {
+		if (entFacade.update(ent) != null) {
+			return true;
+		} else
+			return false;
+	}
+
 }

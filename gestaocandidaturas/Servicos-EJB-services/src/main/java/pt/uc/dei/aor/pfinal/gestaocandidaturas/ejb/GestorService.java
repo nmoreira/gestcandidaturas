@@ -59,4 +59,11 @@ public class GestorService {
 		return (List<Gestor>) gestorFacade.findAll();
 	}
 
+	public boolean atualizarGestor(Gestor gestor) {
+		if (gestorFacade.update(gestor) != null) {
+			return true;
+		} else
+			return false;
+	}
+
 }

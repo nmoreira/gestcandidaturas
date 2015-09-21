@@ -1,0 +1,65 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">As minhas Candidaturas</ui:define>
+
+	<ui:define name="corpo">
+
+		<h1>As minhas Candidaturas</h1>
+
+		<h4>Lista de posições a que se candidatou</h4>
+		<p:dataTable id="resultados"
+			value="#{minhasCandidaturas.candidato.candidaturas}"
+			var="candidatura" emptyMessage="Sem candidaturas" rows="10"
+			paginator="true" paginatorPosition="bottom"
+			paginatorAlwaysVisible="false"
+			sortBy="#{candidatura.dataCandidatura}" sortOrder="descending">
+
+			<p:column width="15">
+				<p:rowToggler />
+			</p:column>
+			<p:column headerText="Data de Candidatura" width="160"
+				sortBy="#{candidatura.dataCandidatura}">
+				<h:outputText value="#{candidatura.dataCandidatura}">
+					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Posição">
+				<h:outputText value="#{candidatura.posicao.titulo}" />
+			</p:column>
+			<p:column headerText="Carta de Motivação" width="140">
+				<p:link value="Ver Carta" href="#{candidatura.cartaMotivacao}"
+					target="_blank" />
+			</p:column>
+			<p:column headerText="Estado da Posição">
+				<h:outputText value="#{candidatura.posicao.estado.valor}" />
+			</p:column>
+
+			<p:rowExpansion>
+				<p:panelGrid columns="2" style="width: 400px;">
+					<h:outputText value="Descrição" />
+					<h:outputText value="#{candidatura.posicao.descricao}" />
+					<h:outputText value="Área técnica" />
+					<h:outputText value="#{candidatura.posicao.areaTecnica.valor}" />
+					<h:outputText value="Data de abertura da posição" />
+					<h:outputText value="#{candidatura.posicao.dataAbertura}">
+						<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>
+					<h:outputText value="Empresa" />
+					<h:outputText value="#{candidatura.posicao.empresa}" />
+					<h:outputText value="Localização" />
+					<h:outputText value="#{candidatura.posicao.local}" />
+					<h:outputText value="Vagas a alocar" />
+					<h:outputText value="#{candidatura.posicao.quantidadeVagas}" />
+				</p:panelGrid>
+			</p:rowExpansion>
+
+		</p:dataTable>
+
+	</ui:define>
+
+</ui:composition>

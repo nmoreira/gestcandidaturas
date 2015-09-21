@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 	
-	<ui:define name="titulo">Novo Utilizador</ui:define>
+	<ui:define name="titulo">Editar perfil de utilizador</ui:define>
 
 	<ui:define name="corpo">
 
@@ -14,7 +14,7 @@
 			<p:panelGrid columns="1" id="painel1"
 				style="width: 50%; margin-top:20px; margin-left:350px"
 				columnClasses="rotulo,campo">
-				<h1>Novo Utilizador</h1>
+				<h1>Editar perfil de utilizador</h1>
 			</p:panelGrid>
 
 			<p:panelGrid columns="2" id="painel"
@@ -22,40 +22,28 @@
 				columnClasses="rotulo,campo">
 				<p:outputLabel value="Login" for="login" />
 				<p:inputText id="login" size="20" maxlength="20"
-					value="#{novoUtilizador.login}" required="true">
-					<p:ajax listener="#{novoUtilizador.validaLogin()}" update="status"
+					value="#{editarPerfil.login}" required="true">
+					<p:ajax listener="#{editarPerfil.validaLogin()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
 
-				<p:outputLabel value="Password" for="password" />
-				<p:password id="password" value="#{novoUtilizador.password}"
-					feedback="true" strongLabel="Password Forte"
-					weakLabel="Password Fraca" goodLabel="Password boa"
-					promptLabel="Por favor introduza uma password" required="true"
-					inline="true" match="confirmaPassword" />
-
-				<p:outputLabel value="Confirmar password" for="confirmaPassword" />
-				<p:password id="confirmaPassword" required="true" />
-
 				<p:outputLabel value="Email" for="email" />
 				<p:inputText id="email" size="20" maxlength="20"
-					value="#{novoUtilizador.email}" required="true">
-					<p:ajax listener="#{novoUtilizador.validaEmail()}" update="status"
+					value="#{editarPerfil.email}" required="true">
+					<p:ajax listener="#{editarPerfil.validaEmail()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Primeiro Nome" for="pnome" />
 				<p:inputText id="pnome" size="20" maxlength="20"
-					value="#{novoUtilizador.nome}" required="true" />
+					value="#{editarPerfil.utilizador.nome}" required="true" />
 
 				<p:outputLabel value="Sobrenome" for="snome" />
 				<p:inputText id="snome" size="20" maxlength="20"
-					value="#{novoUtilizador.apelido}" required="true" />
+					value="#{editarPerfil.utilizador.apelido}" required="true" />
 
-				<p:commandButton value="Criar conta"
-					action="#{novoUtilizador.criaUtilizador()}" update="status" />
-				<p:button value="Limpar" outcome="/paginas/novoutilizador" />
-
+				<p:commandButton value="Atualizar perfil"
+					action="#{editarPerfil.atualizarUtilizador()}" update="status" />
 
 			</p:panelGrid>
 

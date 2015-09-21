@@ -128,57 +128,75 @@ public class EditarPerfil implements Serializable {
 	}
 
 	public void atualizarCandidato() {
+		boolean valido = true;
 		if (!this.login.equals(candidato.getLogin())) {
-			String path = FacesContext.getCurrentInstance()
-					.getExternalContext().getRealPath("/");
-			File folder = new File(path + "/data/cartas/"
-					+ candidato.getLogin());
+			if (userServ.existeLogin(login) == true) {
+				DisplayMessages.addErrorMessage("O login " + login
+						+ " já está em uso! Por favor escolha outro");
+				valido = false;
+			}
+		} else if (!this.email.equals(candidato.getEmail())) {
+			if (userServ.existeEmail(email) == true) {
+				DisplayMessages.addErrorMessage("O email " + email
+						+ " já está registado!");
+				valido = false;
+			}
+		}
+		if (valido) {
 
-			if (folder.exists()) {
-				// atualizar pastas
-				File newFolder = new File(path + "/data/cartas/" + login);
-				newFolder.mkdirs();
-				File[] files = folder.listFiles();
-				for (File file : files) {
-					file.renameTo(new File(path + "/data/cartas/" + login + "/"
-							+ file.getName()));
+			if (!this.login.equals(candidato.getLogin())) {
+				String path = FacesContext.getCurrentInstance()
+						.getExternalContext().getRealPath("/");
+				File folder = new File(path + "/data/cartas/"
+						+ candidato.getLogin());
+
+				if (folder.exists()) {
+					// atualizar pastas
+					File newFolder = new File(path + "/data/cartas/" + login);
+					newFolder.mkdirs();
+					File[] files = folder.listFiles();
+					for (File file : files) {
+						file.renameTo(new File(path + "/data/cartas/" + login
+								+ "/" + file.getName()));
+					}
+					folder.delete();
+
+					// atualizar cartas de motivação
+					List<String> cartas = candServ.getCartas(candidato.getId());
+					List<String> cartasUpdated = new ArrayList<>();
+					for (String filename : cartas) {
+						cartasUpdated.add(filename.replace(
+								"/" + candidato.getLogin() + "/", "/" + login
+										+ "/"));
+					}
+					candidato.setCartas(cartasUpdated);
+
+					// atualizar candidaturas
+					List<Candidatura> candidaturas = candidaturaServ
+							.getCandidaturasByCandidatoId(candidato.getId());
+					for (Candidatura candidatura : candidaturas) {
+						String carta = candidatura.getCartaMotivacao().replace(
+								"/" + candidato.getLogin() + "/",
+								"/" + login + "/");
+						candidatura.setCartaMotivacao(carta);
+						candidaturaServ.atualizarCandidatura(candidatura);
+					}
+
+				} else {
 				}
-				folder.delete();
 
-				// atualizar cartas de motivação
-				List<String> cartas = candServ.getCartas(candidato.getId());
-				List<String> cartasUpdated = new ArrayList<>();
-				for (String filename : cartas) {
-					cartasUpdated
-							.add(filename.replace("/" + candidato.getLogin()
-									+ "/", "/" + login + "/"));
-				}
-				candidato.setCartas(cartasUpdated);
-
-				// atualizar candidaturas
-				List<Candidatura> candidaturas = candidaturaServ
-						.getCandidaturasByCandidatoId(candidato.getId());
-				for (Candidatura candidatura : candidaturas) {
-					String carta = candidatura.getCartaMotivacao()
-							.replace("/" + candidato.getLogin() + "/",
-									"/" + login + "/");
-					candidatura.setCartaMotivacao(carta);
-					candidaturaServ.atualizarCandidatura(candidatura);
-				}
-
-			} else {
+				candidato.setLogin(login);
+			}
+			if (!this.email.equals(candidato.getEmail())) {
+				candidato.setEmail(email);
 			}
 
-			candidato.setLogin(login);
-		}
-		if (!this.email.equals(candidato.getEmail())) {
-			candidato.setEmail(email);
-		}
-
-		if (candServ.atualizarCandidato(candidato)) {
-			DisplayMessages.addInfoMessage("Perfil atualizado com sucesso!");
-		} else {
-			DisplayMessages.addWarnMessage("Falha ao atualizar o perfil");
+			if (candServ.atualizarCandidato(candidato)) {
+				DisplayMessages
+						.addInfoMessage("Perfil atualizado com sucesso!");
+			} else {
+				DisplayMessages.addWarnMessage("Falha ao atualizar o perfil");
+			}
 		}
 	}
 

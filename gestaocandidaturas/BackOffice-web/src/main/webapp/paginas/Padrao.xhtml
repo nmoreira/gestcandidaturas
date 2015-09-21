@@ -22,10 +22,31 @@
 		</f:facet>
 	</p:ajaxStatus>
 	<header>
-	<div>
+	<div style="float: left;">
 		<h:link outcome="/paginas/home">
 			<h:graphicImage library="imagens" name="critical.png" />
 		</h:link>
+	</div>
+	<div align="center" style="float: right;">
+		<h:form id="user">
+			<table>
+				<tr>
+					<td><p:menubar autoDisplay="false"
+							rendered="#{currentSession.logged}">
+							<p:submenu label="Utilizador">
+								<p:menuitem value="Editar perfil" outcome="/paginas/gest/editarutilizador"/>
+								<p:menuitem value="Alterar password" outcome="/paginas/gest/alterarpass"/>
+							</p:submenu>
+						</p:menubar></td>
+					<td align="center">
+						<h4>
+							<p:outputLabel value="Olá #{currentSession.userFirstName}!"
+								rendered="#{currentSession.logged}" />
+						</h4>
+					</td>
+				</tr>
+			</table>
+		</h:form>
 	</div>
 	</header>
 
@@ -34,9 +55,9 @@
 		<ui:include src="/paginas/gest/gestor/gestormenu.xhtml" />
 		<ui:include src="/paginas/gest/ent/entrevistadormenu.xhtml" />
 	</div>
-	
+
 	<p:messages closable="true" id="status" autoUpdate="true" />
-	
+
 	<div id="conteudo" style="min-height: 452px;">
 		<ui:insert name="corpo" />
 	</div>

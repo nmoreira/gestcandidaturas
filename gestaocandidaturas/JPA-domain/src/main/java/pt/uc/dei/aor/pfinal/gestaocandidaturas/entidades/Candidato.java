@@ -58,7 +58,6 @@ public class Candidato extends Utilizador implements Serializable {
 	private List<Candidatura> candidaturas;
 
 	@ElementCollection
-	// @Transient
 	private List<String> cartas = new ArrayList<>();
 
 	public Candidato() {

@@ -60,4 +60,11 @@ public class AdministradorService {
 		return (List<Administrador>) adminFacade.findAll();
 	}
 
+	public boolean atualizarAdministrador(Administrador admin) {
+		if (adminFacade.update(admin) != null) {
+			return true;
+		} else
+			return false;
+	}
+
 }
