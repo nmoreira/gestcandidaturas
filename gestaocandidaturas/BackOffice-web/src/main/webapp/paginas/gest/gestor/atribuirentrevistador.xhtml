@@ -1,0 +1,69 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Atribuir Entrevistadores</ui:define>
+	<ui:define name="corpo">
+
+		<h1>Atribuir Entrevistadores</h1>
+
+		<h4>Lista de Candidaturas sem Entrevistador atribuido</h4>
+		<h:form id="c">
+			<p:dataTable id="cand"
+				value="#{atribuirEntrevistador.candidaturasSemEntrevista}"
+				var="candidatura"
+				emptyMessage="Não existem candidaturas sem entrevistador atribuido">
+				<p:column headerText="Posição">
+					<h:outputText value="#{candidatura.posicao.titulo}" />
+				</p:column>
+				<p:column headerText="Nome do candidato">
+					<h:outputText
+						value="#{candidatura.candidato.nome} #{candidatura.candidato.apelido}" />
+				</p:column>
+				<p:column headerText="Data de Candidatura">
+					<h:outputText value="#{candidatura.dataCandidatura}">
+						<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<p:commandButton value="Atribuir Entrevistador"
+						action="#{atribuirEntrevistador.defineCandidatura(candidatura)}"
+						oncomplete="PF('entrevistador').show();" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<p:dialog widgetVar="entrevistador" dynamic="true"
+			header="Escolha o Entrevistador">
+			<h:form>
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Candidato" />
+					<h:outputText
+						value="#{atribuirEntrevistador.candidatura.candidato.nome} #{atribuirEntrevistador.candidatura.candidato.apelido}" />
+					<p:outputLabel value="Posição"/>
+					<h:outputText value="#{atribuirEntrevistador.candidatura.posicao.titulo}" />
+					<p:outputLabel value="Escolher entrevistador" />
+					<p:selectOneMenu value="#{atribuirEntrevistador.entrevistador}"
+						converter="grupoEntrevistadores">
+						<f:selectItems value="#{atribuirEntrevistador.entrevistadores}"
+							var="entrevistador"
+							itemLabel="#{entrevistador.nome} #{entrevistador.apelido}"
+							itemValue="#{entrevistador}" />
+					</p:selectOneMenu>
+					<f:facet name="footer">
+						<p:commandButton value="Atribuir entrevistador"
+							oncomplete="PF('entrevistador').hide()" icon="ui-icon-check"
+							update=":c:cand"
+							action="#{atribuirEntrevistador.atribuirEntrevistador()}" />
+						<p:spacer width="30" />
+						<p:commandButton value="Cancelar"
+							onclick="PF('entrevistador').hide();" icon="ui-icon-close" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

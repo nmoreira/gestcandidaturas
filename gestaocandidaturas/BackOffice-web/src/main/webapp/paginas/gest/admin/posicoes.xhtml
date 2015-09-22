@@ -59,7 +59,7 @@
 
 				<p:outputLabel for="guiao" value="Guião" />
 				<p:selectOneMenu id="guiao" value="#{novaPosicao.guiao}"
-				converter="guiaoConverter">
+				converter="guiaoConverter" required="true">
 					<f:selectItems value="#{novaPosicao.GUIOES_DISPONIVEIS}"
 						var="guiao" itemLabel="#{guiao.nome}" itemValue="#{guiao}" />
 				</p:selectOneMenu>

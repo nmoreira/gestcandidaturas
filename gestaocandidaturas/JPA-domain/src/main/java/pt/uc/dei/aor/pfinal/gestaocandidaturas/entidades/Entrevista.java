@@ -42,7 +42,7 @@ public class Entrevista implements Serializable {
 	private Date dataEntrevista;
 
 	@ManyToOne
-	private Entrevistador entrevistador;
+	private GrupoEntrevistadores entrevistador;
 
 	@ManyToOne
 	private Candidatura candidatura;
@@ -59,7 +59,7 @@ public class Entrevista implements Serializable {
 		super();
 	}
 
-	public Entrevista(Date dataEntrevista, Entrevistador entrevistador,
+	public Entrevista(Date dataEntrevista, GrupoEntrevistadores entrevistador,
 			Candidatura candidatura) {
 		super();
 		this.dataEntrevista = dataEntrevista;
@@ -83,11 +83,11 @@ public class Entrevista implements Serializable {
 		this.dataEntrevista = dataEntrevista;
 	}
 
-	public Entrevistador getEntrevistador() {
+	public GrupoEntrevistadores getEntrevistador() {
 		return entrevistador;
 	}
 
-	public void setEntrevistador(Entrevistador entrevistador) {
+	public void setEntrevistador(GrupoEntrevistadores entrevistador) {
 		this.entrevistador = entrevistador;
 	}
 

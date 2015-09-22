@@ -41,7 +41,7 @@ public class EntrevistaService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createNewEntrevista(Entrevista newEntrevista) {
+	public boolean createNewEntrevista(Entrevista newEntrevista) {
 		Guiao guiao = newEntrevista.getCandidatura().getPosicao().getGuiao();
 		System.out.println("guiao: " + guiao);
 
@@ -55,7 +55,11 @@ public class EntrevistaService {
 			copia.add(copiada);
 		}
 		newEntrevista.setQuestoesEntrevista(copia);
-		entrevistaFacade.create(newEntrevista);
+		if (entrevistaFacade.create(newEntrevista) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public Entrevista getEntrevistaById(long id) {

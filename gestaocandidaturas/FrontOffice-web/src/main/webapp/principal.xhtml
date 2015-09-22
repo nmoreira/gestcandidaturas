@@ -9,105 +9,117 @@
 
 	<ui:define name="corpo">
 
- <p:growl id="msgs" showDetail="true" />
-    
-    <p:tabView dynamic="true" cache="true">
-        <p:tab title="Principal">
-        <p:panelGrid columns="1" id="painel"
-			styleClass="panelNoBorder">
-			
-			
-		<p:carousel id="slideShow" autoPlayInterval="4000" numVisible="1"
-			effect="easeInStrong" circular="true" pageLinks="6"
-			itemStyleClass="slidshow">
-			
-			<p:graphicImage value="/resources/imagens/imagem4.jpg" styleClass="fotos"/>
-			<p:graphicImage value="/resources/imagens/imagem2.jpg" styleClass="fotos"/>
-			<p:graphicImage value="/resources/imagens/imagem3.jpg" styleClass="fotos"/>
-			
-			<p:graphicImage value="/resources/imagens/imagem5.png" styleClass="fotos"/>
-			<p:graphicImage value="/resources/imagens/imagem6.JPG" styleClass="fotos"/>
-			<p:graphicImage value="/resources/imagens/imagem8.jpg" styleClass="fotos"/>
-			
-		</p:carousel>
-</p:panelGrid>
-        </p:tab>
-         <p:tab title="Carreiras">
-         <p:tabView orientation="left">
-        <p:tab title="Carreiras">
-            <p:panelGrid columns="2" cellpadding="10">
-              <p:graphicImage value="/resources/imagens/trabalhar.jpg" styleClass="fotos1"/>
-                <p:outputLabel
-                    value="terá que se acrescentar um texto introdutivo e depois aparecem as oportunidades em aberto" />
-            </p:panelGrid>
-            
-       
-   <h:form>
-		<p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
-		var="posicao" emptyMessage="Não existem vagas para candidatura"
-		layout="grid" style="width: 70%" rows="12" paginator="true"
-		paginatorAlwaysVisible="true" paginatorPosition="bottom"
-		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-		currentPageReportTemplate="{currentPage} de {totalPages}">
-		<p:panel header="#{posicao.titulo}" style="text-align:center">
-			<h:panelGrid columns="2" style="width:100%; text-align: left;">
-				<p:spacer />
-				
-			
-				<p:commandButton value="#{posicao.titulo}" action="#{posicoesAtuais.selecionarPosicao(posicao)}" oncomplete="PF('caixadialogo').show();"/>
-				
-				</h:panelGrid>
-				</p:panel>
-				</p:dataGrid>
-				
-				</h:form>
-				
-				<p:dialog id="np" widgetVar="caixadialogo" modal="true" dynamic="true">
-				
-			
-			<h:form>
-		
-		
-			<p:outputLabel value="Descrição:" for="descricao" /><br/>
-				<h:outputText value="#{posicoesAtuais.posicao.descricao}" id="descricao" /><br/>
-				<p:outputLabel value="Área técnica:" for="area" /><br/>
-				<h:outputText value="#{posicoesAtuais.posicao.areaTecnica}" id="area" /><br/>
-				<p:outputLabel value="Localização:" for="localizacao" /><br/>
-				<h:outputText value="#{posicoesAtuais.posicao.localizacao}" id="localizacao" /><br/>
-				<p:outputLabel value="Vagas" for="vagas" /><br/>
-				<h:outputText value="#{posicoesAtuais.posicao.vagas}" id="vagas" /><br/>
+		<p:growl id="msgs" showDetail="true" />
 
-				
-				
-				
-				
-					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.posicao.candidatar()}" ajax="false">
-						<f:param name="posid" value="#{posicoesAtuais.posicao.id}"/> 
-					</p:commandButton>
-			</h:form>
-				
-				
-				
-				</p:dialog>
-        </p:tab>
-        
-        <p:tab title="Candidatura Espontanea">
-            <p:panelGrid columns="2" cellpadding="10">
-               <p:graphicImage value="/resources/imagens/espontanea.jpg" styleClass="fotos1"/>
-                <p:outputLabel
-                    value="aparece um texto introdutivo e os campos a preencher para fzer a candidad«tura espontanea" />
-            </p:panelGrid>
-        </p:tab>
-        
-    </p:tabView>
-        </p:tab>
-    
-        
-        
-    </p:tabView>
+		<p:tabView dynamic="true" cache="true">
+			<p:tab title="Principal">
+				<p:panelGrid columns="1" id="painel" styleClass="panelNoBorder">
 
 
-			
+					<p:carousel id="slideShow" autoPlayInterval="4000" numVisible="1"
+						effect="easeInStrong" circular="true" pageLinks="6"
+						itemStyleClass="slidshow">
+
+						<p:graphicImage value="/resources/imagens/imagem4.jpg"
+							styleClass="fotos" />
+						<p:graphicImage value="/resources/imagens/imagem2.jpg"
+							styleClass="fotos" />
+						<p:graphicImage value="/resources/imagens/imagem3.jpg"
+							styleClass="fotos" />
+
+						<p:graphicImage value="/resources/imagens/imagem5.png"
+							styleClass="fotos" />
+						<p:graphicImage value="/resources/imagens/imagem6.JPG"
+							styleClass="fotos" />
+						<p:graphicImage value="/resources/imagens/imagem8.jpg"
+							styleClass="fotos" />
+
+					</p:carousel>
+				</p:panelGrid>
+			</p:tab>
+			<p:tab title="Carreiras">
+				<p:tabView orientation="left">
+					<p:tab title="Carreiras">
+						<p:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/resources/imagens/trabalhar.jpg"
+								styleClass="fotos1" />
+							<p:outputLabel
+								value="terá que se acrescentar um texto introdutivo e depois aparecem as oportunidades em aberto" />
+						</p:panelGrid>
+
+
+						<h:form>
+							<p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
+								var="posicao" emptyMessage="Não existem vagas para candidatura"
+								layout="grid" style="width: 70%" rows="12" paginator="true"
+								paginatorAlwaysVisible="true" paginatorPosition="bottom"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								currentPageReportTemplate="{currentPage} de {totalPages}">
+								<p:panel header="#{posicao.titulo}" style="text-align:center">
+									<h:panelGrid columns="2" style="width:100%; text-align: left;">
+										<p:spacer />
+
+
+										<p:commandButton value="#{posicao.titulo}" update="@form"
+											action="#{posicoesAtuais.selecionarPosicao(posicao)}"
+											oncomplete="PF('caixadialogo').show();" />
+
+									</h:panelGrid>
+								</p:panel>
+							</p:dataGrid>
+
+
+							<p:dialog id="np" widgetVar="caixadialogo" modal="true"
+								dynamic="true">
+								<p:outputLabel value="Descrição:" for="descricao" />
+								<br />
+								<h:outputText value="#{posicoesAtuais.posicao.descricao}"
+									id="descricao" />
+								<br />
+								<p:outputLabel value="Área técnica:" for="area" />
+								<br />
+								<h:outputText value="#{posicoesAtuais.posicao.areaTecnica}"
+									id="area" />
+								<br />
+								<p:outputLabel value="Localização:" for="localizacao" />
+								<br />
+								<h:outputText value="#{posicoesAtuais.posicao.localizacao}"
+									id="localizacao" />
+								<br />
+								<p:outputLabel value="Vagas" for="vagas" />
+								<br />
+								<h:outputText value="#{posicoesAtuais.posicao.vagas}" id="vagas" />
+								<br />
+
+								<p:commandButton value="Candidatar" style="float:right"
+									action="#{posicoesAtuais.posicao.candidatar()}" ajax="false">
+									<f:param name="posid" value="#{posicoesAtuais.posicao.id}" />
+								</p:commandButton>
+							</p:dialog>
+						</h:form>
+
+
+
+					</p:tab>
+
+					<p:tab title="Candidatura Espontanea">
+						<p:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage value="/resources/imagens/espontanea.jpg"
+								styleClass="fotos1" />
+							<p:outputLabel
+								value="aparece um texto introdutivo e os campos a preencher para fzer a candidad«tura espontanea" />
+						</p:panelGrid>
+					</p:tab>
+
+				</p:tabView>
+			</p:tab>
+
+
+
+		</p:tabView>
+
+
+
 
 	</ui:define>
 

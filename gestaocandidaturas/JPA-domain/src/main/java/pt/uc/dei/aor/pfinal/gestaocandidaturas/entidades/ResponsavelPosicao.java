@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 @NamedQueries({
 		@NamedQuery(name = "ResponsavelPosicao.findAll", query = "SELECT r FROM ResponsavelPosicao r"),
 		@NamedQuery(name = "ResponsavelPosicao.findById", query = "SELECT r FROM ResponsavelPosicao r WHERE r.id = :id") })
-public abstract class ResponsavelPosicao extends Utilizador {
+public abstract class ResponsavelPosicao extends GrupoEntrevistadores {
 
 	@OneToMany(mappedBy = "responsavel")
 	private List<Posicao> listaPosicoes;

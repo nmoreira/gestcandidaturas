@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevista;
-import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevistador;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.GrupoEntrevistadores;
 
 /**
  * Session Bean implementation class EntrevistaFacade
@@ -37,7 +37,7 @@ public class EntrevistaFacade implements IEntrevistaFacade {
 	private CandidaturaFacade candidaturaF;
 
 	@Inject
-	private EntrevistadorFacade entrevistadorF;
+	private GrupoEntrevistadoresFacade entrevistadorF;
 
 	/**
 	 * Default constructor.
@@ -131,7 +131,7 @@ public class EntrevistaFacade implements IEntrevistaFacade {
 
 	@Override
 	public List<Entrevista> findByEntrevistador(long entrevistadorId) {
-		Entrevistador ent = entrevistadorF.find(entrevistadorId);
+		GrupoEntrevistadores ent = entrevistadorF.findById(entrevistadorId);
 		if (ent == null) {
 			return null;
 		} else {

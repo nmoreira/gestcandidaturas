@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -70,6 +72,10 @@ public class EntrevistadorService {
 			return true;
 		} else
 			return false;
+	}
+
+	public List<Entrevistador> getTodosOsEntrevistadores() {
+		return (List<Entrevistador>) entFacade.findAll();
 	}
 
 }

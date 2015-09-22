@@ -113,6 +113,7 @@
 		</web-resource-collection>
 		<auth-constraint>
             <role-name>ADMIN</role-name>
+            <role-name>GESTOR</role-name>
             <role-name>ENTREVISTADOR</role-name>
         </auth-constraint>
         <user-data-constraint>
@@ -138,7 +139,7 @@
 		<realm-name>gestcandidaturas</realm-name>
 		<form-login-config>
 			<form-login-page>/paginas/home.xhtml</form-login-page>
-			<form-error-page>/errologin.xhtml</form-error-page>
+			<form-error-page>/paginas/home.xhtml</form-error-page>
 		</form-login-config>
 	</login-config>	
 	

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +19,11 @@ import javax.persistence.Table;
 		@NamedQuery(name = "Entrevistador.findByLogin", query = "SELECT a FROM Entrevistador a WHERE a.login = :login"),
 		@NamedQuery(name = "Entrevistador.findByEmail", query = "SELECT a FROM Entrevistador a WHERE a.email = :email"),
 		@NamedQuery(name = "Entrevistador.findById", query = "SELECT a FROM Entrevistador a WHERE a.id = :id") })
-public class Entrevistador extends Utilizador implements Serializable {
+public class Entrevistador extends GrupoEntrevistadores implements Serializable {
 
-	@OneToMany(mappedBy = "entrevistador")
-	private List<Entrevista> entrevistas;
-
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	public Entrevistador() {
@@ -49,11 +48,12 @@ public class Entrevistador extends Utilizador implements Serializable {
 	}
 
 	public List<Entrevista> getEntrevistas() {
-		return entrevistas;
+		return super.getEntrevistas();
+
 	}
 
 	public void setEntrevistas(List<Entrevista> entrevistas) {
-		this.entrevistas = entrevistas;
+		super.setEntrevistas(entrevistas);
 	}
 
 }
