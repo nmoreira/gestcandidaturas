@@ -26,16 +26,11 @@
 					</h:outputText>
 				</p:column>
 				<p:column width="100" style="text-aign: center;">
-					<p:commandButton value="Atribuir posição"
-						action="/paginas/gest/gestor/atribuirposicao">
-						<f:param name="candid" value="#{candidatura.id}" />
-					</p:commandButton>
 					<p:commandButton icon="ui-icon-person" value="Realizar entrevista"
-						action="/paginas/home">
+						action="/paginas/gest/ent/entrevistar">
 						<f:param name="entid" value="#{entrevista.id}"/>
 					</p:commandButton>
 				</p:column>
-
 			</p:dataTable>
 		</h:form>
 
