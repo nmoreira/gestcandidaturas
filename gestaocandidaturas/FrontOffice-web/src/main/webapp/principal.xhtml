@@ -42,47 +42,53 @@
             </p:panelGrid>
             
        
-            <p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
+   <h:form>
+		<p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
 		var="posicao" emptyMessage="Não existem vagas para candidatura"
 		layout="grid" style="width: 70%" rows="12" paginator="true"
 		paginatorAlwaysVisible="true" paginatorPosition="bottom"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 		currentPageReportTemplate="{currentPage} de {totalPages}">
-		<p:panel style="text-align:center">
-		
+		<p:panel header="#{posicao.titulo}" style="text-align:center">
 			<h:panelGrid columns="2" style="width:100%; text-align: left;">
 				<p:spacer />
 				
-				<h:form>
-				   <p:commandLink value="#{posicao.titulo}" onclick="PF('caixadialogo').show();" update="@form"/>
-				</h:form>
-				
-				  <p:dialog header="Descrição da posição" widgetVar="caixadialogo" showEffect="explode"
-			hideEffect="bounce" height="300">
 			
-		<h:form>  
-				<p:outputLabel value="Área técnica:" for="area" />
-				<h:outputText value="#{posicao.descricao}" />
-				<p:spacer />
-				<p:outputLabel value="Localização:" for="localizacao" />
-				<h:outputText value="#{posicao.localizacao}" id="localizacao" />
-				<p:spacer />
-				<p:outputLabel value="Vagas" for="vagas" />
-				<h:outputText value="#{posicao.quantidadeVagas}" id="vagas" />
-				</h:form>
-				</p:dialog>
-				  
-				<h:form>
+				<p:commandButton value="#{posicao.titulo}" action="#{posicoesAtuais.selecionarPosicao(posicao)}" oncomplete="PF('caixadialogo').show();"/>
 				
-					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.candidatar()}" ajax="false">
-						<f:param name="posid" value="#{posicao.id}"/> 
+				</h:panelGrid>
+				</p:panel>
+				</p:dataGrid>
+				
+				</h:form>
+				
+				<p:dialog id="np" widgetVar="caixadialogo" modal="true" dynamic="true">
+				
+			
+			<h:form>
+		
+		
+			<p:outputLabel value="Descrição:" for="descricao" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.descricao}" id="descricao" /><br/>
+				<p:outputLabel value="Área técnica:" for="area" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.areaTecnica}" id="area" /><br/>
+				<p:outputLabel value="Localização:" for="localizacao" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.localizacao}" id="localizacao" /><br/>
+				<p:outputLabel value="Vagas" for="vagas" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.vagas}" id="vagas" /><br/>
+
+				
+				
+				
+				
+					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.posicao.candidatar()}" ajax="false">
+						<f:param name="posid" value="#{posicoesAtuais.posicao.id}"/> 
 					</p:commandButton>
+			</h:form>
 				
-				</h:form>
 				
-			</h:panelGrid>
-		</p:panel>
-	</p:dataGrid>
+				
+				</p:dialog>
         </p:tab>
         
         <p:tab title="Candidatura Espontanea">
