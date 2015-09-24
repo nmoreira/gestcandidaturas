@@ -5,15 +5,14 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0px;
 	font-weight: normal;
+	background-color: #fee9fb;
 }
 
 header {
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: normal;
-	padding: 5px 0px;
+	padding: 5px 5px;
+	margin-bottom: 20px;
 	height: 50px;
-	background-color: #545454;
+	background-color: #8d8d8d;
 	color: #fff;
 	box-shadow: 0px 2px 2px #ccc;
 }
@@ -23,25 +22,53 @@ header>div {
 }
 
 #conteudo {
-	margin-top: 7px;
 	padding: 0px 8px
 }
 
 footer {
 	padding: 0px 8px;
-	margin-bottom: 10px
+	margin-bottom: 10px;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: bold;
+	text-align: center;
+	
 }
 
 h1 {
 	font-size: 24px;
 	font-weight: 500;
 	padding: 0px;
-	margin: 0px
+	margin: 0px;
+	text-align:center;
+	background-color: #f2f2f2;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 14px;
+	font-weight: 500;
+	padding: 0px;
+	margin: 0px;
+	text-align:center;
+	font-weight: bold;
+}
+
+h4 {
+	font-size: 16px;
+	font-weight: 500;
+	padding: 0px;
+	margin: 0px;
+	text-align:center;
+	background-color: #f2f2f2;
+	font-weight: bold;
 }
 
 #login-dialog {
 	width: 290px;
 	margin: auto;
+	
 }
 
 .grid-login {
@@ -58,8 +85,8 @@ h1 {
 
 .ajax-status {
 	position: fixed;
-	top: 110px;
-	left: 10px;
+	top: 55px;
+	right: 10px;
 	width: 35px;
 	height: 35px
 }
@@ -80,18 +107,22 @@ h1 {
 /* Customiza TabView - início */
 .ui-tabs .ui-tabs-panel {
 	padding: 0.5em 0.2em !important;
+	background-color: #fee9fb;
 }
 
 .ui-tabs {
 	padding: 0px !important;
+	background-color: #fee9fb;
 }
 
 .ui-tabs .ui-tabs-nav {
 	margin: -1px !important;
+	background-color: #fee9fb;
 }
 
 .ui-tabs.ui-tabs-top>.ui-tabs-nav {
 	padding: 0px !important;
+	background-color: #fee9fb;
 }
 /* Customiza TabView - fim */
 
@@ -135,5 +166,75 @@ no-repeat
 	margin-top: 20px;
 	margin-left: 350px;
 }
+
+.textotitulopopup{
+	font-size: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.textodescricaopopup{
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+	text-align: center;
+}
+
+.botaopequeno {
+	font: bold 12px Tahoma, Geneva, sans-serif;
+	font-style: bold;
+	background-color: transparent;
+	border: 1px solid #ffffff;
+	border-radius: 10px 2px 10px 2px;
+	cursor: pointer;
+	margin: 0 auto;
+	color: White
+}
+
+.botaopequeno:hover {
+	background: #a0b8d6;
+	color: white;
+}
+
+.botaogrande {
+	font: bold 14px Tahoma, Geneva, sans-serif;
+	font-style: bold;
+	background-color: transparent;
+	border: 1px solid #ffffff;
+	border-radius: 10px 2px 10px 2px;
+	cursor: pointer;
+	margin: 0 auto;
+	color: White
+}
+
+.botaogrande:hover {
+	background: #a0b8d6;
+	color: white;
+}
+
+.botaoposicao {
+	font: bold 10px Tahoma, Geneva, sans-serif;
+	font-style: bold;
+	background-color: transparent;
+	border: 1px solid #ffffff;
+	border-radius: 10px 2px 10px 2px;
+	cursor: pointer;
+	margin: 0 auto;
+	color: White
+}
+
+.botaoposicao:hover {
+	background: #d89ebf;
+	color: white;
+}
+
+.ui-panelgrid tr, .ui-panelgrid td{
+  border:none !important;
+  background-color: #fee9fb;
+}
+
 
 /* Menu sistema fim */

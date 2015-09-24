@@ -11,7 +11,9 @@
 
 		<h1>Introduzir uma nova posição</h1>
 		<h:form>
-			<p:panelGrid columns="2">
+			<p:panelGrid columns="2" id="painel1"
+				style="width: 50%; margin-top:20px; margin-left:350px"
+				columnClasses="rotulo,campo">
 
 				<p:outputLabel for="codigo" value="Código da posição" />
 				<p:inputText id="codigo" required="true"

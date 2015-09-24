@@ -67,7 +67,7 @@
 							<p:menuitem value="Sair" action="#{login.logout()}" />
 						</p:menubar></td>
 					<td align="center">
-						<h4>
+						<h2>
 							Olá #{currentSession.userFirstName}! <br />
 							<p:commandLink value="Inicie Sessão"
 								rendered="#{!currentSession.logged}"
@@ -76,7 +76,7 @@
 							<p:commandLink value="Registe-se"
 								rendered="#{!currentSession.logged}"
 								action="/paginas/novocandidato?faces-redirect=true" />
-						</h4>
+						</h2>
 					</td>
 				</tr>
 			</table>

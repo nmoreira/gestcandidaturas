@@ -21,12 +21,19 @@
 			<h:outputText value="" />
 		</f:facet>
 	</p:ajaxStatus>
+
 	<header>
 	<div style="float: left;">
+
 		<h:link outcome="/paginas/home">
 			<h:graphicImage library="imagens" name="critical.png" />
+			
 		</h:link>
+		
+	
 	</div>
+	</header>
+	
 	<div align="center" style="float: right;">
 		<h:form id="user">
 			<table>
@@ -39,16 +46,16 @@
 							</p:submenu>
 						</p:menubar></td>
 					<td align="center">
-						<h4>
+						<h2>
 							<p:outputLabel value="Olá #{currentSession.userFirstName}!"
 								rendered="#{currentSession.logged}" />
-						</h4>
+						</h2>
 					</td>
 				</tr>
 			</table>
 		</h:form>
 	</div>
-	</header>
+
 
 	<div id="menubar">
 		<ui:include src="/paginas/gest/admin/adminmenu.xhtml" />

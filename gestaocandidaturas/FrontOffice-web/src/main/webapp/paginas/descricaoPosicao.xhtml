@@ -1,0 +1,59 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+	<h:form>
+		<p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
+		var="posicao" emptyMessage="Não existem vagas para candidatura"
+		layout="grid" style="width: 70%" rows="12" paginator="true"
+		paginatorAlwaysVisible="true" paginatorPosition="bottom"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		currentPageReportTemplate="{currentPage} de {totalPages}">
+		<p:panel header="#{posicao.titulo}" style="text-align:center">
+			<h:panelGrid columns="2" style="width:100%; text-align: left;">
+				<p:spacer />
+				
+			<h:outputText value="ola"  /><br/>
+				<p:commandButton value="#{posicao.titulo}" action="#{posicoesAtuais.posicao.selecionarPosicao(posicao)}" oncomplete="PF('caixadialogo').show();"/>
+				
+				</h:panelGrid>
+				</p:panel>
+				</p:dataGrid>
+				
+				</h:form>
+				
+				<p:dialog id="np" widgetVar="novaposicao" modal="true" dynamic="true">
+				
+			
+			<h:form>
+		
+		
+			<p:outputLabel value="Descrição:" for="descricao" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.descricao}" id="descricao" /><br/>
+				<p:outputLabel value="Área técnica:" for="area" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.areaTecnica}" id="area" /><br/>
+				<p:outputLabel value="Localização:" for="localizacao" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.localizacao}" id="localizacao" /><br/>
+				<p:outputLabel value="Vagas" for="vagas" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.vagas}" id="vagas" /><br/>
+
+				
+				
+				
+				
+					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.posicao.candidatar()}" ajax="false">
+						<f:param name="posid" value="#{posicoesAtuais.posicao.id}"/> 
+					</p:commandButton>
+			</h:form>
+				
+				
+				
+				</p:dialog>
+	</ui:define>
+
+</ui:composition>
+

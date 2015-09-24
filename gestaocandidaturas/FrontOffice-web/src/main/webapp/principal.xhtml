@@ -62,7 +62,7 @@
 						</p:panelGrid>
 
 
-						<h:form>
+						<h:form >
 							<p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
 								var="posicao" emptyMessage="Não existem vagas para candidatura"
 								layout="grid" style="width: 100%" rows="12" paginator="true"
@@ -129,13 +129,20 @@
 					</p:tab>
 
 					<p:tab title="Candidatura Espontanea">
+					
 						<p:panelGrid columns="1" cellpadding="10">
 							<p:graphicImage value="/resources/imagens/espontanea.jpg"
 								styleClass="fotos1" />
 							<p:outputLabel
 								value="Caso as posições em aberto não correspondam ao que procuras e queiras 
 								vir a pertencer à nossa equipa, faz aqui a tua candidatura espontânea..." />
+						
+						<p:button value="Novo Candidato" outcome="/paginas/novocandidato" styleClass="botaogrande"/>
+						
+			
+				
 						</p:panelGrid>
+						
 					</p:tab>
 
 				</p:tabView>

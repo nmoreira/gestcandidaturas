@@ -11,13 +11,13 @@
 		<p:message id="m1" for=":p:fonte" />
 		<p:message id="m2" for=":p:cmotivacao" />
 
-		<p:panelGrid columns="1"
+		<p:panelGrid columns="1" id="painel1"
 			style="width: 50%; margin-top:20px; margin-left:350px"
 			columnClasses="rotulo,campo">
 			<h1>Nova Candidatura</h1>
 		</p:panelGrid>
 
-		<h:panelGrid columns="2"
+		<h:panelGrid columns="2" 
 			style="width: 50%; margin-top:20px; margin-left:350px"
 			columnClasses="rotulo,campo">
 			<p:outputLabel value="Candidato" />
@@ -60,7 +60,7 @@
 				</p:autoComplete>
 
 				<p:commandButton value="Submeter"
-					action="#{novaCandidatura.candidatar()}" update="@form m1 m2" />
+					action="#{novaCandidatura.candidatar()}" update="@form m1 m2" icon="ui-icon-disk"/>
 				<p:button value="Limpar" outcome="/paginas/candidato/candidaturas" />
 			</p:panelGrid>
 

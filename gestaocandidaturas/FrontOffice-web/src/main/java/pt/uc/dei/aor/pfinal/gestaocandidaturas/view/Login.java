@@ -74,7 +74,7 @@ public class Login {
 		try {
 			request.logout();
 			CurrentSession.setCurrentUser(null);
-			return "/paginas/home.xhtml?faces-redirect=true";
+			return "/principal.xhtml?faces-redirect=true";
 		} catch (ServletException e) {
 			DisplayMessages.addErrorMessage("Falha no Logout");
 			return "";
