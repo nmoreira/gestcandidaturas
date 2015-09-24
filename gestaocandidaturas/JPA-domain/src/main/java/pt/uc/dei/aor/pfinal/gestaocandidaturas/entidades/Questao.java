@@ -59,6 +59,10 @@ public abstract class Questao implements Serializable {
 
 	public abstract Questao copiaPergunta(Questao pergunta);
 
+	public abstract String getResposta();
+
+	public abstract void setResposta(String resposta);
+
 	public long getId() {
 		return id;
 	}

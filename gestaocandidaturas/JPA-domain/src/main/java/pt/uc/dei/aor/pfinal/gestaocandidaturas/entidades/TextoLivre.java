@@ -23,7 +23,7 @@ public class TextoLivre extends Questao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column
+	@Column(columnDefinition = "text")
 	private String resposta;
 
 	public TextoLivre() {
@@ -37,10 +37,12 @@ public class TextoLivre extends Questao implements Serializable {
 		this.setPergunta(pergunta.getPergunta());
 	}
 
+	@Override
 	public String getResposta() {
 		return resposta;
 	}
 
+	@Override
 	public void setResposta(String resposta) {
 		this.resposta = resposta;
 	}

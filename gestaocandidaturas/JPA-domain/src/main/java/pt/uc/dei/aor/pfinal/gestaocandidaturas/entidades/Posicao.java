@@ -59,16 +59,9 @@ public class Posicao implements Serializable {
 	@Column
 	private String titulo;
 
-	@Column
-	private String localizacao;
-
 	@ElementCollection
 	@CollectionTable(name = "posicao_locais", joinColumns = @JoinColumn(name = "posicao_id"))
 	@Column(name = "local")
-	// @CollectionTable(name = "localizacao_posicao",
-	// joinColumns = @JoinColumn(name = "posicao_id"))
-	// @Column(name = "local")
-	// @Transient
 	private List<String> local = new ArrayList<>();
 
 	@Column
@@ -83,7 +76,7 @@ public class Posicao implements Serializable {
 	private Date dataFecho;
 
 	@Column
-	private String sla;
+	private int sla;
 
 	@ManyToOne
 	private ResponsavelPosicao responsavel;
@@ -114,15 +107,14 @@ public class Posicao implements Serializable {
 	}
 
 	public Posicao(Date dataAbertura, String codPosicao, String titulo,
-			String localizacao, EstadoPosicao estado, int quantidadeVagas,
-			Date dataFecho, String sla, ResponsavelPosicao responsavel,
-			String empresa, AreaTecnica areaTecnica, String descricao,
-			String canaisPublicacao, Guiao guiao) {
+			EstadoPosicao estado, int quantidadeVagas, Date dataFecho, int sla,
+			ResponsavelPosicao responsavel, String empresa,
+			AreaTecnica areaTecnica, String descricao, String canaisPublicacao,
+			Guiao guiao) {
 		super();
 		this.dataAbertura = dataAbertura;
 		this.codPosicao = codPosicao;
 		this.titulo = titulo;
-		this.localizacao = localizacao;
 		this.estado = estado;
 		this.quantidadeVagas = quantidadeVagas;
 		this.dataFecho = dataFecho;
@@ -167,14 +159,6 @@ public class Posicao implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public String getLocalizacao() {
-		return localizacao;
-	}
-
-	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
-	}
-
 	public EstadoPosicao getEstado() {
 		return estado;
 	}
@@ -199,11 +183,11 @@ public class Posicao implements Serializable {
 		this.dataFecho = dataFecho;
 	}
 
-	public String getSla() {
+	public int getSla() {
 		return sla;
 	}
 
-	public void setSla(String sla) {
+	public void setSla(int sla) {
 		this.sla = sla;
 	}
 

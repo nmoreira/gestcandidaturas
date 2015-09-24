@@ -1,0 +1,216 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Entrevista</ui:define>
+	<ui:define name="corpo">
+
+		<h1>Entrevista</h1>
+
+		<h:form>
+		<p:panel>
+			<p:fieldset legend="Candidato" toggleable="true"
+				style="margin-bottom:20px">				
+					<p:panelGrid columns="2" style="margin: auto;">
+						<f:facet name="header">
+							<h:outputText value="Candidato" />
+						</f:facet>
+
+						<p:outputLabel value="Nome" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.nome}" />
+
+						<p:outputLabel value="Apelido" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.apelido}" />
+
+						<p:outputLabel value="Morada" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.morada}" />
+
+						<p:outputLabel value="Cidade" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.cidade}" />
+
+						<p:outputLabel value="País" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.pais}" />
+
+						<p:outputLabel value="Email" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.email}" />
+
+						<p:outputLabel value="Telefone" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.telefone}" />
+
+						<p:outputLabel value="Telemóvel" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.telemovel}" />
+
+						<p:outputLabel value="Curso" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.curso}" />
+
+						<p:outputLabel value="Escola" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.escola}" />
+
+						<p:outputLabel value="Curriculum Vitae" />
+						<p:link value="Ver"
+							href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/FrontOffice-web#{processarEntrevista.entrevista.candidatura.candidato.cv}"
+							target="_blank" />
+
+						<p:outputLabel value="LinkedIn" />
+						<h:outputText
+							value="#{processarEntrevista.entrevista.candidatura.candidato.idLinkedin}" />
+					</p:panelGrid>				
+			</p:fieldset>
+
+			<p:fieldset legend="Posição" toggleable="true"
+				style="margin-bottom:20px">
+				<p:panelGrid columns="2" style="margin: auto;">
+					<f:facet name="header">
+						<h:outputText value="Posição" />
+					</f:facet>
+					<p:outputLabel value="Título" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.titulo}" />
+					<p:outputLabel value="Data de Abertura" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.dataAbertura}">
+						<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>
+					<p:outputLabel value="Data de Fecho" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.dataFecho}">
+						<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>
+					<p:outputLabel value="SLA" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.sla}" />
+					<p:outputLabel value="Área técnica" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.areaTecnica.valor}" />
+					<p:outputLabel value="Empresa" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.empresa}" />
+					<p:outputLabel value="Localização" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.local}" />
+					<p:outputLabel value="Vagas" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.quantidadeVagas}" />
+					<p:outputLabel value="Gestor de posição" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.responsavel.nome} #{processarEntrevista.entrevista.candidatura.posicao.responsavel.apelido}" />
+					<p:outputLabel value="Estado" />
+					<h:outputText
+						value="#{processarEntrevista.entrevista.candidatura.posicao.estado.valor}" />
+				</p:panelGrid>
+
+			</p:fieldset>
+
+			<p:fieldset legend="Questões da entrevista" toggleable="true"
+				style="margin-bottom:20px">
+				<p:dataTable
+					value="#{processarEntrevista.entrevista.questoesEntrevista}"
+					var="questao" rows="12" paginator="true" id="q"
+					paginatorAlwaysVisible="false" paginatorPosition="bottom"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					currentPageReportTemplate="{currentPage} de {totalPages}"
+					sortBy="#{questao.ordem}" style="width: 650px; margin: auto;">
+					<p:column>
+
+						<p:panelGrid
+							rendered="#{questao.tipo.valor.equals('Resposta Livre')}"
+							style="width: 630px; margin: auto;">
+							<p:row>
+								<p:column>
+									<h:outputText id="perguntaTL" value="#{questao.pergunta}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column style="text-align: center;">
+									<p:inputTextarea value="#{questao.resposta}" rows="4" cols="80" required="true"/>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+
+						<p:panelGrid
+							rendered="#{questao.tipo.valor.equals('Escala de 1 a 5')}"
+							style="width: auto; margin: auto;">
+							<p:row>
+								<p:column>
+									<h:outputText id="perguntaE" value="#{questao.pergunta}" />
+								</p:column>
+							</p:row>
+							<p:row style="text-align: center;">
+								<p:column>
+									<p:selectOneRadio value="#{questao.resposta}" required="true">
+										<f:selectItem itemLabel="1" itemValue="1" />
+										<f:selectItem itemLabel="2" itemValue="2" />
+										<f:selectItem itemLabel="3" itemValue="3" />
+										<f:selectItem itemLabel="4" itemValue="4" />
+										<f:selectItem itemLabel="5" itemValue="5" />
+									</p:selectOneRadio>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+
+						<p:panelGrid rendered="#{questao.tipo.valor.equals('Sim ou Não')}"
+							style="width: auto; margin: auto;">
+							<p:row>
+								<p:column>
+									<h:outputText id="perguntaSN" value="#{questao.pergunta}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column>
+									<p:selectOneRadio value="#{questao.resposta}" required="true">
+										<f:selectItem itemLabel="Sim" itemValue="Sim" />
+										<f:selectItem itemLabel="Não" itemValue="Não" />
+									</p:selectOneRadio>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+
+			<p:fieldset legend="Feedback da entrevista" toggleable="true"
+				style="margin-bottom:20px">
+				<p:panelGrid style="width: 630px; margin: auto;">
+					<p:row>
+						<p:column colspan="2">
+							<p:outputLabel value="Comentários" for="feedbackcom" />
+							<br />
+							<p:inputTextarea id="feedbackcom"
+								value="#{processarEntrevista.entrevista.feedback.comentarios}"
+								rows="4" cols="80" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column style="text-align: center;" >
+							<p:outputLabel value="Resultado" for="feedbackres" />
+						</p:column>
+						<p:column>
+							<p:inputText id="feedbackres"
+								value="#{processarEntrevista.entrevista.feedback.resultado}"
+								size="50" required="true" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:fieldset>
+			<f:facet name="footer">
+				<p:commandButton value="Guardar entrevista"
+					action="#{processarEntrevista.guardarEntrevista()}" update="@form"/>
+			</f:facet>
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

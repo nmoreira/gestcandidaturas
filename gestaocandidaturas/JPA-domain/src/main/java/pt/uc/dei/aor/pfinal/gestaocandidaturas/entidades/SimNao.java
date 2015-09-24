@@ -37,10 +37,12 @@ public class SimNao extends Questao implements Serializable {
 		this.setPergunta(pergunta.getPergunta());
 	}
 
+	@Override
 	public String getResposta() {
 		return resposta;
 	}
 
+	@Override
 	public void setResposta(String resposta) {
 		this.resposta = resposta;
 	}

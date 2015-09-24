@@ -86,4 +86,8 @@ public class EntrevistaService {
 		return entrevistaFacade.findByData(data);
 	}
 
+	public Entrevista getEntrevistaByIdFetchQuestoes(long entrevistaId) {
+		return entrevistaFacade.findByIdFetchQuestoes(entrevistaId);
+	}
+
 }

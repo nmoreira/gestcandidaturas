@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidaturaService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.EntrevistaService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.FeedbackService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.GrupoEntrevistadoresService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevista;
@@ -33,6 +34,9 @@ public class AtribuirEntrevistador implements Serializable {
 
 	@Inject
 	private EntrevistaService entrevistaServ;
+
+	@Inject
+	private FeedbackService feedBackServ;
 
 	private List<Candidatura> candidaturasSemEntrevista;
 	private List<GrupoEntrevistadores> entrevistadores;
@@ -86,8 +90,6 @@ public class AtribuirEntrevistador implements Serializable {
 
 	public void setEntrevistador(GrupoEntrevistadores entrevistador) {
 		this.entrevistador = entrevistador;
-		System.out.println("Entrevistador atribuido: "
-				+ this.entrevistador.getNome());
 	}
 
 	public Candidatura getCandidatura() {
@@ -96,7 +98,5 @@ public class AtribuirEntrevistador implements Serializable {
 
 	public void defineCandidatura(Candidatura candidatura) {
 		this.candidatura = candidatura;
-		System.out.println("Candidatura definida: "
-				+ this.candidatura.getPosicao().getTitulo());
 	}
 }

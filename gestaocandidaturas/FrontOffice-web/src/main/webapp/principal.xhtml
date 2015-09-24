@@ -9,8 +9,6 @@
 
 	<ui:define name="corpo">
 
-		<p:growl id="msgs" showDetail="true" />
-
 		<p:tabView dynamic="true" cache="true">
 			<p:tab title="Principal">
 				<p:panelGrid columns="1" id="painel" styleClass="panelNoBorder">
@@ -38,124 +36,124 @@
 				</p:panelGrid>
 			</p:tab>
 			<p:tab title="Carreiras">
-				<p:tabView orientation="left">
+				<p:tabView orientation="left" dynamic="true">
 					<p:tab title="Carreiras">
 						<p:panelGrid columns="1" cellpadding="10">
 							<p:graphicImage value="/resources/imagens/trabalhar.jpg"
 								styleClass="fotos1" />
-								<h3>Investimento em Recursos Humanos</h3>
+							<h3>Investimento em Recursos Humanos</h3>
 							<p:outputLabel
 								value="A fim de manter a competitividade , as empresas têm de investir continuamente em processos de diferenciação.
 								A Critical está consciente desta realidade por um longo tempo e, para lidar com a concorrência, aposta em recursos humanos
 							 e inovação.A Critical lidado com os desafios de rápido crescimento , muitos deles resultado de uma integração sucessiva de recursos 
 							 humanos e jovens qualificados para lidar com os desafios e projetos de crescimento que lhe são propostos" />
-							 
-							 <h3>Estratégia de crescimento</h3>
-							 
-							 <p:outputLabel value="O Grupo Critical tem vindo a aumentar a cada ano, com base numa estratégia sustentável que permite a um grupo 
+
+							<h3>Estratégia de crescimento</h3>
+
+							<p:outputLabel
+								value="O Grupo Critical tem vindo a aumentar a cada ano, com base numa estratégia sustentável que permite a um grupo 
 							 de profissionais especializados experientes suportar a integração de novos recursos.
 							 A proximidade da empresa com os seus funcionários,o esforço que é implementada numa tentativa de compreender as motivações de cada um 
 							 e o fato de tentar encaixar o feedback geral na política da empresa, são algumas das características que permitem a motivação de quem trabalha conosco.
 							 Isso, e a forte convicção de que em Portugal se pode encontrar os melhores profissionais." />
-							 
-							 <h1>Informe-se sobre as oportunidades em aberto e ....Junte-se à nossa equipa.</h1>
+
+							<h1>Informe-se sobre as oportunidades em aberto e
+								....Junte-se à nossa equipa.</h1>
 						</p:panelGrid>
-
-
-						<h:form >
+						
+						<h:form>
 							<p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
 								var="posicao" emptyMessage="Não existem vagas para candidatura"
-								layout="grid" style="width: 100%" rows="12" paginator="true"
+								layout="grid" rows="12" paginator="true"
 								paginatorAlwaysVisible="true" paginatorPosition="bottom"
 								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 								currentPageReportTemplate="{currentPage} de {totalPages}">
-								<p:panel>
-									<h:panelGrid columns="2" style="width:100%; text-align: left;">
-										<p:spacer />
-
-
+								<p:panel style="text-align:center">
+									<f:facet name="header">
 										<p:commandButton value="#{posicao.titulo}" update="@form"
 											action="#{posicoesAtuais.selecionarPosicao(posicao)}"
-											oncomplete="PF('caixadialogo').show();" styleClass="botaoposicao"/>
+											oncomplete="PF('caixadialogo').show();"
+											styleClass="botaoposicao" />
+									</f:facet>
+									<h:panelGrid columns="2" style="width:100%; text-align: left;">
+										<p:spacer />
+										<h:outputText value="#{posicao.descricao}" />
+										<p:outputLabel value="Área técnica:" for="area" />
+										<h:outputText value="#{posicao.areaTecnica.valor}" id="area" />
+										<p:outputLabel value="Localização:" for="localizacao" />
+										<h:outputText value="#{posicao.local}" id="localizacao" />
+										<p:outputLabel value="Vagas" for="vagas" />
+										<h:outputText value="#{posicao.quantidadeVagas}" id="vagas" />
+
+										<f:facet name="footer">
+											<p:commandButton value="Candidatar" style="float:right"
+												action="#{posicoesAtuais.candidatar()}" ajax="false">
+												<f:param name="posid" value="#{posicao.id}" />
+											</p:commandButton>
+										</f:facet>
 
 									</h:panelGrid>
 								</p:panel>
 							</p:dataGrid>
-
-
+							
 							<p:dialog id="np" widgetVar="caixadialogo" modal="true"
-								dynamic="true" showEffect="explode"	hideEffect="bounce"	height= "300" with="300">
-								<p:outputLabel value="Descrição:" for="descricao" styleClass="textotitulopopup"/>
+								dynamic="true" showEffect="explode" hideEffect="bounce"
+								height="300" with="300">
+								<p:outputLabel value="Descrição:" for="descricao"
+									styleClass="textotitulopopup" />
 								<br />
-								
+
 								<h:outputText value="#{posicoesAtuais.posicao.descricao}"
-									id="descricao" styleClass="textodescricaopopup"/>
+									id="descricao" styleClass="textodescricaopopup" />
 								<br />
 								<br />
-								<p:outputLabel value="Área técnica:" for="area" styleClass="textotitulopopup"/>
+								<p:outputLabel value="Área técnica:" for="area"
+									styleClass="textotitulopopup" />
 								<br />
 								<h:outputText value="#{posicoesAtuais.posicao.areaTecnica}"
-									id="area" styleClass="textodescricaopopup"/>
+									id="area" styleClass="textodescricaopopup" />
 								<br />
 								<br />
-								<p:outputLabel value="Localização:" for="localizacao" styleClass="textotitulopopup"/>
+								<p:outputLabel value="Localização:" for="localizacao"
+									styleClass="textotitulopopup" />
 								<br />
-								<h:outputText value="#{posicoesAtuais.posicao.localizacao}"
-									id="localizacao" styleClass="textodescricaopopup"/>
+								<h:outputText value="#{posicoesAtuais.posicao.local}"
+									id="localizacao" styleClass="textodescricaopopup" />
 								<br />
 								<br />
-								<p:outputLabel value="Vagas" for="vagas" styleClass="textotitulopopup"/>
+								<p:outputLabel value="Vagas" for="vagas"
+									styleClass="textotitulopopup" />
 								<br />
-								<h:outputText value="#{posicoesAtuais.posicao.quantidadeVagas}" 
+								<h:outputText value="#{posicoesAtuais.posicao.quantidadeVagas}"
 									id="vagas" styleClass="textodescricaopopup" />
 								<br />
 								<br />
 								<br />
 								<br />
-								
-								<p:commandButton value="Candidatar" styleClass="botaopequeno" action="#{posicoesAtuais.candidatar()}" ajax="false">
-							
-								<f:param name="posid" value="#{posicoesAtuais.posicao.id}" />	
-								</p:commandButton>
-								
 
-								
-								
+								<p:commandButton value="Candidatar" styleClass="botaopequeno"
+									action="#{posicoesAtuais.candidatar()}" ajax="false">
+									<f:param name="posid" value="#{posicoesAtuais.posicao.id}" />
+								</p:commandButton>
 							</p:dialog>
 						</h:form>
-
-
-
 					</p:tab>
-
 					<p:tab title="Candidatura Espontanea">
-					
+
 						<p:panelGrid columns="1" cellpadding="10">
 							<p:graphicImage value="/resources/imagens/espontanea.jpg"
 								styleClass="fotos1" />
 							<p:outputLabel
 								value="Caso as posições em aberto não correspondam ao que procuras e queiras 
 								vir a pertencer à nossa equipa, faz aqui a tua candidatura espontânea..." />
-						
-						<p:button value="Novo Candidato" outcome="/paginas/novocandidato" styleClass="botaogrande"/>
-						
-			
-				
-						</p:panelGrid>
-						
-					</p:tab>
 
+							<p:button value="Novo Candidato" outcome="/paginas/novocandidato"
+								styleClass="botaogrande" />
+						</p:panelGrid>
+					</p:tab>
 				</p:tabView>
 			</p:tab>
-
-
-
 		</p:tabView>
-
-
-
-
 	</ui:define>
-
 </ui:composition>
 

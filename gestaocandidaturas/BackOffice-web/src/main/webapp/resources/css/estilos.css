@@ -10,7 +10,6 @@ body {
 
 header {
 	padding: 5px 5px;
-	margin-bottom: 20px;
 	height: 50px;
 	background-color: #8d8d8d;
 	color: #fff;
@@ -22,6 +21,7 @@ header>div {
 }
 
 #conteudo {
+	margin-top: 10px;
 	padding: 0px 8px
 }
 
@@ -85,8 +85,8 @@ h4 {
 
 .ajax-status {
 	position: fixed;
-	top: 55px;
-	right: 10px;
+	top: 110px;
+	left: 10px;
 	width: 35px;
 	height: 35px
 }
@@ -98,6 +98,15 @@ h4 {
 
 .ui-selectmanycheckbox td label {
 	padding-right: 10px;
+}
+
+.ui-radiobutton td label {
+	padding-right: 10px;
+}
+
+.ui-radiobutton td {
+	border-width: 0px !important;
+	padding: 0px !important;
 }
 
 .produto-tabela input {

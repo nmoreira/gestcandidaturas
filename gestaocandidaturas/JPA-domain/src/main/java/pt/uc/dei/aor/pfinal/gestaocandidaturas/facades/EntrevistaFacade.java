@@ -153,4 +153,11 @@ public class EntrevistaFacade implements IEntrevistaFacade {
 			return null;
 	}
 
+	@Override
+	public Entrevista findByIdFetchQuestoes(long entrevistaId) {
+		q = em.createQuery("select distinct e from Entrevista e left join fetch e.questoesEntrevista where e.id = :id");
+		q.setParameter("id", entrevistaId);
+		return (Entrevista) q.getSingleResult();
+	}
+
 }

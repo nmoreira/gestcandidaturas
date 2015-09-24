@@ -89,4 +89,8 @@ public class PosicaoService {
 	public List<Posicao> pesquisaArea(AreaTecnica area) {
 		return posicaoFacade.searchByAreaTecnica(area);
 	}
+
+	public List<LocalPosicao> getLocaisPosicao(long id) {
+		return posicaoFacade.getLocaisPosicao(id);
+	}
 }

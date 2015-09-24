@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.PosicaoService;
-import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Guiao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 
@@ -23,7 +22,7 @@ public class PosicoesAtuais implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<Posicao> listaPosicoes;
-	
+
 	private Posicao posicao;
 
 	@Inject
@@ -58,10 +57,9 @@ public class PosicoesAtuais implements Serializable {
 	public void setListaPosicoes(List<Posicao> listaPosicoes) {
 		this.listaPosicoes = listaPosicoes;
 	}
-	
+
 	public void selecionarPosicao(Posicao posicao) {
-		this.posicao=posicao;
-		System.out.println("fui " + posicao.getId());
+		this.posicao = posicao;
 	}
 
 	public Posicao getPosicao() {
@@ -70,9 +68,7 @@ public class PosicoesAtuais implements Serializable {
 
 	public void setPosicao(Posicao posicao) {
 		this.posicao = posicao;
-		
+
 	}
-	
-	
 
 }

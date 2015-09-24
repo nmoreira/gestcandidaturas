@@ -37,12 +37,14 @@ public class Escala1a5 extends Questao implements Serializable {
 		this.setPergunta(pergunta.getPergunta());
 	}
 
-	public int getResposta() {
-		return resposta;
+	@Override
+	public String getResposta() {
+		return String.valueOf(resposta);
 	}
 
-	public void setResposta(int resposta) {
-		this.resposta = resposta;
+	@Override
+	public void setResposta(String resposta) {
+		this.resposta = Integer.valueOf(resposta);
 	}
 
 	@Override

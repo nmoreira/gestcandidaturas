@@ -138,7 +138,7 @@ public class PosicaoFacade implements IPosicaoFacade {
 	@Override
 	public List<Posicao> getPosicoesEmAberto() {
 		List<Posicao> result = new ArrayList<>();
-		q = em.createQuery("from Posicao p where p.estado = :estado");
+		q = em.createQuery("select distinct p from Posicao p left join fetch p.local where p.estado = :estado");
 		q.setParameter("estado", EstadoPosicao.ABERTA);
 		result = q.getResultList();
 		return result;
@@ -212,6 +212,12 @@ public class PosicaoFacade implements IPosicaoFacade {
 		q.setParameter("areaTecnica", area);
 		result = q.getResultList();
 		return result;
+	}
+
+	@Override
+	public List<LocalPosicao> getLocaisPosicao(long id) {
+		Posicao p = find(id);
+		return p.getLocal();
 	}
 
 }

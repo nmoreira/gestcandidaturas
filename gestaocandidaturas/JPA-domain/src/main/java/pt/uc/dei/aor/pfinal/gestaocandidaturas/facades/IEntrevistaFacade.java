@@ -12,4 +12,6 @@ public interface IEntrevistaFacade extends IEntityFacade<Entrevista> {
 	public abstract List<Entrevista> findByEntrevistador(long entrevistadorId);
 
 	public abstract List<Entrevista> findByData(Date dataEntrevista);
+
+	public abstract Entrevista findByIdFetchQuestoes(long entrevistaId);
 }

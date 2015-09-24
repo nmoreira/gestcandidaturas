@@ -67,7 +67,10 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel for="sla" value="Service Level Agreement" />
-				<p:inputText id="sla" value="#{novaPosicao.sla}" />
+				<h:panelGroup>
+				<p:inputText id="sla" value="#{novaPosicao.sla}" size="2"/>
+				<h:outputText value=" semanas" />
+				</h:panelGroup>
 
 				<p:outputLabel for="empresa" value="Empresa" />
 				<p:inputText id="empresa" value="#{novaPosicao.empresa}" />

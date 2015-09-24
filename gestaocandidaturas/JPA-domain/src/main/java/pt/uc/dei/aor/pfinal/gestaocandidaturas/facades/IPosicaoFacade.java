@@ -32,4 +32,6 @@ public interface IPosicaoFacade extends IEntityFacade<Posicao> {
 
 	public abstract List<Posicao> searchByAreaTecnica(AreaTecnica area);
 
+	public abstract List<LocalPosicao> getLocaisPosicao(long id);
+
 }

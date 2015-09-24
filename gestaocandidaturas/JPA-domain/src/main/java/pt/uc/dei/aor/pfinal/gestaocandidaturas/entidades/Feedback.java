@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,6 +18,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "feedback")
+@NamedQueries({
+		@NamedQuery(name = "Feedback.findAll", query = "SELECT f FROM Feedback f"),
+		@NamedQuery(name = "Feedback.findByEntrevista", query = "SELECT f FROM Feedback f WHERE f.entrevista = :entrevista"),
+		@NamedQuery(name = "Feedback.findById", query = "SELECT f FROM Feedback f WHERE f.id = :id") })
 public class Feedback implements Serializable {
 
 	@Id

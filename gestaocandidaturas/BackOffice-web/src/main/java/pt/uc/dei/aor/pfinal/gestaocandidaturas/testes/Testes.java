@@ -58,8 +58,8 @@ public class Testes implements Serializable {
 				"email2", "morada2", "cidade2", 13256455, 912123354, "pais",
 				"curso", "escola", "cv", "idLinkedin");
 
-		Posicao p = new Posicao(new Date(), "pos1", "titulo", "localizacao",
-				EstadoPosicao.ABERTA, 3, null, "", null, "",
+		Posicao p = new Posicao(new Date(), "pos1", "titulo",
+				EstadoPosicao.ABERTA, 3, null, 0, null, "",
 				AreaTecnica.Dot_Net_Development, "", "", null);
 
 		candidatoServ.createNewCandidato(c);

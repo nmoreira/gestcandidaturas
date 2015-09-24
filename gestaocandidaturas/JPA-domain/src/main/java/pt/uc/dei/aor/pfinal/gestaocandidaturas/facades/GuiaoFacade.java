@@ -107,7 +107,6 @@ public class GuiaoFacade implements IGuiaoFacade {
 		q = em.createQuery("from Guiao g left join fetch g.questoes where g.id = :id");
 		q.setParameter("id", id);
 		Guiao g = (Guiao) q.getSingleResult();
-		System.out.println(g.getQuestoes().size());
 		return g.getQuestoes();
 	}
 
