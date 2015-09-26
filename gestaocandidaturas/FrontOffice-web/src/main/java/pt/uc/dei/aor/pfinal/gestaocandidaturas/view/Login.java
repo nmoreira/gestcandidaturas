@@ -34,7 +34,8 @@ public class Login {
 			Utilizador u = userServ.getUtilizadorByLogin(login);
 			CurrentSession.setCurrentUser(u);
 			System.out.println("login ok: " + login);
-			if (u.getCargo().equals("CANDIDATO")) {
+			if (u.getCargo().equals("CANDIDATO")
+					|| u.getCargo().equals("ADMIN")) {
 				DisplayMessages
 						.addInfoMessage("Sessão iniciada com sucesso! Bem-vindo "
 								+ u.getNome() + " " + u.getApelido() + "!");

@@ -27,6 +27,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.PosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.mail.CommonsMail;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.StringNormalizer;
 
@@ -59,6 +60,9 @@ public class NovaCandidatura implements Serializable {
 
 	@Inject
 	private CandidaturaService candidaturaServ;
+
+	@Inject
+	private CommonsMail mail;
 
 	public NovaCandidatura() {
 	}
@@ -124,6 +128,11 @@ public class NovaCandidatura implements Serializable {
 				if (candidaturaServ.criaCandidaturaEspontanea(candidatura)) {
 					DisplayMessages
 							.addInfoMessage("Candidatura espontânea efetuada com sucesso!");
+					mail.enviaEmailSimples(
+							"Candidatura espontânea submetida",
+							"Obrigado por submeter uma candidatura espontânea\n"
+									+ "Será notificado assim que a sua candidatura for analisada e atribuida a uma posição específica",
+							candidato.getEmail());
 				} else {
 					DisplayMessages
 							.addErrorMessage("Falha ao submeter a candidatura espontânea!");
@@ -132,6 +141,17 @@ public class NovaCandidatura implements Serializable {
 				if (candidaturaServ.createNewCandidatura(candidatura)) {
 					DisplayMessages
 							.addInfoMessage("Candidatura efetuada com sucesso!");
+					mail.enviaEmailSimples(
+							"Nova candidatura submetida à posição "
+									+ candidatura.getPosicao().getTitulo(),
+							"O candidato "
+									+ candidato.getNome()
+									+ " "
+									+ candidato.getApelido()
+									+ " submeteu uma nova candidatura à posição "
+									+ candidatura.getPosicao().getTitulo()
+									+ " da qual você é gestor", candidatura
+									.getPosicao().getResponsavel().getEmail());
 				} else {
 					DisplayMessages
 							.addErrorMessage("Falha ao submeter a candidatura!");

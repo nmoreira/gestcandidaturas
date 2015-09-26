@@ -22,7 +22,7 @@
 
 
 				<p:outputLabel value="Login" for="login" />
-				<p:inputText id="login" size="20" maxlength="20"
+				<p:inputText id="login" size="20" 
 					value="#{novoCandidato.login}" required="true">
 					<p:ajax listener="#{novoCandidato.validaLogin()}" event="change"
 						process="@this" update="status" partialSubmit="true" />
@@ -39,19 +39,19 @@
 				<p:password id="confirmaPassword" required="true" />
 
 				<p:outputLabel value="Primeiro Nome" for="pnome" />
-				<p:inputText id="pnome" size="20" maxlength="20"
+				<p:inputText id="pnome" size="20" 
 					value="#{novoCandidato.nome}" required="true">
 					<p:ajax event="change" process="@this" partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Apelido" for="apelido" />
-				<p:inputText id="apelido" size="20" maxlength="20"
+				<p:inputText id="apelido" size="20" 
 					value="#{novoCandidato.apelido}" required="true">
 					<p:ajax event="change" process="@this" partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Email" for="email" />
-				<p:inputText id="email" size="20" maxlength="20"
+				<p:inputText id="email" size="20" 
 					value="#{novoCandidato.email}" required="true">
 					<p:ajax listener="#{novoCandidato.validaEmail()}" update="status"
 						partialSubmit="true" />
@@ -64,11 +64,11 @@
 				<p:inputText id="cidade" value="#{novoCandidato.cidade}" />
 
 				<p:outputLabel value="Telefone" for="telefone" />
-				<p:inputText id="telefone" size="20" maxlength="20"
+				<p:inputText id="telefone" size="20" 
 					value="#{novoCandidato.telefone}" />
 
 				<p:outputLabel value="Telemóvel" for="telemovel" />
-				<p:inputText id="telemovel" size="20" maxlength="20"
+				<p:inputText id="telemovel" size="20" 
 					value="#{novoCandidato.telemovel}" />
 
 				<p:outputLabel value="País" for="pais" />

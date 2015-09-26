@@ -21,25 +21,25 @@
 				style="width: 50%; margin-top:20px; margin-left:350px"
 				columnClasses="rotulo,campo">
 				<p:outputLabel value="Login" for="login" />
-				<p:inputText id="login" size="20" maxlength="20"
+				<p:inputText id="login" size="20"
 					value="#{editarPerfil.login}" required="true">
 					<p:ajax listener="#{editarPerfil.validaLogin()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Email" for="email" />
-				<p:inputText id="email" size="20" maxlength="20"
+				<p:inputText id="email" size="20" 
 					value="#{editarPerfil.email}" required="true">
 					<p:ajax listener="#{editarPerfil.validaEmail()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Primeiro Nome" for="pnome" />
-				<p:inputText id="pnome" size="20" maxlength="20"
+				<p:inputText id="pnome" size="20" 
 					value="#{editarPerfil.utilizador.nome}" required="true" />
 
 				<p:outputLabel value="Sobrenome" for="snome" />
-				<p:inputText id="snome" size="20" maxlength="20"
+				<p:inputText id="snome" size="20" 
 					value="#{editarPerfil.utilizador.apelido}" required="true" />
 
 				<p:commandButton value="Atualizar perfil"

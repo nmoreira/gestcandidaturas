@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.mail.CommonsMail;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 
 @Named
@@ -27,6 +28,9 @@ public class NovoUtilizador implements Serializable {
 	@Inject
 	private UtilizadorService userService;
 
+	@Inject
+	private CommonsMail mail;
+
 	public void criaUtilizador() {
 		if (userService.existeEmail(email) == true) {
 			DisplayMessages.addErrorMessage("O email " + email
@@ -41,16 +45,19 @@ public class NovoUtilizador implements Serializable {
 			DisplayMessages.addInfoMessage("Novo Utilizador criado!");
 			DisplayMessages
 					.addInfoMessage("Aguarde que um administrador lhe atribua o perfil correto!");
+			mail.enviaEmailSimples(
+					"Bem vindo ao gestão candidaturas",
+					"Olá "
+							+ nome
+							+ " "
+							+ apelido
+							+ ". Obrigado por se registar no nosso site!\n"
+							+ "Aguarde que um administrador lhe atribua o perfil correto, para poder começar a navegar no site!",
+					email);
 		}
 	}
 
 	public void validaLogin() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if (userService.existeLogin(login) == true)
 			DisplayMessages.addErrorMessage("O login " + login
 					+ " já está em uso! Por favor escolha outro");
@@ -59,12 +66,6 @@ public class NovoUtilizador implements Serializable {
 	}
 
 	public void validaEmail() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if (userService.existeEmail(email) == true)
 			DisplayMessages.addErrorMessage("O email " + email
 					+ " já está registado!");

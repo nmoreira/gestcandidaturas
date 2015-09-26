@@ -61,7 +61,9 @@
 
 				<p:commandButton value="Submeter"
 					action="#{novaCandidatura.candidatar()}" update="@form m1 m2" icon="ui-icon-disk"/>
-				<p:button value="Limpar" outcome="/paginas/candidato/candidaturas" />
+				<p:button value="Limpar" outcome="/paginas/candidato/candidaturas" >
+					<f:param name="posid" value="#{novaCandidatura.posicao.id}"/>
+				</p:button>
 			</p:panelGrid>
 
 			<p:dialog header="Carregar uma carta de motivação"

@@ -16,6 +16,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.ResponsavelPosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Guiao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.ResponsavelPosicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.mail.CommonsMail;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.AreaTecnica;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
@@ -57,6 +58,9 @@ public class NovaPosicao implements Serializable {
 
 	@Inject
 	private GuiaoService guiaoServ;
+
+	@Inject
+	private CommonsMail mail;
 
 	/**
 	 * Default constructor.
@@ -133,8 +137,15 @@ public class NovaPosicao implements Serializable {
 					quantidadeVagas, dataFecho, sla, responsavel, empresa,
 					areaTecnica, descricao, canaisPublicacao, guiao);
 			pos.setLocal(local);
-			posicaoServ.createNewPosicao(pos);
-			DisplayMessages.addInfoMessage("Posição criada com sucesso!");
+			if (posicaoServ.createNewPosicao(pos) != null) {
+				DisplayMessages.addInfoMessage("Posição criada com sucesso!");
+				mail.enviaEmailSimples(
+						"Nova posição atribuida",
+						"Um administrador criou a nova posição "
+								+ pos.getTitulo()
+								+ " e definiu-o como Gestor desta posição!",
+						pos.getResponsavel().getEmail());
+			}
 		}
 
 	}

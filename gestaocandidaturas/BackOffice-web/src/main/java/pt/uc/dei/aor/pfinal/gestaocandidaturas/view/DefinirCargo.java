@@ -18,6 +18,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Administrador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevistador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Gestor;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.mail.CommonsMail;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 
 @Named
@@ -40,6 +41,9 @@ public class DefinirCargo implements Serializable {
 
 	@Inject
 	private GestorService gestService;
+
+	@Inject
+	private CommonsMail mail;
 
 	private List<Utilizador> users;
 	private Utilizador user;
@@ -71,6 +75,11 @@ public class DefinirCargo implements Serializable {
 			DisplayMessages.addInfoMessage(user.getNome() + " "
 					+ user.getApelido()
 					+ " convertido com sucesso em Administrador");
+			mail.enviaEmailSimples(
+					"Perfil atribuido",
+					"Um administrador do sistema, já lhe atribuiu o perfil de Administrador.\n"
+							+ "A partir de agora pode iniciar sessão no sistema e começar a sua atividade",
+					admin.getEmail());
 		} else {
 			DisplayMessages.addErrorMessage("Erro ao converter "
 					+ user.getNome() + " " + user.getApelido()
@@ -86,6 +95,11 @@ public class DefinirCargo implements Serializable {
 			DisplayMessages.addInfoMessage(user.getNome() + " "
 					+ user.getApelido()
 					+ " convertido com sucesso em Entrevistador");
+			mail.enviaEmailSimples(
+					"Perfil atribuido",
+					"Um administrador do sistema, já lhe atribuiu o perfil de Entrevistador.\n"
+							+ "A partir de agora pode iniciar sessão no sistema e começar a sua atividade",
+					ent.getEmail());
 		} else {
 			DisplayMessages.addErrorMessage("Erro ao converter "
 					+ user.getNome() + " " + user.getApelido()
@@ -99,6 +113,11 @@ public class DefinirCargo implements Serializable {
 		if (gest != null) {
 			DisplayMessages.addInfoMessage(user.getNome() + " "
 					+ user.getApelido() + " convertido com sucesso em Gestor");
+			mail.enviaEmailSimples(
+					"Perfil atribuido",
+					"Um administrador do sistema, já lhe atribuiu o perfil de Gestor.\n"
+							+ "A partir de agora pode iniciar sessão no sistema e começar a sua atividade",
+					gest.getEmail());
 		} else {
 			DisplayMessages.addErrorMessage("Erro ao converter "
 					+ user.getNome() + " " + user.getApelido() + " em Gestor");
