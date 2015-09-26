@@ -18,7 +18,7 @@
 				<p:spacer />
 				
 			<h:outputText value="ola"  /><br/>
-				<p:commandButton value="#{posicao.titulo}" action="#{posicoesAtuais.posicao.selecionarPosicao(posicao)}" oncomplete="PF('caixadialogo').show();"/>
+				<p:commandButton value="#{posicao.titulo}" action="#{posicoesAtuais.selecionarPosicao(posicao)}" oncomplete="PF('caixadialogo').show();"/>
 				
 				</h:panelGrid>
 				</p:panel>
@@ -37,15 +37,15 @@
 				<p:outputLabel value="Área técnica:" for="area" /><br/>
 				<h:outputText value="#{posicoesAtuais.posicao.areaTecnica}" id="area" /><br/>
 				<p:outputLabel value="Localização:" for="localizacao" /><br/>
-				<h:outputText value="#{posicoesAtuais.posicao.localizacao}" id="localizacao" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.local}" id="localizacao" /><br/>
 				<p:outputLabel value="Vagas" for="vagas" /><br/>
-				<h:outputText value="#{posicoesAtuais.posicao.vagas}" id="vagas" /><br/>
+				<h:outputText value="#{posicoesAtuais.posicao.quantidadeVagas}" id="vagas" /><br/>
 
 				
 				
 				
 				
-					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.posicao.candidatar()}" ajax="false">
+					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.candidatar()}" ajax="false">
 						<f:param name="posid" value="#{posicoesAtuais.posicao.id}"/> 
 					</p:commandButton>
 			</h:form>

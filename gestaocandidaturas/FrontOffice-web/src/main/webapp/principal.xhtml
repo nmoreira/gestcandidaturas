@@ -54,12 +54,10 @@
 							 A proximidade da empresa com os seus funcionários,o esforço que é implementada numa tentativa de compreender as motivações de cada um 
 							 e o fato de tentar encaixar o feedback geral na política da empresa, são algumas das características que permitem a motivação de quem trabalha conosco.
 							 Isso, e a forte convicção de que em Portugal se pode encontrar os melhores profissionais." />
-<br/>
-<br/>
+					<br /> <br />
 					<h1>Informe-se sobre as oportunidades em aberto e ....Junte-se
 						à nossa equipa.</h1>
 				</td>
-
 			</tr>
 			<tr>
 				<td width="20%"></td>
@@ -77,7 +75,23 @@
 										oncomplete="PF('caixadialogo').show();"
 										styleClass="botaoposicao" />
 								</f:facet>
-							
+								<h:panelGrid columns="2" style="width:100%; text-align: left;">
+
+									<p:outputLabel value="Área técnica:" for="area" />
+									<h:outputText value="#{posicao.areaTecnica.valor}" id="area" />
+									<p:outputLabel value="Localização:" for="localizacao" />
+									<h:outputText value="#{posicao.local}" id="localizacao" />
+									<p:outputLabel value="Vagas" for="vagas" />
+									<h:outputText value="#{posicao.quantidadeVagas}" id="vagas" />
+
+									<f:facet name="footer">
+										<p:commandButton value="Candidatar" style="float:right"
+											action="#{posicoesAtuais.candidatar()}" ajax="false">
+											<f:param name="faces-redirect" value="true" />
+											<f:param name="posid" value="#{posicao.id}" />
+										</p:commandButton>
+									</f:facet>
+								</h:panelGrid>
 							</p:panel>
 						</p:dataGrid>
 
@@ -123,35 +137,27 @@
 						</p:dialog>
 					</h:form></td>
 			</tr>
-
 			<tr>
 				<td width="20%"><p:graphicImage
 						value="/resources/imagens/espontanea.jpg" styleClass="fotos1" />
 				</td>
-
 				<td width="80%"><p:outputLabel
 						value="Caso as posições em aberto não correspondam ao que procuras e queiras 
 								vir a pertencer à nossa equipa, faz aqui a tua candidatura espontânea..." />
-
-				</td>	
+				</td>
 			</tr>
+			<tr>
+				<td width="20%"></td>
 
-<tr>
-<td width="20%"></td>
-
-<td width="80%" align="center">
-<h:form>
-<p:commandButton value="Candidatura espontânea" styleClass="botaopequeno1"
+				<td width="80%" align="center"><h:form>
+						<p:commandButton value="Candidatura espontânea"
+							styleClass="botaopequeno1"
 							action="#{posicoesAtuais.candidatar()}" ajax="false">
 							<f:param name="faces-redirect" value="true" />
 							<f:param name="posid" value="0" />
 						</p:commandButton>
-						</h:form>
-						</td>
-
-</tr>
+					</h:form></td>
+			</tr>
 		</table>
-
-
 	</ui:define>
 </ui:composition>

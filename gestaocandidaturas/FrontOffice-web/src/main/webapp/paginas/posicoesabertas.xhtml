@@ -12,8 +12,7 @@
 		currentPageReportTemplate="{currentPage} de {totalPages}">
 		<p:panel header="#{posicao.titulo}" style="text-align:center">
 			<h:panelGrid columns="2" style="width:100%; text-align: left;">
-				<p:spacer />
-				<h:outputText value="#{posicao.descricao}" />
+				
 				<p:outputLabel value="Área técnica:" for="area" />
 				<h:outputText value="#{posicao.areaTecnica.valor}" id="area" />
 				<p:outputLabel value="Localização:" for="localizacao" />
