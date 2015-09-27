@@ -10,17 +10,11 @@ import javax.xml.bind.JAXBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
+
 @Named
 @ApplicationScoped
 public class Configuration {
-
-	// public static void main(String[] args) {
-	// Configuration conf = new Configuration();
-	// }
-	//
-	// public Configuration() {
-	// init();
-	// }
 
 	private ConfigurationXML conf;
 
@@ -31,22 +25,19 @@ public class Configuration {
 		try {
 			setConf(ConfigurationXML.unmarshal());
 		} catch (JAXBException e) {
-			logger.error("Erro ao ler o ficheiro de configurações");
+			logger.error("Erro ao ler o ficheiro de configurações" + e);
 		}
 	}
 
 	public void saveConfiguration() {
-		this.conf.setSmtpHostName("smtp.gmail.com");
-		this.conf.setSmtpPort("465");
-		this.conf.setSmtpUsername("nunofrmoreira@gmail.com");
-		this.conf.setSmtpPassword("ArcaMlam26");
-		this.conf.setSmtpFromEmail("nunofrmoreira@gmail.com");
-
 		try {
 			ConfigurationXML.marshalConfiguration(conf);
+			DisplayMessages
+					.addInfoMessage("Configurações guardadas com sucesso!");
 			logger.info("Ficheiro de configurações gravado com sucesso");
 		} catch (IOException | JAXBException e) {
-			logger.error("Erro ao guardar o ficheiro de configurações");
+			DisplayMessages.addErrorMessage("Erro ao guardar as configurações");
+			logger.error("Erro ao guardar o ficheiro de configurações" + e);
 		}
 	}
 

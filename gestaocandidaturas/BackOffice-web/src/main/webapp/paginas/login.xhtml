@@ -1,11 +1,11 @@
-<ui:composition 
-	xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<div id="login-dialog" style="min-height: 400px; vertical-align: middle;">
+
+	<div id="login-dialog"
+		style="min-height: 400px; vertical-align: middle;">
 		<h1>Login</h1>
 		<h:form id="frm">
 			<h:panelGrid columns="2" styleClass="grid-login">
@@ -18,14 +18,13 @@
 				<p:password size="30" id="password" value="#{login.password}"
 					required="true" />
 				<f:facet name="footer">
-				<p:commandButton value="Login" action="#{login.login()}" />
-				<p:spacer width="20"/>
-				<p:button value="Registo" outcome="/paginas/novoutilizador.xhtml"/>
-				<p:spacer width="20"/>
-				<p:button value="Nova password" outcome="/paginas/passwordperdida" />
-				
+					<p:commandButton value="Login" action="#{login.login()}" />
+					<p:spacer width="20" />
+					<p:button value="Registo" outcome="/paginas/novoutilizador.xhtml" />
+					<p:spacer width="20" />
+					<p:button value="Nova password" outcome="/paginas/passwordperdida" />
 				</f:facet>
-				
+
 			</h:panelGrid>
 		</h:form>
 	</div>

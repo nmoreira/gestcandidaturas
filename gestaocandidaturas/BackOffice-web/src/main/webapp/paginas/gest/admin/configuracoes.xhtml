@@ -1,0 +1,68 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Configurações da aplicação BackOffice</ui:define>
+
+	<ui:define name="corpo">
+
+		<h1>Configurações da aplicação BackOffice</h1>
+
+		<br />
+		<br />
+		<h:form>
+			<p:panel style="width: 600px; margin: auto;">
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:outputText value="Dados da empresa" />
+					</f:facet>
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" value="#{configuration.conf.nome}" size="40"
+						required="true" />
+					<p:outputLabel value="Morada da empresa" for="morada" />
+					<p:inputText id="morada" value="#{configuration.conf.morada}"
+						size="40" required="true" />
+					<p:outputLabel value="Telefone" for="tel" />
+					<p:inputText id="tel" value="#{configuration.conf.telefone}"
+						size="20" required="true" />
+					<p:outputLabel value="Email de contacto" for="email" />
+					<p:inputText id="email" value="#{configuration.conf.email}"
+						size="40" required="true" />
+				</p:panelGrid>
+				<br />
+				<br />
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:outputText value="Configuração do servidor de envio de emails" />
+					</f:facet>
+					<p:outputLabel value="SMTP Host Name" for="smtphost" />
+					<p:inputText id="smtphost"
+						value="#{configuration.conf.smtpHostName}" size="40"
+						required="true" />
+					<p:outputLabel value="SMTP Port" for="port" />
+					<p:inputText id="port" value="#{configuration.conf.smtpPort}"
+						size="6" required="true" />
+					<p:outputLabel value="Endereço de envio" for="from" />
+					<p:inputText id="from" value="#{configuration.conf.smtpFromEmail}"
+						size="40" required="true" />
+					<p:outputLabel value="Username do servidor de envio" for="username" />
+					<p:inputText id="username"
+						value="#{configuration.conf.smtpUsername}" size="40"
+						required="true" />
+					<p:outputLabel value="Password do servidor de envio" for="password" />
+					<p:password id="password"
+						value="#{configuration.conf.smtpPassword}" size="40"
+						required="true" redisplay="true" />
+				</p:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton value="Guardar configurações"
+						action="#{configuration.saveConfiguration()}" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

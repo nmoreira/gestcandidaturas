@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <configuration>
     <logotipo>logo</logotipo>
-    <nome>nome</nome>
+    <nome>CRITICAL SOFTWARE, SA</nome>
+    <morada>Parque Industrial de Taveiro, lote 49 - 3045-504 Coimbra, Portugal</morada>
+    <telefone>+351 239 989 100</telefone>
+    <email>info@criticalsoftware.com</email>
     <smtpHostName>smtp.gmail.com</smtpHostName>
     <smtpPort>465</smtpPort>
     <smtpUsername>candidaturasaor@gmail.com</smtpUsername>
