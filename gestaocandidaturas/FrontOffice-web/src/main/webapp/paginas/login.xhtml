@@ -23,8 +23,9 @@
     				<p:password size="30" id="password" value ="#{login.password}" required="true"  feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
     				promptLabel="Indique uma password" inline="true"/>
     				
-    				<p:spacer/>
     				<p:commandButton value="Login" action="#{login.login()}"/>
+					<p:spacer width="20"/>
+					<p:button value="Esqueci-me da password" outcome="/paginas/passwordperdida" />
     				
     			</h:panelGrid>
     		</h:form>

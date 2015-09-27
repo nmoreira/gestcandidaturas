@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.configuration.ConfigurationXML;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Utilizador;
 
 @ApplicationScoped
 public class CommonsMail {
@@ -30,7 +31,7 @@ public class CommonsMail {
 			conf = ConfigurationXML.unmarshal();
 			logger.info("Configurações de email lidas com sucesso");
 		} catch (JAXBException e) {
-			logger.error("Erro ao ler o ficheiro de configurações");
+			logger.error("Erro ao ler o ficheiro de configurações" + e);
 		}
 	}
 
@@ -40,7 +41,7 @@ public class CommonsMail {
 	 * @throws EmailException
 	 */
 	public void enviaEmailSimples(String assunto, String mensagem,
-			String destinatario) {
+			Utilizador destinatario) {
 
 		try {
 			Email email = new SimpleEmail();
@@ -50,14 +51,17 @@ public class CommonsMail {
 					.getSmtpUsername(), conf.getSmtpPassword()));
 			email.setSSLOnConnect(true);
 
-			email.setFrom(conf.getSmtpFromEmail());
+			email.setFrom(conf.getSmtpFromEmail(),
+					"Plataforma de gestão de Candidaturas");
 			email.setSubject(assunto);
 			email.setMsg(mensagem);
-			email.addTo(destinatario);
+			email.addTo(destinatario.getEmail(), destinatario.getNome() + " "
+					+ destinatario.getApelido());
 			email.send();
 			logger.info("Email enviado com sucesso para " + destinatario);
 		} catch (NumberFormatException | EmailException e) {
-			logger.error("Erro ao enviar email para " + destinatario);
+			logger.error("Erro ao enviar email para " + destinatario.getEmail()
+					+ "\n" + e);
 		}
 
 	}
@@ -67,49 +71,44 @@ public class CommonsMail {
 	 * 
 	 * @throws EmailException
 	 */
-	public void enviaEmailComAnexo() {
+	public void enviaEmailComAnexo(String assunto, String mensagem,
+			Utilizador destinatario, String anexo) {
+		String[] split = anexo.split("/");
+		String filename = split[split.length - 1];
+		System.out.println(filename);
 
-		// cria o anexo 1.
-		EmailAttachment anexo1 = new EmailAttachment();
-		anexo1.setPath("teste/teste.txt"); // caminho do arquivo
-											// (RAIZ_PROJETO/teste/teste.txt)
-		anexo1.setDisposition(EmailAttachment.ATTACHMENT);
-		anexo1.setDescription("Exemplo de arquivo anexo");
-		anexo1.setName("teste.txt");
+		// Create the attachment
+		EmailAttachment attachment = new EmailAttachment();
+		try {
+			attachment.setURL(new URL(anexo));
+		} catch (MalformedURLException e1) {
+			logger.error("Erro ao carregar anexo a partir do URL \n" + e1);
+		}
+		attachment.setDisposition(EmailAttachment.ATTACHMENT);
+		attachment.setName(filename);
+		attachment.setDescription(filename.split("\\.")[0]);
 
-		// cria o anexo 2.
-		EmailAttachment anexo2 = new EmailAttachment();
-		anexo2.setPath("teste/teste2.jsp"); // caminho do arquivo
-											// (RAIZ_PROJETO/teste/teste2.jsp)
-		anexo2.setDisposition(EmailAttachment.ATTACHMENT);
-		anexo2.setDescription("Exemplo de arquivo anexo");
-		anexo2.setName("teste2.jsp");
-
-		// configura o email
 		try {
 			MultiPartEmail email = new MultiPartEmail();
-			email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio
-													// do
-													// e-mail
-			email.addTo("teste@gmail.com", "Guilherme"); // destinat�rio
-			email.setFrom("teste@gmail.com", "Eu"); // remetente
-			email.setSubject("Teste -> Email com anexos"); // assunto do e-mail
-			email.setMsg("Teste de Email utilizando commons-email"); // conteudo
-																		// do
-																		// e-mail
-			email.setAuthentication("teste", "xxxxx");
-			email.setSmtpPort(465);
+			email.setHostName(conf.getSmtpHostName());
+			email.setSmtpPort(Integer.parseInt(conf.getSmtpPort()));
+			email.setAuthenticator(new DefaultAuthenticator(conf
+					.getSmtpUsername(), conf.getSmtpPassword()));
 			email.setSSLOnConnect(true);
-			email.setStartTLSEnabled(true);
 
-			// adiciona arquivo(s) anexo(s)
-			email.attach(anexo1);
-			email.attach(anexo2);
-			// envia o email
+			email.setFrom(conf.getSmtpFromEmail(),
+					"Plataforma de gestão de Candidaturas");
+			email.setSubject(assunto);
+			email.setMsg(mensagem);
+			email.addTo(destinatario.getEmail(), destinatario.getNome() + " "
+					+ destinatario.getApelido());
+			email.attach(attachment);
 			email.send();
-		} catch (EmailException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("Email enviado com sucesso para "
+					+ destinatario.getEmail());
+		} catch (NumberFormatException | EmailException e) {
+			logger.error("Erro ao enviar email para " + destinatario.getEmail()
+					+ "\n" + e);
 		}
 	}
 

@@ -31,7 +31,7 @@ public class CommonsMail {
 			conf = ConfigurationXML.unmarshal();
 			logger.info("Configurações de email lidas com sucesso");
 		} catch (JAXBException e) {
-			logger.error("Erro ao ler o ficheiro de configurações");
+			logger.error("Erro ao ler o ficheiro de configurações" + e);
 		}
 	}
 
@@ -41,7 +41,7 @@ public class CommonsMail {
 	 * @throws EmailException
 	 */
 	public void enviaEmailSimples(String assunto, String mensagem,
-			String destinatario) {
+			Utilizador destinatario) {
 
 		try {
 			Email email = new SimpleEmail();
@@ -51,14 +51,17 @@ public class CommonsMail {
 					.getSmtpUsername(), conf.getSmtpPassword()));
 			email.setSSLOnConnect(true);
 
-			email.setFrom(conf.getSmtpFromEmail());
+			email.setFrom(conf.getSmtpFromEmail(),
+					"Plataforma de gestão de Candidaturas");
 			email.setSubject(assunto);
 			email.setMsg(mensagem);
-			email.addTo(destinatario);
+			email.addTo(destinatario.getEmail(), destinatario.getNome() + " "
+					+ destinatario.getApelido());
 			email.send();
 			logger.info("Email enviado com sucesso para " + destinatario);
 		} catch (NumberFormatException | EmailException e) {
-			logger.error("Erro ao enviar email para " + destinatario);
+			logger.error("Erro ao enviar email para " + destinatario.getEmail()
+					+ "\n" + e);
 		}
 
 	}
@@ -79,8 +82,7 @@ public class CommonsMail {
 		try {
 			attachment.setURL(new URL(anexo));
 		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			logger.error("Erro ao carregar anexo a partir do URL \n" + e1);
 		}
 		attachment.setDisposition(EmailAttachment.ATTACHMENT);
 		attachment.setName(filename);
@@ -94,7 +96,8 @@ public class CommonsMail {
 					.getSmtpUsername(), conf.getSmtpPassword()));
 			email.setSSLOnConnect(true);
 
-			email.setFrom(conf.getSmtpFromEmail());
+			email.setFrom(conf.getSmtpFromEmail(),
+					"Plataforma de gestão de Candidaturas");
 			email.setSubject(assunto);
 			email.setMsg(mensagem);
 			email.addTo(destinatario.getEmail(), destinatario.getNome() + " "

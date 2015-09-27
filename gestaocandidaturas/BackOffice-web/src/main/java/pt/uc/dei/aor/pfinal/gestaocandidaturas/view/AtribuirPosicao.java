@@ -51,13 +51,12 @@ public class AtribuirPosicao implements Serializable {
 							+ "Posição: " + posicao.getTitulo() + "\n"
 							+ "Candidato: "
 							+ candidatura.getCandidato().getNome() + " "
-							+ candidatura.getCandidato().getApelido(), posicao
-							.getResponsavel().getEmail());
+							+ candidatura.getCandidato().getApelido(),
+					posicao.getResponsavel());
 			mail.enviaEmailSimples(
 					"A sua candidatura espontânea foi atribuida a uma posição",
 					"A sua candidatura espontânea no site de candidaturas, foi atribuida à posição: "
-							+ posicao.getTitulo(), candidatura.getCandidato()
-							.getEmail());
+							+ posicao.getTitulo(), candidatura.getCandidato());
 		} else {
 			DisplayMessages.addWarnMessage("Falha ao atribuir a posição");
 		}

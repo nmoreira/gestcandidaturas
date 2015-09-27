@@ -79,7 +79,7 @@ public class DefinirCargo implements Serializable {
 					"Perfil atribuido",
 					"Um administrador do sistema, já lhe atribuiu o perfil de Administrador.\n"
 							+ "A partir de agora pode iniciar sessão no sistema e começar a sua atividade",
-					admin.getEmail());
+					admin);
 		} else {
 			DisplayMessages.addErrorMessage("Erro ao converter "
 					+ user.getNome() + " " + user.getApelido()
@@ -99,7 +99,7 @@ public class DefinirCargo implements Serializable {
 					"Perfil atribuido",
 					"Um administrador do sistema, já lhe atribuiu o perfil de Entrevistador.\n"
 							+ "A partir de agora pode iniciar sessão no sistema e começar a sua atividade",
-					ent.getEmail());
+					ent);
 		} else {
 			DisplayMessages.addErrorMessage("Erro ao converter "
 					+ user.getNome() + " " + user.getApelido()
@@ -117,7 +117,7 @@ public class DefinirCargo implements Serializable {
 					"Perfil atribuido",
 					"Um administrador do sistema, já lhe atribuiu o perfil de Gestor.\n"
 							+ "A partir de agora pode iniciar sessão no sistema e começar a sua atividade",
-					gest.getEmail());
+					gest);
 		} else {
 			DisplayMessages.addErrorMessage("Erro ao converter "
 					+ user.getNome() + " " + user.getApelido() + " em Gestor");

@@ -17,12 +17,15 @@
 				<p:outputLabel value="Password" for="password" />
 				<p:password size="30" id="password" value="#{login.password}"
 					required="true" />
-				<p:spacer/>
-				<h:panelGroup>
+				<f:facet name="footer">
 				<p:commandButton value="Login" action="#{login.login()}" />
 				<p:spacer width="20"/>
 				<p:button value="Registo" outcome="/paginas/novoutilizador.xhtml"/>
-				</h:panelGroup>
+				<p:spacer width="20"/>
+				<p:button value="Nova password" outcome="/paginas/passwordperdida" />
+				
+				</f:facet>
+				
 			</h:panelGrid>
 		</h:form>
 	</div>

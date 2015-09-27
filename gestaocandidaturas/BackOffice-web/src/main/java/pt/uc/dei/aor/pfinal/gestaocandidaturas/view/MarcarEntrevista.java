@@ -51,7 +51,7 @@ public class MarcarEntrevista implements Serializable {
 							+ "Posição: "
 							+ ent.getCandidatura().getPosicao().getTitulo()
 							+ "\n" + "Data da entrevista: " + data, ent
-							.getCandidatura().getCandidato().getEmail());
+							.getCandidatura().getCandidato());
 		} else {
 			DisplayMessages
 					.addErrorMessage("Erro ao marcar a data da entrevista");

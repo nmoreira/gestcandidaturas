@@ -132,7 +132,7 @@ public class NovaCandidatura implements Serializable {
 							"Candidatura espontânea submetida",
 							"Obrigado por submeter uma candidatura espontânea\n"
 									+ "Será notificado assim que a sua candidatura for analisada e atribuida a uma posição específica",
-							candidato.getEmail());
+							candidato);
 				} else {
 					DisplayMessages
 							.addErrorMessage("Falha ao submeter a candidatura espontânea!");
@@ -151,7 +151,7 @@ public class NovaCandidatura implements Serializable {
 									+ " submeteu uma nova candidatura à posição "
 									+ candidatura.getPosicao().getTitulo()
 									+ " da qual você é gestor", candidatura
-									.getPosicao().getResponsavel().getEmail());
+									.getPosicao().getResponsavel());
 				} else {
 					DisplayMessages
 							.addErrorMessage("Falha ao submeter a candidatura!");

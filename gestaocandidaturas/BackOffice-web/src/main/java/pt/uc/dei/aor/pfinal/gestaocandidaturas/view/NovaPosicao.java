@@ -144,7 +144,7 @@ public class NovaPosicao implements Serializable {
 						"Um administrador criou a nova posição "
 								+ pos.getTitulo()
 								+ " e definiu-o como Gestor desta posição!",
-						pos.getResponsavel().getEmail());
+						pos.getResponsavel());
 			}
 		}
 

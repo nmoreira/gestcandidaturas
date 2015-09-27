@@ -1,5 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -65,8 +67,26 @@ public class UtilizadorService {
 		return userFacade.findByLogin(login);
 	}
 
+	public Utilizador getUtilizadorByEmail(String email) {
+		return userFacade.findByEmail(email);
+	}
+
 	public List<Utilizador> listaUtilizadores() {
 		return (List<Utilizador>) userFacade.findAll();
+	}
+
+	public String geraNovaPassword(String email) {
+		Utilizador user = userFacade.findByEmail(email);
+		String newPass = getRandomPass();
+		if (userFacade.changePassword(user.getId(), newPass))
+			return newPass;
+		else
+			return null;
+	}
+
+	private String getRandomPass() {
+		SecureRandom random = new SecureRandom();
+		return new BigInteger(130, random).toString(32);
 	}
 
 }

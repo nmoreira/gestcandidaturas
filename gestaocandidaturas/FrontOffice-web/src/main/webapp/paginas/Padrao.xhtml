@@ -108,9 +108,10 @@
 					required="true" />
 
 				<f:facet name="footer">
-				<p:spacer/>
 					<p:commandButton value="Login" action="#{login.login()}"
 						oncomplete="handleLoginRequest(xhr, status, args)" update="user" />
+					<p:spacer width="20"/>
+					<p:button value="Esqueci-me da password" outcome="/paginas/passwordperdida" />
 				</f:facet>
 			</h:panelGrid>
 		</p:dialog>

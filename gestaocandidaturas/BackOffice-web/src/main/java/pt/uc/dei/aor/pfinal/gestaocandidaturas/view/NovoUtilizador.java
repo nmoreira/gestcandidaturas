@@ -53,7 +53,7 @@ public class NovoUtilizador implements Serializable {
 							+ apelido
 							+ ". Obrigado por se registar no nosso site!\n"
 							+ "Aguarde que um administrador lhe atribua o perfil correto, para poder começar a navegar no site!",
-					email);
+					userService.getUtilizadorByLogin(login));
 		}
 	}
 
