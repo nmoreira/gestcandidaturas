@@ -38,6 +38,9 @@ public class ConfigurationXML {
 	protected String email;
 
 	@XmlElement
+	protected String tema;
+
+	@XmlElement
 	protected String smtpHostName;
 
 	@XmlElement
@@ -212,5 +215,13 @@ public class ConfigurationXML {
 
 	public void setSmtpFromEmail(String smtpFromEmail) {
 		this.smtpFromEmail = smtpFromEmail;
+	}
+
+	public String getTema() {
+		return tema;
+	}
+
+	public void setTema(String tema) {
+		this.tema = tema;
 	}
 }

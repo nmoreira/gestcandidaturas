@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.view.Theme;
 
 @Named
 @ApplicationScoped
@@ -47,6 +48,10 @@ public class Configuration {
 
 	public void setConf(ConfigurationXML conf) {
 		this.conf = conf;
+	}
+
+	public Theme[] getTemas() {
+		return Theme.values();
 	}
 
 }

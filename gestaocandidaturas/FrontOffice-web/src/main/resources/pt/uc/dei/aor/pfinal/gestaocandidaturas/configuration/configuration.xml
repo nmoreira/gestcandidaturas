@@ -5,6 +5,7 @@
     <morada>Parque Industrial de Taveiro, lote 49 - 3045-504 Coimbra, Portugal</morada>
     <telefone>+351 239 989 100</telefone>
     <email>info@criticalsoftware.com</email>
+    <tema>aristo</tema>
     <smtpHostName>smtp.gmail.com</smtpHostName>
     <smtpPort>465</smtpPort>
     <smtpUsername>candidaturasaor@gmail.com</smtpUsername>

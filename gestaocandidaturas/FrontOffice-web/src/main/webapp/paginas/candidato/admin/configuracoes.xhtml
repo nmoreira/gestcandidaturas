@@ -31,6 +31,17 @@
 					<p:outputLabel value="Email de contacto" for="email" />
 					<p:inputText id="email" value="#{configuration.conf.email}"
 						size="40" required="true" />
+					<p:outputLabel for="advanced" value="Tema" /> 
+			        
+			        <p:themeSwitcher id="advanced" style="width:165px" effect="fade" var="t" value="#{configuration.conf.tema}">
+			            <f:selectItem itemLabel="Escolha um tema" itemValue="" />
+			            <f:selectItems value="#{configuration.temas}" var="theme" itemLabel="#{theme.desc}" itemValue="#{theme.name}">			 						 					 
+			            <p:column>
+			                 #{theme.desc}
+			            </p:column>
+			            </f:selectItems>
+			        </p:themeSwitcher>
+			        
 				</p:panelGrid>
 				<br />
 				<br />
