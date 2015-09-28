@@ -152,6 +152,13 @@ public class NovaCandidatura implements Serializable {
 									+ candidatura.getPosicao().getTitulo()
 									+ " da qual você é gestor", candidatura
 									.getPosicao().getResponsavel());
+					mail.enviaEmailSimples(
+							"Nova candidatura",
+							"Obrigado pela sua candidatura à posição de "
+									+ posicao.getTitulo()
+									+ ".\n"
+									+ "Acompanhe a evolução da sua candidatura na opção Minhas candidaturas, depois de fazer login no site!",
+							candidato);
 				} else {
 					DisplayMessages
 							.addErrorMessage("Falha ao submeter a candidatura!");
