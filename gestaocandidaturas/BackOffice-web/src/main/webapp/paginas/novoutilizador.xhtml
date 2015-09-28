@@ -4,14 +4,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 	<ui:define name="titulo">Novo Utilizador</ui:define>
 
 	<ui:define name="corpo">
 
 		<h:form>
 
-			<p:panelGrid columns="1" style="width: 50%; margin-top:20px; margin-left:350px">
+			<p:panelGrid columns="1"
+				style="width: 50%; margin-top:20px; margin-left:350px">
 				<h1>Novo Utilizador</h1>
 			</p:panelGrid>
 
@@ -19,8 +20,9 @@
 				style="width: 50%; margin-top:20px; margin-left:350px"
 				columnClasses="rotulo,campo">
 				<p:outputLabel value="Login" for="login" />
-				<p:inputText id="login" size="20" 
-					value="#{novoUtilizador.login}" required="true">
+				<p:inputText id="login" size="20" value="#{novoUtilizador.login}"
+					required="true"
+					requiredMessage="Por favor introduza o login que pretende usar">
 					<p:ajax listener="#{novoUtilizador.validaLogin()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
@@ -30,28 +32,34 @@
 					feedback="true" strongLabel="Password Forte"
 					weakLabel="Password Fraca" goodLabel="Password boa"
 					promptLabel="Por favor introduza uma password" required="true"
-					inline="true" match="confirmaPassword" />
+					requiredMessage="Por favor introduza uma password" inline="true"
+					match="confirmaPassword" />
 
 				<p:outputLabel value="Confirmar password" for="confirmaPassword" />
-				<p:password id="confirmaPassword" required="true" />
+				<p:password id="confirmaPassword" required="true"
+					requiredMessage="Por favor confirme a sua password" />
 
 				<p:outputLabel value="Email" for="email" />
-				<p:inputText id="email" size="20" 
-					value="#{novoUtilizador.email}" required="true">
+				<p:inputText id="email" size="20" value="#{novoUtilizador.email}"
+					required="true"
+					requiredMessage="Por favor introduza o seu endereço de email"
+					validatorMessage="Formato de email inválido">
+					<f:validateRegex pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
 					<p:ajax listener="#{novoUtilizador.validaEmail()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Primeiro Nome" for="pnome" />
-				<p:inputText id="pnome" size="20" 
-					value="#{novoUtilizador.nome}" required="true" />
+				<p:inputText id="pnome" size="20" value="#{novoUtilizador.nome}"
+					required="true"
+					requiredMessage="Por favor introduza o seu primeiro nome" />
 
-				<p:outputLabel value="Sobrenome" for="snome" />
-				<p:inputText id="snome" size="20" 
-					value="#{novoUtilizador.apelido}" required="true" />
+				<p:outputLabel value="Apelido" for="snome" />
+				<p:inputText id="snome" size="20" value="#{novoUtilizador.apelido}"
+					required="true" requiredMessage="Por favor introduza o seu apelido" />
 
 				<p:commandButton value="Criar conta"
-					action="#{novoUtilizador.criaUtilizador()}" update="status" />
+					action="#{novoUtilizador.criaUtilizador()}" update="status @form" />
 				<p:button value="Limpar" outcome="/paginas/novoutilizador" />
 
 

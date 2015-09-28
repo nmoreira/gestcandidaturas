@@ -20,11 +20,11 @@
 			<h:outputText value="#{posicaoCandidaturas.posicao.titulo}" />
 			<p:outputLabel value="Data de Abertura" />
 			<h:outputText value="#{posicaoCandidaturas.posicao.dataAbertura}">
-				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+				<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
 			</h:outputText>
 			<p:outputLabel value="Data de Fecho" />
 			<h:outputText value="#{posicaoCandidaturas.posicao.dataFecho}">
-				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+				<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
 			</h:outputText>
 			<p:outputLabel value="SLA" />
 			<h:outputText value="#{posicaoCandidaturas.posicao.sla}" />
@@ -38,7 +38,8 @@
 			<p:outputLabel value="Vagas" />
 			<h:outputText value="#{posicaoCandidaturas.posicao.quantidadeVagas}" />
 			<p:outputLabel value="Gestor de posição" />
-			<h:outputText value="#{posicaoCandidaturas.posicao.responsavel.nome} #{posicaoCandidaturas.posicao.responsavel.apelido}" />
+			<h:outputText
+				value="#{posicaoCandidaturas.posicao.responsavel.nome} #{posicaoCandidaturas.posicao.responsavel.apelido}" />
 			<p:outputLabel value="Estado" />
 			<h:outputText value="#{posicaoCandidaturas.posicao.estado.valor}" />
 		</p:panelGrid>
@@ -60,7 +61,9 @@
 				</h:outputText>
 			</p:column>
 			<p:column headerText="Carta de Motivação" width="155">
-				<p:link value="Ver" href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/FrontOffice-web#{resultado.cartaMotivacao}" target="_blank"/>
+				<p:link value="Ver"
+					href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/FrontOffice-web#{resultado.cartaMotivacao}"
+					target="_blank" />
 			</p:column>
 			<p:column headerText="Cidade" sortBy="#{resultado.candidato.cidade}">
 				<h:outputText value="#{resultado.candidato.cidade}" />

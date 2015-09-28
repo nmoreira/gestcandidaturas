@@ -8,8 +8,7 @@
 	<ui:define name="titulo">Nova Candidatura</ui:define>
 
 	<ui:define name="corpo">
-		<p:message id="m1" for=":p:fonte" />
-		<p:message id="m2" for=":p:cmotivacao" />
+
 
 		<p:panelGrid columns="1" id="painel1"
 			style="width: 50%; margin-top:20px; margin-left:350px"
@@ -17,14 +16,14 @@
 			<h1>Nova Candidatura</h1>
 		</p:panelGrid>
 
-		<h:panelGrid columns="2" 
+		<p:panelGrid columns="2"
 			style="width: 50%; margin-top:20px; margin-left:350px"
 			columnClasses="rotulo,campo">
 			<p:outputLabel value="Candidato" />
 			<h:outputText value="#{novaCandidatura.candidato.nome}" />
 			<p:outputLabel value="Posição" />
 			<h:outputText value="#{novaCandidatura.posicao.titulo}" />
-		</h:panelGrid>
+		</p:panelGrid>
 
 		<h:form id="p">
 
@@ -60,14 +59,16 @@
 				</p:autoComplete>
 
 				<p:commandButton value="Submeter"
-					action="#{novaCandidatura.candidatar()}" update="@form m1 m2" icon="ui-icon-disk"/>
-				<p:button value="Limpar" outcome="/paginas/candidato/candidaturas" >
-					<f:param name="posid" value="#{novaCandidatura.posicao.id}"/>
+					action="#{novaCandidatura.candidatar()}" update="@form"
+					icon="ui-icon-disk" />
+				<p:button value="Limpar" outcome="/paginas/candidato/candidaturas">
+					<f:param name="posid" value="#{novaCandidatura.posicao.id}" />
 				</p:button>
 			</p:panelGrid>
 
+
 			<p:dialog header="Carregar uma carta de motivação"
-				widgetVar="novoFicheiro" resizable="false">
+				widgetVar="novoFicheiro" resizable="false" modal="true">
 
 				<p:fileUpload id="file"
 					fileUploadListener="#{novaCandidatura.fileUpload}" mode="advanced"

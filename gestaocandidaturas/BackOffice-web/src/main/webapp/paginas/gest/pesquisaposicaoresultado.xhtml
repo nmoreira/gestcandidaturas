@@ -5,45 +5,47 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form id="r">
-	<p:dataTable id="resultados"
-		value="#{pesquisaPosicoes.resultadosPesquisa}" var="resultado"
-		emptyMessage="Sem resultados" rows="10" paginator="true"
-		paginatorPosition="bottom" paginatorAlwaysVisible="false"
-		sortBy="#{resultado.titulo}" sortOrder="ascending">
-		<p:column headerText="Data" sortBy="#{resultado.dataAbertura}">
-			<h:outputText value="#{resultado.dataAbertura}">
-				<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
-			</h:outputText>
-		</p:column>
-		<p:column headerText="Código" sortBy="#{resultado.codPosicao}">
-			<h:outputText value="#{resultado.codPosicao}" />
-		</p:column>
-		<p:column headerText="Título" sortBy="#{resultado.titulo}">
-			<h:outputText value="#{resultado.titulo}" />
-		</p:column>
-		<p:column headerText="Local">
-			<p:dataList value="#{resultado.local}" var="l" type="none" >
+		<p:dataTable id="resultados"
+			value="#{pesquisaPosicoes.resultadosPesquisa}" var="resultado"
+			emptyMessage="Sem resultados" rows="10" paginator="true"
+			paginatorPosition="bottom" paginatorAlwaysVisible="false"
+			sortBy="#{resultado.titulo}" sortOrder="ascending">
+			<p:column headerText="Data" sortBy="#{resultado.dataAbertura}">
+				<h:outputText value="#{resultado.dataAbertura}">
+					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Código" sortBy="#{resultado.codPosicao}">
+				<h:outputText value="#{resultado.codPosicao}" />
+			</p:column>
+			<p:column headerText="Título" sortBy="#{resultado.titulo}">
+				<h:outputText value="#{resultado.titulo}" />
+			</p:column>
+			<p:column headerText="Local">
+				<p:dataList value="#{resultado.local}" var="l" type="none">
 				#{l.valor}
 			</p:dataList>
-		</p:column>
-		<p:column headerText="Estado" sortBy="#{resultado.estado.valor}">
-			<h:outputText value="#{resultado.estado.valor}" />
-		</p:column>
-		<p:column headerText="Empresa" sortBy="#{resultado.empresa}">
-			<h:outputText value="#{resultado.empresa}" />
-		</p:column>
-		<p:column headerText="Área" sortBy="#{resultado.areaTecnica.valor}">
-			<h:outputText value="#{resultado.areaTecnica.valor}" />
-		</p:column>
-		<p:column style="text-align: center;">
-		<p:button icon="ui-icon-search" title="Ver candidaturas" outcome="/paginas/gest/gestor/candidaturasaposicao">
-			<f:param name="posid" value="#{resultado.id}"/>
-		</p:button>
-		<p:button icon="ui-icon-pencil" title="Editar Posição" outcome="/paginas/gest/admin/editarposicao">
-			<f:param name="posicaoid" value="#{resultado.id}"/>
-		</p:button>	
-		</p:column>
-	</p:dataTable>
+			</p:column>
+			<p:column headerText="Estado" sortBy="#{resultado.estado.valor}">
+				<h:outputText value="#{resultado.estado.valor}" />
+			</p:column>
+			<p:column headerText="Empresa" sortBy="#{resultado.empresa}">
+				<h:outputText value="#{resultado.empresa}" />
+			</p:column>
+			<p:column headerText="Área" sortBy="#{resultado.areaTecnica.valor}">
+				<h:outputText value="#{resultado.areaTecnica.valor}" />
+			</p:column>
+			<p:column style="text-align: center;">
+				<p:button icon="ui-icon-search" title="Ver candidaturas"
+					outcome="/paginas/gest/gestor/candidaturasaposicao">
+					<f:param name="posid" value="#{resultado.id}" />
+				</p:button>
+				<p:button icon="ui-icon-pencil" title="Editar Posição"
+					outcome="/paginas/gest/admin/editarposicao">
+					<f:param name="posicaoid" value="#{resultado.id}" />
+				</p:button>
+			</p:column>
+		</p:dataTable>
 	</h:form>
 
 </ui:composition>

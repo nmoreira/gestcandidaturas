@@ -1,4 +1,4 @@
-<ui:composition template="/paginas/Padrao.xhtml" 
+<ui:composition template="/paginas/Padrao.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -13,19 +13,22 @@
 		<h:form id="lista">
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Nome do guião" for="nomeguiao" />
-				<p:inputText id="nomeguiao" value="#{novoGuiao.nomeGuiao}" required="true" size="40"/>
+				<p:inputText id="nomeguiao" value="#{novoGuiao.nomeGuiao}"
+					required="true" size="40"
+					requiredMessage="Por favor atribua um nome ao guião" />
 			</p:panelGrid>
 
 			<h3>Perguntas do guião</h3>
 
 			<p:dataTable id="guiao" value="#{novoGuiao.novoGuiao.questoes}"
-				var="questao" emptyMessage="Guião sem perguntas" draggableRows="true"
-				sortBy="#{questao.ordem}">
-				<p:ajax event="rowReorder" listener="#{novoGuiao.reordenar}" update="guiao"/>
+				var="questao" emptyMessage="Guião sem perguntas"
+				draggableRows="true" sortBy="#{questao.ordem}">
+				<p:ajax event="rowReorder" listener="#{novoGuiao.reordenar}"
+					update="guiao" />
 				<f:facet name="header">
 					<p:outputPanel style="text-align: left;">
 						<p:commandButton value="Nova Pergunta"
-						onclick="PF('novapergunta').show();" process="@none" />
+							onclick="PF('novapergunta').show();" process="@none" />
 					</p:outputPanel>
 				</f:facet>
 				<p:column headerText="Nº" width="10">
@@ -39,14 +42,15 @@
 				</p:column>
 				<p:column width="30">
 					<p:commandButton icon="ui-icon-closethick" title="Apagar pergunta"
-						update="guiao" action="#{novoGuiao.removeQuestao(questao)}" process="@this"/>
+						update="guiao" action="#{novoGuiao.removeQuestao(questao)}"
+						process="@this" />
 				</p:column>
 				<f:facet name="footer">
 					<p:outputPanel style="text-align: left;">
-					<p:commandButton value="Guardar guião"
-						action="#{novoGuiao.gravaGuiao()}" />						
+						<p:commandButton value="Guardar guião"
+							action="#{novoGuiao.gravaGuiao()}" />
 					</p:outputPanel>
-				</f:facet>								
+				</f:facet>
 			</p:dataTable>
 		</h:form>
 
@@ -54,97 +58,107 @@
 			position="490, 170" header="Nova Pergunta">
 			<h:form>
 				<h:panelGrid columns="2">
-				<p:outputLabel value="Tipo de questão" for="tipo" />
-				<p:selectOneMenu id="tipo" required="true"
-					value="#{novoGuiao.tipoQuestao}">
-					<f:selectItem itemValue="#{null}" itemLabel="- Selecionar Tipo -"/>
-					<f:selectItems value="#{novoGuiao.tiposDeQuestoes}" var="tipo"
-						itemValue="#{tipo}" itemLabel="#{tipo.valor}" />
-					<p:ajax event="change" update="opcao" />
-				</p:selectOneMenu>
+					<p:outputLabel value="Tipo de questão" for="tipo" />
+					<p:selectOneMenu id="tipo" required="true"
+						requiredMessage="Por favor selecione o tipo de questão"
+						value="#{novoGuiao.tipoQuestao}">
+						<f:selectItem itemValue="#{null}" itemLabel="- Selecionar Tipo -" />
+						<f:selectItems value="#{novoGuiao.tiposDeQuestoes}" var="tipo"
+							itemValue="#{tipo}" itemLabel="#{tipo.valor}" />
+						<p:ajax event="change" update="opcao" />
+					</p:selectOneMenu>
 				</h:panelGrid>
 				<br />
 				<h:panelGroup id="opcao">
 					<p:panelGrid rendered="#{novoGuiao.tipoQuestao.equals('LIVRE')}">
 						<p:row>
-						<p:column>
-						<p:outputLabel value="Texto da pergunta" for="perguntaTL" />
-						<br/>
-						<p:inputText id="perguntaTL" value="#{novoGuiao.pergunta}" size="50" required="true"/>
-						</p:column>
+							<p:column>
+								<p:outputLabel value="Texto da pergunta" for="perguntaTL" />
+								<br />
+								<p:inputText id="perguntaTL" value="#{novoGuiao.pergunta}"
+									size="50" required="true"
+									requiredMessage="Por favor introduza o texto da pergunta" />
+							</p:column>
 						</p:row>
 						<p:row>
-						<p:column style="text-align: center;">
-						<p:inputTextarea value="Caixa de texto que conterá a resposta"
-							disabled="true" rows="4" cols="50" />
-						</p:column>
+							<p:column style="text-align: center;">
+								<p:inputTextarea value="Caixa de texto que conterá a resposta"
+									disabled="true" rows="4" cols="50" />
+							</p:column>
 						</p:row>
-						<f:facet name="footer" >
-						<p:row>
-						<p:column style="text-align: right;">
-						<p:commandButton value="Adicionar pergunta"
-							action="#{novoGuiao.gravarPerguntaTextoLivre()}"
-							update=":lista:guiao :np" oncomplete="PF('novapergunta').hide();" />
-						</p:column>
-						</p:row>
+						<f:facet name="footer">
+							<p:row>
+								<p:column style="text-align: right;">
+									<p:commandButton value="Adicionar pergunta"
+										action="#{novoGuiao.gravarPerguntaTextoLivre()}"
+										update=":lista:guiao :np"
+										oncomplete="PF('novapergunta').hide();" />
+								</p:column>
+							</p:row>
 						</f:facet>
 					</p:panelGrid>
 
 					<p:panelGrid
 						rendered="#{novoGuiao.tipoQuestao.equals('ESCALA_1_5')}">
 						<p:row>
-						<p:column>
-						<p:outputLabel value="Texto da pergunta" for="perguntaE" />
-						<br/>
-						<p:inputText id="perguntaE" value="#{novoGuiao.pergunta}" size="50" required="true"/>
-						</p:column>
-						</p:row>
-						<p:row>
-						<p:column style="text-align: center;">
-						<p:selectOneRadio disabled="true" >
-							<f:selectItem itemLabel="1" itemValue="1" />
-							<f:selectItem itemLabel="2" itemValue="2" />
-							<f:selectItem itemLabel="3" itemValue="3" />
-							<f:selectItem itemLabel="4" itemValue="4" />
-							<f:selectItem itemLabel="5" itemValue="5" />
-						</p:selectOneRadio>
-						</p:column>
-						</p:row>
-						<f:facet name="footer" >
-						<p:row>
-						<p:column style="text-align: right;">
-						<p:commandButton value="Gravar pergunta"
-							action="#{novoGuiao.gravarPerguntaEscala1a5()}"
-							update=":lista:guiao :np" oncomplete="PF('novapergunta').hide();" />
+							<p:column>
+								<p:outputLabel value="Texto da pergunta" for="perguntaE" />
+								<br />
+								<p:inputText id="perguntaE" value="#{novoGuiao.pergunta}"
+									size="50" required="true"
+									requiredMessage="Por favor introduza o texto da pergunta" />
 							</p:column>
 						</p:row>
+						<p:row>
+							<p:column style="text-align: center;">
+								<p:selectOneRadio disabled="true">
+									<f:selectItem itemLabel="1" itemValue="1" />
+									<f:selectItem itemLabel="2" itemValue="2" />
+									<f:selectItem itemLabel="3" itemValue="3" />
+									<f:selectItem itemLabel="4" itemValue="4" />
+									<f:selectItem itemLabel="5" itemValue="5" />
+								</p:selectOneRadio>
+							</p:column>
+						</p:row>
+						<f:facet name="footer">
+							<p:row>
+								<p:column style="text-align: right;">
+									<p:commandButton value="Gravar pergunta"
+										action="#{novoGuiao.gravarPerguntaEscala1a5()}"
+										update=":lista:guiao :np"
+										oncomplete="PF('novapergunta').hide();" />
+								</p:column>
+							</p:row>
 						</f:facet>
 					</p:panelGrid>
 
 					<p:panelGrid rendered="#{novoGuiao.tipoQuestao.equals('SIM_NAO')}">
 						<p:row>
-						<p:column>
-						<p:outputLabel value="Texto da pergunta" for="perguntaSN" />
-						<br/>
-						<p:inputText id="perguntaSN" value="#{novoGuiao.pergunta}" size="50" required="true"/>
-						</p:column>
+							<p:column>
+								<p:outputLabel value="Texto da pergunta" for="perguntaSN" />
+								<br />
+								<p:inputText id="perguntaSN" value="#{novoGuiao.pergunta}"
+									size="50" required="true"
+									requiredMessage="Por favor introduza o texto da pergunta" />
+							</p:column>
 						</p:row>
 						<p:row>
-						<p:column style="text-align: center;">
-						<p:selectOneRadio disabled="true">
-							<f:selectItem itemLabel="Sim" itemValue="Sim" />
-							<f:selectItem itemLabel="Não" itemValue="Não" />
-						</p:selectOneRadio>
-						</p:column>
+							<p:column style="text-align: center;">
+								<p:selectOneRadio disabled="true">
+									<f:selectItem itemLabel="Sim" itemValue="Sim" />
+									<f:selectItem itemLabel="Não" itemValue="Não" />
+								</p:selectOneRadio>
+							</p:column>
 						</p:row>
-						<f:facet name="footer" >
-						<p:row>
-						<p:column style="text-align: right;">
-						<p:commandButton value="Gravar pergunta"
-							action="#{novoGuiao.gravarPerguntaSimNao()}"
-							update=":lista:guiao :np" oncomplete="PF('novapergunta').hide();" />
-						</p:column>
-						</p:row>
+						<f:facet name="footer">
+							<p:row>
+								<p:column style="text-align: right;">
+									<p:commandButton value="Gravar pergunta"
+										action="#{novoGuiao.gravarPerguntaSimNao()}"
+										update=":lista:guiao :np"
+										oncomplete="PF('novapergunta').hide();" />
+								</p:column>
+							</p:row>
 						</f:facet>
 					</p:panelGrid>
 				</h:panelGroup>

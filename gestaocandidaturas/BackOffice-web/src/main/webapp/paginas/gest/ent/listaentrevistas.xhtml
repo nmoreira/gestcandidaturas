@@ -1,15 +1,15 @@
-<ui:composition template="/paginas/Padrao.xhtml" 
+<ui:composition template="/paginas/Padrao.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-<ui:define name="titulo">Lista das minhas Entrevistas</ui:define>
-<ui:define name="corpo">
-<h1>Lista das minhas Entrevistas</h1>
+	<ui:define name="titulo">Lista das minhas Entrevistas</ui:define>
+	<ui:define name="corpo">
+		<h1>Lista das minhas Entrevistas</h1>
 
-<h:form>
+		<h:form>
 			<p:dataTable value="#{listaEntrevistasUtilizador.minhasEntrevistas}"
 				var="entrevista" emptyMessage="Sem entrevistas atribuidas a sí">
 				<p:column headerText="Posição">
@@ -21,18 +21,18 @@
 				</p:column>
 				<p:column headerText="Data da entrevista" width="190"
 					style="text-aign: center;">
-					<h:outputText value="#{entrevista.dataEntrevista}" >
-						<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm"/>
+					<h:outputText value="#{entrevista.dataEntrevista}">
+						<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm" />
 					</h:outputText>
 				</p:column>
 				<p:column width="100" style="text-aign: center;">
 					<p:commandButton icon="ui-icon-person" value="Realizar entrevista"
 						action="/paginas/gest/ent/entrevistar">
-						<f:param name="entid" value="#{entrevista.id}"/>
+						<f:param name="entid" value="#{entrevista.id}" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</h:form>
 
-</ui:define>
+	</ui:define>
 </ui:composition>

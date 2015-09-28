@@ -12,177 +12,183 @@
 		<p:growl id="msgs" showDetail="true" />
 
 		<p:tabView dynamic="true" cache="true">
-			
-			
+
+
 			<p:tab title="Administrador">
 			</p:tab>
-			
+
 			<p:tab title="Gestor">
 			</p:tab>
-			
+
 			<p:tab title="Entrevistador">
 			</p:tab>
-			
+
 			<p:tab title="Pesquisar Posições">
-			<h:form>
-		<p:panelGrid columns="4" id="painel1"
-				style="width: 50%; margin-top:20px; margin-left:350px"
-				columnClasses="rotulo,campo">
-		<p:outputLabel for="codigo" value="Código" />
-		<p:inputText id="codigo" value="#{pesquisaPosicoes.codigo}" />
+				<h:form>
+					<p:panelGrid columns="4" id="painel1"
+						style="width: 50%; margin-top:20px; margin-left:350px"
+						columnClasses="rotulo,campo">
+						<p:outputLabel for="codigo" value="Código" />
+						<p:inputText id="codigo" value="#{pesquisaPosicoes.codigo}" />
 
-		<p:outputLabel for="titulo" value="Título" />
-		<p:inputText id="titulo" value="#{pesquisaPosicoes.titulo}" />
-		
-		<p:outputLabel for="data" value="Data" />
-		<h:panelGroup>
-			<p:calendar id="data" value="#{pesquisaPosicoes.data}"
-				navigator="true" readonlyInput="true" mode="popup" size="11" />
-			<p:commandButton action="#{pesquisaPosicoes.resetData()}" icon="ui-icon-close" 
-			update="data" process="@this" style="width: 22px; height: 22px; vertical-align: middle; margin: 3px;"/>
-		</h:panelGroup>
+						<p:outputLabel for="titulo" value="Título" />
+						<p:inputText id="titulo" value="#{pesquisaPosicoes.titulo}" />
 
-		<p:outputLabel for="local" value="Localização" />
-		<p:selectOneMenu id="local" value="#{pesquisaPosicoes.local}"
-			converter="localPosicao">
-			<f:selectItem itemValue="#{null}" itemLabel="---------" />
-			<f:selectItems value="#{pesquisaPosicoes.locaisEnum}" var="local"
-				itemLabel="#{local.valor}" itemValue="#{local}" />
-		</p:selectOneMenu>
+						<p:outputLabel for="data" value="Data" />
+						<h:panelGroup>
+							<p:calendar id="data" value="#{pesquisaPosicoes.data}"
+								navigator="true" readonlyInput="true" mode="popup" size="11" />
+							<p:commandButton action="#{pesquisaPosicoes.resetData()}"
+								icon="ui-icon-close" update="data" process="@this"
+								style="width: 22px; height: 22px; vertical-align: middle; margin: 3px;" />
+						</h:panelGroup>
 
-		<p:outputLabel for="empresa" value="Empresa" />
-		<p:inputText id="empresa" value="#{pesquisaPosicoes.empresa}" />
-		
-		<p:outputLabel for="estado" value="Estado" />
-		<p:selectOneMenu id="estado" value="#{pesquisaPosicoes.estado}">
-			<f:selectItem itemValue="#{null}" itemLabel="---------" />
-			<f:selectItems value="#{pesquisaPosicoes.estadosEnum}" var="estado"
-				itemLabel="#{estado.valor}" itemValue="#{estado}" />
-		</p:selectOneMenu>
-		<p:outputLabel for="area" value="Área Técnica" />
-		<p:selectOneMenu id="area" value="#{pesquisaPosicoes.area}"
-			style="width:200px;">
-			<f:selectItem itemValue="#{null}" itemLabel="---------" />
-			<f:selectItems value="#{pesquisaPosicoes.areasTecnicasEnum}"
-				var="area" itemLabel="#{area.valor}" itemValue="#{area}" />
-		</p:selectOneMenu>
-		</p:panelGrid>
-		
-		
-		<p:toolbar with="50px" >
-		<p:toolbarGroup allign="right">
-			<p:commandButton value="Pesquisar" action="#{pesquisaPosicoes.Pesquisar()}" update="resultados"></p:commandButton>
-		<p:button value="Nova Posição" outcome="/paginas/posicoes.xhtml"></p:button>
-		</p:toolbarGroup>
-	
-	
-		
-		
-		
-		</p:toolbar>
+						<p:outputLabel for="local" value="Localização" />
+						<p:selectOneMenu id="local" value="#{pesquisaPosicoes.local}"
+							converter="localPosicao">
+							<f:selectItem itemValue="#{null}" itemLabel="---------" />
+							<f:selectItems value="#{pesquisaPosicoes.locaisEnum}" var="local"
+								itemLabel="#{local.valor}" itemValue="#{local}" />
+						</p:selectOneMenu>
 
-	<br />
-	
-	
-	<p:dataTable id="resultados"
-		value="#{pesquisaPosicoes.resultadosPesquisa}" var="resultado"
-		emptyMessage="Sem resultados" rows="10" paginator="true"
-		paginatorPosition="bottom" paginatorAlwaysVisible="false"
-		sortBy="#{resultado.titulo}" sortOrder="ascending">
-		<p:column headerText="Data" sortBy="#{resultado.dataAbertura}">
-			<h:outputText value="#{resultado.dataAbertura}">
-				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-			</h:outputText>
-		</p:column>
-		<p:column headerText="Código" sortBy="#{resultado.codPosicao}">
-			<h:outputText value="#{resultado.codPosicao}" />
-		</p:column>
-		<p:column headerText="Título" sortBy="#{resultado.titulo}">
-			<h:outputText value="#{resultado.titulo}" />
-		</p:column>
-		<p:column headerText="Local">
-			<p:dataList value="#{resultado.local}" var="l" type="none">
+						<p:outputLabel for="empresa" value="Empresa" />
+						<p:inputText id="empresa" value="#{pesquisaPosicoes.empresa}" />
+
+						<p:outputLabel for="estado" value="Estado" />
+						<p:selectOneMenu id="estado" value="#{pesquisaPosicoes.estado}">
+							<f:selectItem itemValue="#{null}" itemLabel="---------" />
+							<f:selectItems value="#{pesquisaPosicoes.estadosEnum}"
+								var="estado" itemLabel="#{estado.valor}" itemValue="#{estado}" />
+						</p:selectOneMenu>
+						<p:outputLabel for="area" value="Área Técnica" />
+						<p:selectOneMenu id="area" value="#{pesquisaPosicoes.area}"
+							style="width:200px;">
+							<f:selectItem itemValue="#{null}" itemLabel="---------" />
+							<f:selectItems value="#{pesquisaPosicoes.areasTecnicasEnum}"
+								var="area" itemLabel="#{area.valor}" itemValue="#{area}" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+
+
+					<p:toolbar with="50px">
+						<p:toolbarGroup allign="right">
+							<p:commandButton value="Pesquisar"
+								action="#{pesquisaPosicoes.Pesquisar()}" update="resultados"></p:commandButton>
+							<p:button value="Nova Posição" outcome="/paginas/posicoes.xhtml"></p:button>
+						</p:toolbarGroup>
+
+
+
+
+
+					</p:toolbar>
+
+					<br />
+
+
+					<p:dataTable id="resultados"
+						value="#{pesquisaPosicoes.resultadosPesquisa}" var="resultado"
+						emptyMessage="Sem resultados" rows="10" paginator="true"
+						paginatorPosition="bottom" paginatorAlwaysVisible="false"
+						sortBy="#{resultado.titulo}" sortOrder="ascending">
+						<p:column headerText="Data" sortBy="#{resultado.dataAbertura}">
+							<h:outputText value="#{resultado.dataAbertura}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Código" sortBy="#{resultado.codPosicao}">
+							<h:outputText value="#{resultado.codPosicao}" />
+						</p:column>
+						<p:column headerText="Título" sortBy="#{resultado.titulo}">
+							<h:outputText value="#{resultado.titulo}" />
+						</p:column>
+						<p:column headerText="Local">
+							<p:dataList value="#{resultado.local}" var="l" type="none">
 				#{l.valor}
 			</p:dataList>
-		</p:column>
-		<p:column headerText="Estado" sortBy="#{resultado.estado.valor}">
-			<h:outputText value="#{resultado.estado.valor}" />
-		</p:column>
-		<p:column headerText="Empresa" sortBy="#{resultado.empresa}">
-			<h:outputText value="#{resultado.empresa}" />
-		</p:column>
-		<p:column headerText="Área" sortBy="#{resultado.areaTecnica.valor}">
-			<h:outputText value="#{resultado.areaTecnica.valor}" />
-		</p:column>
-	</p:dataTable>
-			
-			</h:form>
+						</p:column>
+						<p:column headerText="Estado" sortBy="#{resultado.estado.valor}">
+							<h:outputText value="#{resultado.estado.valor}" />
+						</p:column>
+						<p:column headerText="Empresa" sortBy="#{resultado.empresa}">
+							<h:outputText value="#{resultado.empresa}" />
+						</p:column>
+						<p:column headerText="Área"
+							sortBy="#{resultado.areaTecnica.valor}">
+							<h:outputText value="#{resultado.areaTecnica.valor}" />
+						</p:column>
+					</p:dataTable>
+
+				</h:form>
 			</p:tab>
-			
-			
-			
+
+
+
 			<p:tab title="Pesquisar Candidaturas">
-			<h:form>
-		<p:panelGrid columns="6">
-			<p:outputLabel for="nome" value="Nome" />
-			<p:inputText id="nome" value="#{pesquisaCandidaturas.nome}" />
+				<h:form>
+					<p:panelGrid columns="6">
+						<p:outputLabel for="nome" value="Nome" />
+						<p:inputText id="nome" value="#{pesquisaCandidaturas.nome}" />
 
-			<p:outputLabel for="apelido" value="Apelido" />
-			<p:inputText id="apelido" value="#{pesquisaCandidaturas.apelido}" />
+						<p:outputLabel for="apelido" value="Apelido" />
+						<p:inputText id="apelido" value="#{pesquisaCandidaturas.apelido}" />
 
-			<p:outputLabel for="email" value="Email" />
-			<p:inputText id="email" value="#{pesquisaCandidaturas.email}" />
+						<p:outputLabel for="email" value="Email" />
+						<p:inputText id="email" value="#{pesquisaCandidaturas.email}" />
 
-			<p:outputLabel for="morada" value="Morada" />
-			<p:inputText id="morada" value="#{pesquisaCandidaturas.morada}" />
+						<p:outputLabel for="morada" value="Morada" />
+						<p:inputText id="morada" value="#{pesquisaCandidaturas.morada}" />
 
-			<p:outputLabel for="cidade" value="Cidade" />
-			<p:inputText id="cidade" value="#{pesquisaCandidaturas.cidade}" />
+						<p:outputLabel for="cidade" value="Cidade" />
+						<p:inputText id="cidade" value="#{pesquisaCandidaturas.cidade}" />
 
-			<p:outputLabel for="telefone" value="Telefone" />
-			<p:inputText id="telefone" value="#{pesquisaCandidaturas.telefone}" />
+						<p:outputLabel for="telefone" value="Telefone" />
+						<p:inputText id="telefone"
+							value="#{pesquisaCandidaturas.telefone}" />
 
-			<p:outputLabel for="telemovel" value="Telemovel" />
-			<p:inputText id="telemovel" value="#{pesquisaCandidaturas.telemovel}" />
+						<p:outputLabel for="telemovel" value="Telemovel" />
+						<p:inputText id="telemovel"
+							value="#{pesquisaCandidaturas.telemovel}" />
 
-			<p:outputLabel for="pais" value="País" />
-			<p:inputText id="pais" value="#{pesquisaCandidaturas.pais}" />
+						<p:outputLabel for="pais" value="País" />
+						<p:inputText id="pais" value="#{pesquisaCandidaturas.pais}" />
 
-			<p:outputLabel for="curso" value="Curso" />
-			<p:inputText id="curso" value="#{pesquisaCandidaturas.curso}" />
+						<p:outputLabel for="curso" value="Curso" />
+						<p:inputText id="curso" value="#{pesquisaCandidaturas.curso}" />
 
-			<p:outputLabel for="escola" value="Escola" />
-			<p:inputText id="escola" value="#{pesquisaCandidaturas.escola}" />
-			<p:commandButton value="Pesquisar"
-				action="#{pesquisaCandidaturas.Pesquisar()}" update="resultados" />
-		</p:panelGrid>
-	
-	<br />
-	<p:dataTable id="resultados"
-		value="#{pesquisaCandidaturas.resultadosPesquisa}" var="resultado"
-		emptyMessage="Sem resultados" rows="10" paginator="true"
-		paginatorPosition="bottom" paginatorAlwaysVisible="false"
-		sortBy="#{resultado.candidato.nome}" sortOrder="ascending">
-		<p:column headerText="Posição" sortBy="#{resultado.posicao.titulo}">
-			<h:outputText value="#{resultado.posicao.titulo}" />
-		</p:column>
-		<p:column headerText="Candidato"
-			sortBy="#{resultado.candidato.nome} #{resultado.candidato.apelido}">
-			<h:outputText
-				value="#{resultado.candidato.nome} #{resultado.candidato.apelido}" />
-		</p:column>
-		<p:column headerText="Data de Candidatura"
-			sortBy="#{resultado.dataCandidatura}">
-			<h:outputText value="#{resultado.dataCandidatura}">
-				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-			</h:outputText>
-		</p:column>
-	</p:dataTable>
-			</h:form>
+						<p:outputLabel for="escola" value="Escola" />
+						<p:inputText id="escola" value="#{pesquisaCandidaturas.escola}" />
+						<p:commandButton value="Pesquisar"
+							action="#{pesquisaCandidaturas.Pesquisar()}" update="resultados" />
+					</p:panelGrid>
+
+					<br />
+					<p:dataTable id="resultados"
+						value="#{pesquisaCandidaturas.resultadosPesquisa}" var="resultado"
+						emptyMessage="Sem resultados" rows="10" paginator="true"
+						paginatorPosition="bottom" paginatorAlwaysVisible="false"
+						sortBy="#{resultado.candidato.nome}" sortOrder="ascending">
+						<p:column headerText="Posição"
+							sortBy="#{resultado.posicao.titulo}">
+							<h:outputText value="#{resultado.posicao.titulo}" />
+						</p:column>
+						<p:column headerText="Candidato"
+							sortBy="#{resultado.candidato.nome} #{resultado.candidato.apelido}">
+							<h:outputText
+								value="#{resultado.candidato.nome} #{resultado.candidato.apelido}" />
+						</p:column>
+						<p:column headerText="Data de Candidatura"
+							sortBy="#{resultado.dataCandidatura}">
+							<h:outputText value="#{resultado.dataCandidatura}">
+								<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+				</h:form>
 			</p:tab>
-			
 
-</p:tabView>
+
+		</p:tabView>
 
 
 

@@ -18,6 +18,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.ResponsavelPosicaoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Guiao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.ResponsavelPosicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.mail.CommonsMail;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.AreaTecnica;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoPosicao;
@@ -43,6 +44,9 @@ public class EditarPosicao implements Serializable {
 
 	@Inject
 	private GuiaoService guiaoServ;
+
+	@Inject
+	private CommonsMail mail;
 
 	private Posicao posicao;
 	private String codPosicao;
@@ -108,6 +112,13 @@ public class EditarPosicao implements Serializable {
 		} else {
 			posicaoServ.atualizaPosicao(posicao);
 			DisplayMessages.addInfoMessage("Posição atualizada com sucesso!");
+			mail.enviaEmailSimples(
+					"Atualização de Posição",
+					"A posição "
+							+ posicao.getTitulo()
+							+ " na qual você é o gesto, foi atualizada.\n"
+							+ "Por favor consulte a posição na aplicação para conhecer as alterações.",
+					posicao.getResponsavel());
 		}
 
 	}

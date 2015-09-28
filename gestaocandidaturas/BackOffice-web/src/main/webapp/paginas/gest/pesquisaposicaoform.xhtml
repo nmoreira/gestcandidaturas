@@ -5,48 +5,48 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form>
-	<p:panelGrid columns="4">
-		<p:outputLabel for="codigo" value="Código" />
-		<p:inputText id="codigo" value="#{pesquisaPosicoes.codigo}" />
+		<p:panelGrid columns="4">
+			<p:outputLabel for="codigo" value="Código" />
+			<p:inputText id="codigo" value="#{pesquisaPosicoes.codigo}" />
 
-		<p:outputLabel for="titulo" value="Título" />
-		<p:inputText id="titulo" value="#{pesquisaPosicoes.titulo}" />
+			<p:outputLabel for="titulo" value="Título" />
+			<p:inputText id="titulo" value="#{pesquisaPosicoes.titulo}" />
 
-		<p:outputLabel for="data" value="Data" />
-		<h:panelGroup>
-			<p:calendar id="data" value="#{pesquisaPosicoes.data}"
-				navigator="true" readonlyInput="true" mode="popup" size="11" />
-			<p:commandButton action="#{pesquisaPosicoes.resetData()}"
-				icon="ui-icon-close" update="data" process="@this"
-				style="width: 22px; height: 22px; vertical-align: middle; margin: 3px;" />
-		</h:panelGroup>
+			<p:outputLabel for="data" value="Data" />
+			<h:panelGroup>
+				<p:calendar id="data" value="#{pesquisaPosicoes.data}"
+					navigator="true" readonlyInput="true" mode="popup" size="11" />
+				<p:commandButton action="#{pesquisaPosicoes.resetData()}"
+					icon="ui-icon-close" update="data" process="@this"
+					style="width: 22px; height: 22px; vertical-align: middle; margin: 3px;" />
+			</h:panelGroup>
 
-		<p:outputLabel for="local" value="Localização" />
-		<p:selectOneMenu id="local" value="#{pesquisaPosicoes.local}"
-			converter="localPosicao">
-			<f:selectItem itemValue="#{null}" itemLabel="---------" />
-			<f:selectItems value="#{pesquisaPosicoes.locaisEnum}" var="local"
-				itemLabel="#{local.valor}" itemValue="#{local}" />
-		</p:selectOneMenu>
+			<p:outputLabel for="local" value="Localização" />
+			<p:selectOneMenu id="local" value="#{pesquisaPosicoes.local}"
+				converter="localPosicao">
+				<f:selectItem itemValue="#{null}" itemLabel="---------" />
+				<f:selectItems value="#{pesquisaPosicoes.locaisEnum}" var="local"
+					itemLabel="#{local.valor}" itemValue="#{local}" />
+			</p:selectOneMenu>
 
-		<p:outputLabel for="empresa" value="Empresa" />
-		<p:inputText id="empresa" value="#{pesquisaPosicoes.empresa}" />
+			<p:outputLabel for="empresa" value="Empresa" />
+			<p:inputText id="empresa" value="#{pesquisaPosicoes.empresa}" />
 
-		<p:outputLabel for="estado" value="Estado" />
-		<p:selectOneMenu id="estado" value="#{pesquisaPosicoes.estado}">
-			<f:selectItem itemValue="#{null}" itemLabel="---------" />
-			<f:selectItems value="#{pesquisaPosicoes.estadosEnum}" var="estado"
-				itemLabel="#{estado.valor}" itemValue="#{estado}" />
-		</p:selectOneMenu>
-		<p:outputLabel for="area" value="Área Técnica" />
-		<p:selectOneMenu id="area" value="#{pesquisaPosicoes.area}"
-			style="width:200px;">
-			<f:selectItem itemValue="#{null}" itemLabel="---------" />
-			<f:selectItems value="#{pesquisaPosicoes.areasTecnicasEnum}"
-				var="area" itemLabel="#{area.valor}" itemValue="#{area}" />
-		</p:selectOneMenu>
-		<p:commandButton value="Pesquisar"
-			action="#{pesquisaPosicoes.Pesquisar()}" update=":r:resultados" />
-	</p:panelGrid>
+			<p:outputLabel for="estado" value="Estado" />
+			<p:selectOneMenu id="estado" value="#{pesquisaPosicoes.estado}">
+				<f:selectItem itemValue="#{null}" itemLabel="---------" />
+				<f:selectItems value="#{pesquisaPosicoes.estadosEnum}" var="estado"
+					itemLabel="#{estado.valor}" itemValue="#{estado}" />
+			</p:selectOneMenu>
+			<p:outputLabel for="area" value="Área Técnica" />
+			<p:selectOneMenu id="area" value="#{pesquisaPosicoes.area}"
+				style="width:200px;">
+				<f:selectItem itemValue="#{null}" itemLabel="---------" />
+				<f:selectItems value="#{pesquisaPosicoes.areasTecnicasEnum}"
+					var="area" itemLabel="#{area.valor}" itemValue="#{area}" />
+			</p:selectOneMenu>
+			<p:commandButton value="Pesquisar"
+				action="#{pesquisaPosicoes.Pesquisar()}" update=":r:resultados" />
+		</p:panelGrid>
 	</h:form>
 </ui:composition>

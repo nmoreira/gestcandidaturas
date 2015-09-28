@@ -15,22 +15,26 @@
 				columnClasses="rotulo,campo">
 				<p:outputLabel value="Login" for="login" />
 				<p:inputText id="login" size="20" 
-					value="#{editarPerfil.login}" required="true">
+					value="#{editarPerfil.login}" required="true" requiredMessage="Por favor indique o login a usar na aplicação">
 					<p:ajax listener="#{editarPerfil.validaLogin()}" event="change"
 						process="@this" update="status" partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Primeiro Nome" for="pnome" />
 				<p:inputText id="pnome" size="20" 
-					value="#{editarPerfil.candidato.nome}" required="true" />
+					value="#{editarPerfil.candidato.nome}" required="true" requiredMessage="Por favor indique o seu primeiro nome"/>
 
 				<p:outputLabel value="Apelido" for="apelido" />
 				<p:inputText id="apelido" size="20" 
-					value="#{editarPerfil.candidato.apelido}" required="true" />
+					value="#{editarPerfil.candidato.apelido}" required="true" requiredMessage="Por favor indique o seu apelido"/>
 
 				<p:outputLabel value="Email" for="email" />
 				<p:inputText id="email" size="20" 
-					value="#{editarPerfil.email}" required="true">
+					value="#{editarPerfil.email}" required="true"
+					requiredMessage="Por favor introduza o seu endereço de email"
+					validatorMessage="Formato de email inválido">
+					<f:validateRegex
+							pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
 					<p:ajax listener="#{editarPerfil.validaEmail()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
@@ -84,7 +88,7 @@
 
 
 				<p:commandButton value="Submeter alterações"
-					action="#{editarPerfil.atualizarCandidato()}" update="status"
+					action="#{editarPerfil.atualizarCandidato()}" update="@form"
 					icon="ui-icon-disk" />
 			</p:panelGrid>
 		</h:form>

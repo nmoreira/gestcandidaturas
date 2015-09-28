@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 	<ui:define name="titulo">Editar perfil de utilizador</ui:define>
 
 	<ui:define name="corpo">
@@ -21,29 +21,35 @@
 				style="width: 50%; margin-top:20px; margin-left:350px"
 				columnClasses="rotulo,campo">
 				<p:outputLabel value="Login" for="login" />
-				<p:inputText id="login" size="20"
-					value="#{editarPerfil.login}" required="true">
+				<p:inputText id="login" size="20" value="#{editarPerfil.login}"
+					required="true" requiredMessage="Por favor indique um login a usar">
 					<p:ajax listener="#{editarPerfil.validaLogin()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Email" for="email" />
-				<p:inputText id="email" size="20" 
-					value="#{editarPerfil.email}" required="true">
+				<p:inputText id="email" size="20" value="#{editarPerfil.email}"
+					required="true"
+					requiredMessage="Por favor introduza o seu endereço de email"
+					validatorMessage="Formato de email inválido">
+					<f:validateRegex pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
 					<p:ajax listener="#{editarPerfil.validaEmail()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Primeiro Nome" for="pnome" />
-				<p:inputText id="pnome" size="20" 
-					value="#{editarPerfil.utilizador.nome}" required="true" />
+				<p:inputText id="pnome" size="20"
+					value="#{editarPerfil.utilizador.nome}" required="true"
+					requiredMessage="Por favor introduza o seu primeiro nome" />
 
-				<p:outputLabel value="Sobrenome" for="snome" />
-				<p:inputText id="snome" size="20" 
-					value="#{editarPerfil.utilizador.apelido}" required="true" />
+				<p:outputLabel value="Apelido" for="snome" />
+				<p:inputText id="snome" size="20"
+					value="#{editarPerfil.utilizador.apelido}" required="true"
+					requiredMessage="Por favor introduza o seu apelido" />
 
 				<p:commandButton value="Atualizar perfil"
-					action="#{editarPerfil.atualizarUtilizador()}" update="status" />
+					action="#{editarPerfil.atualizarUtilizador()}"
+					update="status @form" />
 
 			</p:panelGrid>
 

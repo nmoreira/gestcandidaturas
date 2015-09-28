@@ -11,30 +11,35 @@
 
 		<h1>Alterar password</h1>
 		<h:form>
-			<p:panelGrid columns="2" style="width: 50%; margin-top:20px; margin-left:350px"
+			<p:panelGrid columns="2"
+				style="width: 50%; margin-top:20px; margin-left:350px"
 				columnClasses="rotulo,campo">
 				<p:outputLabel value="Password atual" for="pw" />
 				<p:password id="pw" value="#{atualizarPassword.antigaPass}"
-					required="true" />
+					required="true"
+					requiredMessage="Por favor introduza a password atual" />
 
 				<p:outputLabel value="Nova password" for="novapw" />
 				<p:password id="novapw" value="#{atualizarPassword.novaPass}"
 					feedback="true" strongLabel="Password Forte"
 					weakLabel="Password Fraca" goodLabel="Password boa"
 					promptLabel="Por favor introduza uma password" required="true"
-					inline="true" match="confirmaPassword" />
+					inline="true" match="confirmaPassword"
+					requiredMessage="Por favor introduza a nova password" />
 
 				<p:outputLabel value="Confirmar nova password"
 					for="confirmaPassword" />
-				<p:password id="confirmaPassword" required="true" />
+				<p:password id="confirmaPassword" required="true"
+					requiredMessage="Por favor confirme a nova password" />
 
 				<p:commandButton value="Alterar password"
 					action="#{atualizarPassword.alteraPass()}" update="status" />
-					
-					
+
+
 			</p:panelGrid>
-			<p:panelGrid columns="1" style="width: 50%; margin-top:20px; margin-left:350px;text-align: center">
-			<h:graphicImage library="imagens" name="pass.png" /> 
+			<p:panelGrid columns="1"
+				style="width: 50%; margin-top:20px; margin-left:350px;text-align: center">
+				<h:graphicImage library="imagens" name="pass.png" />
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

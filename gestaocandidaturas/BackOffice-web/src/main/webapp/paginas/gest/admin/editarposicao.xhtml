@@ -1,55 +1,63 @@
 <ui:composition template="/paginas/Padrao.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-<ui:define name="titulo">Editar Posição</ui:define>
+	<ui:define name="titulo">Editar Posição</ui:define>
 
-<ui:define name="corpo">
+	<ui:define name="corpo">
 
-<h1>Editar Posição</h1>
+		<h1>Editar Posição</h1>
 
 		<h:form>
 			<p:panelGrid columns="2">
 				<p:outputLabel for="codigo" value="Código da posição" />
 				<p:inputText id="codigo" required="true"
+					requiredMessage="Por favor atribua um código à posição"
 					value="#{editarPosicao.codPosicao}">
-					<p:ajax listener="#{editarPosicao.validaCodPosicao()}" event="change"
-						process="@this" partialSubmit="true" update="status" />
+					<p:ajax listener="#{editarPosicao.validaCodPosicao()}"
+						event="change" process="@this" partialSubmit="true"
+						update="status" />
 				</p:inputText>
 
 				<p:outputLabel for="titulo" value="Título" />
 				<p:inputText id="titulo" value="#{editarPosicao.posicao.titulo}"
-					required="true" />
+					required="true"
+					requiredMessage="Por favor atribua um título à posição" />
 
 				<p:outputLabel for="descricao" value="Descrição da posição" />
-				<p:inputTextarea id="descricao" value="#{editarPosicao.posicao.descricao}"
-					cols="60" rows="8" />
+				<p:inputTextarea id="descricao"
+					value="#{editarPosicao.posicao.descricao}" cols="60" rows="8" />
 
 				<p:outputLabel for="local" value="Localização" />
-				<p:selectManyCheckbox id="local" value="#{editarPosicao.posicao.local}"
-					converter="localPosicao">
+				<p:selectManyCheckbox id="local"
+					value="#{editarPosicao.posicao.local}" converter="localPosicao">
 					<f:selectItems value="#{editarPosicao.locais}" var="local"
 						itemLabel="#{local.valor}" itemValue="#{local}" />
 				</p:selectManyCheckbox>
 
 				<p:outputLabel for="quantidade" value="Quantidade de vagas" />
-				<p:inputText id="quantidade" value="#{editarPosicao.posicao.quantidadeVagas}" />
+				<p:inputText id="quantidade"
+					value="#{editarPosicao.posicao.quantidadeVagas}" />
 
 				<p:outputLabel for="dataAbertura"
 					value="Data de abertura da posição" />
-				<p:calendar id="dataAbertura" value="#{editarPosicao.posicao.dataAbertura}"
-					required="true" navigator="true" readonlyInput="true" mode="popup" />
+				<p:calendar id="dataAbertura"
+					value="#{editarPosicao.posicao.dataAbertura}" required="true"
+					navigator="true" readonlyInput="true" mode="popup"
+					requiredMessage="Por favor defina a data de abertura da posição" />
 
 				<p:outputLabel for="dataFecho" value="Data de fecho da posição" />
-				<p:calendar id="dataFecho" value="#{editarPosicao.posicao.dataFecho}"
-					navigator="true" readonlyInput="true" mode="popup" />
+				<p:calendar id="dataFecho"
+					value="#{editarPosicao.posicao.dataFecho}" navigator="true"
+					readonlyInput="true" mode="popup" />
 
 				<p:outputLabel for="responsavel" value="Responsável" />
-				<p:selectOneMenu id="responsavel" value="#{editarPosicao.posicao.responsavel}"
-					style="width:250px;" converter="responsavelPosicao" filter="true"
+				<p:selectOneMenu id="responsavel"
+					value="#{editarPosicao.posicao.responsavel}" style="width:250px;"
+					converter="responsavelPosicao" filter="true"
 					filterMatchMode="contains">
 					<f:selectItems value="#{editarPosicao.RESPONSAVEIS}"
 						var="responsavel"
@@ -59,7 +67,7 @@
 
 				<p:outputLabel for="guiao" value="Guião" />
 				<p:selectOneMenu id="guiao" value="#{editarPosicao.posicao.guiao}"
-				converter="guiaoConverter">
+					converter="guiaoConverter">
 					<f:selectItems value="#{novaPosicao.GUIOES_DISPONIVEIS}"
 						var="guiao" itemLabel="#{guiao.nome}" itemValue="#{guiao}" />
 				</p:selectOneMenu>
@@ -71,15 +79,15 @@
 				<p:inputText id="empresa" value="#{editarPosicao.posicao.empresa}" />
 
 				<p:outputLabel for="area" value="Área Técnica" />
-				<p:selectOneMenu id="area" value="#{editarPosicao.posicao.areaTecnica}"
-					style="width:200px;">
+				<p:selectOneMenu id="area"
+					value="#{editarPosicao.posicao.areaTecnica}" style="width:200px;">
 					<f:selectItems value="#{editarPosicao.areas}" var="area"
 						itemLabel="#{area.valor}" itemValue="#{area}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel for="canais" value="Canais de Publicação" />
-				<p:autoComplete id="canais" value="#{editarPosicao.posicao.canaisPublicacao}"
-					dropdown="true"
+				<p:autoComplete id="canais"
+					value="#{editarPosicao.posicao.canaisPublicacao}" dropdown="true"
 					completeMethod="#{editarPosicao.sugerirCanaisComunicacao}" />
 
 				<p:outputLabel for="estado" value="Estado da posição" />
@@ -95,6 +103,6 @@
 
 		</h:form>
 
-</ui:define>
+	</ui:define>
 
 </ui:composition>

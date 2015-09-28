@@ -4,12 +4,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 	<ui:define name="titulo">Novo Candidato</ui:define>
 
 	<ui:define name="corpo">
 
-		<h:form>
+		<h:form id="f">
 			<p:panelGrid columns="1" id="painel1"
 				style="width: 50%; margin-top:20px; margin-left:350px"
 				columnClasses="rotulo,campo">
@@ -22,8 +22,9 @@
 
 
 				<p:outputLabel value="Login" for="login" />
-				<p:inputText id="login" size="20" 
-					value="#{novoCandidato.login}" required="true">
+				<p:inputText id="login" size="20" value="#{novoCandidato.login}"
+					required="true"
+					requiredMessage="Por favor indique o login que pretende usar na aplicação">
 					<p:ajax listener="#{novoCandidato.validaLogin()}" event="change"
 						process="@this" update="status" partialSubmit="true" />
 				</p:inputText>
@@ -33,26 +34,33 @@
 					feedback="true" strongLabel="Password Forte"
 					weakLabel="Password Fraca" goodLabel="Password boa"
 					promptLabel="Por favor introduza uma password" required="true"
-					inline="true" match="confirmaPassword" />
+					requiredMessage="Por favor introduza uma password" inline="true"
+					match="confirmaPassword" />
 
 				<p:outputLabel value="Confirmar password" for="confirmaPassword" />
-				<p:password id="confirmaPassword" required="true" />
+				<p:password id="confirmaPassword" required="true"
+					requiredMessage="Por favor confirme a sua password" />
 
 				<p:outputLabel value="Primeiro Nome" for="pnome" />
-				<p:inputText id="pnome" size="20" 
-					value="#{novoCandidato.nome}" required="true">
+				<p:inputText id="pnome" size="20" value="#{novoCandidato.nome}"
+					required="true"
+					requiredMessage="Por favor indique o seu primeiro Nome">
 					<p:ajax event="change" process="@this" partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Apelido" for="apelido" />
-				<p:inputText id="apelido" size="20" 
-					value="#{novoCandidato.apelido}" required="true">
+				<p:inputText id="apelido" size="20" value="#{novoCandidato.apelido}"
+					required="true" requiredMessage="Por favor indique o seu apelido">
 					<p:ajax event="change" process="@this" partialSubmit="true" />
 				</p:inputText>
 
 				<p:outputLabel value="Email" for="email" />
-				<p:inputText id="email" size="20" 
-					value="#{novoCandidato.email}" required="true">
+				<p:inputText id="email" size="20" value="#{novoCandidato.email}"
+					required="true"
+					requiredMessage="Por favor introduza o seu endereço de email"
+					validatorMessage="Formato de email inválido">
+					<f:validateRegex pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+						for="email" />
 					<p:ajax listener="#{novoCandidato.validaEmail()}" update="status"
 						partialSubmit="true" />
 				</p:inputText>
@@ -64,17 +72,17 @@
 				<p:inputText id="cidade" value="#{novoCandidato.cidade}" />
 
 				<p:outputLabel value="Telefone" for="telefone" />
-				<p:inputText id="telefone" size="20" 
+				<p:inputText id="telefone" size="20"
 					value="#{novoCandidato.telefone}" />
 
 				<p:outputLabel value="Telemóvel" for="telemovel" />
-				<p:inputText id="telemovel" size="20" 
+				<p:inputText id="telemovel" size="20"
 					value="#{novoCandidato.telemovel}" />
 
 				<p:outputLabel value="País" for="pais" />
 				<p:autoComplete id="pais" value="#{novoCandidato.pais}"
-					completeMethod="#{novoCandidato.sugerirpais}"
-					forceSelection="true" minQueryLenght="1" dropdown="true"></p:autoComplete>
+					completeMethod="#{novoCandidato.sugerirpais}" forceSelection="true"
+					minQueryLenght="1" dropdown="true"></p:autoComplete>
 
 
 				<p:outputLabel value="Curso" for="curso" />
@@ -85,6 +93,7 @@
 
 				<p:outputLabel value="Curriculum vitæ" for="cv" />
 				<p:fileUpload id="cv" required="true"
+					requiredMessage="Por favor associe um currículo ao seu perfil"
 					fileUploadListener="#{novoCandidato.fileUpload}" mode="advanced"
 					auto="false" sizeLimit="5242880"
 					allowTypes="/(\.|\/)(pdf|doc|docx)$/" label="Procurar ficheiro"
@@ -99,7 +108,7 @@
 				<p:inputText id="linkedin" value="#{novoCandidato.idLinkedin}" />
 
 				<p:commandButton value="Submeter"
-					action="#{novoCandidato.criaCandidato()}" update="status"
+					action="#{novoCandidato.criaCandidato()}" update="@form"
 					icon="ui-icon-disk" />
 				<p:button value="Limpar" outcome="/paginas/novocandidato" />
 

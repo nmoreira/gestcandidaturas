@@ -42,8 +42,9 @@
 					<p:outputLabel value="Candidato" />
 					<h:outputText
 						value="#{atribuirEntrevistador.candidatura.candidato.nome} #{atribuirEntrevistador.candidatura.candidato.apelido}" />
-					<p:outputLabel value="Posição"/>
-					<h:outputText value="#{atribuirEntrevistador.candidatura.posicao.titulo}" />
+					<p:outputLabel value="Posição" />
+					<h:outputText
+						value="#{atribuirEntrevistador.candidatura.posicao.titulo}" />
 					<p:outputLabel value="Escolher entrevistador" />
 					<p:selectOneMenu value="#{atribuirEntrevistador.entrevistador}"
 						converter="grupoEntrevistadores">

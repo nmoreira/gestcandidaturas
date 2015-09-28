@@ -6,29 +6,30 @@
 
 	<p:dataGrid columns="3" value="#{posicoesAtuais.listaPosicoes}"
 		var="posicao" emptyMessage="Não existem vagas para candidatura"
-		layout="grid" rows="12" paginator="true"
-		paginatorAlwaysVisible="true" paginatorPosition="bottom"
+		layout="grid" rows="12" paginator="true" paginatorAlwaysVisible="true"
+		paginatorPosition="bottom"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 		currentPageReportTemplate="{currentPage} de {totalPages}">
 		<p:panel header="#{posicao.titulo}" style="text-align:center">
 			<h:panelGrid columns="2" style="width:100%; text-align: left;">
-				
+
 				<p:outputLabel value="Área técnica:" for="area" />
 				<h:outputText value="#{posicao.areaTecnica.valor}" id="area" />
 				<p:outputLabel value="Localização:" for="localizacao" />
 				<h:outputText value="#{posicao.local}" id="localizacao" />
 				<p:outputLabel value="Vagas" for="vagas" />
 				<h:outputText value="#{posicao.quantidadeVagas}" id="vagas" />
-				
+
 				<f:facet name="footer">
-				<h:form>
-					<p:commandButton value="Candidatar" style="float:right" action="#{posicoesAtuais.candidatar()}" ajax="false">
-						<f:param name="faces-redirect" value="true"/>
-						<f:param name="posid" value="#{posicao.id}"/> 
-					</p:commandButton>
-				</h:form>
+					<h:form>
+						<p:commandButton value="Candidatar" style="float:right"
+							action="#{posicoesAtuais.candidatar()}" ajax="false">
+							<f:param name="faces-redirect" value="true" />
+							<f:param name="posid" value="#{posicao.id}" />
+						</p:commandButton>
+					</h:form>
 				</f:facet>
-				
+
 			</h:panelGrid>
 		</p:panel>
 	</p:dataGrid>

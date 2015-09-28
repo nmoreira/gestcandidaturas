@@ -24,35 +24,38 @@
 	</p:ajaxStatus>
 	<header>
 	<div style="float: left;">
-	<table>
-	<tr>
-	<td valign="middle">
-		<h:link outcome="/principal">
-			<h:graphicImage library="imagens" name="critical.png" />
-		</h:link>
-		</td>
-		<td valign="middle" style="padding-left: 10px; font-size: large;">
-			<h:outputText value="#{configuration.conf.nome}"/>
-		</td>		
-		<td valign="middle" style="padding-left: 10px;">
-		<p:button value="Página inicial" outcome="/principal" styleClass="botaogrande"/>
-		</td>
-	</tr>
-	</table>
+		<table>
+			<tr>
+				<td valign="middle"><h:link outcome="/principal">
+						<h:graphicImage library="imagens" name="critical.png" />
+					</h:link></td>
+				<td valign="middle" style="padding-left: 10px; font-size: large;">
+					<h:outputText value="#{configuration.conf.nome}" />
+				</td>
+				<td valign="middle" style="padding-left: 10px;"><p:button
+						value="Página inicial" outcome="/principal"
+						styleClass="botaogrande" /></td>
+			</tr>
+		</table>
 	</div>
 	<div align="center" style="float: right;">
 		<h:form id="user">
 			<table>
 				<tr>
 					<td><p:menubar autoDisplay="false"
-							rendered="#{currentSession.logged}" >
-							<p:menuitem value="Configurações" outcome="/paginas/candidato/admin/configuracoes" rendered="#{currentSession.currentUser.cargo.equals('ADMIN')}"/>
-							<p:submenu label="Candidato" rendered="#{currentSession.currentUser.cargo.equals('CANDIDATO')}">
+							rendered="#{currentSession.logged}">
+							<p:menuitem value="Configurações"
+								outcome="/paginas/candidato/admin/configuracoes"
+								rendered="#{currentSession.currentUser.cargo.equals('ADMIN')}" />
+							<p:submenu label="Candidato"
+								rendered="#{currentSession.currentUser.cargo.equals('CANDIDATO')}">
 								<p:menuitem value="Minhas Candidaturas" icon="ui-icon-search"
 									outcome="/paginas/candidato/minhascandidaturas" />
-								<p:separator/>
-								<p:menuitem value="Editar perfil" outcome="/paginas/candidato/editarperfil" />
-								<p:menuitem value="Alterar password" outcome="/paginas/candidato/alterarpass" />
+								<p:separator />
+								<p:menuitem value="Editar perfil"
+									outcome="/paginas/candidato/editarperfil" />
+								<p:menuitem value="Alterar password"
+									outcome="/paginas/candidato/alterarpass" />
 							</p:submenu>
 							<p:menuitem value="Sair" action="#{login.logout()}" />
 						</p:menubar></td>
@@ -73,8 +76,7 @@
 		</h:form>
 	</div>
 	</header>
-	<p:messages closable="true" id="status" autoUpdate="true"
-		globalOnly="true" />
+	<p:messages closable="true" id="status" autoUpdate="true" />
 
 	<div id="conteudo" style="min-height: 450px;">
 		<ui:insert name="corpo" />
@@ -82,16 +84,12 @@
 
 	<p:separator style="margin-top: 20px" />
 
-	<footer>
-		<h:outputText value="#{configuration.conf.morada}"/>
-		<br />
-		<h:outputText value="Telefone: #{configuration.conf.telefone}"/> 
-		<br />
-		<h:outputText value="Email: #{configuration.conf.email}"/>
-		
-		<p:separator style="width:340px;height:5px"/>
-		Desenvolvido por Nuno Moreira e Rita Costa
-	</footer>
+	<footer> <h:outputText value="#{configuration.conf.morada}" />
+	<br />
+	<h:outputText value="Telefone: #{configuration.conf.telefone}" /> <br />
+	<h:outputText value="Email: #{configuration.conf.email}" /> <p:separator
+		style="width:340px;height:5px" /> Desenvolvido por Nuno Moreira e Rita
+	Costa </footer>
 	<h:form>
 		<p:dialog header="Login" modal="true" resizable="false"
 			widgetVar="loginWindow">
@@ -109,8 +107,9 @@
 				<f:facet name="footer">
 					<p:commandButton value="Login" action="#{login.login()}"
 						oncomplete="handleLoginRequest(xhr, status, args)" update="user" />
-					<p:spacer width="20"/>
-					<p:button value="Esqueci-me da password" outcome="/paginas/passwordperdida" />
+					<p:spacer width="20" />
+					<p:button value="Esqueci-me da password"
+						outcome="/paginas/passwordperdida" />
 				</f:facet>
 			</h:panelGrid>
 		</p:dialog>

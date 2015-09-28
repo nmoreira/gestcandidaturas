@@ -21,27 +21,38 @@
 					</f:facet>
 					<p:outputLabel value="Nome" for="nome" />
 					<p:inputText id="nome" value="#{configuration.conf.nome}" size="40"
-						required="true" />
+						required="true"
+						requiredMessage="Indique o nome da empresa, a apresentar na página" />
 					<p:outputLabel value="Morada da empresa" for="morada" />
 					<p:inputText id="morada" value="#{configuration.conf.morada}"
-						size="40" required="true" />
+						size="40" required="true"
+						requiredMessage="Introduza a morada da empresa" />
 					<p:outputLabel value="Telefone" for="tel" />
 					<p:inputText id="tel" value="#{configuration.conf.telefone}"
-						size="20" required="true" />
+						size="20" required="true"
+						requiredMessage="Indique o telefone de contacto da empresa" />
 					<p:outputLabel value="Email de contacto" for="email" />
 					<p:inputText id="email" value="#{configuration.conf.email}"
-						size="40" required="true" />
-					<p:outputLabel for="advanced" value="Tema" /> 
-			        
-			        <p:themeSwitcher id="advanced" style="width:165px" effect="fade" var="t" value="#{configuration.conf.tema}">
-			            <f:selectItem itemLabel="Escolha um tema" itemValue="" />
-			            <f:selectItems value="#{configuration.temas}" var="theme" itemLabel="#{theme.desc}" itemValue="#{theme.name}">			 						 					 
-			            <p:column>
+						size="40" required="true"
+						requiredMessage="Por favor introduza um endereço de email da empresa"
+						validatorMessage="Formato de email inválido">
+						<f:validateRegex
+							pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+					</p:inputText>
+					<p:outputLabel for="advanced" value="Tema" />
+
+					<p:themeSwitcher id="advanced" style="width:165px" effect="fade"
+						var="t" value="#{configuration.conf.tema}" required="true"
+						requiredMessage="Por favor selecione um tema">
+						<f:selectItem itemLabel="Escolha um tema" itemValue="" />
+						<f:selectItems value="#{configuration.temas}" var="theme"
+							itemLabel="#{theme.desc}" itemValue="#{theme.name}">
+							<p:column>
 			                 #{theme.desc}
 			            </p:column>
-			            </f:selectItems>
-			        </p:themeSwitcher>
-			        
+						</f:selectItems>
+					</p:themeSwitcher>
+
 				</p:panelGrid>
 				<br />
 				<br />
@@ -52,26 +63,35 @@
 					<p:outputLabel value="SMTP Host Name" for="smtphost" />
 					<p:inputText id="smtphost"
 						value="#{configuration.conf.smtpHostName}" size="40"
-						required="true" />
+						required="true"
+						requiredMessage="Indique o nome do servidor SMTP para envio de emails pela plataforma" />
 					<p:outputLabel value="SMTP Port" for="port" />
 					<p:inputText id="port" value="#{configuration.conf.smtpPort}"
-						size="6" required="true" />
+						size="6" required="true"
+						requiredMessage="Indique a porta de ligação no servidor SMTP para envio de emails pela plataforma" />
 					<p:outputLabel value="Endereço de envio" for="from" />
 					<p:inputText id="from" value="#{configuration.conf.smtpFromEmail}"
-						size="40" required="true" />
+						size="40" required="true"
+						requiredMessage="Por favor introduza o endereço de email a utilizar no envio de emails pela plataforma"
+						validatorMessage="Formato de email inválido">
+						<f:validateRegex
+							pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+					</p:inputText>
 					<p:outputLabel value="Username do servidor de envio" for="username" />
 					<p:inputText id="username"
 						value="#{configuration.conf.smtpUsername}" size="40"
-						required="true" />
+						required="true"
+						requiredMessage="Indique o nome de utilizador para ligação ao servidor de SMTP" />
 					<p:outputLabel value="Password do servidor de envio" for="password" />
 					<p:password id="password"
 						value="#{configuration.conf.smtpPassword}" size="40"
-						required="true" redisplay="true" />
+						required="true" redisplay="true"
+						requiredMessage="Indique a password do utilizador usado na ligação ao servidor SMTP" />
 				</p:panelGrid>
 
 				<f:facet name="footer">
 					<p:commandButton value="Guardar configurações"
-						action="#{configuration.saveConfiguration()}" />
+						action="#{configuration.saveConfiguration()}" update="@form" />
 				</f:facet>
 			</p:panel>
 		</h:form>
