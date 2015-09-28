@@ -50,9 +50,12 @@ public class CandidatoService {
 		return newCandidato;
 	}
 
-	public void createNewCandidato(Candidato newCandidato) {
+	public boolean createNewCandidato(Candidato newCandidato) {
 		newCandidato.setPerfil(candidatoFacade.getPerfilCandidato());
-		candidatoFacade.create(newCandidato);
+		if (candidatoFacade.create(newCandidato) != null)
+			return true;
+		else
+			return false;
 	}
 
 	public boolean atualizarCandidato(Candidato cand) {
