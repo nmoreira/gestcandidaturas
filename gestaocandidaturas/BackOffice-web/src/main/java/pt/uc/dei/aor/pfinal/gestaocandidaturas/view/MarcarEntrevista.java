@@ -10,10 +10,13 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidaturaService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.EntrevistaService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Entrevista;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.mail.CommonsMail;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoCandidatura;
 
 @Named
 @ViewScoped
@@ -33,6 +36,9 @@ public class MarcarEntrevista implements Serializable {
 	@Inject
 	private CommonsMail mail;
 
+	@Inject
+	private CandidaturaService candidaturaServ;
+
 	private List<Entrevista> minhasEntrevistas;
 
 	@PostConstruct
@@ -44,6 +50,12 @@ public class MarcarEntrevista implements Serializable {
 	public void marcarData(Entrevista ent) {
 		if (entrevistaServ.atualizarEntrevista(ent)) {
 			DisplayMessages.addInfoMessage("Entrevista marcada com sucesso");
+
+			Candidatura cand = candidaturaServ.getCandidatura(ent
+					.getCandidatura().getId());
+			cand.setEstadoCandidatura(EstadoCandidatura.ENTREVISTA_AGENDADA);
+			candidaturaServ.atualizarCandidatura(cand);
+
 			String data = new SimpleDateFormat("dd-MM-yyyy 'às' HH:mm")
 					.format(ent.getDataEntrevista());
 			mail.enviaEmailSimples("Entrevista agendada",

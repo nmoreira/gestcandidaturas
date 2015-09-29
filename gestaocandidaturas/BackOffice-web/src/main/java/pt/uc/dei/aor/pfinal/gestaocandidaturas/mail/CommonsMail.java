@@ -75,7 +75,6 @@ public class CommonsMail {
 			Utilizador destinatario, String anexo) {
 		String[] split = anexo.split("/");
 		String filename = split[split.length - 1];
-		System.out.println(filename);
 
 		// Create the attachment
 		EmailAttachment attachment = new EmailAttachment();

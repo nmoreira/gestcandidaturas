@@ -200,6 +200,17 @@
 						</p:row>
 						<p:row>
 							<p:column style="text-align: center;">
+								<p:outputLabel value="Estado da Candidatura" for="estadoCand"/>
+							</p:column>
+							<p:column>
+								<p:selectOneMenu id="estadoCand" value="#{processarEntrevista.entrevista.candidatura.estadoCandidatura}">
+									<f:selectItems value="#{processarEntrevista.estadosCandidatura}" var="estado"
+										itemValue="#{estado}" itemLabel="#{estado.valor}"/>
+								</p:selectOneMenu>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="text-align: center;">
 								<p:outputLabel value="Resultado" for="feedbackres" />
 							</p:column>
 							<p:column>

@@ -1,0 +1,53 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Relatório de candidaturas espontâneas por período</ui:define>
+
+	<ui:define name="corpo">
+
+		<h1>Relatório de candidaturas espontâneas por período</h1>
+		<br />
+		<br />
+		<p:panel>
+			<div align="center">
+				<h:form>
+					<p:outputLabel value="Pesquisar candidaturas espontâneas entre " />
+					<p:calendar value="#{relatorioCandidaturasEspontaneasPeriodo.dataInicio}"
+						required="true" navigator="true" readonlyInput="true" mode="popup"
+						requiredMessage="Por favor defina a data inicial da pesquisa" />
+					<p:outputLabel value=" e " />
+					<p:calendar value="#{relatorioCandidaturasEspontaneasPeriodo.dataFim}"
+						required="true" navigator="true" readonlyInput="true" mode="popup"
+						requiredMessage="Por favor defina a data final da pesquisa" />
+					<p:spacer width="10"/>
+					<p:commandButton value="Pesquisar"
+						action="#{relatorioCandidaturasEspontaneasPeriodo.pesquisar()}" update="@form res" />
+				</h:form>
+			</div>
+			<br />
+			<p:dataTable id="res" value="#{relatorioCandidaturasEspontaneasPeriodo.resultados}"
+				var="candidatura" emptyMessage="Sem resultados para apresentar">
+				<p:column headerText="Candidato">
+					<h:outputText
+						value="#{candidatura.candidato.nome} #{candidatura.candidato.apelido}" />
+				</p:column>
+				<p:column headerText="Data de candidatura" width="210">
+					<h:outputText value="#{candidatura.dataCandidatura}">
+						<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm:ss" />
+					</h:outputText>
+				</p:column>
+				<p:column width="145">
+					<p:button value="Ver candidato" outcome="/paginas/gest/vercandidato">
+						<f:param value="#{candidatura.candidato.id}" name="candidatoid"/>
+					</p:button>
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+	</ui:define>
+</ui:composition>

@@ -29,6 +29,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.mail.CommonsMail;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoCandidatura;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.StringNormalizer;
 
 @Named
@@ -125,6 +126,8 @@ public class NovaCandidatura implements Serializable {
 			Candidatura candidatura = new Candidatura(cartamotivacao, fonte,
 					posicao, candidato);
 			if (candidatura.getPosicao() == null) {
+				candidatura
+						.setEstadoCandidatura(EstadoCandidatura.ESPONTANEA_SUBMETIDA);
 				if (candidaturaServ.criaCandidaturaEspontanea(candidatura)) {
 					DisplayMessages
 							.addInfoMessage("Candidatura espontânea efetuada com sucesso!");
@@ -138,6 +141,7 @@ public class NovaCandidatura implements Serializable {
 							.addErrorMessage("Falha ao submeter a candidatura espontânea!");
 				}
 			} else {
+				candidatura.setEstadoCandidatura(EstadoCandidatura.SUBMETIDA);
 				if (candidaturaServ.createNewCandidatura(candidatura)) {
 					DisplayMessages
 							.addInfoMessage("Candidatura efetuada com sucesso!");

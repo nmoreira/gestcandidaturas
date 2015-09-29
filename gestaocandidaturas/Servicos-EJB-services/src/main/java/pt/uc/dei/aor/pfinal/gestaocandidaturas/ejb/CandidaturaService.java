@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,6 +13,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.CandidaturaFacade;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.ICandidaturaFacade;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.IPosicaoFacade;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.PosicaoFacade;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoCandidatura;
 
 /**
  * Session Bean implementation class AdministradorService
@@ -127,6 +129,7 @@ public class CandidaturaService {
 		Candidatura cand = candidaturaFacade.find(idCandidatura);
 		Posicao pos = posicaoFacade.find(idPosicao);
 		cand.setPosicao(pos);
+		cand.setEstadoCandidatura(EstadoCandidatura.POSICAO_ATRIBUIDA);
 		if (candidaturaFacade.update(cand) != null) {
 			return true;
 		} else {
@@ -136,6 +139,16 @@ public class CandidaturaService {
 
 	public List<Candidatura> getCandidaturasSemEntrevistas() {
 		return candidaturaFacade.getCandidaturasSemEntrevistas();
+	}
+
+	public List<Candidatura> getCandidaturasEntreDatas(Date inicio, Date fim) {
+		return candidaturaFacade.getCandidaturasEntreDatas(inicio, fim);
+	}
+
+	public List<Candidatura> getCandidaturasEspontaneasEntreDatas(Date inicio,
+			Date fim) {
+		return candidaturaFacade.getCandidaturasEspontaneasEntreDatas(inicio,
+				fim);
 	}
 
 }

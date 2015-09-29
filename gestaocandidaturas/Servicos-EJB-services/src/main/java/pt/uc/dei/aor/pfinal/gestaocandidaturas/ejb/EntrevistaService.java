@@ -43,7 +43,6 @@ public class EntrevistaService {
 
 	public boolean createNewEntrevista(Entrevista newEntrevista) {
 		Guiao guiao = newEntrevista.getCandidatura().getPosicao().getGuiao();
-		System.out.println("guiao: " + guiao);
 
 		List<Questao> original = guiaoFacade
 				.getQuestoesByGuiaoId(guiao.getId());
@@ -90,4 +89,11 @@ public class EntrevistaService {
 		return entrevistaFacade.findByIdFetchQuestoes(entrevistaId);
 	}
 
+	public List<Entrevista> getEntrevistasEntreDatas(Date inicio, Date fim) {
+		return entrevistaFacade.getEntrevistasEntreDatas(inicio, fim);
+	}
+
+	public List<Entrevista> getEntrevistasComData() {
+		return entrevistaFacade.getEntrevistasComData();
+	}
 }

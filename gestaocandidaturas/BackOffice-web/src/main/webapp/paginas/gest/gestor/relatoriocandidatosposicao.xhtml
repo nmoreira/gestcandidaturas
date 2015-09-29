@@ -1,0 +1,24 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	 xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<ui:define name="titulo">Relatório de candidaturas a uma posição</ui:define>
+
+<ui:define name="corpo">
+
+<h1>Relatório de candidaturas a uma posição</h1>
+<br />
+<br />
+
+<p:panel>
+		<p align="center">Pesquisar uma posição</p>
+		<ui:include src="/paginas/gest/pesquisaposicaoform.xhtml" />
+		<br />
+		<ui:include src="/paginas/gest/gestor/pesquisaposicaoresultadorelatorio.xhtml" />
+</p:panel>
+
+</ui:define>
+</ui:composition>

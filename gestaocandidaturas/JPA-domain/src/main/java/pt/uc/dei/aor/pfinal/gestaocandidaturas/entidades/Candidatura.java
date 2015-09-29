@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoCandidatura;
 
 /**
  * Entity implementation class for Entity: Candidatura
@@ -54,6 +58,10 @@ public class Candidatura implements Serializable {
 
 	@OneToMany(mappedBy = "candidatura")
 	private List<Entrevista> entrevistas;
+
+	@Column
+	@Enumerated(EnumType.STRING)
+	private EstadoCandidatura estadoCandidatura;
 
 	private static final long serialVersionUID = 1L;
 
@@ -147,6 +155,14 @@ public class Candidatura implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public EstadoCandidatura getEstadoCandidatura() {
+		return estadoCandidatura;
+	}
+
+	public void setEstadoCandidatura(EstadoCandidatura estadoCandidatura) {
+		this.estadoCandidatura = estadoCandidatura;
 	}
 
 }

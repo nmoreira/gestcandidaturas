@@ -25,12 +25,24 @@
 					<p:submenu label="Entrevistas">
 						<p:menuitem value="Atribuir Entrevistador"
 							outcome="/paginas/gest/gestor/atribuirentrevistador" />
+						<p:submenu label="Minhas Entrevistas">
+							<p:menuitem value="Agendar entrevistas"
+								outcome="/paginas/gest/ent/marcarentrevista" />
+							<p:menuitem value="Lista de entrevistas"
+								outcome="/paginas/gest/ent/listaentrevistas" />
+						</p:submenu>
 					</p:submenu>
-					<p:submenu label="Minhas Entrevistas">
-						<p:menuitem value="Agendar entrevistas"
-							outcome="/paginas/gest/ent/marcarentrevista" />
-						<p:menuitem value="Lista de entrevistas"
-							outcome="/paginas/gest/ent/listaentrevistas" />
+					<p:submenu label="Relatórios">
+						<p:menuitem value="Candidatos por período"
+							outcome="/paginas/gest/gestor/relatoriocandidatosperiodo" />
+						<p:menuitem value="Candidatos por posição"
+							outcome="/paginas/gest/gestor/relatoriocandidatosposicao" />
+						<p:menuitem value="Candidaturas espontâneas"
+							outcome="/paginas/gest/gestor/relatoriocandidaturasespontaneasperiodo" />
+						<p:menuitem value="Resultados de Entrevista"
+							outcome="/paginas/gest/gestor/relatorioentrevistasperiodo" />
+						<p:menuitem value="Tempo médio para a primeira entrevista"
+							outcome="/paginas/gest/gestor/relatoriotempomedioentrevista" />
 					</p:submenu>
 				</p:menubar>
 			</f:facet>

@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.view;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidaturaService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.EntrevistaService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.Escala1a5Service;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.FeedbackService;
@@ -23,6 +25,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Questao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.SimNao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.TextoLivre;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoCandidatura;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.LocalPosicao;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.TipoPergunta;
 
@@ -52,6 +55,9 @@ public class ProcessarEntrevista implements Serializable {
 
 	@Inject
 	private FeedbackService feedbackServ;
+
+	@Inject
+	private CandidaturaService candidaturaServ;
 
 	private Entrevista entrevista;
 
@@ -85,9 +91,15 @@ public class ProcessarEntrevista implements Serializable {
 	}
 
 	public void guardarEntrevista() {
-		if (guardarRespostas() && guardarFeedback()
-				&& entrevistaServ.atualizarEntrevista(entrevista)) {
-			DisplayMessages.addInfoMessage("Entrevista guardada com sucesso");
+		if (guardarRespostas() && guardarFeedback()) {
+			entrevista.setDataEntrevista(new Date());
+			candidaturaServ.atualizarCandidatura(entrevista.getCandidatura());
+			if (entrevistaServ.atualizarEntrevista(entrevista)) {
+				DisplayMessages
+						.addInfoMessage("Entrevista guardada com sucesso");
+			} else {
+				DisplayMessages.addErrorMessage("Erro ao guardar a entrevista");
+			}
 		} else {
 			DisplayMessages.addErrorMessage("Erro ao guardar a entrevista");
 		}
@@ -133,5 +145,9 @@ public class ProcessarEntrevista implements Serializable {
 		} else {
 			return true;
 		}
+	}
+
+	public EstadoCandidatura[] getEstadosCandidatura() {
+		return EstadoCandidatura.values();
 	}
 }

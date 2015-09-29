@@ -1,5 +1,6 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.facades;
 
+import java.util.Date;
 import java.util.List;
 
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
@@ -48,5 +49,11 @@ public interface ICandidaturaFacade extends IEntityFacade<Candidatura> {
 			String escola);
 
 	public abstract List<Candidatura> getCandidaturasSemEntrevistas();
+
+	public abstract List<Candidatura> getCandidaturasEntreDatas(Date inicio,
+			Date fim);
+
+	public abstract List<Candidatura> getCandidaturasEspontaneasEntreDatas(
+			Date inicio, Date fim);
 
 }

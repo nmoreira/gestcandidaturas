@@ -35,8 +35,8 @@
 				<p:link value="Ver Carta" href="#{candidatura.cartaMotivacao}"
 					target="_blank" />
 			</p:column>
-			<p:column headerText="Estado da Posição">
-				<h:outputText value="#{candidatura.posicao.estado.valor}" />
+			<p:column headerText="Estado da Candidatura">
+				<h:outputText value="#{candidatura.estadoCandidatura.valor}" />
 			</p:column>
 
 			<p:rowExpansion>
@@ -60,6 +60,8 @@
 						<h:outputText value="#{candidat.posicao.local}" />
 						<h:outputText value="Vagas a alocar" />
 						<h:outputText value="#{candidat.posicao.quantidadeVagas}" />
+						<h:outputText value="Estado da Posição"/>
+						<h:outputText value="#{candidatura.posicao.estado.valor}"/>
 					</p:panelGrid>
 				</p:dataGrid>
 			</p:rowExpansion>

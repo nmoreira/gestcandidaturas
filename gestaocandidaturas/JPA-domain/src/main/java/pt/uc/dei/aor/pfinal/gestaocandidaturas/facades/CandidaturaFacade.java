@@ -2,6 +2,7 @@ package pt.uc.dei.aor.pfinal.gestaocandidaturas.facades;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -286,5 +287,24 @@ public class CandidaturaFacade implements ICandidaturaFacade {
 	public List<Candidatura> getCandidaturasSemEntrevistas() {
 		q = em.createQuery("from Candidatura c left join fetch c.entrevistas e where e is null");
 		return q.getResultList();
+	}
+
+	@Override
+	public List<Candidatura> getCandidaturasEntreDatas(Date inicio, Date fim) {
+		q = em.createQuery("from Candidatura c where c.dataCandidatura between :inicio and :fim order by c.dataCandidatura desc");
+		q.setParameter("inicio", inicio);
+		q.setParameter("fim", fim);
+		List<Candidatura> r = q.getResultList();
+		return r;
+	}
+
+	@Override
+	public List<Candidatura> getCandidaturasEspontaneasEntreDatas(Date inicio,
+			Date fim) {
+		q = em.createQuery("from Candidatura c where c.posicao = null and c.dataCandidatura between :inicio and :fim order by c.dataCandidatura desc");
+		q.setParameter("inicio", inicio);
+		q.setParameter("fim", fim);
+		List<Candidatura> r = q.getResultList();
+		return r;
 	}
 }

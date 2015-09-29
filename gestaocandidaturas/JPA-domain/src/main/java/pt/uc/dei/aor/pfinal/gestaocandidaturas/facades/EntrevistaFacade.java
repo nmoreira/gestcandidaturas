@@ -160,4 +160,19 @@ public class EntrevistaFacade implements IEntrevistaFacade {
 		return (Entrevista) q.getSingleResult();
 	}
 
+	@Override
+	public List<Entrevista> getEntrevistasEntreDatas(Date inicio, Date fim) {
+		q = em.createQuery("from Entrevista e where e.dataEntrevista between :inicio and :fim order by e.dataEntrevista desc");
+		q.setParameter("inicio", inicio);
+		q.setParameter("fim", fim);
+		List<Entrevista> r = q.getResultList();
+		return r;
+	}
+
+	@Override
+	public List<Entrevista> getEntrevistasComData() {
+		q = em.createQuery("from Entrevista e where e.dataEntrevista is not null");
+		return q.getResultList();
+	}
+
 }

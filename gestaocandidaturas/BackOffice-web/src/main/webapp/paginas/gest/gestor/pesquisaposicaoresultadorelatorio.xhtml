@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="r">
+		<p:dataTable id="resultados"
+			value="#{pesquisaPosicoes.resultadosPesquisa}" var="resultado"
+			emptyMessage="Sem resultados" rows="10" paginator="true"
+			paginatorPosition="bottom" paginatorAlwaysVisible="false"
+			sortBy="#{resultado.titulo}" sortOrder="ascending">
+			<f:facet name="header">Resultado da pesquisa de posição</f:facet>
+			<p:column headerText="Data" sortBy="#{resultado.dataAbertura}">
+				<h:outputText value="#{resultado.dataAbertura}">
+					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Código" sortBy="#{resultado.codPosicao}">
+				<h:outputText value="#{resultado.codPosicao}" />
+			</p:column>
+			<p:column headerText="Título" sortBy="#{resultado.titulo}">
+				<h:outputText value="#{resultado.titulo}" />
+			</p:column>
+			<p:column headerText="Local">
+				<p:dataList value="#{resultado.local}" var="l" type="none">
+				#{l.valor}
+			</p:dataList>
+			</p:column>
+			<p:column headerText="Estado" sortBy="#{resultado.estado.valor}">
+				<h:outputText value="#{resultado.estado.valor}" />
+			</p:column>
+			<p:column headerText="Empresa" sortBy="#{resultado.empresa}">
+				<h:outputText value="#{resultado.empresa}" />
+			</p:column>
+			<p:column headerText="Área" sortBy="#{resultado.areaTecnica.valor}">
+				<h:outputText value="#{resultado.areaTecnica.valor}" />
+			</p:column>
+			<p:column style="text-align: center;">
+				<p:commandButton value="Ver candidaturas a esta posição" title="Ver candidaturas a esta posição"
+					action="#{relatorioCandidaturasPosicao.selecionarPosicao(resultado.id)}" update=":posicaoSelecionada"/>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	<br />
+	<br />	
+	
+	<p:dataTable id="posicaoSelecionada"
+			value="#{relatorioCandidaturasPosicao.candidaturas}" var="resultado"
+			emptyMessage="Posição não selecionada ou posição sem candidaturas" rows="10" paginator="true"
+			paginatorPosition="bottom" paginatorAlwaysVisible="false"
+			sortBy="#{resultado.candidato.nome}" sortOrder="ascending">
+			<f:facet name="header">Candidaturas à posição selecionada</f:facet>
+			<p:column headerText="Nome do Candidato"
+				sortBy="#{resultado.candidato.nome} #{resultado.candidato.apelido}">
+				<h:outputText
+					value="#{resultado.candidato.nome} #{resultado.candidato.apelido}" />
+			</p:column>
+			<p:column headerText="Data de Candidatura" width="160"
+				sortBy="#{resultado.dataCandidatura}">
+				<h:outputText value="#{resultado.dataCandidatura}">
+					<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Carta de Motivação" width="155">
+				<p:link value="Ver"
+					href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/FrontOffice-web#{resultado.cartaMotivacao}"
+					target="_blank" />
+			</p:column>
+			<p:column headerText="Cidade" sortBy="#{resultado.candidato.cidade}">
+				<h:outputText value="#{resultado.candidato.cidade}" />
+			</p:column>
+			<p:column headerText="Telefone">
+				<h:outputText value="#{resultado.candidato.telefone}" />
+			</p:column>
+			<p:column headerText="Telemóvel">
+				<h:outputText value="#{resultado.candidato.telemovel}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{resultado.candidato.email}" />
+			</p:column>
+			<p:column headerText="Candidato" width="120">
+				<p:link value="Ver Candidato" outcome="/paginas/gest/vercandidato">
+					<f:param name="candidatoid" value="#{resultado.candidato.id}" />
+				</p:link>
+			</p:column>
+		</p:dataTable>
+	
+
+</ui:composition>
