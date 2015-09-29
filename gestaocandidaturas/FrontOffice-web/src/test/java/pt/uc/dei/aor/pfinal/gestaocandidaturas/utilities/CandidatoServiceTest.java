@@ -3,29 +3,16 @@ package pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
-
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.primefaces.component.log.Log;
-
-
-
-
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidatoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.facades.CandidatoFacade;
-import pt.uc.dei.aor.pfinal.gestaocandidaturas.view.NovoCandidato;
 
 
 @RunWith(MockitoJUnitRunner.class)

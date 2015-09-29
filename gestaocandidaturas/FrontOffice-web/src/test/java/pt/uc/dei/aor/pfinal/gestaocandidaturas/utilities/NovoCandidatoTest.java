@@ -3,10 +3,6 @@ package pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities;
 import java.util.List;
 import java.util.ArrayList;
 
-import javax.management.Query;
-
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 

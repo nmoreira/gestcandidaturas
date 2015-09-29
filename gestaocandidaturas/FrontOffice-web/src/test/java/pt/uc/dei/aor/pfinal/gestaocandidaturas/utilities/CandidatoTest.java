@@ -37,8 +37,7 @@ public class CandidatoTest {
 	
 	@Test
 	public void testaEncontraCandidatoLogin(){
-	
-		String login = "";
+
 		
 		when(em.createQuery("from Candidato novo WHERE novo.login = :login")).thenReturn(q);
 		novo.getLogin();
@@ -48,7 +47,7 @@ public class CandidatoTest {
 	
 	@Test
 	public void testaGetUtilizadorFromId(){
-		long id=0;
+		
 		when(em.createQuery("from Utilizador novo where novo.id = :id")).thenReturn(q);
 		novo.getId();
 		
@@ -57,7 +56,6 @@ public class CandidatoTest {
 	@Test
 	public void testaEncontraCandidatoEmail(){
 	
-		String login = "";
 		
 		when(em.createQuery("from Candidato novo WHERE novo.email = :email")).thenReturn(q);
 		novo.getEmail();
