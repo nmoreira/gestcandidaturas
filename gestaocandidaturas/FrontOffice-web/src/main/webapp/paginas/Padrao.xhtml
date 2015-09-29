@@ -94,15 +94,16 @@
 		<p:dialog header="Login" modal="true" resizable="false"
 			widgetVar="loginWindow">
 			<p:messages autoUpdate="true" for="login" />
+			<p:messages autoUpdate="true" for="password" />
 			<h:panelGrid columns="2" styleClass="grid-login">
 
 				<p:outputLabel value="Login" for="login" />
 				<p:inputText size="30" id="login" value="#{login.login}"
-					required="true" label="Login" />
+					required="true" label="Login" requiredMessage="Por favor introduza o seu login"/>
 
 				<p:outputLabel value="Password" for="password" />
 				<p:password size="30" id="password" value="#{login.password}"
-					required="true" />
+					required="true" requiredMessage="Por favor introduza a sua password"/>
 
 				<f:facet name="footer">
 					<p:commandButton value="Login" action="#{login.login()}"
