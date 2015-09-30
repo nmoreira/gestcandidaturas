@@ -13,7 +13,10 @@ import org.mockito.runners.*;
 
 import javax.persistence.EntityManager;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidatoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
@@ -45,13 +48,14 @@ public class NovoCandidatoTest {
 	@Test
 	public void sugerirPaisTest() throws Exception{
 		String pais1 = "Portugal";
-		String pais2 = "Croácia";
-		String pais3 = "Alemanha";
-		String pais4 = "Brasil";
+		
+		c.setPais(pais1);
 		
 	List<String> paisesugeridos = new ArrayList<>();
+	paisesugeridos.add(pais1);
 		
 	 assertNotNull("nao deveria ser nula", paisesugeridos);
+	 
 		
 	}
 	

@@ -6,9 +6,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
