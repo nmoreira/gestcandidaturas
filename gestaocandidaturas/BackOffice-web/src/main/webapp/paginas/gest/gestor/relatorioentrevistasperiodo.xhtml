@@ -16,46 +16,71 @@
 			<div align="center">
 				<h:form>
 					<p:outputLabel value="Pesquisar entrevistas realizadas entre " />
-					<p:calendar value="#{relatorioResultadosEntrevistasPeriodo.dataInicio}"
+					<p:calendar
+						value="#{relatorioResultadosEntrevistasPeriodo.dataInicio}"
 						required="true" navigator="true" readonlyInput="true" mode="popup"
 						requiredMessage="Por favor defina a data inicial da pesquisa" />
 					<p:outputLabel value=" e " />
-					<p:calendar value="#{relatorioResultadosEntrevistasPeriodo.dataFim}"
+					<p:calendar
+						value="#{relatorioResultadosEntrevistasPeriodo.dataFim}"
 						required="true" navigator="true" readonlyInput="true" mode="popup"
 						requiredMessage="Por favor defina a data final da pesquisa" />
-					<p:spacer width="10"/>
+					<p:spacer width="10" />
 					<p:commandButton value="Pesquisar"
-						action="#{relatorioResultadosEntrevistasPeriodo.pesquisar()}" update="@form res" />
+						action="#{relatorioResultadosEntrevistasPeriodo.pesquisar()}"
+						update="@form :r:res" />
 				</h:form>
 			</div>
 			<br />
-			<h4><h:outputText value="Quantidade de entrevistas realizadas no período indicado: #{relatorioResultadosEntrevistasPeriodo.resultados.size()}"/> </h4>
+			<h4>
+				<h:outputText
+					value="Quantidade de entrevistas realizadas no período indicado: #{relatorioResultadosEntrevistasPeriodo.resultados.size()}" />
+			</h4>
 			<br />
 			<br />
-			<p:dataTable id="res" value="#{relatorioResultadosEntrevistasPeriodo.resultados}"
-				var="entrevista" emptyMessage="Sem resultados para apresentar">
-				<p:column headerText="Data da entrevista">
-					<h:outputText value="#{entrevista.dataEntrevista}">
-						<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm"/>
-					</h:outputText>
-				</p:column>
-				<p:column headerText="Posição">
-					<h:outputText value="#{entrevista.candidatura.posicao.titulo}" />
-				</p:column>
-				<p:column headerText="Candidato">
-					<h:outputText
-						value="#{entrevista.candidatura.candidato.nome} #{entrevista.candidatura.candidato.apelido}" />
-				</p:column>
-				<p:column headerText="Resultado da entrevista">
-					<h:outputText value="#{entrevista.feedback.resultado}"/>
-				</p:column>
-				<p:column>
-					<p:button value="Ver candidato" outcome="/paginas/gest/vercandidato">
-						<f:param value="#{entrevista.candidatura.candidato.id}" name="candidatoid"/>
-					</p:button>
-				</p:column>
+			<h:form id="r">
+				<p:dataTable id="res"
+					value="#{relatorioResultadosEntrevistasPeriodo.resultados}"
+					var="entrevista" emptyMessage="Sem resultados para apresentar"
+					paginator="true" paginatorPosition="bottom" rows="12"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
+					<f:facet name="{Exporters}">
+						<h:commandLink>
+							<p:graphicImage library="imagens" name="xls.png" width="24" />
+							<p:dataExporter type="xls" target="res"
+								fileName="resultados_de_entrevistas" />
+						</h:commandLink>
+						<h:commandLink>
+							<p:graphicImage library="imagens" name="pdf.png" width="24" />
+							<p:dataExporter type="pdf" target="res"
+								fileName="resultados_de_entrevistas" />
+						</h:commandLink>
+					</f:facet>
+					<p:column headerText="Data da entrevista">
+						<h:outputText value="#{entrevista.dataEntrevista}">
+							<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Posição">
+						<h:outputText value="#{entrevista.candidatura.posicao.titulo}" />
+					</p:column>
+					<p:column headerText="Candidato">
+						<h:outputText
+							value="#{entrevista.candidatura.candidato.nome} #{entrevista.candidatura.candidato.apelido}" />
+					</p:column>
+					<p:column headerText="Resultado da entrevista">
+						<h:outputText value="#{entrevista.feedback.resultado}" />
+					</p:column>
+					<p:column exportable="false">
+						<p:button value="Ver candidato"
+							outcome="/paginas/gest/vercandidato">
+							<f:param value="#{entrevista.candidatura.candidato.id}"
+								name="candidatoid" />
+						</p:button>
+					</p:column>
 
-			</p:dataTable>
+				</p:dataTable>
+			</h:form>
 		</p:panel>
 
 	</ui:define>

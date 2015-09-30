@@ -1,46 +1,66 @@
-<ui:composition template="/paginas/Padrao.xhtml" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-<ui:define name="titulo">Relatório do tempo médio para a primeira entrevista</ui:define>
+	<ui:define name="titulo">Relatório do tempo médio para a primeira entrevista</ui:define>
 
-<ui:define name="corpo">
+	<ui:define name="corpo">
 
-<h1>Relatório do tempo médio para a primeira entrevista</h1>
+		<h1>Relatório do tempo médio para a primeira entrevista</h1>
 
-<br />
+		<br />
 		<br />
 		<p:panel>
-		<h4>Tempo médio para a realização da primeira entrevista: #{relatorioTempoMedioEntrevista.tempoMedio} </h4>
-		<br />
-		<br />
-		<p:dataTable id="res" value="#{relatorioTempoMedioEntrevista.entrevistas}"
-				var="entrevista" emptyMessage="Sem resultados para apresentar">
-				<p:column headerText="Posição">
-					<h:outputText value="#{entrevista.candidatura.posicao.titulo}" />
-				</p:column>
-				<p:column headerText="Candidato">
-					<h:outputText
-						value="#{entrevista.candidatura.candidato.nome} #{entrevista.candidatura.candidato.apelido}" />
-				</p:column>
-				<p:column headerText="Data de Candidatura" width="150">
-					<h:outputText value="#{entrevista.candidatura.dataCandidatura}">
-						<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm:ss"/>
-					</h:outputText>
-				</p:column>
-				<p:column headerText="Data da entrevista" width="150">
-					<h:outputText value="#{entrevista.dataEntrevista}">
-						<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm:ss"/>
-					</h:outputText>
-				</p:column>
-				<p:column headerText="Tempo para a 1ª entrevista" width="260">
-					<h:outputText value="#{relatorioTempoMedioEntrevista.dateDifference(entrevista.candidatura.dataCandidatura, entrevista.dataEntrevista)}"/>
-				</p:column>
-			</p:dataTable>
+			<h4>Tempo médio para a realização da primeira entrevista:
+				#{relatorioTempoMedioEntrevista.tempoMedio}</h4>
+			<br />
+			<br />
+			<h:form>
+				<p:dataTable id="res"
+					value="#{relatorioTempoMedioEntrevista.entrevistas}"
+					var="entrevista" emptyMessage="Sem resultados para apresentar"
+					paginator="true" paginatorPosition="bottom" rows="12"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
+					<f:facet name="{Exporters}">
+						<h:commandLink>
+							<p:graphicImage library="imagens" name="xls.png" width="24" />
+							<p:dataExporter type="xls" target="res"
+								fileName="tempo_medio_de_entrevistas" />
+						</h:commandLink>
+						<h:commandLink>
+							<p:graphicImage library="imagens" name="pdf.png" width="24" />
+							<p:dataExporter type="pdf" target="res"
+								fileName="tempo_medio_de_entrevistas" />
+						</h:commandLink>
+					</f:facet>
+					<p:column headerText="Posição">
+						<h:outputText value="#{entrevista.candidatura.posicao.titulo}" />
+					</p:column>
+					<p:column headerText="Candidato">
+						<h:outputText
+							value="#{entrevista.candidatura.candidato.nome} #{entrevista.candidatura.candidato.apelido}" />
+					</p:column>
+					<p:column headerText="Data de Candidatura" width="150">
+						<h:outputText value="#{entrevista.candidatura.dataCandidatura}">
+							<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Data da entrevista" width="150">
+						<h:outputText value="#{entrevista.dataEntrevista}">
+							<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Tempo para a 1ª entrevista" width="260">
+						<h:outputText
+							value="#{relatorioTempoMedioEntrevista.dateDifference(entrevista.candidatura.dataCandidatura, entrevista.dataEntrevista)}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
 		</p:panel>
 
-</ui:define>
+	</ui:define>
 
 </ui:composition>

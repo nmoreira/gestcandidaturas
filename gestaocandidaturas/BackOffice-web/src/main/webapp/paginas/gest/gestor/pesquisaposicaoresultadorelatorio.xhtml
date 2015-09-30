@@ -36,20 +36,37 @@
 			<p:column headerText="Área" sortBy="#{resultado.areaTecnica.valor}">
 				<h:outputText value="#{resultado.areaTecnica.valor}" />
 			</p:column>
-			<p:column style="text-align: center;">
-				<p:commandButton value="Ver candidaturas a esta posição" title="Ver candidaturas a esta posição"
-					action="#{relatorioCandidaturasPosicao.selecionarPosicao(resultado.id)}" update=":posicaoSelecionada"/>
+			<p:column style="text-align: center;" exportable="false">
+				<p:commandButton value="Ver candidaturas a esta posição"
+					title="Ver candidaturas a esta posição"
+					action="#{relatorioCandidaturasPosicao.selecionarPosicao(resultado.id)}"
+					update=":p:posicaoSelecionada" />
 			</p:column>
 		</p:dataTable>
 	</h:form>
 	<br />
-	<br />	
-	
-	<p:dataTable id="posicaoSelecionada"
+	<br />
+	<h:form id="p">
+		<p:dataTable id="posicaoSelecionada"
 			value="#{relatorioCandidaturasPosicao.candidaturas}" var="resultado"
-			emptyMessage="Posição não selecionada ou posição sem candidaturas" rows="10" paginator="true"
-			paginatorPosition="bottom" paginatorAlwaysVisible="false"
+			emptyMessage="Posição não selecionada ou posição sem candidaturas"
+			rows="10" paginator="true" paginatorPosition="bottom"
+			paginatorAlwaysVisible="true"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 			sortBy="#{resultado.candidato.nome}" sortOrder="ascending">
+			<f:facet name="{Exporters}">
+				<h:commandLink>
+					<p:graphicImage library="imagens" name="xls.png" width="24" />
+					<p:dataExporter type="xls" target="posicaoSelecionada"
+						fileName="candidatos_por_posicao" />
+				</h:commandLink>
+				<h:commandLink>
+					<p:graphicImage library="imagens" name="pdf.png" width="24" />
+					<p:dataExporter type="pdf" target="posicaoSelecionada"
+						fileName="candidatos_por_posicao" />
+				</h:commandLink>
+			</f:facet>
+
 			<f:facet name="header">Candidaturas à posição selecionada</f:facet>
 			<p:column headerText="Nome do Candidato"
 				sortBy="#{resultado.candidato.nome} #{resultado.candidato.apelido}">
@@ -79,12 +96,12 @@
 			<p:column headerText="Email">
 				<h:outputText value="#{resultado.candidato.email}" />
 			</p:column>
-			<p:column headerText="Candidato" width="120">
+			<p:column headerText="Candidato" width="120" exportable="false">
 				<p:link value="Ver Candidato" outcome="/paginas/gest/vercandidato">
 					<f:param name="candidatoid" value="#{resultado.candidato.id}" />
 				</p:link>
 			</p:column>
 		</p:dataTable>
-	
+	</h:form>
 
 </ui:composition>
