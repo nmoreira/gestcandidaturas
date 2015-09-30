@@ -1,7 +1,6 @@
 package pt.uc.dei.aor.pfinal.gestaocandidaturas.view;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
 
 @Named
 @ViewScoped
-public class RelatorioTempoMedioEntrevista implements Serializable {
+public class RelatorioTempoMedioContratado implements Serializable {
 
 	/**
 	 * 
@@ -26,21 +25,12 @@ public class RelatorioTempoMedioEntrevista implements Serializable {
 	private CandidaturaService candidaturaServ;
 
 	private List<Candidatura> candidaturas;
-	private String tempoMedio = "Sem entrevistas";
+	private String tempoMedio = "Sem contratações";
 
 	@PostConstruct
 	private void init() {
 
-		List<Candidatura> revisto = new ArrayList<>();
-		candidaturas = candidaturaServ.getCandidaturasComEntrevistas();
-
-		for (Candidatura candidatura : candidaturas) {
-			if (candidatura.getEntrevistas().get(0).getDataEntrevista() != null) {
-				revisto.add(candidatura);
-			}
-		}
-
-		candidaturas = revisto;
+		candidaturas = candidaturaServ.getCandidaturasContratadas();
 
 		if (candidaturas.size() > 0) {
 			long soma = 0;

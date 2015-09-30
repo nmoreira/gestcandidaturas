@@ -56,4 +56,10 @@ public interface ICandidaturaFacade extends IEntityFacade<Candidatura> {
 	public abstract List<Candidatura> getCandidaturasEspontaneasEntreDatas(
 			Date inicio, Date fim);
 
+	public abstract List<Candidatura> getCandidaturasRejeitadas();
+
+	public abstract List<Candidatura> getCandidaturasContratadas();
+
+	public abstract List<Candidatura> getCandidaturasComEntrevistas();
+
 }

@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidato;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Candidatura;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Posicao;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.EstadoCandidatura;
 
 /**
  * Session Bean implementation class AdministradorFacade
@@ -305,6 +306,30 @@ public class CandidaturaFacade implements ICandidaturaFacade {
 		q.setParameter("inicio", inicio);
 		q.setParameter("fim", fim);
 		List<Candidatura> r = q.getResultList();
+		return r;
+	}
+
+	@Override
+	public List<Candidatura> getCandidaturasRejeitadas() {
+		q = em.createQuery("select distinct c from Candidatura c left join fetch c.entrevistas e where c.estadoCandidatura = :estado order by e.dataEntrevista desc");
+		q.setParameter("estado", EstadoCandidatura.REJEITADO);
+		List<Candidatura> r = q.getResultList();
+		return r;
+	}
+
+	@Override
+	public List<Candidatura> getCandidaturasContratadas() {
+		q = em.createQuery("select distinct c from Candidatura c left join fetch c.entrevistas e where c.estadoCandidatura = :estado order by e.dataEntrevista desc");
+		q.setParameter("estado", EstadoCandidatura.CONTRATADO);
+		List<Candidatura> r = q.getResultList();
+		return r;
+	}
+
+	@Override
+	public List<Candidatura> getCandidaturasComEntrevistas() {
+		q = em.createQuery("select distinct c from Candidatura c left join fetch c.entrevistas e where e is not null order by e.dataEntrevista asc");
+		List<Candidatura> r = q.getResultList();
+
 		return r;
 	}
 }

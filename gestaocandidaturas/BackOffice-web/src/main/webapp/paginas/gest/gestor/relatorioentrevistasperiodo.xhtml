@@ -28,12 +28,12 @@
 					<p:spacer width="10" />
 					<p:commandButton value="Pesquisar"
 						action="#{relatorioResultadosEntrevistasPeriodo.pesquisar()}"
-						update="@form :r:res" />
+						update="@form :r:res n" /> 
 				</h:form>
 			</div>
 			<br />
 			<h4>
-				<h:outputText
+				<h:outputText id="n"
 					value="Quantidade de entrevistas realizadas no período indicado: #{relatorioResultadosEntrevistasPeriodo.resultados.size()}" />
 			</h4>
 			<br />

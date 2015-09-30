@@ -151,4 +151,16 @@ public class CandidaturaService {
 				fim);
 	}
 
+	public List<Candidatura> getCandidaturasRejeitadas() {
+		return candidaturaFacade.getCandidaturasRejeitadas();
+	}
+
+	public List<Candidatura> getCandidaturasContratadas() {
+		return candidaturaFacade.getCandidaturasContratadas();
+	}
+
+	public List<Candidatura> getCandidaturasComEntrevistas() {
+		return candidaturaFacade.getCandidaturasComEntrevistas();
+	}
+
 }

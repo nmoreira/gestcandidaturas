@@ -5,57 +5,57 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="titulo">Relatório do tempo médio para a primeira entrevista</ui:define>
+	<ui:define name="titulo">Relatório do tempo médio para contratação</ui:define>
 
 	<ui:define name="corpo">
 
-		<h1>Relatório do tempo médio para a primeira entrevista</h1>
+		<h1>Relatório do tempo médio para contratação</h1>
 
 		<br />
 		<br />
 		<p:panel>
-			<h4>Tempo médio para a realização da primeira entrevista:
-				#{relatorioTempoMedioEntrevista.tempoMedio}</h4>
+			<h4>Tempo médio para a contratação:
+				#{relatorioTempoMedioContratado.tempoMedio}</h4>
 			<br />
 			<br />
 			<h:form>
 				<p:dataTable id="res"
-					value="#{relatorioTempoMedioEntrevista.candidaturas}"
-					var="entrevista" emptyMessage="Sem resultados para apresentar"
+					value="#{relatorioTempoMedioContratado.candidaturas}"
+					var="candidatura" emptyMessage="Sem resultados para apresentar"
 					paginator="true" paginatorPosition="bottom" rows="12"
 					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
 					<f:facet name="{Exporters}">
 						<h:commandLink>
 							<p:graphicImage library="imagens" name="xls.png" width="24" />
 							<p:dataExporter type="xls" target="res"
-								fileName="tempo_medio_de_entrevistas" />
+								fileName="tempo_medio_contratacao" />
 						</h:commandLink>
 						<h:commandLink>
 							<p:graphicImage library="imagens" name="pdf.png" width="24" />
 							<p:dataExporter type="pdf" target="res"
-								fileName="tempo_medio_de_entrevistas" />
+								fileName="tempo_medio_contratacao" />
 						</h:commandLink>
 					</f:facet>
 					<p:column headerText="Posição">
-						<h:outputText value="#{entrevista.posicao.titulo}" />
+						<h:outputText value="#{candidatura.posicao.titulo}" />
 					</p:column>
 					<p:column headerText="Candidato">
 						<h:outputText
-							value="#{entrevista.candidato.nome} #{entrevista.candidato.apelido}" />
+							value="#{candidatura.candidato.nome} #{candidatura.candidato.apelido}" />
 					</p:column>
 					<p:column headerText="Data de Candidatura" width="150">
-						<h:outputText value="#{entrevista.dataCandidatura}">
+						<h:outputText value="#{candidatura.dataCandidatura}">
 							<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
-					<p:column headerText="Data da entrevista" width="150">
-						<h:outputText value="#{entrevista.entrevistas.get(0).dataEntrevista}">
+					<p:column headerText="Data da contratação" width="150">
+						<h:outputText value="#{candidatura.entrevistas.get(0).dataEntrevista}">
 							<f:convertDateTime type="both" pattern="dd-MM-yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
-					<p:column headerText="Tempo para a 1ª entrevista" width="260">
+					<p:column headerText="Tempo até à contratação" width="260">
 						<h:outputText
-							value="#{relatorioTempoMedioEntrevista.dateDifference(entrevista.dataCandidatura, entrevista.entrevistas.get(0).dataEntrevista)}" />
+							value="#{relatorioTempoMedioContratado.dateDifference(candidatura.dataCandidatura, candidatura.entrevistas.get(0).dataEntrevista)}" />
 					</p:column>
 				</p:dataTable>
 			</h:form>
