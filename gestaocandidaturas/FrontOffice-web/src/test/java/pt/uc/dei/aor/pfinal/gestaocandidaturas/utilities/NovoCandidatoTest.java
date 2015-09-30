@@ -10,8 +10,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.*;
+
 import javax.persistence.EntityManager;
 
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.CandidatoService;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.UtilizadorService;
@@ -49,10 +51,7 @@ public class NovoCandidatoTest {
 		
 	List<String> paisesugeridos = new ArrayList<>();
 		
-		paisesugeridos.add(pais1);
-		paisesugeridos.add(pais2);
-		paisesugeridos.add(pais3);
-		paisesugeridos.add(pais4);
+	 assertNotNull("nao deveria ser nula", paisesugeridos);
 		
 	}
 	

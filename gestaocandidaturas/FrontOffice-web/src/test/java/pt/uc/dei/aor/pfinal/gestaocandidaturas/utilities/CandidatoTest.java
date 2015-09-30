@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.mockito.runners.*;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
