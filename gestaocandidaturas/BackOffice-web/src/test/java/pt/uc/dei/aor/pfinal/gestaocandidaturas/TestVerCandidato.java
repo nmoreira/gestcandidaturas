@@ -49,10 +49,6 @@ public class TestVerCandidato {
 		Date inicio = null;
 		Date fim = null;
 		Candidatura cand1 = new Candidatura();
-		 Candidato c = new Candidato();
-		
-		
-		
 		 List<Candidatura> pesquisa = candidaturaServ.getCandidaturasEntreDatas(inicio, fim);
 		 pesquisa.add(cand1);
 		  

@@ -39,13 +39,13 @@ public class PesquisaPosicoesTest {
 		 pesquisa.add(pos1);
 		 
 		 assertThat(pos1.getTitulo(), is(equalTo("aaa"))); 
-		 assertEquals("deveria estar trazendo a lista de tamanho correto", pesquisa.size(), 1);
+		 assertEquals("deveria trazer a lista de tamanho correto", pesquisa.size(), 1);
 		 
 		 
 		 assertNotNull("nao deveria ser nula", pesquisa);
 		 
-		 assertEquals("deveria estar trazendo a lista correta", pesquisa.get(0).getTitulo(), "aaa");
-		 assertEquals("deveria estar trazendo a lista correta", pesquisa.get(0).getEstado(), null);
+		 assertEquals("deveria trazer a lista correta", pesquisa.get(0).getTitulo(), "aaa");
+		 assertEquals("deveria trazer a lista correta", pesquisa.get(0).getEstado(), null);
 	}
 
 }
