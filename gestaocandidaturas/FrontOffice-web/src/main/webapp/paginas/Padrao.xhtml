@@ -76,7 +76,8 @@
 		</h:form>
 	</div>
 	</header>
-	<p:messages closable="true" id="status" autoUpdate="true" />
+	<p:growl autoUpdate="true" life="10000" id="status"/>
+	
 
 	<div id="conteudo" style="min-height: 450px;">
 		<ui:insert name="corpo" />

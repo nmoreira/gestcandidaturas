@@ -71,6 +71,14 @@ h4 {
 	
 }
 
+/*growl position*/
+div[id="status_container"] {
+    position: fixed;
+    top: 115px;
+    right: 20px;
+    width: 301px;
+}
+
 .grid-login {
 	background-color: #f2f2f2;
 	border-radius: 8px;
