@@ -24,6 +24,11 @@
 					<h:outputText
 						value="#{candidatura.candidato.nome} #{candidatura.candidato.apelido}" />
 				</p:column>
+				<p:column>
+					<p:link value="Ver Candidato" outcome="/paginas/gest/vercandidato">
+						<f:param name="candidatoid" value="#{candidatura.candidato.id}" />
+					</p:link>
+				</p:column>
 				<p:column headerText="Data de Candidatura" width="155"
 					sortBy="#{candidatura.dataCandidatura}">
 					<h:outputText value="#{candidatura.dataCandidatura}">

@@ -34,6 +34,14 @@ public class Login {
 			CurrentSession.setCurrentUser(u);
 
 			String cargo = u.getCargo();
+			if (cargo == null || cargo.equals("")) {
+				request.logout();
+				CurrentSession.setCurrentUser(null);
+				DisplayMessages
+						.addWarnMessage("A sua conta ainda não foi validada por um administrador. Por favor aguarde uma mensagem do administrador para poder utilizar a plataforma.");
+				outcome = "";
+				return outcome;
+			}
 
 			if (cargo.equals("ADMIN") || cargo.equals("GESTOR")
 					|| cargo.equals("ENTREVISTADOR")) {

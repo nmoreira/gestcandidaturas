@@ -70,18 +70,23 @@ public class NovaCandidatura implements Serializable {
 
 	@PostConstruct
 	private void init() {
-		carregaFontes();
-		this.candidato = (Candidato) current.getCurrentUser();
-		carregaCartasMotivacao();
-
-		Map<String, String> params = FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestParameterMap();
-		long posid = Long.parseLong(params.get("posid"));
-
-		if (posid == 0) {
-			this.posicao = null;
+		if (current.getCurrentUser().getPerfil().equals("ADMIN")) {
+			DisplayMessages
+					.addErrorMessage("Com o perfil de Administrador, não se pode candidatar a nenhuma posição");
 		} else {
-			this.posicao = posicaoServ.getPosicaoById(posid);
+			carregaFontes();
+			this.candidato = (Candidato) current.getCurrentUser();
+			carregaCartasMotivacao();
+
+			Map<String, String> params = FacesContext.getCurrentInstance()
+					.getExternalContext().getRequestParameterMap();
+			long posid = Long.parseLong(params.get("posid"));
+
+			if (posid == 0) {
+				this.posicao = null;
+			} else {
+				this.posicao = posicaoServ.getPosicaoById(posid);
+			}
 		}
 	}
 

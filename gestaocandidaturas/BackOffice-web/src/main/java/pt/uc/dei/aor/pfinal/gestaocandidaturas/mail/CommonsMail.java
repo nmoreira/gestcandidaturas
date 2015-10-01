@@ -58,7 +58,8 @@ public class CommonsMail {
 			email.addTo(destinatario.getEmail(), destinatario.getNome() + " "
 					+ destinatario.getApelido());
 			email.send();
-			logger.info("Email enviado com sucesso para " + destinatario);
+			logger.info("Email enviado com sucesso para "
+					+ destinatario.getEmail());
 		} catch (NumberFormatException | EmailException e) {
 			logger.error("Erro ao enviar email para " + destinatario.getEmail()
 					+ "\n" + e);
