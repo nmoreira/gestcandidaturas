@@ -66,6 +66,10 @@ public class CandidatoService {
 		}
 	}
 
+	public List<Candidato> getTodosCandidatos() {
+		return (List<Candidato>) candidatoFacade.findAll();
+	}
+
 	public Candidato getCandidatoById(long id) {
 		return candidatoFacade.find(id);
 	}

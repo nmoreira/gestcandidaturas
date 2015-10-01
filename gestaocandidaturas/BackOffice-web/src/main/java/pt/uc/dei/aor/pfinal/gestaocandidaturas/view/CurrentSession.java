@@ -36,25 +36,6 @@ public class CurrentSession implements Serializable {
 		currentUser = loggedUser;
 	}
 
-	// public String getUserHome() {
-	// if (currentUser == null) {
-	// return "/paginas/login.xhtml";
-	// } else {
-	// String outcome;
-	// String cargo = currentUser.getCargo();
-	// if (cargo.equals("ADMIN")) {
-	// outcome = "/paginas/homeadministrador.xhtml";
-	// } else if (cargo.equals("GESTOR")) {
-	// outcome = "/paginas/homegestor.xhtml";
-	// } else if (cargo.equals("ENTREVISTADOR")) {
-	// outcome = "/paginas/homeentrevistador.xhtml";
-	// } else {
-	// outcome = "/paginas/home.xhtml?faces-redirect=true";
-	// }
-	// return outcome;
-	// }
-	// }
-
 	public String getUserFirstName() {
 		return userFirstName;
 	}

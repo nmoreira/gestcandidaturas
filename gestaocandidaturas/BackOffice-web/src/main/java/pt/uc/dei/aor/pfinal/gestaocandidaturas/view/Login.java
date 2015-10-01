@@ -33,7 +33,6 @@ public class Login {
 			Utilizador u = userServ.getUtilizadorByLogin(login);
 			CurrentSession.setCurrentUser(u);
 
-			System.out.println("login ok: " + login);
 			String cargo = u.getCargo();
 
 			if (cargo.equals("ADMIN") || cargo.equals("GESTOR")
@@ -41,16 +40,6 @@ public class Login {
 				outcome = "/paginas/home.xhtml?faces-redirect=true";
 			} else {
 
-				// if (cargo.equals("ADMIN")) {
-				// outcome = "/paginas/home.xhtml?faces-redirect=true"; //
-				// "/paginas/homeadministrador.xhtml?faces-redirect=true";
-				// } else if (cargo.equals("GESTOR")) {
-				// outcome = "/paginas/home.xhtml?faces-redirect=true"; //
-				// "/paginas/homegestor.xhtml?faces-redirect=true";
-				// } else if (cargo.equals("ENTREVISTADOR")) {
-				// outcome = "/paginas/home.xhtml?faces-redirect=true"; //
-				// "/paginas/homeentrevistador.xhtml?faces-redirect=true";
-				// } else {
 				request.logout();
 				CurrentSession.setCurrentUser(null);
 				DisplayMessages.addWarnMessage("Perfil inválido!");

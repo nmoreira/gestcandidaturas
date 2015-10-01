@@ -4,12 +4,15 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.xml.bind.JAXBException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.ejb.AdministradorService;
+import pt.uc.dei.aor.pfinal.gestaocandidaturas.entidades.Administrador;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities.DisplayMessages;
 import pt.uc.dei.aor.pfinal.gestaocandidaturas.view.Theme;
 
@@ -21,8 +24,18 @@ public class Configuration {
 
 	static Logger logger = LoggerFactory.getLogger(Configuration.class);
 
+	@Inject
+	private AdministradorService adminServ;
+
 	@PostConstruct
 	private void init() {
+
+		if (adminServ.getNumAdministradores() == 0) {
+			Administrador admin = new Administrador("admin", "ADMIN",
+					"Administrador", "Principal", "candidaturasaor@gmail.com");
+			adminServ.createNewAdministrador(admin);
+		}
+
 		try {
 			setConf(ConfigurationXML.unmarshal());
 		} catch (JAXBException e) {

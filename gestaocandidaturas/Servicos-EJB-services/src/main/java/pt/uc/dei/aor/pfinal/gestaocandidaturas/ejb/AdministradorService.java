@@ -60,6 +60,10 @@ public class AdministradorService {
 		return (List<Administrador>) adminFacade.findAll();
 	}
 
+	public int getNumAdministradores() {
+		return adminFacade.findAll().size();
+	}
+
 	public boolean atualizarAdministrador(Administrador admin) {
 		if (adminFacade.update(admin) != null) {
 			return true;

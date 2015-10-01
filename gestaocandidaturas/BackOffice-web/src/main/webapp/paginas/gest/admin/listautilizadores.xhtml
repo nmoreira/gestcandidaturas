@@ -1,0 +1,240 @@
+<ui:composition template="/paginas/Padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Listagem de utilizadores</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Listagem de utilizadores</h1>
+		<br />
+		<br />
+
+		<p:tabView dynamic="true" cache="false">
+
+			<p:tab title="Lista de todos os Administradores">
+				<h:form>
+					<p:dataTable value="#{listaUtilizadores.listaAdministradores}"
+						id="admin" var="utilizador" emptyMessage="Tabela sem registos!"
+						rows="10" paginator="true" paginatorPosition="bottom"
+						paginatorAlwaysVisible="true" draggableColumns="true"
+						resizableColumns="false" sortBy="#{utilizador.id}"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						sortOrder="ascending">
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="xls.png" width="24" />
+								<p:dataExporter type="xls" target="admin"
+									fileName="lista_administradores" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="pdf.png" width="24" />
+								<p:dataExporter type="pdf" target="admin"
+									fileName="lista_administradores" />
+							</h:commandLink>
+						</f:facet>
+						<p:column headerText="ID" sortBy="#{utilizador.id}" width="20">
+							<h:outputText value="#{utilizador.id}" />
+						</p:column>
+						<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+							<h:outputText value="#{utilizador.nome}" />
+						</p:column>
+						<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+							<h:outputText value="#{utilizador.apelido}" />
+						</p:column>
+						<p:column headerText="Login" sortBy="#{utilizador.login}">
+							<h:outputText value="#{utilizador.login}" />
+						</p:column>
+						<p:column headerText="Email" sortBy="#{utilizador.email}">
+							<h:outputText value="#{utilizador.email}" />
+						</p:column>
+						<f:facet name="footer">
+        		#{listaUtilizadores.listaAdministradores.size()} registos. 
+    		</f:facet>
+					</p:dataTable>
+				</h:form>
+			</p:tab>
+
+			<p:tab title="Lista de todos os Gestores">
+				<h:form>
+					<p:dataTable value="#{listaUtilizadores.listaGestores}" id="gest"
+						var="utilizador" emptyMessage="Tabela sem registos!" rows="10"
+						paginator="true" paginatorPosition="bottom"
+						paginatorAlwaysVisible="true" draggableColumns="true"
+						resizableColumns="false" sortBy="#{utilizador.id}"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						sortOrder="ascending">
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="xls.png" width="24" />
+								<p:dataExporter type="xls" target="gest"
+									fileName="lista_gestores" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="pdf.png" width="24" />
+								<p:dataExporter type="pdf" target="gest"
+									fileName="lista_gestores" />
+							</h:commandLink>
+						</f:facet>
+						<p:column headerText="ID" sortBy="#{utilizador.id}" width="20">
+							<h:outputText value="#{utilizador.id}" />
+						</p:column>
+						<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+							<h:outputText value="#{utilizador.nome}" />
+						</p:column>
+						<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+							<h:outputText value="#{utilizador.apelido}" />
+						</p:column>
+						<p:column headerText="Login" sortBy="#{utilizador.login}">
+							<h:outputText value="#{utilizador.login}" />
+						</p:column>
+						<p:column headerText="Email" sortBy="#{utilizador.email}">
+							<h:outputText value="#{utilizador.email}" />
+						</p:column>
+						<f:facet name="footer">
+        		#{listaUtilizadores.listaGestores.size()} registos. 
+    		</f:facet>
+					</p:dataTable>
+				</h:form>
+			</p:tab>
+
+			<p:tab title="Lista de todos os Candidatos">
+				<h:form>
+					<p:dataTable value="#{listaUtilizadores.listaCandidatos}" id="cand"
+						var="utilizador" emptyMessage="Tabela sem registos!" rows="10"
+						paginator="true" paginatorPosition="bottom"
+						paginatorAlwaysVisible="true" draggableColumns="true"
+						resizableColumns="false" sortBy="#{utilizador.id}"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						sortOrder="ascending">
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="xls.png" width="24" />
+								<p:dataExporter type="xls" target="cand"
+									fileName="lista_candidatos" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="pdf.png" width="24" />
+								<p:dataExporter type="pdf" target="cand"
+									fileName="lista_candidatos" />
+							</h:commandLink>
+						</f:facet>
+						<p:column headerText="ID" sortBy="#{utilizador.id}" width="20">
+							<h:outputText value="#{utilizador.id}" />
+						</p:column>
+						<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+							<h:outputText value="#{utilizador.nome}" />
+						</p:column>
+						<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+							<h:outputText value="#{utilizador.apelido}" />
+						</p:column>
+						<p:column headerText="Login" sortBy="#{utilizador.login}">
+							<h:outputText value="#{utilizador.login}" />
+						</p:column>
+						<p:column headerText="Email" sortBy="#{utilizador.email}">
+							<h:outputText value="#{utilizador.email}" />
+						</p:column>
+						<f:facet name="footer">
+        		#{listaUtilizadores.listaCandidatos.size()} registos. 
+    		</f:facet>
+					</p:dataTable>
+				</h:form>
+			</p:tab>
+
+			<p:tab title="Lista de todos os Utilizadores sem perfil">
+				<h:form>
+					<p:dataTable
+						value="#{listaUtilizadores.listaUtilizadoresSemPerfil}"
+						id="semperfil" var="utilizador"
+						emptyMessage="Tabela sem registos!" rows="10" paginator="true"
+						paginatorPosition="bottom" paginatorAlwaysVisible="true"
+						draggableColumns="true" resizableColumns="flase"
+						sortBy="#{utilizador.id}"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						sortOrder="ascending">
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="xls.png" width="24" />
+								<p:dataExporter type="xls" target="semperfil"
+									fileName="lista_utilizadores_sem_perfil" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="pdf.png" width="24" />
+								<p:dataExporter type="pdf" target="semperfil"
+									fileName="lista_utilizadores_sem_perfil" />
+							</h:commandLink>
+						</f:facet>
+						<p:column headerText="ID" sortBy="#{utilizador.id}" width="20">
+							<h:outputText value="#{utilizador.id}" />
+						</p:column>
+						<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+							<h:outputText value="#{utilizador.nome}" />
+						</p:column>
+						<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+							<h:outputText value="#{utilizador.apelido}" />
+						</p:column>
+						<p:column headerText="Login" sortBy="#{utilizador.login}">
+							<h:outputText value="#{utilizador.login}" />
+						</p:column>
+						<p:column headerText="Email" sortBy="#{utilizador.email}">
+							<h:outputText value="#{utilizador.email}" />
+						</p:column>
+						<f:facet name="footer">
+        			#{listaUtilizadores.listaUtilizadoresSemPerfil.size()} registos. 
+    			</f:facet>
+					</p:dataTable>
+				</h:form>
+			</p:tab>
+
+			<p:tab title="Lista de todos os utilizaodres">
+				<h:form>
+					<p:dataTable value="#{listaUtilizadores.listaTodosUtilizadores}"
+						id="todos" var="utilizador" emptyMessage="Tabela sem registos!"
+						rows="10" paginator="true" paginatorPosition="bottom"
+						paginatorAlwaysVisible="true" draggableColumns="true"
+						resizableColumns="false" sortBy="#{utilizador.id}"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						sortOrder="ascending">
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="xls.png" width="24" />
+								<p:dataExporter type="xls" target="todos"
+									fileName="lista_todos_utilizadores" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage library="imagens" name="pdf.png" width="24" />
+								<p:dataExporter type="pdf" target="todos"
+									fileName="lista_todos_utilizadores" />
+							</h:commandLink>
+						</f:facet>
+						<p:column headerText="ID" sortBy="#{utilizador.id}" width="20">
+							<h:outputText value="#{utilizador.id}" />
+						</p:column>
+						<p:column headerText="Nome" sortBy="#{utilizador.nome}">
+							<h:outputText value="#{utilizador.nome}" />
+						</p:column>
+						<p:column headerText="Apelido" sortBy="#{utilizador.apelido}">
+							<h:outputText value="#{utilizador.apelido}" />
+						</p:column>
+						<p:column headerText="Login" sortBy="#{utilizador.login}">
+							<h:outputText value="#{utilizador.login}" />
+						</p:column>
+						<p:column headerText="Email" sortBy="#{utilizador.email}">
+							<h:outputText value="#{utilizador.email}" />
+						</p:column>
+						<p:column headerText="Perfil" sortBy="#{utilizador.perfil.cargo}">
+							<h:outputText value="#{utilizador.perfil.cargo}" />
+						</p:column>
+						<f:facet name="footer">
+        		#{listaUtilizadores.listaTodosUtilizadores.size()} registos. 
+    		</f:facet>
+					</p:dataTable>
+				</h:form>
+			</p:tab>
+
+		</p:tabView>
+
+	</ui:define>
+</ui:composition>

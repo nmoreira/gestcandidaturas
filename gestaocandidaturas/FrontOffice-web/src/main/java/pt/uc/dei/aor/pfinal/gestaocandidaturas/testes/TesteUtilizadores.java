@@ -65,7 +65,7 @@ public class TesteUtilizadores implements Serializable {
 				"Apelido utilizador teste", "mail1");
 		userService.createNewUtilizador(user1);
 
-		Administrador admin = new Administrador("admin", "123",
+		Administrador admin = new Administrador("adminteste", "123",
 				"Administrador teste", "Apelido administrador teste",
 				"mailadmin");
 		adminService.createNewAdministrador(admin);

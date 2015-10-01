@@ -33,7 +33,7 @@ public class Login {
 			request.login(login, password);
 			Utilizador u = userServ.getUtilizadorByLogin(login);
 			CurrentSession.setCurrentUser(u);
-			System.out.println("login ok: " + login);
+
 			if (u.getCargo().equals("CANDIDATO")
 					|| u.getCargo().equals("ADMIN")) {
 				DisplayMessages
