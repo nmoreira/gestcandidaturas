@@ -3,6 +3,8 @@ package pt.uc.dei.aor.pfinal.gestaocandidaturas.utilities;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -38,18 +40,26 @@ public class UtilizadorServiceTest {
 	@Test
 	public void testExisteMail() throws Exception{
 
-		String email="";	
-		ufacade.findByEmail(email);
-		assertThat(c.getEmail(), is(equalTo(null)));		
+		String email="candidaturasaor@gmail.com";	
+		c.setEmail(email);
+		 ufacade.findByEmail(email);
+		
+		Assert.assertTrue(c.getEmail(), true);
+		
+		System.out.println("O email procurado existe");
 
 	}
 	
 	@Test
 	public void testAlteraPassword() throws Exception{
-
-		String passnova ="";
+	String passnova="null";
+	 c.setPassword(passnova);
+		
+		
 		ufacade.changePassword(0, passnova);
-		assertThat(c.getPassword(), is(equalTo(null)));		
+		assertThat(c.getPassword(), is(equalTo(null)));	
+		
+		System.out.println("A nova password é: "+c.getPassword());
 
 	}
 }
